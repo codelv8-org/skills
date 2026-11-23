@@ -30,7 +30,7 @@ project/
   previews/clay_under_nose.png
   previews/pbr_front.png
   uv/head_uv0_layout.png
-  textures/... 
+  textures/...
   export/head.glb
   reports/glb_qa.json
   README.md
