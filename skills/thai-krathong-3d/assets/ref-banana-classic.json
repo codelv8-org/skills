@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "name": "ref-banana-classic",
+  "seed": 731,
+  "provenance": "New original procedural interpretation of user-supplied screenshot principles; no third-party meshes or textures.",
+  "family": "banana_classic",
+  "reference_images": [
+    "2026-11-23_215736.png",
+    "2026-11-23_215901.png"
+  ],
+  "reference_variant": "Multiple low staggered angular rings; ring reach/rise/profile can study the taller crown or rounded-tab variants.",
+  "base": {
+    "radius": 0.114,
+    "height": 0.014
+  },
+  "rings": [
+    {
+      "count": 16,
+      "radius": 0.088,
+      "z": 0.014,
+      "reach": 0.047,
+      "rise": 0.014,
+      "width": 0.047,
+      "phase_degrees": 0,
+      "ridge": 0.004
+    },
+    {
+      "count": 16,
+      "radius": 0.086,
+      "z": 0.023,
+      "reach": 0.038,
+      "rise": 0.03,
+      "width": 0.045,
+      "phase_degrees": 11.25,
+      "ridge": 0.004
+    },
+    {
+      "count": 14,
+      "radius": 0.081,
+      "z": 0.031,
+      "reach": 0.031,
+      "rise": 0.038,
+      "width": 0.042,
+      "phase_degrees": 0,
+      "ridge": 0.004
+    }
+  ],
+  "deck": {
+    "radius": 0.086,
+    "z": 0.033
+  },
+  "accessories": {
+    "candle": true,
+    "incense_count": 3,
+    "candle_radius": 0.0055,
+    "candle_height": 0.051,
+    "incense_height": 0.096,
+    "flame": true
+  },
+  "primary_reference": "2026-11-23_215736.png"
+}

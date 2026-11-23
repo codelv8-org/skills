@@ -1,0 +1,14 @@
+{
+  "name": "กระทงดอกบัวสีชมพู",
+  "diameter_m": 0.26,
+  "flower_style": "lotus",
+  "flower_count": 4,
+  "amaranth_count": 0,
+  "outer_leaf_count": 22,
+  "inner_leaf_count": 14,
+  "candle": true,
+  "candle_lit": true,
+  "incense_count": 3,
+  "quality": "medium",
+  "seed": 2026
+}

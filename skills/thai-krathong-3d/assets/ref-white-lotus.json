@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "name": "ref-white-lotus",
+  "seed": 731,
+  "provenance": "New original procedural interpretation of user-supplied screenshot principles; no third-party meshes or textures.",
+  "family": "white_lotus",
+  "reference_images": [
+    "2026-11-23_214701.png",
+    "2026-11-23_214638.png"
+  ],
+  "reference_variant": "Open nested centre from 214701. Change center.mode to dome, radius to 0.032 and height to 0.030, and disable accessories to study 214638.",
+  "petal_role": "petal_white",
+  "base": {
+    "radius": 0.047,
+    "height": 0.009,
+    "role": "petal_white"
+  },
+  "whorls": [
+    {
+      "name": "outer",
+      "count": 8,
+      "radius": 0.022,
+      "z": 0.009,
+      "reach": 0.112,
+      "rise": 0.016,
+      "width": 0.074,
+      "phase_degrees": 0,
+      "cup": 0.008,
+      "edge_curl": 0.003,
+      "ridge": 0.0007,
+      "tip_hook": 0.004,
+      "thickness": 0.0016,
+      "width_profile": [
+        0.55,
+        0.6
+      ]
+    },
+    {
+      "name": "middle",
+      "count": 8,
+      "radius": 0.021,
+      "z": 0.012,
+      "reach": 0.079,
+      "rise": 0.05,
+      "width": 0.059,
+      "phase_degrees": 22.5,
+      "cup": 0.007,
+      "edge_curl": 0.0025,
+      "ridge": 0.001,
+      "tip_hook": 0.004,
+      "thickness": 0.0015
+    },
+    {
+      "name": "inner",
+      "count": 6,
+      "radius": 0.017,
+      "z": 0.017,
+      "reach": 0.046,
+      "rise": 0.061,
+      "width": 0.043,
+      "phase_degrees": 0,
+      "cup": 0.006,
+      "edge_curl": 0.002,
+      "ridge": 0.0007,
+      "tip_hook": 0.003,
+      "thickness": 0.0013
+    },
+    {
+      "name": "heart",
+      "count": 6,
+      "radius": 0.01,
+      "z": 0.023,
+      "reach": 0.022,
+      "rise": 0.044,
+      "width": 0.024,
+      "phase_degrees": 30,
+      "cup": 0.0035,
+      "edge_curl": 0.0012,
+      "ridge": 0.0005,
+      "tip_hook": 0.003,
+      "thickness": 0.0011
+    }
+  ],
+  "center": {
+    "mode": "open",
+    "radius": 0.013,
+    "z": 0.029,
+    "role": "petal_white"
+  },
+  "accessories": {
+    "candle": true,
+    "incense_count": 0,
+    "candle_radius": 0.0022,
+    "candle_height": 0.055,
+    "wax_drips": false,
+    "flame": false
+  },
+  "primary_reference": "2026-11-23_214701.png"
+}

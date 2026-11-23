@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "name": "ref-clay-bowl",
+  "seed": 731,
+  "provenance": "New original procedural interpretation of user-supplied screenshot principles; no third-party meshes or textures.",
+  "family": "clay_bowl",
+  "reference_images": [
+    "2026-11-23_215820.png"
+  ],
+  "radius": 0.13,
+  "height": 0.044,
+  "accessories": {
+    "candle": true,
+    "incense_count": 3,
+    "candle_radius": 0.0055,
+    "candle_height": 0.051,
+    "incense_height": 0.096,
+    "flame": true
+  },
+  "primary_reference": "2026-11-23_215820.png"
+}

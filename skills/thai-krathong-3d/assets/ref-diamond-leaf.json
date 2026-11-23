@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "name": "ref-diamond-leaf",
+  "seed": 731,
+  "provenance": "New original procedural interpretation of user-supplied screenshot principles; no third-party meshes or textures.",
+  "family": "diamond_leaf",
+  "reference_images": [
+    "2026-11-23_215833.png"
+  ],
+  "reference_variant": "Bilateral diamond interpretation with pointed front; exact heart-like rear contour remains a visual refinement.",
+  "half_width": 0.11,
+  "front": 0.139,
+  "back": 0.11,
+  "deck_scale": 0.84,
+  "deck_z": 0.034,
+  "rings": [
+    {
+      "scale": 0.95,
+      "leaves_per_side": 5,
+      "z": 0.015,
+      "reach": 0.023,
+      "rise": 0.017,
+      "width": 0.038,
+      "ridge": 0.004
+    },
+    {
+      "scale": 0.87,
+      "leaves_per_side": 5,
+      "z": 0.026,
+      "reach": 0.023,
+      "rise": 0.031,
+      "width": 0.036,
+      "ridge": 0.004
+    }
+  ],
+  "accessories": {
+    "candle": true,
+    "incense_count": 3,
+    "candle_radius": 0.0055,
+    "candle_height": 0.051,
+    "incense_height": 0.096,
+    "flame": true
+  },
+  "primary_reference": "2026-11-23_215833.png"
+}

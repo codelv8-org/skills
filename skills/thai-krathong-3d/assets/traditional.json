@@ -1,0 +1,14 @@
+{
+  "name": "กระทงใบตองดอกดาวเรืองแบบไทย",
+  "diameter_m": 0.26,
+  "flower_style": "marigold",
+  "flower_count": 8,
+  "amaranth_count": 8,
+  "outer_leaf_count": 20,
+  "inner_leaf_count": 16,
+  "candle": true,
+  "candle_lit": false,
+  "incense_count": 3,
+  "quality": "medium",
+  "seed": 2026
+}

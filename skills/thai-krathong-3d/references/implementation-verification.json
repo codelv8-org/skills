@@ -1,0 +1,391 @@
+{
+  "revision": "R3.1",
+  "checked_date": "2026-11-23",
+  "blender_version": "4.3.2",
+  "scope": "Research-informed implementation, actual Blender build/export/import, and limited visual inspection; not exact website-model reproduction.",
+  "provenance": {
+    "research_report_library_file_id": "libfile_ffc2d867098c819189e7101fda501d9b",
+    "previous_installed_file_count": 15,
+    "original_report_archive_recovered": false,
+    "implementation": "new direct integration of the completed research and 14 user screenshots"
+  },
+  "source_sha256": {
+    "scripts/build_reference.py": "375605d299b4be1499747160194c6eefc85b215b2baf1132d06a3efc03ea60b4",
+    "scripts/reference_finish.py": "35e16d1ee3b8ca01d0a4c3aad91ace203985a021b031ed348a245ee59486b691",
+    "scripts/check_reference_model.py": "f3ca5ab903c47473766d88b7e7af4361cffb959768227f332266053f4fa5158c",
+    "assets/ref-banana-classic.json": "bfd73b233e1700e292e6cfe38983ac990213be0d0b84985f6112c0f66e02e758",
+    "assets/ref-bread-flower.json": "a28bd9a6cf3f816005676db992919fa9dd0f77a4886ca735efd9724d4769ae81",
+    "assets/ref-clay-bowl.json": "7e30a709b0cc0195b40ccef06045595883ace2df673913ed45cc15a5498de3df",
+    "assets/ref-diamond-leaf.json": "58ada1a5ce36e276538fe28c91fcf88fed5438e9cfcff8adf4240fccc6934514",
+    "assets/ref-orange-bowl.json": "99d017fc1ce54caa752f156cc0d8b0b2a68275ecdb20dcfe5a70e09fb0be1b51",
+    "assets/ref-pink-lotus.json": "e0d4fd4f10400131dcda23194a2de7c5da8b290833e1cc193dd5248811b2d330",
+    "assets/ref-tiered-leaf.json": "f5f09f6e6d23e0e1040241ddb4fb8a635f35e27f63067cdee6628e2c09c4e24f",
+    "assets/ref-white-lotus.json": "9f956b85494ff4ae54848c5cc61e1f1308cc67a82c489f8ff72cd863a6750d6f"
+  },
+  "checks": {
+    "skill_frontmatter": "passed",
+    "python_syntax": "passed",
+    "relative_markdown_links": "passed",
+    "reference_images_catalogued": 14,
+    "preset_families": 8,
+    "legacy_smoke_cases_passed": 8,
+    "new_family_builds_passed": 8,
+    "new_family_glb_roundtrips_passed": 8,
+    "final_orange_material_rebuild_and_roundtrip": "passed",
+    "white_source_and_reimported_glb_render": "inspected under same camera and lights; textures present; not a numeric similarity test"
+  },
+  "roundtrips": [
+    {
+      "family_output": "banana-classic",
+      "sha256": "a529132c05d5f61dc3fb7727cdb50a4e476d91b7e026efe79fd2aa29c8fcd0cd",
+      "passed": true,
+      "source_glb": {
+        "file_bytes": 701632,
+        "binary_chunk_bytes": 560316,
+        "mesh_definitions": 152,
+        "mesh_primitives": 152,
+        "mesh_nodes": 152,
+        "material_definitions": 6,
+        "image_definitions": 6,
+        "embedded_images": 6,
+        "base_color_textured_materials": 6,
+        "camera_definitions": 0,
+        "light_definitions": 0,
+        "named_stage_objects": [],
+        "extensions_used": [
+          "KHR_materials_emissive_strength",
+          "KHR_materials_specular"
+        ]
+      },
+      "imported": {
+        "mesh_objects": 152,
+        "unique_meshes": 152,
+        "vertices": 12160,
+        "triangles": 9256,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "objects_missing_uv": 0,
+        "empty_mesh_objects": 0,
+        "used_materials": 6,
+        "referenced_images": 6,
+        "missing_images": 0
+      },
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "family_output": "bread-flower",
+      "sha256": "8f607258cb3cf69680338fc88b65683575220007cad1b09e07c3978538fb243b",
+      "passed": true,
+      "source_glb": {
+        "file_bytes": 1085656,
+        "binary_chunk_bytes": 1036508,
+        "mesh_definitions": 46,
+        "mesh_primitives": 46,
+        "mesh_nodes": 46,
+        "material_definitions": 5,
+        "image_definitions": 5,
+        "embedded_images": 5,
+        "base_color_textured_materials": 5,
+        "camera_definitions": 0,
+        "light_definitions": 0,
+        "named_stage_objects": [],
+        "extensions_used": [
+          "KHR_materials_emissive_strength",
+          "KHR_materials_specular"
+        ]
+      },
+      "imported": {
+        "mesh_objects": 46,
+        "unique_meshes": 46,
+        "vertices": 28221,
+        "triangles": 46922,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "objects_missing_uv": 0,
+        "empty_mesh_objects": 0,
+        "used_materials": 5,
+        "referenced_images": 5,
+        "missing_images": 0
+      },
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "family_output": "clay-bowl",
+      "sha256": "7ccaf324d6a02f848bd7501a21c6b2393b8122aad565e8560954b203374f3a88",
+      "passed": true,
+      "source_glb": {
+        "file_bytes": 227972,
+        "binary_chunk_bytes": 213188,
+        "mesh_definitions": 12,
+        "mesh_primitives": 12,
+        "mesh_nodes": 12,
+        "material_definitions": 4,
+        "image_definitions": 4,
+        "embedded_images": 4,
+        "base_color_textured_materials": 4,
+        "camera_definitions": 0,
+        "light_definitions": 0,
+        "named_stage_objects": [],
+        "extensions_used": [
+          "KHR_materials_emissive_strength",
+          "KHR_materials_specular"
+        ]
+      },
+      "imported": {
+        "mesh_objects": 12,
+        "unique_meshes": 12,
+        "vertices": 3340,
+        "triangles": 6064,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "objects_missing_uv": 0,
+        "empty_mesh_objects": 0,
+        "used_materials": 4,
+        "referenced_images": 4,
+        "missing_images": 0
+      },
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "family_output": "diamond-leaf",
+      "sha256": "a9973de59c87e695cb2b8a2796d86ba2fa4c17a53faf0514bce7c2513fb298c6",
+      "passed": true,
+      "source_glb": {
+        "file_bytes": 613372,
+        "binary_chunk_bytes": 478572,
+        "mesh_definitions": 134,
+        "mesh_primitives": 134,
+        "mesh_nodes": 134,
+        "material_definitions": 6,
+        "image_definitions": 6,
+        "embedded_images": 6,
+        "base_color_textured_materials": 6,
+        "camera_definitions": 0,
+        "light_definitions": 0,
+        "named_stage_objects": [],
+        "extensions_used": [
+          "KHR_materials_emissive_strength",
+          "KHR_materials_specular"
+        ]
+      },
+      "imported": {
+        "mesh_objects": 134,
+        "unique_meshes": 134,
+        "vertices": 9730,
+        "triangles": 6964,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "objects_missing_uv": 0,
+        "empty_mesh_objects": 0,
+        "used_materials": 6,
+        "referenced_images": 6,
+        "missing_images": 0
+      },
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "family_output": "orange-bowl",
+      "sha256": "d72f0801d038bfe3f5bd2783f4f948b6e651e624b03e0da77a2162e4b0c76996",
+      "passed": true,
+      "source_glb": {
+        "file_bytes": 653900,
+        "binary_chunk_bytes": 625148,
+        "mesh_definitions": 28,
+        "mesh_primitives": 28,
+        "mesh_nodes": 28,
+        "material_definitions": 1,
+        "image_definitions": 1,
+        "embedded_images": 1,
+        "base_color_textured_materials": 1,
+        "camera_definitions": 0,
+        "light_definitions": 0,
+        "named_stage_objects": [],
+        "extensions_used": [
+          "KHR_materials_specular"
+        ]
+      },
+      "imported": {
+        "mesh_objects": 28,
+        "unique_meshes": 28,
+        "vertices": 16416,
+        "triangles": 32144,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "objects_missing_uv": 0,
+        "empty_mesh_objects": 0,
+        "used_materials": 1,
+        "referenced_images": 1,
+        "missing_images": 0
+      },
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "family_output": "pink-lotus",
+      "sha256": "9d0bde7a94698d360688d0191fbd4f1400a81ed12bdaecaac6b96d1e448ef2b6",
+      "passed": true,
+      "source_glb": {
+        "file_bytes": 1128532,
+        "binary_chunk_bytes": 1084684,
+        "mesh_definitions": 40,
+        "mesh_primitives": 40,
+        "mesh_nodes": 40,
+        "material_definitions": 3,
+        "image_definitions": 3,
+        "embedded_images": 3,
+        "base_color_textured_materials": 3,
+        "camera_definitions": 0,
+        "light_definitions": 0,
+        "named_stage_objects": [],
+        "extensions_used": [
+          "KHR_materials_specular"
+        ]
+      },
+      "imported": {
+        "mesh_objects": 40,
+        "unique_meshes": 40,
+        "vertices": 23592,
+        "triangles": 46448,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "objects_missing_uv": 0,
+        "empty_mesh_objects": 0,
+        "used_materials": 3,
+        "referenced_images": 3,
+        "missing_images": 0
+      },
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "family_output": "tiered-leaf",
+      "sha256": "503a1701e3762596f9ba75ad1730d381572450ebd254ec481ea455f8e116e350",
+      "passed": true,
+      "source_glb": {
+        "file_bytes": 717368,
+        "binary_chunk_bytes": 586724,
+        "mesh_definitions": 141,
+        "mesh_primitives": 141,
+        "mesh_nodes": 141,
+        "material_definitions": 6,
+        "image_definitions": 6,
+        "embedded_images": 6,
+        "base_color_textured_materials": 6,
+        "camera_definitions": 0,
+        "light_definitions": 0,
+        "named_stage_objects": [],
+        "extensions_used": [
+          "KHR_materials_emissive_strength",
+          "KHR_materials_specular"
+        ]
+      },
+      "imported": {
+        "mesh_objects": 141,
+        "unique_meshes": 141,
+        "vertices": 12896,
+        "triangles": 11060,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "objects_missing_uv": 0,
+        "empty_mesh_objects": 0,
+        "used_materials": 6,
+        "referenced_images": 6,
+        "missing_images": 0
+      },
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "family_output": "white",
+      "sha256": "9be896f0f89cb32cb4361e5f58e277ee6a8c91f8b0edf3e2cc8c9cf4df857a4f",
+      "passed": true,
+      "source_glb": {
+        "file_bytes": 749424,
+        "binary_chunk_bytes": 715348,
+        "mesh_definitions": 32,
+        "mesh_primitives": 32,
+        "mesh_nodes": 32,
+        "material_definitions": 3,
+        "image_definitions": 3,
+        "embedded_images": 3,
+        "base_color_textured_materials": 3,
+        "camera_definitions": 0,
+        "light_definitions": 0,
+        "named_stage_objects": [],
+        "extensions_used": [
+          "KHR_materials_specular"
+        ]
+      },
+      "imported": {
+        "mesh_objects": 32,
+        "unique_meshes": 32,
+        "vertices": 17916,
+        "triangles": 34928,
+        "nonfinite_vertices": 0,
+        "degenerate_triangles": 0,
+        "objects_missing_uv": 0,
+        "empty_mesh_objects": 0,
+        "used_materials": 3,
+        "referenced_images": 3,
+        "missing_images": 0
+      },
+      "errors": [],
+      "warnings": []
+    }
+  ],
+  "visual_status": "needs_revision",
+  "visual_review": [
+    {
+      "family": "white-lotus",
+      "views": [
+        "iso",
+        "front",
+        "top",
+        "GLB iso"
+      ],
+      "status": "needs_revision",
+      "observations": [
+        "Broad spoon petals and differing whorl inclinations are now present.",
+        "Source and reimported GLB have no missing base-color image in the inspected view.",
+        "Exact petal edge profile, centre opening and camera angle still differ from screenshot subtypes; no exact-match approval.",
+        "Fine bump and subsurface are not baked into GLB; minor render grain remains in overlaps."
+      ]
+    },
+    {
+      "family": "orange-bowl",
+      "views": [
+        "iso"
+      ],
+      "status": "needs_revision",
+      "observations": [
+        "Final source produces broad orange lips, pointed upper crests and a central deck.",
+        "Final embedded image material was rebuilt and round-trip validated.",
+        "Centre surface is still too smooth and perimeter lips need reference-specific rounding."
+      ]
+    },
+    {
+      "family": "banana-classic",
+      "views": [
+        "iso"
+      ],
+      "status": "needs_revision",
+      "observations": [
+        "Directional fibers and separate folded panels are visible.",
+        "Default sample is brighter and yellower than the dark-green tall-crown reference.",
+        "Distinct low-rim, rounded-tab and tall-crown screenshot variants require configuration/component changes."
+      ]
+    }
+  ],
+  "limitations": [
+    "No all-page capture or complete mesh inventory for reference websites.",
+    "No copied website model/UV/texture archive.",
+    "No exact visual similarity certification or percentage score.",
+    "No physical flotation, self-intersection-free proof, mobile FPS or draw-call benchmark.",
+    "Blender node bump/subsurface and render stage are not equivalent to portable baked web materials."
+  ],
+  "artifact_policy": "Generated models and render test files are task outputs, not installed skill contents."
+}

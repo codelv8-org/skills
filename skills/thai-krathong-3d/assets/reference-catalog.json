@@ -1,0 +1,977 @@
+{
+  "schema_version": 1,
+  "catalog_id": "thai-krathong-reference-study-2026-11-23",
+  "title": "Fourteen supplied krathong screenshots: morphology and preset routing",
+  "provenance": {
+    "study_method": "All fourteen original PNG files were opened and visually inspected at full resolution; a contact sheet was used only for comparison.",
+    "report_title": "Thai Krathong 3D Builder — Deep Research Upgrade",
+    "report_document_id": "DeepResearchRecentReport_4c1e9a838c908191a4530d375d7ac631",
+    "report_backing_conversation_id": "6b045683-f268-83ec-b4c7-4bb5b7e3705c",
+    "report_message_id": "bcd23164-52b9-4fd5-bd6b-ff6fc858c693",
+    "report_role": "Research provenance and implementation direction; prior package and test claims are not current validation evidence.",
+    "integration_status": "New direct integration from recovered research report and supplied images; this is not a recovery of the original report-linked skill.zip.",
+    "source_archive_status": "The report-linked sandbox:/mnt/data/skill.zip was unavailable in the inspected runtime.",
+    "image_policy": "Screenshots are not bundled. Original filenames, file hashes and pixel metadata identify the supplied evidence; add verified source file IDs when available."
+  },
+  "interpretation_rules": [
+    "Observe first and separate visible facts from inferred structure. All material terms describe rendered appearance unless independently verified.",
+    "Physical dimensions, real thickness, hidden fold counts, support volumes and complete underside construction cannot be inferred reliably from one view.",
+    "Qualitative parameters describe a target shape; they are not measured generator values.",
+    "A recommended preset is a starting family, not a guarantee that the supplied preset reproduces every subtype.",
+    "Do not substitute generic flowers, candles or incense where none are visible. Exact accessory counts are stated only when directly visible.",
+    "No rendered similarity scores or image-match pass results are established by this catalog. Run current geometry and visual QA separately and record limitations.",
+    "The PNG DPI metadata is a screenshot encoding value and does not establish object scale."
+  ],
+  "references": [
+    {
+      "reference_id": "R01",
+      "filename": "2026-11-23_214537.png",
+      "recommended_preset": "ref-banana-classic",
+      "subtype": "Compact lime-green folded-leaf bowl with unobstructed round deck",
+      "mapping_fit": "Family-level starting point; requires a compact low bowl variant, not the tall dark-green crown used by R13.",
+      "silhouette": "Shallow circular body seen as an ellipse; many pointed crests make a dense compact perimeter. The front edge remains broad and low rather than forming long narrow spikes.",
+      "folds": {
+        "width": "Broad triangular/diamond-like faces relative to their visible height; pinched lower corners.",
+        "tip": "Pointed angular peaks, with small bevels and slight surface rounding.",
+        "curl": "Low transverse cupping and folded front side flaps; no large smooth spoon curl.",
+        "overlap": "Staggered faces overlap side to side; a low front band crosses the taller inner crests, with V-shaped seams."
+      },
+      "arrangement": "At least two distinguishable staggered bands of folded green motifs are visible. Exact whole-ring count and hidden rear construction are not established.",
+      "center": "A large, nearly flat lime-green circular deck fills most of the opening. Faint radial seams converge near its centre; no central flowers or accessories are visible.",
+      "base": "A continuous low yellow-green cylindrical side band is exposed below the leaf folds; the underside is hidden.",
+      "material": "Green and yellow-green waxy/satin appearance, with subtle mottling and radial surface traces on the centre; this is a rendered appearance, not proof of real banana-leaf construction.",
+      "accessories": "No candle, incense or flame is visible.",
+      "lighting": "Dark rippling water with orange reflections, strongest behind and to image right; the object is brightly and broadly lit. Surface colour includes this warm illumination and cannot be sampled as an intrinsic material value without correction.",
+      "parameters": {
+        "footprint": "circular",
+        "wall_profile": "low compact bowl",
+        "fold_width": "broad",
+        "fold_rise": "low to moderate",
+        "fold_tip": "pointed",
+        "fold_curl": "slight",
+        "layering": "staggered overlapping bands",
+        "center_mode": "large flat green deck",
+        "palette": "lime and yellow-green"
+      },
+      "confidence": {
+        "family": "high",
+        "silhouette": "high",
+        "fold_construction": "medium",
+        "material_identity": "low",
+        "hidden_geometry": "low"
+      },
+      "uncertainties": [
+        "A single elevated view hides the bottom, rear fastenings and exact fold thickness.",
+        "Radial centre seams are visible; whether they represent separate leaf pieces or texture is uncertain."
+      ],
+      "variant_changes": [
+        "Preserve the large empty centre and compact wall height.",
+        "Use broad folded facets and a continuous low base band; omit flowers and ceremonial accessories."
+      ],
+      "sha256": "ac683eedacd1a04b40875bdc141f0ed50718110b0a5c5c773f362ca7fe6d27c8",
+      "source": {
+        "kind": "user-supplied screenshot",
+        "original_filename": "2026-11-23_214537.png",
+        "pixel_dimensions": {
+          "width": 645,
+          "height": 556
+        },
+        "colour_mode": "RGB",
+        "embedded_dpi": [
+          96.012,
+          96.012
+        ],
+        "physical_scale": "not established",
+        "redistributed_image": false,
+        "library_file_id": "libfile_670d5b21b7488191b6b36f333430d362"
+      },
+      "observed_view": "Single elevated front/three-quarter view; not an orthographic measurement.",
+      "render_validation": {
+        "status": "not yet validated against generated output in this catalog",
+        "similarity_score": null,
+        "basis": "Direct visual study of the supplied screenshot only; not a measured match."
+      }
+    },
+    {
+      "reference_id": "R02",
+      "filename": "2026-11-23_214555.png",
+      "recommended_preset": "ref-pink-lotus",
+      "subtype": "Pink-tip lotus-petal bowl on a green base",
+      "mapping_fit": "Strong family match; needs a wide open deck and tall pointed bowl walls rather than an open flat blossom.",
+      "silhouette": "Circular bowl with a wide opening and a jagged pointed rear crest. The lower front forms a broad overlapping scalloped band.",
+      "folds": {
+        "width": "Broad tapered petals, widest through the middle and narrowing toward the point and attachment.",
+        "tip": "Distinct pink/red pointed tips, some slightly hooked outward.",
+        "curl": "Concave spoon-like transverse cup; front outer petals turn outward into a low lip.",
+        "overlap": "Several staggered rows overlap strongly; inner petals rise above lower outer petals, leaving a wide unobstructed opening."
+      },
+      "arrangement": "Multiple nested petal bands are visible with increasing rise toward the inner/back crest. Perspective and occlusion prevent a reliable exact whole-ring count.",
+      "center": "Large pale cream/yellow-pink flat circular deck with faint radial wedges. It is not a dense flower centre.",
+      "base": "Low green/yellow cylindrical band beneath the petal body; flat underside not shown.",
+      "material": "Cream/yellow petal bases transition toward pink and red tips/edges; subtle surface texture, pale edge highlights and shadowed overlaps. Pink is a positional gradient, not a uniform material colour.",
+      "accessories": "No candle, incense or flame is visible.",
+      "lighting": "Dark rippling water with orange reflections, strongest behind and to image right; the object is brightly and broadly lit. Surface colour includes this warm illumination and cannot be sampled as an intrinsic material value without correction.",
+      "parameters": {
+        "footprint": "circular",
+        "wall_profile": "open petal bowl",
+        "petal_width": "broad",
+        "petal_rise": "moderate to high",
+        "tip": "pointed",
+        "transverse_cup": "moderate",
+        "outer_lip": "outward",
+        "layering": "nested staggered whorls",
+        "center_mode": "large flat pale deck",
+        "palette": "cream bases to pink/red tips, green base"
+      },
+      "confidence": {
+        "family": "high",
+        "silhouette": "high",
+        "petal_profile": "high",
+        "material_identity": "low",
+        "hidden_geometry": "low"
+      },
+      "uncertainties": [
+        "Backside petal attachments and exact hidden petal counts are unknown.",
+        "The image does not establish real thickness, dimensions or whether the material is natural petal, wax or a stylized substitute."
+      ],
+      "variant_changes": [
+        "Keep the pale exposed centre instead of filling it with stamens or marigolds.",
+        "Model petal cupping, outward lower lip and pink tip gradient separately."
+      ],
+      "sha256": "f5c7e6e7b27c3df2c13623e5835ba760735d218f35eada78859242552227f166",
+      "source": {
+        "kind": "user-supplied screenshot",
+        "original_filename": "2026-11-23_214555.png",
+        "pixel_dimensions": {
+          "width": 635,
+          "height": 563
+        },
+        "colour_mode": "RGB",
+        "embedded_dpi": [
+          96.012,
+          96.012
+        ],
+        "physical_scale": "not established",
+        "redistributed_image": false,
+        "library_file_id": "libfile_4e71860044048191a9fffd1f53ba59ca"
+      },
+      "observed_view": "Single elevated front/three-quarter view; not an orthographic measurement.",
+      "render_validation": {
+        "status": "not yet validated against generated output in this catalog",
+        "similarity_score": null,
+        "basis": "Direct visual study of the supplied screenshot only; not a measured match."
+      }
+    },
+    {
+      "reference_id": "R03",
+      "filename": "2026-11-23_214613.png",
+      "recommended_preset": "ref-banana-classic",
+      "subtype": "Pale lime pointed-fold bowl with bead-like inner trim and rolled V band",
+      "mapping_fit": "Partial family match only; the beaded trim and rolled lower band are distinct features that the ordinary banana preset may not contain.",
+      "silhouette": "Compact circular bowl with a repetitive pointed crown. The front has a large descending V/chevron rather than a plain straight rim.",
+      "folds": {
+        "width": "Broad triangular folded panels; side flaps spread laterally.",
+        "tip": "Sharp lime/yellow pointed peaks along the upper perimeter.",
+        "curl": "Raised rounded/rolled strips follow the front chevron; leaf panels are faceted with mild cupping.",
+        "overlap": "Upper pointed panels overlap; lower diagonal strips cross in a prominent front V. The pale bead-like trim overlays the inner rim."
+      },
+      "arrangement": "A pointed outer crown and a lower decorative folded band surround one continuous inner ring of pale ovoid bead-like forms; exact trim count is not established.",
+      "center": "Wide flat pale-yellow circular deck with visible radial wedges, bounded by rounded pale-yellow ovoids. These rounded forms should not automatically be labelled marigolds.",
+      "base": "Pale green wall continues to the bottom edge; no separate exposed stem band is clearly visible.",
+      "material": "Bright pale yellow-green surfaces, smooth rounded trim and mild waxy highlights; the image does not identify the physical material of the beads or deck.",
+      "accessories": "No candle, incense or flame is visible.",
+      "lighting": "Dark rippling water with orange reflections, strongest behind and to image right; the object is brightly and broadly lit. Surface colour includes this warm illumination and cannot be sampled as an intrinsic material value without correction.",
+      "parameters": {
+        "footprint": "circular",
+        "wall_profile": "compact pointed bowl",
+        "fold_width": "broad",
+        "fold_tip": "pointed",
+        "lower_band": "rolled chevron/V",
+        "inner_trim": "continuous ovoid bead-like ring",
+        "center_mode": "flat pale-yellow deck",
+        "palette": "pale lime and yellow"
+      },
+      "confidence": {
+        "family": "high",
+        "silhouette": "high",
+        "decorative_trim": "high",
+        "material_identity": "low",
+        "hidden_geometry": "low"
+      },
+      "uncertainties": [
+        "The back of the crossing lower strips and their fastening are occluded.",
+        "Bead-like trim is visible, but its botanical or craft identity is unverified.",
+        "Do not infer a full bead count or real-world size from this perspective."
+      ],
+      "variant_changes": [
+        "Add an inner ovoid trim ring and the front rolled V band as separate geometry.",
+        "Use pale materials and a broad empty deck; a dark-green triangular wreath is insufficient."
+      ],
+      "sha256": "b7fa2cc3e53ef4e605693cbef5e12cb4d70e025bfe20e635e6775bd12c8a7fe3",
+      "source": {
+        "kind": "user-supplied screenshot",
+        "original_filename": "2026-11-23_214613.png",
+        "pixel_dimensions": {
+          "width": 617,
+          "height": 568
+        },
+        "colour_mode": "RGB",
+        "embedded_dpi": [
+          96.012,
+          96.012
+        ],
+        "physical_scale": "not established",
+        "redistributed_image": false,
+        "library_file_id": "libfile_f839ca88adb48191b4b454fef3f1a71f"
+      },
+      "observed_view": "Single elevated front/three-quarter view; not an orthographic measurement.",
+      "render_validation": {
+        "status": "not yet validated against generated output in this catalog",
+        "similarity_score": null,
+        "basis": "Direct visual study of the supplied screenshot only; not a measured match."
+      }
+    },
+    {
+      "reference_id": "R04",
+      "filename": "2026-11-23_214625.png",
+      "recommended_preset": "ref-orange-bowl",
+      "subtype": "Thick orange petal bowl with rounded rolled front lips",
+      "mapping_fit": "Strong family match if broad lips and petal volume are retained.",
+      "silhouette": "Low circular orange bowl with a broad flat centre; the rear has pointed overlapping peaks while the front has rounded thick scalloped lobes.",
+      "folds": {
+        "width": "Wide substantial petals/lobes with visible volume, not thin strips.",
+        "tip": "Rear crests are pointed; front outer lobes have rounded tops and broad corners.",
+        "curl": "Pronounced inward/outward lip rounding at the front, with thick amber-highlighted rims and recessed cupped middles.",
+        "overlap": "Staggered petal layers wrap the wall; front rounded lobes overlap a taller inner row and a narrow continuous base band."
+      },
+      "arrangement": "Multiple staggered petal rows are visible; the exact hidden whole-ring counts are uncertain.",
+      "center": "Large nearly flat orange disk with mottled texture and faint radial divisions; no floral cluster occupies the opening.",
+      "base": "Low continuous orange side band under the petal lobes.",
+      "material": "Saturated orange/yellow with darker amber/toasted-looking lip edges and mottled centre. The wax-, cake- or bread-like impression is ambiguous; do not assert composition from colour alone.",
+      "accessories": "No candle, incense or flame is visible.",
+      "lighting": "Dark rippling water with orange reflections, strongest behind and to image right; the object is brightly and broadly lit. Surface colour includes this warm illumination and cannot be sampled as an intrinsic material value without correction.",
+      "parameters": {
+        "footprint": "circular",
+        "wall_profile": "thick lobed bowl",
+        "petal_width": "very broad",
+        "lip_thickness": "visually substantial",
+        "front_tip": "rounded",
+        "rear_tip": "pointed",
+        "curl": "strong rolled lip",
+        "center_mode": "flat mottled orange deck",
+        "palette": "orange with amber rims"
+      },
+      "confidence": {
+        "family": "high",
+        "silhouette": "high",
+        "lip_profile": "high",
+        "material_identity": "low",
+        "hidden_geometry": "low"
+      },
+      "uncertainties": [
+        "Only the elevated front view is available; lip cross-sections and underside thickness require further views.",
+        "Exact whole-ring petal counts and physical material remain unknown."
+      ],
+      "variant_changes": [
+        "Make front lips rounded and thick, with differentiated inner and outer surfaces.",
+        "Preserve the orange central disk and avoid narrow lotus blades or flower clusters."
+      ],
+      "sha256": "5829bc6c43691c8104f0c03e1e13475e48488120d3ac1d3ec235023faecb456d",
+      "source": {
+        "kind": "user-supplied screenshot",
+        "original_filename": "2026-11-23_214625.png",
+        "pixel_dimensions": {
+          "width": 614,
+          "height": 543
+        },
+        "colour_mode": "RGB",
+        "embedded_dpi": [
+          96.012,
+          96.012
+        ],
+        "physical_scale": "not established",
+        "redistributed_image": false,
+        "library_file_id": "libfile_a59f1ebe6e2081918e91c69e0bae9cac"
+      },
+      "observed_view": "Single elevated front/three-quarter view; not an orthographic measurement.",
+      "render_validation": {
+        "status": "not yet validated against generated output in this catalog",
+        "similarity_score": null,
+        "basis": "Direct visual study of the supplied screenshot only; not a measured match."
+      }
+    },
+    {
+      "reference_id": "R05",
+      "filename": "2026-11-23_214638.png",
+      "recommended_preset": "ref-white-lotus",
+      "subtype": "Open white lotus with large smooth central dome",
+      "mapping_fit": "Same family as R06 but requires a different centre; do not merge the two subtypes.",
+      "silhouette": "Open radial blossom with broad near-horizontal outer petals and a taller nested inner cup; no obvious cylindrical base is exposed.",
+      "folds": {
+        "width": "Broad spoon-shaped petals, pinched near attachment and fuller toward the distal half.",
+        "tip": "Mostly tapered rounded points, with small notches or hooks on some visible edges.",
+        "curl": "Transverse cupping, raised pale rims and curled/notched tips; outer petals spread flat while inner petals stand upright.",
+        "overlap": "Nested offset whorls overlap; outer petals remain individually readable around the full visible contour."
+      },
+      "arrangement": "Several visible whorls change pitch from low outer petals to upright inner petals. Exact hidden whorl and petal counts are not recoverable.",
+      "center": "A large smooth pale rounded dome/volume protrudes within the inner cup. Its lower attachment is hidden. It must not be replaced silently by a small flower core or candle.",
+      "base": "Petals conceal the underside and attachment; no separate base shape can be verified.",
+      "material": "Ivory-white surface, soft cream shading, pale edge highlights and weak fine texture. Rendering may suggest soft or waxy petals but does not prove a physical material.",
+      "accessories": "No candle, incense or flame is visible; the centre is the smooth pale volume.",
+      "lighting": "Dark rippling water with orange reflections, strongest behind and to image right; the object is brightly and broadly lit. Surface colour includes this warm illumination and cannot be sampled as an intrinsic material value without correction.",
+      "parameters": {
+        "footprint": "open radial blossom",
+        "outer_petals": "broad low spoons",
+        "inner_petals": "upright nested cup",
+        "tip": "soft tapered, occasionally notched",
+        "edge_curl": "visible",
+        "center_mode": "large smooth dome",
+        "base_visibility": "hidden",
+        "palette": "ivory"
+      },
+      "confidence": {
+        "family": "high",
+        "silhouette": "high",
+        "center_presence": "high",
+        "center_identity": "low",
+        "hidden_geometry": "low"
+      },
+      "uncertainties": [
+        "The identity and full geometry of the central dome are unverified.",
+        "The bottom and rear petal attachments are hidden.",
+        "Lighting and screenshot scale differ from R06, so direct pixel dimensions are not object dimensions."
+      ],
+      "variant_changes": [
+        "Add an explicit dome centre option while retaining the broad outer whorls.",
+        "Do not enable the R06 candle or assume the dome is a real lotus seedpod."
+      ],
+      "sha256": "eaa1060c79e4c2a13c3bdf3f441dae99a67c4373e02ae3289c831067d68aab5c",
+      "source": {
+        "kind": "user-supplied screenshot",
+        "original_filename": "2026-11-23_214638.png",
+        "pixel_dimensions": {
+          "width": 482,
+          "height": 451
+        },
+        "colour_mode": "RGB",
+        "embedded_dpi": [
+          96.012,
+          96.012
+        ],
+        "physical_scale": "not established",
+        "redistributed_image": false,
+        "library_file_id": "libfile_0b6a4449886481918aab834df9feb7f4"
+      },
+      "observed_view": "Single elevated front/three-quarter view; not an orthographic measurement.",
+      "render_validation": {
+        "status": "not yet validated against generated output in this catalog",
+        "similarity_score": null,
+        "basis": "Direct visual study of the supplied screenshot only; not a measured match."
+      }
+    },
+    {
+      "reference_id": "R06",
+      "filename": "2026-11-23_214701.png",
+      "recommended_preset": "ref-white-lotus",
+      "subtype": "Open white lotus with nested open centre and slim pale candle",
+      "mapping_fit": "Strong family match; default centre must stay open around the slim candle, unlike R05.",
+      "silhouette": "Wide white lotus with nearly horizontal outer petals, an upright rear crown and a visibly open nested inner cup.",
+      "folds": {
+        "width": "Broad outer spoons and progressively smaller inner petals, with narrow attachments.",
+        "tip": "Tapered soft points; some curled or notched edge details.",
+        "curl": "Clear transverse cup and lifted margins, with the outer front petal almost horizontal and curling upward at its rim.",
+        "overlap": "Offset nested whorls reveal small inner petals around the accessory; outer petal gaps remain visible."
+      },
+      "arrangement": "Several nested whorls vary in radius, rise and pitch independently. Exact hidden counts are not established.",
+      "center": "An open small petal cup surrounds one visible slender pale vertical candle-like cylinder. There is no large smooth dome.",
+      "base": "No exposed cylindrical stem band; attachment and underside are hidden by petals.",
+      "material": "Ivory-white petals with cream highlights and soft grey-green shaded folds; the slim centre cylinder is pale yellow/cream.",
+      "accessories": "One slender pale candle-like cylinder is visible. No flame or incense is visible.",
+      "lighting": "Dark rippling water with orange reflections, strongest behind and to image right; the object is brightly and broadly lit. Surface colour includes this warm illumination and cannot be sampled as an intrinsic material value without correction.",
+      "parameters": {
+        "footprint": "open radial blossom",
+        "outer_petals": "broad low spoons",
+        "inner_petals": "small open cup",
+        "edge_curl": "visible",
+        "center_mode": "open with slim unlit candle",
+        "palette": "ivory with pale cream centre accessory"
+      },
+      "confidence": {
+        "family": "high",
+        "silhouette": "high",
+        "center_openness": "high",
+        "accessory_identity": "medium",
+        "hidden_geometry": "low"
+      },
+      "uncertainties": [
+        "The small pale cylinder is visually consistent with a candle; wick detail is not clear enough to establish more.",
+        "Hidden attachments, exact counts and real dimensions remain unknown."
+      ],
+      "variant_changes": [
+        "Select open/candle centre instead of the R05 dome.",
+        "Keep independent whorl pitch and the broad front outer petal."
+      ],
+      "sha256": "913aca50b3abdbe5f890f3de96bb3c763eb5288740be51025d3195ea87038040",
+      "source": {
+        "kind": "user-supplied screenshot",
+        "original_filename": "2026-11-23_214701.png",
+        "pixel_dimensions": {
+          "width": 408,
+          "height": 379
+        },
+        "colour_mode": "RGB",
+        "embedded_dpi": [
+          96.012,
+          96.012
+        ],
+        "physical_scale": "not established",
+        "redistributed_image": false,
+        "library_file_id": "libfile_51dac9b23000819193051a8284d185d5"
+      },
+      "observed_view": "Single elevated front/three-quarter view; not an orthographic measurement.",
+      "render_validation": {
+        "status": "not yet validated against generated output in this catalog",
+        "similarity_score": null,
+        "basis": "Direct visual study of the supplied screenshot only; not a measured match."
+      }
+    },
+    {
+      "reference_id": "R07",
+      "filename": "2026-11-23_215736.png",
+      "recommended_preset": "ref-banana-classic",
+      "subtype": "Dark-green angular multilayer wreath with broad leaf-covered deck",
+      "mapping_fit": "Strong banana family match; requires several low overlapping perimeter bands rather than a flower-filled centre.",
+      "silhouette": "Wide circular disk with a strongly jagged leaf contour and multiple low staggered angular bands visible at the front.",
+      "folds": {
+        "width": "Broad triangular/diamond folded panels; large side flaps.",
+        "tip": "Sharp angular points with central facet ridges.",
+        "curl": "Mostly planar folded facets, not smooth blade curvature; slight bends at overlaps.",
+        "overlap": "Several perimeter bands overlap with dark gaps. Small brown fastening-like marks are visible at some front seams."
+      },
+      "arrangement": "Multiple low concentric perimeter bands surround one broad continuous central deck. The screenshot does not show three separately elevated interior decks.",
+      "center": "Large near-flat green leaf-covered deck with long parallel veins, unobstructed apart from the central candle/incense.",
+      "base": "Pale porous-looking cylindrical band exposed below the dark green folds; material identity is unconfirmed.",
+      "material": "Dark/medium green directional leaf veins; grain rotates with different folded panels. Deep seam shadows separate bands; base is pale cream with irregular yellow-brown flecks.",
+      "accessories": "One visible lit white candle and three visible incense sticks stand together near the centre.",
+      "lighting": "Blue-to-charcoal background with soft pale bokeh; a warm vertical reflection appears below the object. Broad front/upper-left lighting and a candle flame accompany a directional accessory shadow toward image upper right. Match object lighting separately from background.",
+      "parameters": {
+        "footprint": "circular",
+        "rim_profile": "multi-band angular wreath",
+        "fold_width": "broad",
+        "fold_tip": "sharp",
+        "fold_construction": "planar facets with ridge and flaps",
+        "center_mode": "large flat leaf deck",
+        "base_band": "exposed pale flecked",
+        "palette": "dark green"
+      },
+      "confidence": {
+        "family": "high",
+        "silhouette": "high",
+        "fold_facets": "high",
+        "material_identity": "medium",
+        "hidden_geometry": "low"
+      },
+      "uncertainties": [
+        "Small brown marks resemble fasteners, but their exact type and hidden arrangement cannot be determined.",
+        "The visible pale base cannot be positively identified as banana stem from this render.",
+        "Exact hidden leaf counts are not established."
+      ],
+      "variant_changes": [
+        "Keep the deck open and use a few broad faceted overlapping bands.",
+        "Preserve rotated leaf grain and dark inter-layer seams; do not add flowers."
+      ],
+      "sha256": "86a3684deec2b4ad5eb9eb0239995918e6c2edc22145cfe46db4454d1b54392c",
+      "source": {
+        "kind": "user-supplied screenshot",
+        "original_filename": "2026-11-23_215736.png",
+        "pixel_dimensions": {
+          "width": 805,
+          "height": 563
+        },
+        "colour_mode": "RGB",
+        "embedded_dpi": [
+          96.012,
+          96.012
+        ],
+        "physical_scale": "not established",
+        "redistributed_image": false,
+        "library_file_id": "libfile_3ee6bb9abb248191bf22673d41bc673b"
+      },
+      "observed_view": "Single elevated front/three-quarter view; not an orthographic measurement.",
+      "render_validation": {
+        "status": "not yet validated against generated output in this catalog",
+        "similarity_score": null,
+        "basis": "Direct visual study of the supplied screenshot only; not a measured match."
+      }
+    },
+    {
+      "reference_id": "R08",
+      "filename": "2026-11-23_215754.png",
+      "recommended_preset": "ref-banana-classic",
+      "subtype": "Rounded/clipped folded-tab wreath with low scalloped edge",
+      "mapping_fit": "Family-level only; the pointed-leaf classic preset needs a rounded/clipped-tab variant.",
+      "silhouette": "Circular broad deck with a soft scalloped perimeter; the rear contour is formed by broad rounded or clipped polygonal tabs rather than tall points.",
+      "folds": {
+        "width": "Wide short tabs with broad shoulders.",
+        "tip": "Rounded or clipped/faceted ends; not spear points.",
+        "curl": "Bent planar faces with mild rounding; little long longitudinal curl.",
+        "overlap": "Low overlapping edge bands create a dark ring at the front; outer tabs are offset relative to inner tabs."
+      },
+      "arrangement": "Low concentric rim bands around a single dominant central deck. Precise full ring counts are not proven.",
+      "center": "Nearly flat green circular deck with long parallel veins and a clear open area around the candle.",
+      "base": "Visible pale cream flecked circular band beneath green trim.",
+      "material": "Directional dark-green leaf texture with medium-green ridges; lower overlaps are almost black in shade. The base has pale porous/flecked appearance.",
+      "accessories": "One visible lit white candle and three visible incense sticks.",
+      "lighting": "Blue-to-charcoal background with soft pale bokeh; a warm vertical reflection appears below the object. Broad front/upper-left lighting and a candle flame accompany a directional accessory shadow toward image upper right. Match object lighting separately from background.",
+      "parameters": {
+        "footprint": "circular",
+        "rim_profile": "low scalloped tabs",
+        "fold_width": "wide short",
+        "tip": "rounded/clipped",
+        "fold_rise": "low",
+        "center_mode": "large flat leaf deck",
+        "palette": "dark green"
+      },
+      "confidence": {
+        "family": "high",
+        "silhouette": "high",
+        "tab_tip_profile": "high",
+        "material_identity": "medium",
+        "hidden_geometry": "low"
+      },
+      "uncertainties": [
+        "Backside tab profiles and exact fold thickness are hidden.",
+        "The screenshot cannot establish total tab counts or substrate composition."
+      ],
+      "variant_changes": [
+        "Replace sharp triangular tips with broad rounded/clipped ends.",
+        "Keep the rim low, the centre large and the exposed base band visible."
+      ],
+      "sha256": "3a32496200740a946c1f242ffe63abf364d4d97b61dcab29febb183a18f3acc5",
+      "source": {
+        "kind": "user-supplied screenshot",
+        "original_filename": "2026-11-23_215754.png",
+        "pixel_dimensions": {
+          "width": 716,
+          "height": 556
+        },
+        "colour_mode": "RGB",
+        "embedded_dpi": [
+          96.012,
+          96.012
+        ],
+        "physical_scale": "not established",
+        "redistributed_image": false,
+        "library_file_id": "libfile_e6c814a6247c81919db8b94eec842179"
+      },
+      "observed_view": "Single elevated front/three-quarter view; not an orthographic measurement.",
+      "render_validation": {
+        "status": "not yet validated against generated output in this catalog",
+        "similarity_score": null,
+        "basis": "Direct visual study of the supplied screenshot only; not a measured match."
+      }
+    },
+    {
+      "reference_id": "R09",
+      "filename": "2026-11-23_215807.png",
+      "recommended_preset": "ref-banana-classic",
+      "subtype": "Minimal low sawtooth leaf border with large flat deck",
+      "mapping_fit": "Family-level only; requires a shallow single-border treatment rather than a tall or multi-tier crown.",
+      "silhouette": "Flat circular platter-like body with short outward triangular points around the rim. The central deck occupies most of the visible object.",
+      "folds": {
+        "width": "Broad shallow triangular folded pieces; limited visible height.",
+        "tip": "Short sharp sawtooth points directed outward.",
+        "curl": "Minimal visible curl; mainly folded planar facets.",
+        "overlap": "One dominant low sawtooth perimeter band; any additional bands are hidden or cannot be separated confidently."
+      },
+      "arrangement": "A single main low border is apparent around one broad continuous deck; do not invent extra raised tiers.",
+      "center": "Very large near-flat green leaf-covered deck with long parallel veins and no flowers.",
+      "base": "Prominent pale cream flecked cylindrical band under the shallow green top.",
+      "material": "Parallel green leaf grain on the deck; grain turns across the small outer facets. Pale base has irregular pores/flecks.",
+      "accessories": "One visible lit white candle and three visible incense sticks.",
+      "lighting": "Blue-to-charcoal background with soft pale bokeh; a warm vertical reflection appears below the object. Broad front/upper-left lighting and a candle flame accompany a directional accessory shadow toward image upper right. Match object lighting separately from background.",
+      "parameters": {
+        "footprint": "circular",
+        "rim_profile": "low sawtooth",
+        "fold_width": "broad shallow",
+        "fold_rise": "minimal",
+        "layering": "one dominant visible border",
+        "center_mode": "very large flat leaf deck",
+        "base_band": "prominent pale flecked"
+      },
+      "confidence": {
+        "family": "high",
+        "silhouette": "high",
+        "low_profile": "high",
+        "material_identity": "medium",
+        "hidden_geometry": "low"
+      },
+      "uncertainties": [
+        "Hidden rim layers and exact leaf counts are unknown.",
+        "Deck curvature appears slight, but one perspective cannot prove perfect planarity."
+      ],
+      "variant_changes": [
+        "Reduce wall and fold height substantially relative to R13.",
+        "Keep one dominant low border and a wide uncluttered deck."
+      ],
+      "sha256": "3b30138175eee717ccceffe25a9e00e8d9bc613845dc1b6a934973763d803913",
+      "source": {
+        "kind": "user-supplied screenshot",
+        "original_filename": "2026-11-23_215807.png",
+        "pixel_dimensions": {
+          "width": 708,
+          "height": 533
+        },
+        "colour_mode": "RGB",
+        "embedded_dpi": [
+          96.012,
+          96.012
+        ],
+        "physical_scale": "not established",
+        "redistributed_image": false,
+        "library_file_id": "libfile_e4ebe5e790e881919e1e14a1ad3178e8"
+      },
+      "observed_view": "Single elevated front/three-quarter view; not an orthographic measurement.",
+      "render_validation": {
+        "status": "not yet validated against generated output in this catalog",
+        "similarity_score": null,
+        "basis": "Direct visual study of the supplied screenshot only; not a measured match."
+      }
+    },
+    {
+      "reference_id": "R10",
+      "filename": "2026-11-23_215820.png",
+      "recommended_preset": "ref-clay-bowl",
+      "subtype": "Plain terracotta-like shallow bowl with thick rounded lip",
+      "mapping_fit": "Strong family match; the bowl must be genuinely concave with a continuous inner wall and thick lip.",
+      "silhouette": "Round broad shallow basin with smooth elliptical rim, thick rounded lip and a continuous curved outer side wall; no petal points.",
+      "folds": {
+        "width": "No petals or leaf folds.",
+        "tip": "Continuous rounded rim, no tips.",
+        "curl": "Smooth inward basin curvature and rounded lip cross-section.",
+        "overlap": "None; the basin is visually continuous."
+      },
+      "arrangement": "One continuous bowl wall around a concave interior; no concentric leaf or flower rings.",
+      "center": "Reddish-brown interior slopes smoothly toward the lower central floor, occupied only by the candle/incense. It must not be modeled as a raised flat disk covering the opening.",
+      "base": "Dark brown exterior wall; bottom and foot are occluded.",
+      "material": "Terracotta-like matte reddish-brown surface with small dark speckles, a lighter warm rim and a much darker outer side. Material appearance is strong evidence, but actual physical clay is not verified.",
+      "accessories": "One visible lit white candle and three visible incense sticks.",
+      "lighting": "Blue-to-charcoal background with soft pale bokeh; a warm vertical reflection appears below the object. Broad front/upper-left lighting and a candle flame accompany a directional accessory shadow toward image upper right. Match object lighting separately from background.",
+      "parameters": {
+        "footprint": "circular",
+        "body": "continuous concave basin",
+        "rim": "thick rounded",
+        "wall": "smooth curved",
+        "center_mode": "concave clay interior",
+        "palette": "warm reddish brown, lighter rim, dark exterior"
+      },
+      "confidence": {
+        "family": "high",
+        "silhouette": "high",
+        "concavity": "high",
+        "material_identity": "medium",
+        "hidden_geometry": "low"
+      },
+      "uncertainties": [
+        "The underside, foot shape and physical wall thickness are not observable.",
+        "Absolute bowl depth and scale cannot be recovered reliably from this single view."
+      ],
+      "variant_changes": [
+        "Use a concave bowl mesh with distinct inner wall, rounded lip and outer side.",
+        "Add restrained speckle variation; do not attach petals or a green base band."
+      ],
+      "sha256": "9bf1966b065cd3f44b24a229b795678636787bedd601e23ba3442932cc057126",
+      "source": {
+        "kind": "user-supplied screenshot",
+        "original_filename": "2026-11-23_215820.png",
+        "pixel_dimensions": {
+          "width": 736,
+          "height": 544
+        },
+        "colour_mode": "RGB",
+        "embedded_dpi": [
+          96.012,
+          96.012
+        ],
+        "physical_scale": "not established",
+        "redistributed_image": false,
+        "library_file_id": "libfile_2d5b88b421048191a1911aa5fdcd12b9"
+      },
+      "observed_view": "Single elevated front/three-quarter view; not an orthographic measurement.",
+      "render_validation": {
+        "status": "not yet validated against generated output in this catalog",
+        "similarity_score": null,
+        "basis": "Direct visual study of the supplied screenshot only; not a measured match."
+      }
+    },
+    {
+      "reference_id": "R11",
+      "filename": "2026-11-23_215833.png",
+      "recommended_preset": "ref-diamond-leaf",
+      "subtype": "Pointed-front heart/diamond-like leaf construction",
+      "mapping_fit": "Strong noncircular family match; the deck, border and base all need the same bilateral outline.",
+      "silhouette": "Bilaterally symmetric heart/diamond-like planform with a pronounced sharp front apex and broad left/right shoulders. It is not a circular krathong seen in perspective.",
+      "folds": {
+        "width": "Broad faceted pointed leaves along the sides; folded bands converge at the front point.",
+        "tip": "Sharp outward tips and a very distinct long front apex.",
+        "curl": "Angular ridges and panel bends, with little smooth spoon curvature.",
+        "overlap": "Several perimeter bands follow the noncircular contour and overlap in a nested V at the front. Small brown fastening-like marks occur at seams."
+      },
+      "arrangement": "Nested noncircular outline bands surround a matching pointed-front central deck. Rear contour is partly obscured by crests and the central accessories.",
+      "center": "Broad green vein-textured deck with a pointed front and rounded shoulders; it must share the perimeter shape rather than remain a circular disk.",
+      "base": "Pale flecked base follows the same pointed-front outline, exposed along both sides and at the apex.",
+      "material": "Directional green grain, dark facet overlaps and pale flecked substrate; grain and folds follow local panel orientation.",
+      "accessories": "One visible lit white candle and three visible incense sticks.",
+      "lighting": "Blue-to-charcoal background with soft pale bokeh; a warm vertical reflection appears below the object. Broad front/upper-left lighting and a candle flame accompany a directional accessory shadow toward image upper right. Match object lighting separately from background.",
+      "parameters": {
+        "footprint": "bilateral heart/diamond-like",
+        "front": "sharp elongated apex",
+        "shoulders": "broad",
+        "rim": "nested faceted V bands",
+        "center_mode": "matching noncircular leaf deck",
+        "base_shape": "same pointed outline"
+      },
+      "confidence": {
+        "family": "high",
+        "noncircular_footprint": "high",
+        "exact_rear_outline": "medium",
+        "material_identity": "medium",
+        "hidden_geometry": "low"
+      },
+      "uncertainties": [
+        "The exact top-view outline, especially any rear cleft, is partly occluded.",
+        "Heart versus diamond is a descriptive subtype, not a claimed traditional craft name.",
+        "Hidden fold counts and underside construction are not established."
+      ],
+      "variant_changes": [
+        "Apply the noncircular outline to centre, base and every perimeter band.",
+        "Preserve the front V/apex and bilateral symmetry; do not approximate with circular rings."
+      ],
+      "sha256": "7799257bf11ca2b2c976358fdb4848c0d5178cdcffcefe457661afb7fe960d99",
+      "source": {
+        "kind": "user-supplied screenshot",
+        "original_filename": "2026-11-23_215833.png",
+        "pixel_dimensions": {
+          "width": 774,
+          "height": 573
+        },
+        "colour_mode": "RGB",
+        "embedded_dpi": [
+          96.012,
+          96.012
+        ],
+        "physical_scale": "not established",
+        "redistributed_image": false,
+        "library_file_id": "libfile_41f65ab492ec8191aa95d2c8a8a3d806"
+      },
+      "observed_view": "Single elevated front/three-quarter view; not an orthographic measurement.",
+      "render_validation": {
+        "status": "not yet validated against generated output in this catalog",
+        "similarity_score": null,
+        "basis": "Direct visual study of the supplied screenshot only; not a measured match."
+      }
+    },
+    {
+      "reference_id": "R12",
+      "filename": "2026-11-23_215846.png",
+      "recommended_preset": "ref-tiered-leaf",
+      "subtype": "Three visibly stepped leaf-covered decks with pointed crowns",
+      "mapping_fit": "Strong tiered family match; requires discrete raised decks, not simply extra leaf rows on one deck.",
+      "silhouette": "Tall stepped radial composition with three visible levels: broad lower platform, smaller elevated middle platform and compact upper platform.",
+      "folds": {
+        "width": "Broad triangular folded panels on each tier; large outer leaves spread diagonally.",
+        "tip": "Sharp tall points with strong centre ridges.",
+        "curl": "Mostly faceted bends; tier borders curl upward around each deck but individual panels are angular.",
+        "overlap": "Each tier has its own overlapping crown/border; lower tiers remain visible as broad annular decks. Brown fastening-like marks punctuate some seams."
+      },
+      "arrangement": "Three distinct elevated leaf-covered decks are visibly separated in height and radius, each with its own pointed border. Rear leaf overlaps obscure exact per-tier counts.",
+      "center": "Small top circular leaf deck carries the candle; broad middle and lower annuli are exposed around it.",
+      "base": "Pale flecked circular substrate visible beneath the broad bottom tier.",
+      "material": "Directional green veins across each deck, rotated grain on folded leaves, dark seams and pale substrate. Tier separation produces substantial occlusion shadows.",
+      "accessories": "One visible lit white candle and three visible incense sticks on the upper deck.",
+      "lighting": "Blue-to-charcoal background with soft pale bokeh; a warm vertical reflection appears below the object. Broad front/upper-left lighting and a candle flame accompany a directional accessory shadow toward image upper right. Match object lighting separately from background.",
+      "parameters": {
+        "footprint": "concentric circular",
+        "visible_tiers": 3,
+        "tier_radius": "decreases upward",
+        "tier_elevation": "discrete raised steps",
+        "fold_width": "broad",
+        "fold_tip": "sharp",
+        "center_mode": "small upper deck plus exposed lower annuli"
+      },
+      "confidence": {
+        "family": "high",
+        "visible_tier_count": "high",
+        "fold_facets": "high",
+        "material_identity": "medium",
+        "hidden_geometry": "low"
+      },
+      "uncertainties": [
+        "Exact heights, radius ratios and hidden support volumes are not established.",
+        "Per-tier leaf counts and hidden rear overlaps are unknown."
+      ],
+      "variant_changes": [
+        "Create three separate raised deck surfaces with decreasing radii.",
+        "Place candle/incense on the top deck and keep lower annular areas visible."
+      ],
+      "sha256": "10b5e499234ba13bbc425fc6182ec819c4ff8110bbedcbb54c217707e0ac6cc9",
+      "source": {
+        "kind": "user-supplied screenshot",
+        "original_filename": "2026-11-23_215846.png",
+        "pixel_dimensions": {
+          "width": 806,
+          "height": 634
+        },
+        "colour_mode": "RGB",
+        "embedded_dpi": [
+          96.012,
+          96.012
+        ],
+        "physical_scale": "not established",
+        "redistributed_image": false,
+        "library_file_id": "libfile_107fd16be0ac8191b981c4198240ab21"
+      },
+      "observed_view": "Single elevated front/three-quarter view; not an orthographic measurement.",
+      "render_validation": {
+        "status": "not yet validated against generated output in this catalog",
+        "similarity_score": null,
+        "basis": "Direct visual study of the supplied screenshot only; not a measured match."
+      }
+    },
+    {
+      "reference_id": "R13",
+      "filename": "2026-11-23_215901.png",
+      "recommended_preset": "ref-banana-classic",
+      "subtype": "Tall broad pointed leaf crown with lower folded band",
+      "mapping_fit": "Strong banana classic match for a tall-crown variant; not interchangeable with the low rims in R08/R09.",
+      "silhouette": "Circular bowl-like wreath with a tall broad pointed rear crown and outward-spreading lower perimeter leaves; the centre remains open.",
+      "folds": {
+        "width": "Wide triangular panels with broad bases and prominent central ridges.",
+        "tip": "Tall sharp tapered points, visibly much higher than R09.",
+        "curl": "Angular folded facets with a slightly cupped V section; no thin continuous blade strips.",
+        "overlap": "Tall pointed panels overlap around the central deck; a lower staggered band crosses the front, with visible dark seams and brown fastening-like marks."
+      },
+      "arrangement": "One dominant tall crown plus a lower overlapping perimeter band; this is not the three raised deck architecture of R12.",
+      "center": "Broad near-flat circular green deck with parallel leaf veins and a clear area around the candle.",
+      "base": "Pale cream flecked circular band exposed beneath the folded border.",
+      "material": "Dark-green leaf grain follows each panel; overlap shadows are deep and front fold edges catch lighter green highlights.",
+      "accessories": "One visible lit white candle and three visible incense sticks.",
+      "lighting": "Blue-to-charcoal background with soft pale bokeh; a warm vertical reflection appears below the object. Broad front/upper-left lighting and a candle flame accompany a directional accessory shadow toward image upper right. Match object lighting separately from background.",
+      "parameters": {
+        "footprint": "circular",
+        "rim_profile": "tall pointed crown",
+        "fold_width": "broad",
+        "fold_rise": "high",
+        "fold_tip": "sharp",
+        "layering": "tall crown plus lower band",
+        "center_mode": "large flat leaf deck"
+      },
+      "confidence": {
+        "family": "high",
+        "silhouette": "high",
+        "tall_crown": "high",
+        "material_identity": "medium",
+        "hidden_geometry": "low"
+      },
+      "uncertainties": [
+        "Rear fold attachments and exact crown counts are occluded.",
+        "The apparent leaf thickness and physical substrate material are not measurable."
+      ],
+      "variant_changes": [
+        "Use broad, high triangular folded panels with readable ridges and flaps.",
+        "Preserve a single main deck and lower overlap band; do not turn it into a stepped tower."
+      ],
+      "sha256": "9922469f3683b263a8b57332cd74240c5d9df6e48c81687767bfc4f7ae539a66",
+      "source": {
+        "kind": "user-supplied screenshot",
+        "original_filename": "2026-11-23_215901.png",
+        "pixel_dimensions": {
+          "width": 820,
+          "height": 637
+        },
+        "colour_mode": "RGB",
+        "embedded_dpi": [
+          96.012,
+          96.012
+        ],
+        "physical_scale": "not established",
+        "redistributed_image": false,
+        "library_file_id": "libfile_62e7eac0e13081919e3cab119afd7773"
+      },
+      "observed_view": "Single elevated front/three-quarter view; not an orthographic measurement.",
+      "render_validation": {
+        "status": "not yet validated against generated output in this catalog",
+        "similarity_score": null,
+        "basis": "Direct visual study of the supplied screenshot only; not a measured match."
+      }
+    },
+    {
+      "reference_id": "R14",
+      "filename": "2026-11-23_215912.png",
+      "recommended_preset": "ref-bread-flower",
+      "subtype": "Radial bread-slice flower with cylindrical centre and small round slices",
+      "mapping_fit": "Strong bread family match if flat crumb faces and crust thickness are modeled distinctly.",
+      "silhouette": "Open radial flower made from eight clearly visible broad elongated oval bread slices. Rounded petal tips and gaps produce a lobed contour, without a surrounding bowl wall.",
+      "folds": {
+        "width": "Very broad flat elongated oval slices with narrower inner attachments.",
+        "tip": "Rounded bread-slice ends; no sharp leaf points.",
+        "curl": "Little to no visible petal cup; pieces resemble thick planar cut slices.",
+        "overlap": "Outer slices converge around the centre and slightly overlap near their roots; small cylindrical pieces are arranged around a larger central cylinder."
+      },
+      "arrangement": "Eight visible outer slices in one radial ring. Seven smaller round slice tops are clearly visible around the main central cylinder; the rear is occluded, so seven is a visible count rather than a total-count claim.",
+      "center": "Large upright bread-like cylindrical pedestal supports the candle. A surrounding ring of shorter cylinders has pale circular cut faces and browned rims.",
+      "base": "An orange/brown underlying support is partly visible between front slice roots; complete underside is hidden.",
+      "material": "Cream/yellow porous crumb on broad top faces, toasted brown crust around slice edges and vertical sides, and fine vertical banding on cylinders. Crumb and crust need distinct material regions.",
+      "accessories": "One visible lit white candle and three visible incense sticks stand on the central pedestal.",
+      "lighting": "Blue-to-charcoal background with soft pale bokeh; a warm vertical reflection appears below the object. Broad front/upper-left lighting and a candle flame accompany a directional accessory shadow toward image upper right. Match object lighting separately from background.",
+      "parameters": {
+        "footprint": "eight-lobed radial slices",
+        "outer_slices_visible": 8,
+        "outer_slice_profile": "flat thick elongated oval",
+        "center_mode": "large cylindrical pedestal",
+        "small_round_tops_visible": 7,
+        "small_round_total": "unknown due to occlusion",
+        "material_regions": "porous pale cut face and brown crust sides"
+      },
+      "confidence": {
+        "family": "high",
+        "outer_visible_count": "high",
+        "bread_appearance": "high",
+        "small_piece_total": "low",
+        "hidden_geometry": "low"
+      },
+      "uncertainties": [
+        "A rear small cylinder may be hidden by the central pedestal/candle; do not set total small-piece count solely from the seven visible tops.",
+        "The hidden supporting base and underside are not established.",
+        "Rendered bread appearance does not verify recipe, physical buoyancy or actual material dimensions."
+      ],
+      "variant_changes": [
+        "Use thick flat oval slices rather than cupped lotus petals.",
+        "Separate crumb top faces from crust sidewalls, and include central and small cylindrical forms."
+      ],
+      "sha256": "e98347d2a12ab67678da6e70b480436e5f40cbc35f66cebb6f869b82392d0c08",
+      "source": {
+        "kind": "user-supplied screenshot",
+        "original_filename": "2026-11-23_215912.png",
+        "pixel_dimensions": {
+          "width": 733,
+          "height": 578
+        },
+        "colour_mode": "RGB",
+        "embedded_dpi": [
+          96.012,
+          96.012
+        ],
+        "physical_scale": "not established",
+        "redistributed_image": false,
+        "library_file_id": "libfile_f68964706b248191b821391d1cb23c8b"
+      },
+      "observed_view": "Single elevated front/three-quarter view; not an orthographic measurement.",
+      "render_validation": {
+        "status": "not yet validated against generated output in this catalog",
+        "similarity_score": null,
+        "basis": "Direct visual study of the supplied screenshot only; not a measured match."
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "กระทงสไตล์เกม Low Poly",
+  "diameter_m": 0.24,
+  "flower_style": "mixed",
+  "flower_count": 4,
+  "amaranth_count": 4,
+  "outer_leaf_count": 16,
+  "inner_leaf_count": 12,
+  "candle": true,
+  "candle_lit": true,
+  "incense_count": 3,
+  "quality": "low",
+  "seed": 77
+}

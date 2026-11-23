@@ -574,6 +574,232 @@
         "ส่งออก GLB พร้อมหลักฐานและ release gates",
         "มี React Three Fiber viewer สำหรับตรวจโมเดลบนเว็บ"
       ]
+    },
+    {
+      "id": "thai-krathong-3d",
+      "name": "Thai Krathong 3D",
+      "nameTh": "สร้างโมเดลกระทงไทย 3D",
+      "category": "UIUX",
+      "version": "3.1.0",
+      "status": "Ready",
+      "phase": "Phase 1",
+      "author": "Personal Library",
+      "summary": "สร้างและปรับโมเดลกระทงไทยจากข้อความหรือภาพอ้างอิง รองรับ Blender, GLB และ Three.js พร้อมตรวจรูปทรงและไฟล์ส่งออก",
+      "description": "สร้างกระทงใบตอง ดอกบัว แบบหลายชั้น ทรงข้าวหลามตัด ขนมปัง และดินเผา ด้วย workflow R3.1 แยกตรวจรูปทรง วัสดุ ภาพเรนเดอร์ และ GLB round-trip มี presets และแนวทางตรวจเทียบภาพอ้างอิง โดยแยกผลตรวจทางเทคนิคจากการยอมรับด้านภาพ",
+      "tags": [
+        "3D",
+        "Krathong",
+        "Loy Krathong",
+        "Blender",
+        "GLB",
+        "Three.js",
+        "Multi-Agent"
+      ],
+      "supportedAgents": [
+        "antigravity",
+        "claude-code",
+        "codex"
+      ],
+      "agentCompatibility": {
+        "antigravity": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "claudeCode": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "codex": {
+          "supported": true,
+          "version": ">=1.0.0"
+        }
+      },
+      "triggers": [
+        "ปั้นกระทง 3D",
+        "กระทงใบตอง",
+        "กระทงดอกบัว",
+        "โมเดลกระทง",
+        "Thai krathong",
+        "Loy Krathong assets",
+        "krathong GLB"
+      ],
+      "path": "skills/thai-krathong-3d",
+      "entryFile": "skills/thai-krathong-3d/SKILL.md",
+      "assets": [
+        {
+          "name": "openai.yaml",
+          "type": "asset",
+          "path": "skills/thai-krathong-3d/agents/openai.yaml"
+        },
+        {
+          "name": "icon.svg",
+          "type": "asset",
+          "path": "skills/thai-krathong-3d/assets/icon.svg"
+        },
+        {
+          "name": "lotus.json",
+          "type": "template",
+          "path": "skills/thai-krathong-3d/assets/lotus.json"
+        },
+        {
+          "name": "ref-banana-classic.json",
+          "type": "template",
+          "path": "skills/thai-krathong-3d/assets/ref-banana-classic.json"
+        },
+        {
+          "name": "ref-bread-flower.json",
+          "type": "template",
+          "path": "skills/thai-krathong-3d/assets/ref-bread-flower.json"
+        },
+        {
+          "name": "ref-clay-bowl.json",
+          "type": "template",
+          "path": "skills/thai-krathong-3d/assets/ref-clay-bowl.json"
+        },
+        {
+          "name": "ref-diamond-leaf.json",
+          "type": "template",
+          "path": "skills/thai-krathong-3d/assets/ref-diamond-leaf.json"
+        },
+        {
+          "name": "ref-orange-bowl.json",
+          "type": "template",
+          "path": "skills/thai-krathong-3d/assets/ref-orange-bowl.json"
+        },
+        {
+          "name": "ref-pink-lotus.json",
+          "type": "template",
+          "path": "skills/thai-krathong-3d/assets/ref-pink-lotus.json"
+        },
+        {
+          "name": "ref-tiered-leaf.json",
+          "type": "template",
+          "path": "skills/thai-krathong-3d/assets/ref-tiered-leaf.json"
+        },
+        {
+          "name": "ref-white-lotus.json",
+          "type": "template",
+          "path": "skills/thai-krathong-3d/assets/ref-white-lotus.json"
+        },
+        {
+          "name": "reference-catalog.json",
+          "type": "template",
+          "path": "skills/thai-krathong-3d/assets/reference-catalog.json"
+        },
+        {
+          "name": "stylized.json",
+          "type": "template",
+          "path": "skills/thai-krathong-3d/assets/stylized.json"
+        },
+        {
+          "name": "traditional.json",
+          "type": "template",
+          "path": "skills/thai-krathong-3d/assets/traditional.json"
+        },
+        {
+          "name": "anatomy.md",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/references/anatomy.md"
+        },
+        {
+          "name": "craft-and-materials.md",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/references/craft-and-materials.md"
+        },
+        {
+          "name": "examples.md",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/references/examples.md"
+        },
+        {
+          "name": "implementation-verification.json",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/references/implementation-verification.json"
+        },
+        {
+          "name": "material-and-export.md",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/references/material-and-export.md"
+        },
+        {
+          "name": "reference-qa.md",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/references/reference-qa.md"
+        },
+        {
+          "name": "research-evidence.md",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/references/research-evidence.md"
+        },
+        {
+          "name": "screenshot-study.md",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/references/screenshot-study.md"
+        },
+        {
+          "name": "web-integration.md",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/references/web-integration.md"
+        },
+        {
+          "name": "blender_finish.py",
+          "type": "script",
+          "path": "skills/thai-krathong-3d/scripts/blender_finish.py"
+        },
+        {
+          "name": "build_reference.py",
+          "type": "script",
+          "path": "skills/thai-krathong-3d/scripts/build_reference.py"
+        },
+        {
+          "name": "check_reference_model.py",
+          "type": "script",
+          "path": "skills/thai-krathong-3d/scripts/check_reference_model.py"
+        },
+        {
+          "name": "generate_krathong.py",
+          "type": "script",
+          "path": "skills/thai-krathong-3d/scripts/generate_krathong.py"
+        },
+        {
+          "name": "qa_model.py",
+          "type": "script",
+          "path": "skills/thai-krathong-3d/scripts/qa_model.py"
+        },
+        {
+          "name": "reference_finish.py",
+          "type": "script",
+          "path": "skills/thai-krathong-3d/scripts/reference_finish.py"
+        },
+        {
+          "name": "render_preview.py",
+          "type": "script",
+          "path": "skills/thai-krathong-3d/scripts/render_preview.py"
+        },
+        {
+          "name": "smoke_test.py",
+          "type": "script",
+          "path": "skills/thai-krathong-3d/scripts/smoke_test.py"
+        },
+        {
+          "name": "SKILL.md",
+          "type": "skill",
+          "path": "skills/thai-krathong-3d/SKILL.md"
+        }
+      ],
+      "examples": [
+        {
+          "title": "ตัวอย่าง brief และ presets กระทงไทย",
+          "description": "แนวทางสร้างกระทงจากข้อความและภาพอ้างอิง",
+          "markdownPath": "skills/thai-krathong-3d/references/examples.md"
+        }
+      ],
+      "highlights": [
+        "R3.1 รองรับรูปทรงกระทง 8 ตระกูลและ presets สำหรับภาพอ้างอิง",
+        "ตรวจรูปทรงก่อนเพิ่มรายละเอียดวัสดุและแสง",
+        "ตรวจ GLB round-trip และแยกผลเทคนิคจาก visual review",
+        "เก็บ workflow low-poly เดิมสำหรับงานที่ต้องการโมเดลเรียบง่าย"
+      ]
     }
   ]
 }

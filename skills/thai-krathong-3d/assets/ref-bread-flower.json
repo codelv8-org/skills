@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "name": "ref-bread-flower",
+  "seed": 731,
+  "provenance": "New original procedural interpretation of user-supplied screenshot principles; no third-party meshes or textures.",
+  "family": "bread_flower",
+  "reference_images": [
+    "2026-11-23_215912.png"
+  ],
+  "slice_count": 8,
+  "slice_radius": 0.076,
+  "slice_length": 0.104,
+  "slice_width": 0.054,
+  "slice_thickness": 0.008,
+  "small_round_count": 8,
+  "reference_variant": "Eight outer slices. Eight small rounds are inferred where the rear is occluded.",
+  "accessories": {
+    "candle": true,
+    "incense_count": 3,
+    "candle_radius": 0.0055,
+    "candle_height": 0.051,
+    "incense_height": 0.096,
+    "flame": true
+  },
+  "primary_reference": "2026-11-23_215912.png"
+}

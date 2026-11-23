@@ -1,0 +1,15 @@
+interface:
+  display_name: Thai Krathong 3D Builder
+  short_description: ปั้นกระทงตามภาพอ้างอิง ด้วยโครงสร้าง วัสดุ และ Blender
+  default_prompt: ใช้ $thai-krathong-3d สร้างกระทงตามภาพอ้างอิง ตรวจรูปทรง วัสดุ และ
+    GLB ที่ส่งออกจริง
+  brand_color: '#317C47'
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
