@@ -1,5 +1,5 @@
 interface:
   display_name: "Web App Quotation Builder"
-  short_description: "ประเมินราคาเว็บแอปและทำใบเสนอราคา A4 + สไลด์ PDF"
-  default_prompt: "ช่วยสร้างใบเสนอราคางานพัฒนา Web App โดยเริ่มจากแบบฟอร์มผู้ให้บริการ ตรวจสอบราคาอ้างอิงล่าสุด แล้วถามรายละเอียดโครงการก่อนสร้าง PDF 2 ไฟล์"
+  short_description: "ใบเสนอราคาเว็บแอป A4 + สไลด์ภาษาไทยพร้อม Diagram/Stepper และ UI Components"
+  default_prompt: "ช่วยสร้างใบเสนอราคางานพัฒนา Web App โดยเริ่มจากแบบฟอร์มผู้ให้บริการ ตรวจสอบราคาอ้างอิงล่าสุด แล้วถามรายละเอียดโครงการก่อนสร้าง PDF 2 ไฟล์ พร้อม Infographic, Diagram และ Stepper ภาษาไทย โดยใช้ UI Components ที่ประกอบซ้ำแบบ Web App"
   brand_color: "#2563EB"

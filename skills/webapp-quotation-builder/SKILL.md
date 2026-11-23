@@ -1,9 +1,9 @@
 ---
 name: webapp-quotation-builder
-description: สร้างใบเสนอราคาและข้อเสนอการพัฒนา Web App/PWA/ระบบเว็บแบบมืออาชีพสำหรับลูกค้าไทยหรือสากล ใช้เมื่อผู้ใช้ขอประเมินราคาทำเว็บแอป ทำ quotation เสนอราคา software project จัดทำ scope และงวดชำระ หรือสร้าง quotation A4 PDF พร้อม slide PDF แนะนำบริการ ขั้นตอนต้องเริ่มจาก Markdown profile ที่ใช้ซ้ำได้ ตรวจสอบราคาตลาดและภาษีล่าสุด ถามความต้องการเป็นตัวเลือกอย่างน้อย 3 ข้อพร้อม Other และสร้าง PDF สองไฟล์หลังข้อมูลครบเสมอ
+description: สร้างใบเสนอราคาพัฒนา Web App/PWA สำหรับลูกค้าไทยหรือสากล ใช้เมื่อผู้ใช้ขอประเมินราคา จัดทำขอบเขตและงวดชำระ หรือสร้างใบเสนอราคา A4 PDF คู่กับสไลด์แนะนำบริการภาษาไทยที่มี Diagram และ Stepper เริ่มจากโปรไฟล์ผู้เสนอราคา ตรวจราคาอ้างอิงและภาษี แล้วเก็บรายละเอียดก่อนคำนวณและสร้างเอกสาร
 category: Document
 tags: [quotation, webapp, pwa, pdf, pricing, proposal]
-version: 1.0.0
+version: 1.1.0
 agents: [antigravity, claude-code, codex]
 compatibility:
   antigravity: ">=1.0.0"
@@ -40,6 +40,8 @@ compatibility:
 
 ใช้ [JSON ตัวอย่าง](assets/quote-data.example.json) เป็นแบบโครงสร้าง สร้าง `quote-data.json` จากข้อมูลที่ยืนยันแล้ว ใช้พาธรูปในเครื่องและเลี่ยงข้อมูลลับหรือรายละเอียดต้นทุนภายในในเอกสารลูกค้า ใช้โลโก้และไฟล์ที่ได้รับอนุญาต
 
+อ่าน [โครงสร้างองค์ประกอบ](references/slide-component-architecture.md), [ระบบออกแบบสไลด์](references/slide-design-system.md), [รูปแบบแผนภาพและ Stepper](references/diagram-stepper-patterns.md) และ [เกณฑ์ตรวจสไลด์](references/slide-qa-checklist.md) ก่อนจัดหน้า ใช้ `SlideUI.render(slide, tree, frame)` จาก [slide_components.js](scripts/slide_components.js) เพื่อวาง Grid, Stack, Card, Stepper และ Diagram เป็นข้อความและรูปทรง PPTX ที่แก้ไขได้ แสดงงวดชำระตามสัดส่วนของยอดจริง แบ่งหน้าต่อเมื่อเนื้อหาแน่นและรักษาขนาดข้อความหลักอย่างน้อย 16 pt
+
 ```powershell
 .\scripts\generate.ps1 --input .\quote-data.json --out-dir .\quote-results
 ```
@@ -48,10 +50,11 @@ compatibility:
 bash scripts/generate.sh --input ./quote-data.json --out-dir ./quote-results
 ```
 
-เครื่องมือสร้าง PDF ต้องมี Python, `playwright`, Chromium ที่ค้นเจอใน `PATH` ผ่าน `chromium`, `chromium-browser` หรือ `google-chrome`, `pymupdf` (`fitz`), Node.js, `pptxgenjs`, LibreOffice (`soffice`) และฟอนต์ภาษาไทย เช่น `Noto Sans Thai` หาก runtime ไม่พร้อม ใช้เครื่องมือสร้าง PDF/สไลด์ที่ตรวจผลตามเกณฑ์เดียวกันได้
+เครื่องมือสร้าง PDF ต้องมี Python, `playwright`, Chromium ที่ค้นเจอใน `PATH` ผ่าน `chromium`, `chromium-browser` หรือ `google-chrome`, `pymupdf` (`fitz`), Node.js, `pptxgenjs`, LibreOffice (`soffice`) และฟอนต์ภาษาไทย เช่น `Noto Sans Thai` หากชุด `pptxgenjs_helpers` อยู่คนละตำแหน่งกับค่าเริ่มต้น `/home/oai/skills/slides/pptxgenjs_helpers/index.js` ให้ตั้ง `SLIDES_HELPERS` เป็นพาธเต็มของ `index.js` จากชุดเครื่องมือที่เชื่อถือได้ หาก runtime ไม่พร้อม ใช้เครื่องมือสร้าง PDF/สไลด์ที่ตรวจผลตามเกณฑ์เดียวกันได้
 
 - ใช้ [pricing.py](scripts/pricing.py) ตรวจข้อมูลและปัดเศษเป็นสตางค์ [generate.py](scripts/generate.py) กับ [build_slides.js](scripts/build_slides.js) สร้างไฟล์และตรวจขนาดหน้า
-- ส่งมอบ `quotation-<number>.pdf` ขนาด A4 แนวตั้งหนึ่งหน้า และ `service-overview-<number>.pdf` แนวนอน 16:9 ปกติห้าหน้า เก็บไฟล์ PPTX/HTML/JSON เป็นไฟล์ระหว่างทำงาน ส่งให้ผู้ใช้เมื่อร้องขอ
+- ส่งมอบ `quotation-<number>.pdf` ขนาด A4 แนวตั้งหนึ่งหน้า และ `service-overview-<number>.pdf` แนวนอน 16:9 ปกติ 5 หน้า ขยายได้ถึง 12 หน้า เก็บไฟล์ PPTX/HTML/JSON เป็นไฟล์ระหว่างทำงาน ส่งให้ผู้ใช้เมื่อร้องขอ
+- ตัวสร้างเรียก [slide_preflight.py](scripts/slide_preflight.py) หลังส่งออก PDF เพื่อตรวจขนาดหน้า ข้อความ และความครบถ้วนของเนื้อหา เมื่อแก้ตัวสร้างให้รัน `python scripts/test_pricing.py`, `python scripts/test_components.py` และ `python scripts/test_slides.py` พร้อมตรวจภาพ PDF ทุกหน้า
 - ตรวจเกณฑ์ใน [รายการ QA](references/output-qa.md) เทียบยอดรวม VAT งวดชำระ ชื่อลูกค้า วันหมดอายุ กรรมสิทธิ์ และเงื่อนไขของทั้งสองไฟล์ เปิดภาพเรนเดอร์เพื่อตรวจฟอนต์ไทยและข้อความล้น หาก A4 เกินหนึ่งหน้าให้ปรับการจัดกลุ่มและย่อข้อความโดยคงเงื่อนไขสำคัญ
 - ส่งลิงก์ PDF ทั้งสองไฟล์พร้อมยอดเสนอราคา สถานะ VAT อายุใบเสนอราคา และสมมติฐานที่เกี่ยวข้อง สำหรับข้อมูลทดลอง ให้ระบุ **ตัวอย่างเท่านั้น ไม่ใช่ใบเสนอราคาจริง**
 

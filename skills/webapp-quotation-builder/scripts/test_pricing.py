@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""ทดสอบการคำนวณราคาและการปฏิเสธข้อมูลที่ไม่พร้อมออกใบเสนอราคา"""
+"""ทดสอบการคำนวณและการปฏิเสธข้อมูลที่ไม่พร้อมออกใบเสนอราคา"""
 
 import copy
 import json
@@ -25,7 +25,7 @@ class PricingTests(unittest.TestCase):
 
     def test_vat_and_discount(self):
         self.data["provider"]["vat_registered"] = True
-        self.data["provider"]["tax_id"] = "0000000000000"  # ใช้เฉพาะในชุดทดสอบ ห้ามใส่ใน PDF สำหรับลูกค้า
+        self.data["provider"]["tax_id"] = "0000000000000"  # ใช้ในชุดทดสอบเท่านั้น
         self.data["pricing"]["vat_rate"] = 7
         self.data["pricing"]["discount"] = 9000
         c = calculate(self.data)

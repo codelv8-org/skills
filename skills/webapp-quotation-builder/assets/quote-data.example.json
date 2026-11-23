@@ -32,37 +32,111 @@
     "vat_rate": 0,
     "discount": 0,
     "items": [
-      {"name": "วิเคราะห์ระบบและออกแบบ UI/UX", "detail": "Requirements, User Flow, Responsive Mockup", "quantity": 1, "unit": "งาน", "unit_price": 9000},
-      {"name": "พัฒนา Web App และระบบจัดการ", "detail": "ลงทะเบียน, จองคิว, Dashboard, สิทธิ์เจ้าหน้าที่", "quantity": 1, "unit": "งาน", "unit_price": 42000},
-      {"name": "ทดสอบและปรับปรุงระบบ", "detail": "Functional QA, UAT, แก้บั๊กตาม Scope", "quantity": 1, "unit": "งาน", "unit_price": 12000},
-      {"name": "ติดตั้ง ส่งมอบ และอบรม", "detail": "Deploy, ส่ง Source Code, คู่มือ, อบรม 1 รอบ", "quantity": 1, "unit": "งาน", "unit_price": 6000}
+      {
+        "name": "วิเคราะห์ระบบและออกแบบ UI/UX",
+        "detail": "Requirements, User Flow, Responsive Mockup",
+        "quantity": 1,
+        "unit": "งาน",
+        "unit_price": 9000
+      },
+      {
+        "name": "พัฒนา Web App และระบบจัดการ",
+        "detail": "ลงทะเบียน, จองคิว, Dashboard, สิทธิ์เจ้าหน้าที่",
+        "quantity": 1,
+        "unit": "งาน",
+        "unit_price": 42000
+      },
+      {
+        "name": "ทดสอบและปรับปรุงระบบ",
+        "detail": "Functional QA, UAT, แก้บั๊กตาม Scope",
+        "quantity": 1,
+        "unit": "งาน",
+        "unit_price": 12000
+      },
+      {
+        "name": "ติดตั้ง ส่งมอบ และอบรม",
+        "detail": "Deploy, ส่ง Source Code, คู่มือ, อบรม 1 รอบ",
+        "quantity": 1,
+        "unit": "งาน",
+        "unit_price": 6000
+      }
     ]
   },
   "milestones": [
-    {"label": "เริ่มงาน", "percent": 30, "trigger": "ยืนยันขอบเขตและเริ่มพัฒนา"},
-    {"label": "Demo + UAT", "percent": 40, "trigger": "ส่ง Demo และรายการทดสอบให้ตรวจรับ"},
-    {"label": "รับมอบ", "percent": 30, "trigger": "ติดตั้งจริง ส่งมอบและอบรม"}
+    {
+      "label": "เริ่มงาน",
+      "percent": 30,
+      "trigger": "ยืนยันขอบเขตและเริ่มพัฒนา"
+    },
+    {
+      "label": "Demo + UAT",
+      "percent": 40,
+      "trigger": "ส่ง Demo และรายการทดสอบให้ตรวจรับ"
+    },
+    {
+      "label": "รับมอบ",
+      "percent": 30,
+      "trigger": "ติดตั้งจริง ส่งมอบและอบรม"
+    }
   ],
   "scope": {
-    "modules": ["บัญชีผู้ใช้และสิทธิ์", "จองคิวออนไลน์", "ปฏิทินและช่วงเวลา", "แจ้งเตือนสถานะ", "รายงานเจ้าหน้าที่"],
-    "audiences": ["ลูกค้า", "เจ้าหน้าที่"],
-    "not_included": ["ค่า Hosting/Domain และค่า SMS/API ภายนอก", "ฟีเจอร์นอก Scope ที่ตกลง"],
+    "modules": [
+      "บัญชีผู้ใช้และสิทธิ์",
+      "จองคิวออนไลน์",
+      "ปฏิทินและช่วงเวลา",
+      "แจ้งเตือนสถานะ",
+      "รายงานเจ้าหน้าที่"
+    ],
+    "audiences": [
+      "ลูกค้า",
+      "เจ้าหน้าที่"
+    ],
+    "not_included": [
+      "ค่า Hosting/Domain และค่า SMS/API ภายนอก",
+      "ฟีเจอร์นอก Scope ที่ตกลง"
+    ],
     "security_note": "สิทธิ์การใช้งานและข้อมูลส่วนบุคคลตามขอบเขตที่ตกลง"
   },
   "delivery": {
     "phases": [
-      {"name": "วิเคราะห์", "duration": "สัปดาห์ 1"},
-      {"name": "ออกแบบ", "duration": "สัปดาห์ 2"},
-      {"name": "พัฒนา", "duration": "สัปดาห์ 3–6"},
-      {"name": "UAT", "duration": "สัปดาห์ 7"},
-      {"name": "Go-Live", "duration": "สัปดาห์ 8"}
+      {
+        "name": "วิเคราะห์",
+        "duration": "สัปดาห์ 1"
+      },
+      {
+        "name": "ออกแบบ",
+        "duration": "สัปดาห์ 2"
+      },
+      {
+        "name": "พัฒนา",
+        "duration": "สัปดาห์ 3–6"
+      },
+      {
+        "name": "UAT",
+        "duration": "สัปดาห์ 7"
+      },
+      {
+        "name": "Go-Live",
+        "duration": "สัปดาห์ 8"
+      }
     ],
-    "handover": ["Web App ที่ติดตั้งพร้อมใช้", "Source Code ใน Repository", "คู่มือการใช้งาน", "อบรมผู้ดูแล 1 รอบ"]
+    "handover": [
+      "Web App ที่ติดตั้งพร้อมใช้",
+      "Source Code ใน Repository",
+      "คู่มือการใช้งาน",
+      "อบรมผู้ดูแล 1 รอบ"
+    ]
   },
   "after_sales": {
     "warranty": "รับประกันแก้บั๊กภายในขอบเขตงาน 60 วันหลังรับมอบ",
-    "included": ["แก้บั๊กใน Scope ตามรายการตรวจรับ", "แนะนำการใช้งานช่องทางออนไลน์"],
-    "excluded": ["เพิ่มฟีเจอร์ใหม่", "ค่าโฮสต์/โดเมน/บริการภายนอก"],
+    "included": [
+      "แก้บั๊กใน Scope ตามรายการตรวจรับ",
+      "แนะนำการใช้งานช่องทางออนไลน์"
+    ],
+    "excluded": [
+      "เพิ่มฟีเจอร์ใหม่",
+      "ค่าโฮสต์/โดเมน/บริการภายนอก"
+    ],
     "change_rate": "งานเพิ่มเติมประเมินราคาและยืนยัน Change Request ก่อนเริ่ม"
   },
   "commercial": {
@@ -73,8 +147,20 @@
   "research": {
     "price_checked_at": "2026-11-23",
     "price_sources": [
-      {"title": "OPEN Studio FAQ", "url": "https://openstudio.asia/faqs"},
-      {"title": "Bluewich 2026", "url": "https://bluewich.com/blog/website-cost-bangkok-2026/"}
+      {
+        "title": "OPEN Studio FAQ",
+        "url": "https://openstudio.asia/faqs"
+      },
+      {
+        "title": "Bluewich 2026",
+        "url": "https://bluewich.com/blog/website-cost-bangkok-2026/"
+      }
     ]
-  }
+  },
+  "presentation_style": {
+    "language": "th-TH",
+    "font": "Noto Sans Thai",
+    "note": "หัวข้อและคำอธิบายใช้ภาษาไทยเป็นหลัก ภาษาอังกฤษใช้เฉพาะศัพท์เทคนิคที่จำเป็น"
+  },
+  "presentation_diagrams": []
 }

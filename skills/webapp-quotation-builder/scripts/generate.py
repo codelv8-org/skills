@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Generate verified A4 quotation PDF and 16:9 slide PDF from confirmed JSON.
+"""สร้างและตรวจใบเสนอราคา A4 PDF และสไลด์ PDF 16:9 จาก JSON ที่ยืนยันแล้ว
 
-Run from any directory:
+ระบุพาธอินพุตและโฟลเดอร์ปลายทาง
   python scripts/generate.py --input data.json --out-dir /mnt/data/quotes
 
-Requires: Python playwright + pymupdf, Chromium/Chrome, Node pptxgenjs,
-LibreOffice. Input for final customer documents must come from the discovery flow.
+ต้องมี Python playwright และ pymupdf, Chromium/Chrome, Node pptxgenjs และ LibreOffice
+ใช้ข้อมูลที่ยืนยันจากขั้นตอนเก็บรายละเอียดสำหรับเอกสารลูกค้า
 """
 from __future__ import annotations
 
@@ -212,8 +212,8 @@ def verify_pdf_files(quotation_path: Path, slides_path: Path, calc: dict):
         if len(text.strip()) < 200:
             raise RuntimeError("Quotation has unexpectedly little selectable text")
     with fitz.open(slides_path) as pdf:
-        if not 4 <= len(pdf) <= 6:
-            raise RuntimeError(f"Expected 4..6 slides, got {len(pdf)}")
+        if not 5 <= len(pdf) <= 12:
+            raise RuntimeError(f"Expected 5..12 slides, got {len(pdf)}")
         for num, page in enumerate(pdf, start=1):
             w, h = page.rect.width, page.rect.height
             if w <= h or abs((w / h) - 16/9) > 0.08:
@@ -256,11 +256,19 @@ def main():
     slides_pptx = temp_dir / f'service-overview-{calc["quote_id"]}.pptx'
     node = require_executable("node")
     slide_script = Path(__file__).with_name("build_slides.js")
-    process = subprocess.run([node, str(slide_script), str(Path(args.input).absolute()), str(math_file), str(slides_pptx)], capture_output=True, text=True, timeout=150)
+    process = subprocess.run([node, str(slide_script), str(Path(args.input).absolute()), str(math_file), str(slides_pptx)], capture_output=True, encoding="utf-8", timeout=150)
     if process.returncode:
         raise RuntimeError(f"Slide generation failed: {process.stdout}\n{process.stderr}")
     export_slides_to_pdf(slides_pptx, slides_file, temp_dir)
     verify_pdf_files(quote_file, slides_file, calc)
+    preflight = Path(__file__).with_name("slide_preflight.py")
+    preflight_result = subprocess.run([
+        sys.executable, "-X", "utf8", str(preflight), "--pdf", str(slides_file),
+        "--input", str(Path(args.input).absolute()), "--math", str(math_file)
+    ], capture_output=True, encoding="utf-8", timeout=40)
+    if preflight_result.returncode:
+        raise RuntimeError(f"Slide preflight failed:\n{preflight_result.stdout}\n{preflight_result.stderr}")
+    (temp_dir / "slide-preflight.json").write_text(preflight_result.stdout, encoding="utf-8")
     make_previews([quote_file, slides_file], temp_dir / "previews")
     if args.keep_pptx:
         shutil.copyfile(slides_pptx, out_dir / slides_pptx.name)

@@ -1768,19 +1768,21 @@
           "name": "Web App Quotation Builder",
           "nameTh": "สร้างใบเสนอราคาพัฒนา Web App",
           "category": "Document",
-          "version": "1.0.0",
+          "version": "1.1.0",
           "status": "Ready",
           "phase": "Phase 1",
           "author": "Personal Library",
-          "summary": "เก็บความต้องการ ประเมินราคา และจัดทำใบเสนอราคา A4 พร้อมสไลด์ PDF สำหรับโครงการ Web App หรือ PWA",
-          "description": "ใช้โปรไฟล์ผู้ให้บริการและข้อมูลราคาอ้างอิงเพื่อเก็บขอบเขตโครงการ คำนวณราคา ภาษี และงวดชำระ แล้วสร้างใบเสนอราคา A4 และสไลด์แนะนำบริการ 16:9 จากข้อมูลชุดเดียวกัน",
+          "summary": "ประเมินราคา Web App/PWA และสร้างใบเสนอราคา A4 พร้อมสไลด์ PDF ที่ใช้แผนภาพและ Stepper",
+          "description": "เก็บข้อมูลผู้เสนอราคาและขอบเขตโครงการ คำนวณราคา ภาษี และงวดชำระ แล้วสร้างใบเสนอราคา A4 และสไลด์ 16:9 จากข้อมูลชุดเดียวกัน สไลด์ประกอบจากองค์ประกอบ PPTX ที่แก้ไขได้และแบ่งหน้าเมื่อเนื้อหายาว",
           "tags": [
             "Quotation",
             "Web App",
             "PWA",
             "PDF",
             "Pricing",
-            "Proposal"
+            "Proposal",
+            "Slides",
+            "Diagram"
           ],
           "supportedAgents": [
             "antigravity",
@@ -1845,13 +1847,45 @@
               "name": "output-qa.md",
               "type": "reference",
               "path": "skills/webapp-quotation-builder/references/output-qa.md"
+            },
+            {
+              "name": "slide_components.js",
+              "type": "script",
+              "path": "skills/webapp-quotation-builder/scripts/slide_components.js"
+            },
+            {
+              "name": "slide_preflight.py",
+              "type": "script",
+              "path": "skills/webapp-quotation-builder/scripts/slide_preflight.py"
+            },
+            {
+              "name": "slide-design-system.md",
+              "type": "reference",
+              "path": "skills/webapp-quotation-builder/references/slide-design-system.md"
+            },
+            {
+              "name": "diagram-stepper-patterns.md",
+              "type": "reference",
+              "path": "skills/webapp-quotation-builder/references/diagram-stepper-patterns.md"
+            },
+            {
+              "name": "slide-component-architecture.md",
+              "type": "reference",
+              "path": "skills/webapp-quotation-builder/references/slide-component-architecture.md"
+            },
+            {
+              "name": "slide-qa-checklist.md",
+              "type": "reference",
+              "path": "skills/webapp-quotation-builder/references/slide-qa-checklist.md"
             }
           ],
           "examples": [],
           "highlights": [
             "มีแบบฟอร์มข้อมูลผู้ให้บริการและชุดคำถามสำหรับเก็บขอบเขตโครงการ",
             "คำนวณยอดรวม VAT และงวดชำระจากข้อมูลที่ยืนยันแล้ว",
-            "สร้างใบเสนอราคา A4 หนึ่งหน้าและสไลด์แนะนำบริการ PDF ขนาด 16:9"
+            "สร้างใบเสนอราคา A4 หนึ่งหน้าและสไลด์แนะนำบริการ PDF ขนาด 16:9",
+            "ใช้ Grid, Card, Diagram และ Stepper ที่ประกอบเป็นองค์ประกอบ PPTX และแบ่งหน้าได้",
+            "ตรวจขนาดหน้า ข้อความ และยอดสำคัญของสไลด์ PDF ด้วย preflight"
           ]
         },
         {

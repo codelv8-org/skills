@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-"""Deterministic, fail-closed web-app quotation pricing and input validation.
+"""ตรวจข้อมูลและคำนวณราคา Web App โดยปฏิเสธข้อมูลที่ไม่ครบหรือผิดเงื่อนไข
 
-Only this module may calculate totals for customer PDFs. Avoid floating-point
-arithmetic in money. This script contains no built-in current tax assumptions.
+ใช้โมดูลนี้เป็นแหล่งยอดเงินของ PDF ลูกค้า ใช้ Decimal คำนวณเงินและรับอัตราภาษีจากข้อมูลที่ยืนยันแล้ว
 """
 
 from __future__ import annotations
@@ -163,10 +162,10 @@ def calculate(quote: dict) -> dict:
 
     modules = scope.get("modules")
     phases = delivery.get("phases")
-    if not isinstance(modules, list) or not 1 <= len(modules) <= 6:
-        raise QuoteValidationError("scope.modules needs 1..6 grouped modules for slide overview")
-    if not isinstance(phases, list) or not 3 <= len(phases) <= 6:
-        raise QuoteValidationError("delivery.phases needs 3..6 phases")
+    if not isinstance(modules, list) or not 1 <= len(modules) <= 18:
+        raise QuoteValidationError("scope.modules needs 1..18 scoped modules; slides paginate in groups of six")
+    if not isinstance(phases, list) or not 1 <= len(phases) <= 15:
+        raise QuoteValidationError("delivery.phases needs 1..15 phases; slides paginate in groups of five")
     if not isinstance(delivery.get("handover"), list) or not 1 <= len(delivery["handover"]) <= 4:
         raise QuoteValidationError("delivery.handover must have 1..4 grouped deliverables for slides")
     for field in ("warranty", "change_rate"):
