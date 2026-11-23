@@ -241,6 +241,68 @@
         "คำนวณยอดรวม VAT และงวดชำระจากข้อมูลที่ยืนยันแล้ว",
         "สร้างใบเสนอราคา A4 หนึ่งหน้าและสไลด์แนะนำบริการ PDF ขนาด 16:9"
       ]
+    },
+    {
+      "id": "user-manual-writer",
+      "name": "User Manual Writer",
+      "nameTh": "เขียนคู่มือการใช้งานระบบ",
+      "category": "Document",
+      "version": "1.0.0",
+      "status": "Ready",
+      "phase": "Phase 1",
+      "author": "Personal Library",
+      "summary": "เขียนคู่มือพร้อมภาพประกอบจากบันทึก เอกสาร หรือภาพหน้าจอ และตรวจขั้นตอนผ่าน Browser เมื่อมีระบบทดสอบที่ได้รับอนุญาต",
+      "description": "เขียนหรือปรับปรุงคู่มือการใช้งานระบบสำหรับผู้ใช้ทั่วไป บทความคลังความรู้ และวิธีใช้ฟีเจอร์แบบทีละขั้นจากบันทึก เอกสาร หรือภาพหน้าจอ พร้อมภาพประกอบ เมื่อมี URL ระบบทดสอบที่ได้รับอนุญาต ต้องใช้ Browser ของ AI Agent เดินตามขั้นตอนจริงและจับภาพหน้าจอ",
+      "tags": [
+        "Document",
+        "User Manual",
+        "User Guide",
+        "Knowledge Base",
+        "Screenshot"
+      ],
+      "supportedAgents": [
+        "antigravity",
+        "claude-code",
+        "codex"
+      ],
+      "agentCompatibility": {
+        "antigravity": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "claudeCode": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "codex": {
+          "supported": true,
+          "version": ">=1.0.0"
+        }
+      },
+      "triggers": [
+        "เขียนคู่มือการใช้งาน",
+        "ปรับปรุงคู่มือ",
+        "บทความคลังความรู้",
+        "วิธีใช้ฟีเจอร์",
+        "user manual",
+        "user guide",
+        "knowledge base article"
+      ],
+      "path": "skills/user-manual-writer",
+      "entryFile": "skills/user-manual-writer/SKILL.md",
+      "assets": [
+        {
+          "name": "SKILL.md",
+          "type": "skill",
+          "path": "skills/user-manual-writer/SKILL.md"
+        }
+      ],
+      "examples": [],
+      "highlights": [
+        "เขียนคู่มือแบบทีละขั้นสำหรับบทบาทของผู้อ่าน",
+        "เดินตามขั้นตอนจริงและจับภาพผ่าน Browser เมื่อมี URL ทดสอบที่ได้รับอนุญาต",
+        "ใช้ข้อมูลสมมติและภาพจำลองสำหรับขั้นตอนยืนยันตัวตนเพิ่มเติม"
+      ]
     }
   ]
 }

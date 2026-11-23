@@ -40,6 +40,8 @@ skills/
 │   ├── css/
 │   └── js/
 └── skills/                 # 📂 คลังโฟลเดอร์รวบรวมแต่ละ Skill
+    ├── user-manual-writer/
+    │   └── SKILL.md        # คู่มือทีละขั้นพร้อมภาพจากระบบทดสอบ
     ├── ui-ux-pro-max/
     │   ├── SKILL.md        # ไฟล์คำสั่งและ Metadata หลัก
     │   └── ...
