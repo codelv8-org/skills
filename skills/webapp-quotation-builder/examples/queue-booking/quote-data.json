@@ -1,0 +1,209 @@
+{
+  "demo": true,
+  "provider": {
+    "name": "Example Web Studio (ข้อมูลสมมติ)",
+    "entity_type": "บุคคลธรรมดา",
+    "address": "กรุงเทพมหานคร ประเทศไทย (ที่อยู่สมมติ)",
+    "contact": "ฝ่ายพัฒนาเว็บไซต์",
+    "phone": "ไม่ระบุในตัวอย่าง",
+    "email": "demo@example.invalid",
+    "vat_registered": false,
+    "tax_id": "",
+    "logo_path": ""
+  },
+  "customer": {
+    "name": "บริษัทลูกค้าตัวอย่าง จำกัด (สมมติ)",
+    "address": "ประเทศไทย (ที่อยู่สมมติ)",
+    "contact": "ผู้ประสานงานโครงการ (สมมติ)"
+  },
+  "quotation": {
+    "number": "DEMO-QT-2026-001",
+    "issue_date": "2026-11-23",
+    "valid_until": "2026-12-07",
+    "project_name": "ระบบจองคิวออนไลน์สำหรับธุรกิจบริการ",
+    "summary": "จองคิวผ่านเว็บ ตรวจสอบสถานะ และบริหารจัดการนัดหมายสำหรับเจ้าหน้าที่",
+    "lead_time": "ประมาณ 8 สัปดาห์นับจากยืนยันขอบเขตและรับชำระงวดแรก",
+    "acceptance": "ตรวจรับตามรายการทดสอบ (UAT) ที่ตกลงร่วมกันภายใน 7 วันหลังส่งมอบ",
+    "ip_terms": "ส่งมอบ Source Code เฉพาะงานที่พัฒนาขึ้นใหม่เมื่อชำระครบ; ไลบรารีภายนอกตามสิทธิเดิม",
+    "revision_policy": "แก้ไข UI ในขอบเขตงานไม่เกิน 2 รอบ; งานเพิ่มใช้ Change Request",
+    "currency": "THB"
+  },
+  "pricing": {
+    "vat_rate": 0,
+    "discount": 0,
+    "items": [
+      {
+        "name": "วิเคราะห์ระบบและออกแบบ UI/UX",
+        "detail": "Requirements, User Flow, Responsive Mockup",
+        "quantity": 1,
+        "unit": "งาน",
+        "unit_price": 9000
+      },
+      {
+        "name": "พัฒนา Web App และระบบจัดการ",
+        "detail": "ลงทะเบียน, จองคิว, Dashboard, สิทธิ์เจ้าหน้าที่",
+        "quantity": 1,
+        "unit": "งาน",
+        "unit_price": 42000
+      },
+      {
+        "name": "ทดสอบและปรับปรุงระบบ",
+        "detail": "Functional QA, UAT, แก้บั๊กตาม Scope",
+        "quantity": 1,
+        "unit": "งาน",
+        "unit_price": 12000
+      },
+      {
+        "name": "ติดตั้ง ส่งมอบ และอบรม",
+        "detail": "Deploy, ส่ง Source Code, คู่มือ, อบรม 1 รอบ",
+        "quantity": 1,
+        "unit": "งาน",
+        "unit_price": 6000
+      }
+    ]
+  },
+  "milestones": [
+    {
+      "label": "เริ่มงาน",
+      "percent": 30,
+      "trigger": "ยืนยันขอบเขตและเริ่มพัฒนา"
+    },
+    {
+      "label": "Demo + UAT",
+      "percent": 40,
+      "trigger": "ส่ง Demo และรายการทดสอบให้ตรวจรับ"
+    },
+    {
+      "label": "รับมอบ",
+      "percent": 30,
+      "trigger": "ติดตั้งจริง ส่งมอบและอบรม"
+    }
+  ],
+  "scope": {
+    "modules": [
+      "บัญชีผู้ใช้และสิทธิ์",
+      "จองคิวออนไลน์",
+      "ปฏิทินและช่วงเวลา",
+      "แจ้งเตือนสถานะ",
+      "รายงานเจ้าหน้าที่"
+    ],
+    "audiences": [
+      "ลูกค้า",
+      "เจ้าหน้าที่"
+    ],
+    "not_included": [
+      "ค่า Hosting/Domain และค่า SMS/API ภายนอก",
+      "ฟีเจอร์นอก Scope ที่ตกลง"
+    ],
+    "security_note": "สิทธิ์การใช้งานและข้อมูลส่วนบุคคลตามขอบเขตที่ตกลง"
+  },
+  "delivery": {
+    "phases": [
+      {
+        "name": "วิเคราะห์",
+        "duration": "สัปดาห์ 1"
+      },
+      {
+        "name": "ออกแบบ",
+        "duration": "สัปดาห์ 2"
+      },
+      {
+        "name": "พัฒนา",
+        "duration": "สัปดาห์ 3–6"
+      },
+      {
+        "name": "UAT",
+        "duration": "สัปดาห์ 7"
+      },
+      {
+        "name": "Go-Live",
+        "duration": "สัปดาห์ 8"
+      }
+    ],
+    "handover": [
+      "Web App ที่ติดตั้งพร้อมใช้",
+      "Source Code ใน Repository",
+      "คู่มือการใช้งาน",
+      "อบรมผู้ดูแล 1 รอบ"
+    ]
+  },
+  "after_sales": {
+    "warranty": "รับประกันแก้บั๊กภายในขอบเขตงาน 60 วันหลังรับมอบ",
+    "included": [
+      "แก้บั๊กใน Scope ตามรายการตรวจรับ",
+      "แนะนำการใช้งานช่องทางออนไลน์"
+    ],
+    "excluded": [
+      "เพิ่มฟีเจอร์ใหม่",
+      "ค่าโฮสต์/โดเมน/บริการภายนอก"
+    ],
+    "change_rate": "งานเพิ่มเติมประเมินราคาและยืนยัน Change Request ก่อนเริ่ม"
+  },
+  "commercial": {
+    "payment_note": "ชำระตามงวดเมื่อได้รับเอกสารแจ้งชำระเงินที่เกี่ยวข้อง",
+    "withholding_note": "หากเข้าเกณฑ์หัก ณ ที่จ่าย ให้ผู้จ่ายดำเนินการตามกฎหมาย ณ วันชำระเงินจริง",
+    "extra_note": "ข้อเสนอนี้ไม่รวมใบกำกับภาษี และไม่ถือเป็นสัญญาจ้างโดยตัวเอง"
+  },
+  "research": {
+    "price_checked_at": "2026-11-23",
+    "price_sources": [
+      {
+        "title": "OPEN Studio FAQ",
+        "url": "https://openstudio.asia/faqs"
+      },
+      {
+        "title": "Bluewich 2026",
+        "url": "https://bluewich.com/blog/website-cost-bangkok-2026/"
+      }
+    ]
+  },
+  "presentation_style": {
+    "language": "th-TH",
+    "font": "Noto Sans Thai",
+    "note": "หัวข้อและคำอธิบายใช้ภาษาไทยเป็นหลัก ภาษาอังกฤษใช้เฉพาะศัพท์เทคนิคที่จำเป็น"
+  },
+  "presentation_diagrams": [
+    {
+      "type": "flow",
+      "title": "เส้นทางการจองคิวของลูกค้า",
+      "subtitle": "ลูกค้าจองคิวและติดตามสถานะผ่านเว็บเดียวกัน",
+      "nodes": [
+        {
+          "id": "signin",
+          "kind": "start",
+          "label": "เข้าสู่ระบบ"
+        },
+        {
+          "id": "select",
+          "kind": "process",
+          "label": "เลือกช่วงเวลา"
+        },
+        {
+          "id": "book",
+          "kind": "process",
+          "label": "ยืนยันการจอง"
+        },
+        {
+          "id": "status",
+          "kind": "end",
+          "label": "ดูสถานะการจอง"
+        }
+      ],
+      "edges": [
+        {
+          "from": "signin",
+          "to": "select"
+        },
+        {
+          "from": "select",
+          "to": "book"
+        },
+        {
+          "from": "book",
+          "to": "status"
+        }
+      ],
+      "note": "เจ้าหน้าที่ดูนัดหมายผ่านหน้าจัดการตามสิทธิ์ที่ได้รับ"
+    }
+  ]
+}
