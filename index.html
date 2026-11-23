@@ -330,6 +330,26 @@
       box-shadow: var(--shadow-hover);
       border-color: var(--primary);
     }
+    .skill-overview {
+      display: block;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      border-radius: var(--radius-sm);
+      background: var(--bg-subtle);
+    }
+    .skill-card .skill-overview {
+      width: 100%;
+      margin-bottom: 16px;
+      border-radius: var(--radius-md);
+    }
+    .skill-list-item .skill-overview {
+      width: 112px;
+      flex-shrink: 0;
+    }
+    .skills-table .skill-overview {
+      width: 80px;
+      margin-bottom: 6px;
+    }
     .card-top {
       display: flex;
       align-items: flex-start;
@@ -828,6 +848,103 @@
             "windows": "Copy-Item -Path \".\\skills\\webapp-user-manual\" -Destination \"$env:USERPROFILE\\.gemini\\config\\skills\\\" -Recurse",
             "posix": "cp -r ./skills/webapp-user-manual ~/.gemini/config/skills/"
           }
+        },
+        {
+          "id": "lowpoly-character-web",
+          "overviewImage": "assets/skill-overviews/lowpoly-character-web.webp",
+          "name": "Low-poly Character Web Studio",
+          "nameTh": "สตูดิโอตัวละคร Low-poly สำหรับเว็บ",
+          "category": "UIUX",
+          "version": "5.0.0",
+          "status": "Ready",
+          "phase": "Phase 1",
+          "author": "Personal Library",
+          "summary": "สร้างและปรับโมเดลตัวละคร 3D จากภาพอ้างอิง พร้อมส่งออก GLB สำหรับ WebGL, Three.js และ React Three Fiber",
+          "description": "สร้าง ตรวจ และปรับโมเดลตัวละคร Low-poly จากข้อความ ภาพอ้างอิง หรือโมเดลเดิม ตรวจรูปทรงแยกตามชิ้นส่วน รองรับ rig, skinning และ animation ตามขอบเขตงาน พร้อมพรีวิว GLB และเครื่องมือประเมิน LOD กับงบการเรนเดอร์สำหรับฉากหลายตัวละคร",
+          "tags": [
+            "3D",
+            "Low-poly",
+            "GLB",
+            "Blender",
+            "WebGL",
+            "Three.js",
+            "Character Modeling"
+          ],
+          "supportedAgents": [
+            "antigravity",
+            "claude-code",
+            "codex"
+          ],
+          "agentCompatibility": {
+            "antigravity": {
+              "supported": true,
+              "version": ">=1.0.0"
+            },
+            "claudeCode": {
+              "supported": true,
+              "version": ">=1.0.0"
+            },
+            "codex": {
+              "supported": true,
+              "version": ">=1.0.0"
+            }
+          },
+          "triggers": [
+            "สร้างโมเดลตัวละคร 3D",
+            "ตัวละคร low-poly",
+            "สร้างตัวละครจากภาพอ้างอิง",
+            "character rigging",
+            "skinning QA",
+            "GLB สำหรับเว็บ",
+            "WebGL crowd budget",
+            "Sentinel"
+          ],
+          "path": "skills/lowpoly-character-web",
+          "entryFile": "skills/lowpoly-character-web/SKILL.md",
+          "assets": [
+            {
+              "name": "SKILL.md",
+              "type": "skill",
+              "path": "skills/lowpoly-character-web/SKILL.md"
+            },
+            {
+              "name": "studio_project.py",
+              "type": "script",
+              "path": "skills/lowpoly-character-web/scripts/studio_project.py"
+            },
+            {
+              "name": "stage_pipeline.py",
+              "type": "script",
+              "path": "skills/lowpoly-character-web/scripts/stage_pipeline.py"
+            },
+            {
+              "name": "character_spec.json",
+              "type": "template",
+              "path": "skills/lowpoly-character-web/assets/templates/character_spec.json"
+            },
+            {
+              "name": "part-by-part-studio.md",
+              "type": "reference",
+              "path": "skills/lowpoly-character-web/references/part-by-part-studio.md"
+            }
+          ],
+          "examples": [
+            {
+              "title": "ตัวอย่างโมเดลและ Rig",
+              "description": "โมเดล blockout และ skinned GLB พร้อมภาพพรีวิวและรายงานตรวจโครงสร้าง",
+              "markdownPath": "skills/lowpoly-character-web/references/examples.md"
+            }
+          ],
+          "highlights": [
+            "ตรวจรูปทรงจากภาพอ้างอิงทีละชิ้นส่วน เริ่มจากศีรษะ",
+            "เก็บบริบทโครงการและหลักฐานตรวจงานเพื่อทำต่อจากรอบก่อน",
+            "ตรวจโครงสร้าง GLB, skin weights และ animation clips",
+            "ประเมิน LOD และงบการเรนเดอร์สำหรับฉากหลายตัวละคร"
+          ],
+          "installCommand": {
+            "windows": "Copy-Item -Path \".\\skills\\lowpoly-character-web\" -Destination \"$env:USERPROFILE\\.codex\\skills\\\" -Recurse",
+            "posix": "mkdir -p ~/.codex/skills && cp -r ./skills/lowpoly-character-web ~/.codex/skills/"
+          }
         }
       ]
     };
@@ -900,6 +1017,14 @@
       });
     }
 
+    function renderOverviewImage(skill) {
+      const path = skill.overviewImage;
+      if (typeof path !== 'string' || !/^assets\/skill-overviews\/[a-z0-9-]+\.webp$/.test(path)) {
+        return '';
+      }
+      return `<img class="skill-overview" src="${path}" width="960" height="540" alt="" decoding="async">`;
+    }
+
     function renderSkills() {
       const items = getFilteredSkills();
       const container = document.getElementById('viewContainer');
@@ -929,6 +1054,7 @@
         <div class="skills-grid">
           ${items.map(skill => `
             <div class="skill-card">
+              ${renderOverviewImage(skill)}
               <div class="card-top">
                 <span class="category-badge">📁 ${skill.category}</span>
                 <span class="version-tag">v${skill.version}</span>
@@ -958,6 +1084,7 @@
         <div class="skills-list">
           ${items.map(skill => `
             <div class="skill-list-item">
+              ${renderOverviewImage(skill)}
               <div class="list-info">
                 <div class="list-title-row">
                   <span class="category-badge">📁 ${skill.category}</span>
@@ -994,6 +1121,7 @@
               ${items.map(skill => `
                 <tr>
                   <td>
+                    ${renderOverviewImage(skill)}
                     <strong>${skill.nameTh || skill.name}</strong><br>
                     <small style="color:var(--text-muted); font-family:'JetBrains Mono';">${skill.id}</small>
                   </td>

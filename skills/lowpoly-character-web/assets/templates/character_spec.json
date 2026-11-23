@@ -1,0 +1,22 @@
+{
+  "name": "original-lowpoly-explorer",
+  "kind": "human",
+  "style": "faceted-hero",
+  "height_meters": 1.70,
+  "head_scale": 1.0,
+  "shoulder_scale": 1.0,
+  "pose": "A-pose",
+  "rig": "none",
+  "accessories": {
+    "backpack": true
+  },
+  "palette": {
+    "skin": "#D8AA83",
+    "hair": "#35282E",
+    "shirt": "#397C83",
+    "pants": "#344858",
+    "boots": "#2B2F36",
+    "eyes": "#262128",
+    "accent": "#E0A346"
+  }
+}

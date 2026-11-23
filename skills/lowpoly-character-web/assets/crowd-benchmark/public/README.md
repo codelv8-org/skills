@@ -1,0 +1,1 @@
+Copy exported `character.glb` here and rename it to `model.glb` before running the benchmark. This directory is intentionally empty of model data; do not confuse benchmark scaffolding with successful runtime testing.

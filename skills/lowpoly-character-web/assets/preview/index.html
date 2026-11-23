@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="th"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Character Studio — Live GLB Preview</title>
+<link rel="stylesheet" href="./style.css"/>
+</head><body>
+<div class="app">
+  <header class="topbar"><div class="brand"><div class="brand-symbol">◇</div><div><strong>CHARACTER<span>STUDIO</span></strong><small>LOW-POLY / MOTION QA LAB</small></div></div><div class="top-right"><span class="status-dot" id="status-dot"></span><span id="status">Initializing viewer</span><button id="import-btn" class="btn outline">＋ &nbsp; Import GLB</button><input type="file" id="model-file" accept=".glb,model/gltf-binary" hidden></div></header>
+  <main class="layout">
+    <section class="scene-wrap" aria-label="Interactive 3D preview"><div class="scene-top"><div><span class="tag">WEBGL2 / LIVE</span><h1 id="asset-name">Character preview</h1><p id="scene-sub">Orbit • inspect • animate</p></div><div class="scene-tools"><button class="iconbtn" id="grid-btn" title="Toggle grid">▦</button><button class="iconbtn" id="wire-btn" title="Toggle wireframe">⌗</button><button class="iconbtn" id="shot-btn" title="Screenshot">▣</button></div></div>
+    <canvas id="viewer" aria-label="3D character canvas"></canvas>
+    <div class="viewport-guide" id="viewport-guide">DRAG TO ORBIT <span>·</span> SCROLL TO ZOOM</div>
+    <div class="view-angles" role="group" aria-label="Camera preset"><button data-view="front" class="selected">FRONT</button><button data-view="three">3/4 VIEW</button><button data-view="side">SIDE</button><button data-view="back">BACK</button><button data-view="reset">RESET</button></div>
+    <div id="drop-hint" class="drop-hint" hidden>DROP YOUR .GLB HERE</div>
+    <div id="error" class="error-banner" hidden></div>
+    </section>
+    <aside class="inspector"><div class="sidebar-title"><span class="eyebrow">INSPECTOR / 01</span><h2>Character Overview</h2></div>
+      <div class="preview-badge"><div class="badge-icon">◎</div><div><strong id="rig-status">Checking rig…</strong><small id="rig-caption">GLB asset analysis</small></div></div>
+      <div class="panel-section"><h3>ASSET METRICS</h3><div class="metric-grid"><div><span>TRIANGLES</span><strong id="metric-tris">—</strong></div><div><span>MESHES</span><strong id="metric-meshes">—</strong></div><div><span>BONES</span><strong id="metric-bones">—</strong></div><div><span>CLIPS</span><strong id="metric-clips">—</strong></div></div></div>
+      <div class="panel-section"><h3>MOTION LIBRARY</h3><label class="fieldlabel" for="animation">Animation Clip</label><select id="animation"><option>Loading…</option></select><div class="playback"><button id="play-btn" class="play-btn" title="Play or pause">Ⅱ</button><div class="seek-wrap"><input id="timeline" type="range" min="0" max="1000" value="0" aria-label="Animation timeline"><div class="time"><span id="time-current">0.00</span><span id="time-end">0.00 s</span></div></div></div><div class="speed-row"><span>PLAYBACK SPEED</span><div class="speed-group"><button data-speed="0.5">0.5×</button><button data-speed="1" class="selected">1×</button><button data-speed="1.5">1.5×</button></div></div></div>
+      <div class="panel-section"><h3>MODEL VALIDATION</h3><div class="qa-row"><span>GLB geometry</span><span class="qa-pill" id="qa-geometry">—</span></div><div class="qa-row"><span>Skeletal skin</span><span class="qa-pill" id="qa-skin">—</span></div><div class="qa-row"><span>Deform weights</span><span class="qa-pill" id="qa-weights">—</span></div><div class="qa-row"><span>Animation tracks</span><span class="qa-pill" id="qa-anim">—</span></div><p class="qa-note" id="qa-note">This is a runtime preview, not an artistic deformation sign-off.</p></div>
+      <div class="inspector-footer"><span>Character Studio / Skill v2.0</span><span id="fps">— FPS</span></div>
+    </aside>
+  </main>
+</div>
+<script type="module" src="./viewer.js"></script>
+</body></html>

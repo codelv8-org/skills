@@ -53,6 +53,103 @@
         "windows": "Copy-Item -Path \".\\skills\\webapp-user-manual\" -Destination \"$env:USERPROFILE\\.gemini\\config\\skills\\\" -Recurse",
         "posix": "cp -r ./skills/webapp-user-manual ~/.gemini/config/skills/"
       }
+    },
+    {
+      "id": "lowpoly-character-web",
+      "overviewImage": "assets/skill-overviews/lowpoly-character-web.webp",
+      "name": "Low-poly Character Web Studio",
+      "nameTh": "สตูดิโอตัวละคร Low-poly สำหรับเว็บ",
+      "category": "UIUX",
+      "version": "5.0.0",
+      "status": "Ready",
+      "phase": "Phase 1",
+      "author": "Personal Library",
+      "summary": "สร้างและปรับโมเดลตัวละคร 3D จากภาพอ้างอิง พร้อมส่งออก GLB สำหรับ WebGL, Three.js และ React Three Fiber",
+      "description": "สร้าง ตรวจ และปรับโมเดลตัวละคร Low-poly จากข้อความ ภาพอ้างอิง หรือโมเดลเดิม ตรวจรูปทรงแยกตามชิ้นส่วน รองรับ rig, skinning และ animation ตามขอบเขตงาน พร้อมพรีวิว GLB และเครื่องมือประเมิน LOD กับงบการเรนเดอร์สำหรับฉากหลายตัวละคร",
+      "tags": [
+        "3D",
+        "Low-poly",
+        "GLB",
+        "Blender",
+        "WebGL",
+        "Three.js",
+        "Character Modeling"
+      ],
+      "supportedAgents": [
+        "antigravity",
+        "claude-code",
+        "codex"
+      ],
+      "agentCompatibility": {
+        "antigravity": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "claudeCode": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "codex": {
+          "supported": true,
+          "version": ">=1.0.0"
+        }
+      },
+      "triggers": [
+        "สร้างโมเดลตัวละคร 3D",
+        "ตัวละคร low-poly",
+        "สร้างตัวละครจากภาพอ้างอิง",
+        "character rigging",
+        "skinning QA",
+        "GLB สำหรับเว็บ",
+        "WebGL crowd budget",
+        "Sentinel"
+      ],
+      "path": "skills/lowpoly-character-web",
+      "entryFile": "skills/lowpoly-character-web/SKILL.md",
+      "assets": [
+        {
+          "name": "SKILL.md",
+          "type": "skill",
+          "path": "skills/lowpoly-character-web/SKILL.md"
+        },
+        {
+          "name": "studio_project.py",
+          "type": "script",
+          "path": "skills/lowpoly-character-web/scripts/studio_project.py"
+        },
+        {
+          "name": "stage_pipeline.py",
+          "type": "script",
+          "path": "skills/lowpoly-character-web/scripts/stage_pipeline.py"
+        },
+        {
+          "name": "character_spec.json",
+          "type": "template",
+          "path": "skills/lowpoly-character-web/assets/templates/character_spec.json"
+        },
+        {
+          "name": "part-by-part-studio.md",
+          "type": "reference",
+          "path": "skills/lowpoly-character-web/references/part-by-part-studio.md"
+        }
+      ],
+      "examples": [
+        {
+          "title": "ตัวอย่างโมเดลและ Rig",
+          "description": "โมเดล blockout และ skinned GLB พร้อมภาพพรีวิวและรายงานตรวจโครงสร้าง",
+          "markdownPath": "skills/lowpoly-character-web/references/examples.md"
+        }
+      ],
+      "highlights": [
+        "ตรวจรูปทรงจากภาพอ้างอิงทีละชิ้นส่วน เริ่มจากศีรษะ",
+        "เก็บบริบทโครงการและหลักฐานตรวจงานเพื่อทำต่อจากรอบก่อน",
+        "ตรวจโครงสร้าง GLB, skin weights และ animation clips",
+        "ประเมิน LOD และงบการเรนเดอร์สำหรับฉากหลายตัวละคร"
+      ],
+      "installCommand": {
+        "windows": "Copy-Item -Path \".\\skills\\lowpoly-character-web\" -Destination \"$env:USERPROFILE\\.codex\\skills\\\" -Recurse",
+        "posix": "mkdir -p ~/.codex/skills && cp -r ./skills/lowpoly-character-web ~/.codex/skills/"
+      }
     }
   ]
 }

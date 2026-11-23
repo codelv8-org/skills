@@ -1,0 +1,16 @@
+{
+  "output": "/mnt/data/skill_work/skinned_demo.glb",
+  "triangles": 6256,
+  "vertices": 3130,
+  "skins": 1,
+  "joints": 16,
+  "animations": [
+    "Idle",
+    "Walk",
+    "Run",
+    "Salute"
+  ],
+  "source_method": "implicit single surface with smooth union, marching cubes",
+  "continuous_topological_components": 1,
+  "IMPORTANT": "Only GLB skinning/viewer/QA format demonstrator. Marching cubes lacks joint-aligned quad retopology. Not a finished deformation-ready human."
+}

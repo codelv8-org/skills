@@ -1,0 +1,15 @@
+interface:
+  display_name: Low-poly Character Web Studio
+  short_description: สร้างตัวละคร 3D จากภาพ สั่งสั้น ๆ ภาษาไทย พร้อมเว็บดูโมเดล
+  default_prompt: ใช้ $lowpoly-character-web สร้างตัวละครจากภาพนี้ พร้อมเว็บพรีวิวและรายงาน
+    QA ภาษาไทย
+  brand_color: '#1EBBB5'
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

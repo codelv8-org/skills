@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#18212a">
+  <meta name="description" content="ตรวจโมเดลตัวละคร 3 มิติแบบ low-poly เทียบกับภาพอ้างอิงทีละส่วน">
+  <title>ตรวจโมเดลตัวละคร · Character Web Studio</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <a class="skip-link" href="#workspace">ข้ามไปยังพื้นที่ตรวจโมเดล</a>
+  <header class="app-header">
+    <a class="brand" href="./" aria-label="Character Web Studio">
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 36" fill="none"><path d="M16 2 29 9v18l-13 7L3 27V9Z" stroke="currentColor" stroke-width="1.8"/><path d="m3 9 13 8 13-8M16 17v17M16 2v15M3 27l13-10 13 10" stroke="currentColor" stroke-width="1.3"/></svg></span>
+      <span><strong>CHARACTER <span>WEB STUDIO</span></strong><small>ตรวจโมเดล LOW-POLY จากภาพอ้างอิง</small></span>
+    </a>
+    <div class="header-actions"><span class="stage-chip" id="stage-chip">ศีรษะ · ต้นแบบ</span><a class="download-button" id="download-model" href="./head.glb" download><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v9m-4-4 4 4 4-4M4 13v4h12v-4"/></svg><span>ดาวน์โหลด GLB</span></a></div>
+  </header>
+
+  <div class="app-layout">
+    <aside class="inspector" aria-label="รายละเอียดโมเดลและสถานะการตรวจ">
+      <div class="inspector-intro"><span class="eyebrow">ตรวจโมเดลทีละส่วน</span><h2 id="stage-title">ตรวจรูปทรงศีรษะ</h2><p>พัฒนาทีละส่วน<br>ดูภาพจริงก่อนผ่านขั้นตอนถัดไป</p></div>
+      <div class="review-status"><span class="status-indicator" aria-hidden="true"></span><div><strong id="review-status">รอตรวจและปรับแก้</strong><code id="review-status-code">REVIEW_REQUIRED</code><span id="review-status-description">ยังไม่รับรองความเหมือนหรือความพร้อมใช้งาน</span></div></div>
+      <section class="inspector-section">
+        <h3>โมเดลที่กำลังดู <span>VERSION</span></h3>
+        <div class="version-switch" role="group" aria-label="เลือกรุ่นโมเดล"><button type="button" data-asset="current" class="selected" aria-pressed="true"><span class="version-dot"></span>รุ่นปัจจุบัน</button><button type="button" data-asset="previous" aria-pressed="false">รุ่นก่อนหน้า</button></div>
+        <div class="version-meta"><strong id="version-name">โมเดลที่ปรับล่าสุด</strong><span id="version-description">กำลังโหลดโมเดล</span></div>
+      </section>
+      <section class="inspector-section">
+        <h3>ข้อมูลจากไฟล์จริง <span>ASSET DATA</span></h3>
+        <div class="metric-grid"><div><span>สามเหลี่ยม<small>Triangles</small></span><strong id="stat-triangles">—</strong></div><div><span>จุดยอด<small>Vertices</small></span><strong id="stat-vertices">—</strong></div><div><span>ชุดรูปทรง<small>Primitives</small></span><strong id="stat-primitives">—</strong></div><div><span>ขนาดไฟล์<small>File size</small></span><strong id="stat-size">—</strong></div></div>
+        <p class="metric-note">อ่านจาก GLB ที่กำลังดู · นับจุดยอดแยกตามแต่ละชุดรูปทรง (primitive) · ไม่ใช่ผลวัด FPS</p>
+      </section>
+      <section class="inspector-section focus-section">
+        <h3>จุดที่ต้องเทียบ <span>REVIEW FOCUS</span></h3>
+        <ol id="focus-list"><li><span>01</span><div><strong>รูปทรงรอบนอก</strong><p>ทรงศีรษะ กราม และสัดส่วนรวม (silhouette)</p></div></li><li><span>02</span><div><strong>โครงสร้างใบหน้า</strong><p>เบ้าตา จมูก ปาก และระนาบใบหน้า</p></div></li><li><span>03</span><div><strong>ผมและหู</strong><p>แนวผม ปริมาตรผม และตำแหน่งหู</p></div></li></ol>
+      </section>
+      <div class="inspector-foot"><span class="live-indicator" id="runtime-dot"></span><span id="runtime-status" role="status" aria-live="polite">กำลังเตรียมตัวแสดงผล 3 มิติ</span><span id="engine-label">WebGL</span></div>
+    </aside>
+
+    <main class="workspace" id="workspace">
+      <div class="workspace-heading"><div><div class="breadcrumb">ตรวจรูปทรงตัวละคร <span>/</span> <span id="stage-breadcrumb">ศีรษะ (HEAD)</span></div><h1 id="project-title">ตรวจรูปทรงศีรษะ<span class="title-dot">.</span></h1><p id="project-subtitle">เทียบภาพอ้างอิงกับโมเดล 3D เพื่อปรับรูปทรงศีรษะ</p></div><div class="iteration-note"><span class="iteration-number" id="iteration">02</span><span>รอบการ<br>ปรับรูปทรง</span></div></div>
+      <div class="review-toolbar"><div class="view-picker" role="group" aria-label="มุมมองโมเดล"><button type="button" data-view="front" class="selected" aria-pressed="true">หน้า <span>FRONT</span></button><button type="button" data-view="right" aria-pressed="false">ขวา <span>RIGHT</span></button><button type="button" data-view="back" aria-pressed="false">หลัง <span>BACK</span></button><button type="button" data-view="left" aria-pressed="false">ซ้าย <span>LEFT</span></button><button type="button" data-view="three" aria-pressed="false">เฉียง <span>¾ VIEW</span></button></div><label class="link-views"><input type="checkbox" id="link-views" checked><span>เชื่อมมุมอ้างอิง</span></label></div>
+
+      <div class="comparison-grid">
+        <section class="viewport-panel reference-panel" aria-labelledby="reference-heading">
+          <header class="panel-header"><div><span class="panel-index">01</span><h2 id="reference-heading">ภาพอ้างอิง <span>REFERENCE</span></h2></div><a id="source-link" class="text-link" href="./reference/source.png" target="_blank" rel="noopener">ภาพต้นฉบับ <span aria-hidden="true">↗</span></a></header>
+          <div class="reference-viewport" id="reference-viewport" tabindex="0" role="group" aria-label="ภาพอ้างอิง ใช้ล้อเมาส์เพื่อซูม หรือลากเพื่อเลื่อนภาพ">
+            <div class="viewport-topline"><span class="image-badge">ภาพต้นฉบับ</span><select id="reference-view" aria-label="มุมภาพอ้างอิง"><option value="front">ด้านหน้า (Front)</option><option value="right">ด้านขวา (Right)</option><option value="back">ด้านหลัง (Back)</option><option value="left">ด้านซ้าย (Left)</option></select></div>
+            <img id="reference-image" alt="ภาพอ้างอิงด้านหน้า" draggable="false">
+            <div class="reference-missing" id="reference-missing" hidden>ยังไม่มีภาพอ้างอิงมุมนี้</div>
+            <div class="viewport-corner top-left" aria-hidden="true"></div><div class="viewport-corner bottom-right" aria-hidden="true"></div>
+            <div class="viewport-caption"><span id="reference-caption">ภาพอ้างอิงเฉพาะส่วน · ด้านหน้า</span><span id="reference-dimensions">—</span></div>
+          </div>
+          <footer class="panel-controls"><div class="zoom-control"><label for="reference-zoom">ซูมภาพ</label><input id="reference-zoom" type="range" min="50" max="300" value="100"><output for="reference-zoom" id="reference-zoom-value">100%</output></div><button type="button" class="quiet-button" id="reference-reset" title="คืนขนาดและตำแหน่งภาพอ้างอิง">พอดีภาพ</button></footer>
+        </section>
+
+        <section class="viewport-panel model-panel" aria-labelledby="model-heading">
+          <header class="panel-header"><div><span class="panel-index">02</span><h2 id="model-heading">โมเดล 3 มิติ <span>LIVE 3D</span></h2></div><span class="live-badge" id="model-live-badge"><i></i> กำลังโหลด</span></header>
+          <div class="model-viewport" id="model-viewport">
+            <div class="viewport-topline"><span class="model-version" id="model-version">รุ่นปัจจุบัน / V02</span><button type="button" class="icon-button" id="fit-model" title="จัดโมเดลให้อยู่กึ่งกลาง (Home)" aria-label="จัดโมเดลให้อยู่กึ่งกลาง"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 3H3v4m10-4h4v4M3 13v4h4m10-4v4h-4M7 7h6v6H7Z"/></svg></button></div>
+            <canvas id="model-canvas" tabindex="0" aria-label="โมเดล 3 มิติ ลากเพื่อหมุน ใช้ล้อเมาส์หรือสองนิ้วเพื่อซูม ใช้ปุ่มลูกศรหมุน และ Home เพื่อจัดกึ่งกลาง"></canvas>
+            <div class="ground-shadow" aria-hidden="true"></div>
+            <div class="loading-state" id="loading-state"><span class="loading-orbit" aria-hidden="true"></span><strong>กำลังเปิดโมเดล</strong><span>กำลังอ่านรูปทรงจากไฟล์ GLB</span></div>
+            <div class="model-error" id="model-error" hidden><strong>ยังเปิดโมเดล 3D ไม่ได้</strong><p id="model-error-message"></p><details id="model-error-details" class="error-details" hidden><summary>รายละเอียดทางเทคนิค</summary><p id="model-error-detail"></p></details><a id="fallback-link" href="#still-views">ดูภาพเรนเดอร์นิ่งสี่มุม ↓</a></div>
+            <div class="viewport-corner top-left" aria-hidden="true"></div><div class="viewport-corner bottom-right" aria-hidden="true"></div>
+            <div class="axis-gizmo" aria-hidden="true"><svg viewBox="0 0 64 64"><path class="axis-y" d="M28 37V10"/><path class="axis-x" d="m28 37 22 9"/><path class="axis-z" d="M28 37 9 51"/><circle cx="28" cy="37" r="3"/><text class="axis-y" x="24" y="8">Y</text><text class="axis-x" x="53" y="50">X</text><text class="axis-z" x="2" y="60">Z</text></svg></div>
+            <div class="canvas-hint" id="canvas-hint"><svg viewBox="0 0 18 22" aria-hidden="true"><rect x="3" y="2" width="12" height="18" rx="6"/><path d="M9 2v7"/></svg><span>ลากหมุน <b>·</b> เลื่อนเพื่อซูม</span></div>
+            <div class="viewport-caption"><span id="camera-label">ฉายขนาน · ด้านหน้า</span><span id="model-render-label">สีและวัสดุ</span></div>
+          </div>
+          <footer class="panel-controls"><div class="material-picker" role="group" aria-label="โหมดแสดงโมเดล"><button type="button" data-mode="material" class="selected" aria-pressed="true">สีและวัสดุ<small>Material</small></button><button type="button" data-mode="clay" aria-pressed="false">สีเดียว<small>Clay</small></button><button type="button" data-mode="wireframe" aria-pressed="false">เส้นโครง<small>Wireframe</small></button></div><div class="model-zoom"><button type="button" id="zoom-out" class="icon-button" aria-label="ย่อโมเดล">−</button><span id="model-zoom-value">100%</span><button type="button" id="zoom-in" class="icon-button" aria-label="ขยายโมเดล">+</button></div></footer>
+        </section>
+      </div>
+
+      <p id="software-note" class="software-note" hidden><span>โหมดซอฟต์แวร์ 3D</span> หมุนและซูมโมเดลได้ · ตรวจผิวที่บังกันจากความลึก · แสงเป็นภาพประมาณ · WebGL ยังไม่ผ่านการทดสอบในเบราว์เซอร์นี้</p>
+      <div class="review-note"><span class="note-icon" aria-hidden="true">i</span><p><strong>ต้นแบบสำหรับตรวจรูปทรง</strong><span id="review-note">สถานะนี้ยังไม่รับรองความเหมือน โปรดตรวจทั้งด้านหน้า ด้านข้าง และด้านหลัง ก่อนผ่านไปทำส่วนถัดไป</span></p><a id="qa-link" href="./qa.json" target="_blank" rel="noopener" hidden><span id="qa-link-label">รายงาน QA</span> <span aria-hidden="true">↗</span></a></div>
+      <p id="data-warning" class="data-warning" role="status" hidden></p>
+      <section class="state-notes" id="state-notes" aria-labelledby="state-notes-title" hidden><h2 id="state-notes-title">บันทึกการตรวจและสิ่งที่ยังค้าง</h2><ul id="state-notes-list"></ul></section>
+      <details class="details-panel" id="still-views"><summary><span><strong>ภาพเรนเดอร์สำหรับตรวจสี่มุม</strong><small>ภาพนิ่ง (Still renders) · ไม่ใช่โมเดลที่หมุนได้</small></span><span class="details-plus" aria-hidden="true">+</span></summary><div class="still-grid" id="still-grid"></div><a id="diagnostic-link" class="diagnostic-link" href="./diagnostic-board.png" target="_blank" rel="noopener" hidden>เปิดภาพตรวจรวมความละเอียดเต็ม ↗</a><p id="still-empty" hidden>ยังไม่มีภาพเรนเดอร์นิ่งแนบมา สามารถดาวน์โหลด GLB เพื่อตรวจในโปรแกรม 3D ได้</p></details>
+      <footer class="workspace-footer"><span>ภาพอ้างอิง → รูปทรง → ตรวจรับ</span><details class="keyboard-help"><summary>ปุ่มลัดและข้อมูลตัวแสดงผล</summary><p>คลิกพื้นที่ 3D แล้วใช้ปุ่มลูกศรเพื่อหมุน · + / − เพื่อซูม · Home เพื่อจัดโมเดลกึ่งกลาง · 1 หน้า · 2 ขวา · 3 หลัง · 4 ซ้าย · 5 เฉียง</p><p>แสดง GLB ท่านิ่งด้วยแสงจำลอง · รองรับสีจุดยอด (vertex colors) และวัสดุทึบแสงแบบ metallic / roughness · การเปิดโมเดลได้ยังไม่รับรองความเหมือนหรือ FPS บนอุปกรณ์เป้าหมาย</p><p id="viewer-warnings" hidden></p></details><span id="workspace-signature">LOW-POLY CHARACTER STUDIO</span></footer>
+    </main>
+  </div>
+  <script type="module" src="./viewer.js"></script>
+</body>
+</html>

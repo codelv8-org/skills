@@ -1,0 +1,171 @@
+{
+  "name": "original-lowpoly-explorer",
+  "source": "procedural-static-starter",
+  "stage": "BLOCKOUT_ONLY",
+  "style": "faceted-hero",
+  "pose": "A-pose",
+  "rig": "none",
+  "animation_clips": [],
+  "has_uv0": false,
+  "height_meters": 1.7,
+  "head_scale": 1.0,
+  "glb_axes": "Y-up, +Z character forward (Blender-like authoring was Z-up, -Y forward)",
+  "triangles": 1444,
+  "components": [
+    {
+      "part": "BODY_Torso",
+      "material": "shirt",
+      "triangles": 48
+    },
+    {
+      "part": "BODY_Pelvis",
+      "material": "pants",
+      "triangles": 12
+    },
+    {
+      "part": "BODY_Neck",
+      "material": "skin",
+      "triangles": 32
+    },
+    {
+      "part": "LEG_L_Thigh",
+      "material": "pants",
+      "triangles": 32
+    },
+    {
+      "part": "LEG_L_Calf",
+      "material": "pants",
+      "triangles": 32
+    },
+    {
+      "part": "LEG_L_Shoe",
+      "material": "boots",
+      "triangles": 12
+    },
+    {
+      "part": "ARM_L_Upper",
+      "material": "shirt",
+      "triangles": 32
+    },
+    {
+      "part": "ARM_L_Forearm",
+      "material": "skin",
+      "triangles": 28
+    },
+    {
+      "part": "ARM_L_Hand",
+      "material": "skin",
+      "triangles": 80
+    },
+    {
+      "part": "LEG_R_Thigh",
+      "material": "pants",
+      "triangles": 32
+    },
+    {
+      "part": "LEG_R_Calf",
+      "material": "pants",
+      "triangles": 32
+    },
+    {
+      "part": "LEG_R_Shoe",
+      "material": "boots",
+      "triangles": 12
+    },
+    {
+      "part": "ARM_R_Upper",
+      "material": "shirt",
+      "triangles": 32
+    },
+    {
+      "part": "ARM_R_Forearm",
+      "material": "skin",
+      "triangles": 28
+    },
+    {
+      "part": "ARM_R_Hand",
+      "material": "skin",
+      "triangles": 80
+    },
+    {
+      "part": "HEAD_Cranium",
+      "material": "skin",
+      "triangles": 320
+    },
+    {
+      "part": "HEAD_Nose",
+      "material": "skin",
+      "triangles": 80
+    },
+    {
+      "part": "HEAD_Mouth",
+      "material": "eyes",
+      "triangles": 12
+    },
+    {
+      "part": "HEAD_Ear_L",
+      "material": "skin",
+      "triangles": 80
+    },
+    {
+      "part": "HEAD_Eye_L",
+      "material": "eyes",
+      "triangles": 80
+    },
+    {
+      "part": "HEAD_Brow_L",
+      "material": "hair",
+      "triangles": 12
+    },
+    {
+      "part": "HEAD_Ear_R",
+      "material": "skin",
+      "triangles": 80
+    },
+    {
+      "part": "HEAD_Eye_R",
+      "material": "eyes",
+      "triangles": 80
+    },
+    {
+      "part": "HEAD_Brow_R",
+      "material": "hair",
+      "triangles": 12
+    },
+    {
+      "part": "HEAD_HairCap",
+      "material": "hair",
+      "triangles": 48
+    },
+    {
+      "part": "HEAD_RearHairVolume",
+      "material": "hair",
+      "triangles": 80
+    },
+    {
+      "part": "GEAR_Backpack",
+      "material": "accent",
+      "triangles": 12
+    },
+    {
+      "part": "GEAR_Strap_L",
+      "material": "accent",
+      "triangles": 12
+    },
+    {
+      "part": "GEAR_Strap_R",
+      "material": "accent",
+      "triangles": 12
+    }
+  ],
+  "geometry_count": 29,
+  "limitations": [
+    "Not a skinned/rigged or animated model",
+    "Disconnected starter meshes and intentional open hair shell need artist topology review",
+    "Needs actual front/profile/back visual review and production refinement in Blender",
+    "No UV atlas; uses PBR solid color factors, so UV0 is not required",
+    "Browser loading and performance have not been tested by this generator"
+  ],
+  "file": "/mnt/data/skill_work/lowpoly-character-web/assets/examples/character_blockout.glb",
+  "size_bytes": 121492
+}

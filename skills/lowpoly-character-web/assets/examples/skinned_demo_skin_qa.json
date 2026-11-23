@@ -1,0 +1,48 @@
+{
+  "file": "/mnt/data/skill_work/skinned_demo.glb",
+  "status": "PASS",
+  "errors": [],
+  "warnings": [],
+  "skinned_primitives": [
+    {
+      "node": "Body_Skinned",
+      "primitive": 0,
+      "vertex_count": 3130,
+      "triangles": 6256,
+      "blended_vertices": 1915,
+      "blended_ratio": 0.6118,
+      "connected_components": 1,
+      "largest_component_ratio": 1.0,
+      "weight_max_sum_error": 1.2e-07
+    }
+  ],
+  "clips": [
+    {
+      "name": "Idle",
+      "duration_s": 1.0,
+      "channels": 3
+    },
+    {
+      "name": "Walk",
+      "duration_s": 1.0,
+      "channels": 8
+    },
+    {
+      "name": "Run",
+      "duration_s": 1.0,
+      "channels": 8
+    },
+    {
+      "name": "Salute",
+      "duration_s": 1.5,
+      "channels": 3
+    }
+  ],
+  "skin_count": 1,
+  "rig_classification": "SKINNED",
+  "scope": "GLB data QA. Not a substitute for glTF Validator, Blender retopology, deformation-pose review or browser playback.",
+  "skinned_vertices": 3130,
+  "blended_vertices": 1915,
+  "blended_ratio": 0.6118,
+  "animated_skin_joints": 9
+}

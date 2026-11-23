@@ -1,0 +1,27 @@
+{
+  "file": "/mnt/data/skill_work/lowpoly-character-web/assets/examples/character_blockout.glb",
+  "profile": "mobile",
+  "size_mb": 0.1159,
+  "budget_max_triangles": 5000,
+  "budget_max_mb": 5.0,
+  "mesh_count": 29,
+  "primitive_count": 29,
+  "node_count": 30,
+  "triangles_unique": 1444,
+  "triangles_instantiated": 1444,
+  "materials": 7,
+  "images": 0,
+  "textured_primitives": 0,
+  "uv0_primitives": 0,
+  "skins": 0,
+  "skinned_mesh_nodes": 0,
+  "animations": 0,
+  "animation_clip_names": [],
+  "extensions_required": [],
+  "status": "PASS",
+  "errors": [],
+  "warnings": [
+    "High mesh-part count for a lightweight character; review draw calls on target hardware"
+  ],
+  "validation_scope": "Structural/metadata checks only. Not an official glTF Validator, visual anatomy check, rig pose test or browser verification."
+}
