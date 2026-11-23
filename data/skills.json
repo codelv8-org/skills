@@ -258,6 +258,7 @@
     },
     {
       "id": "webapp-quotation-builder",
+      "overviewImage": "assets/skill-overviews/webapp-quotation-builder.webp",
       "name": "Web App Quotation Builder",
       "nameTh": "สร้างใบเสนอราคาพัฒนา Web App",
       "category": "Document",
@@ -394,6 +395,7 @@
     },
     {
       "id": "user-manual-writer",
+      "overviewImage": "assets/skill-overviews/user-manual-writer.webp",
       "name": "User Manual Writer",
       "nameTh": "เขียนคู่มือการใช้งานระบบ",
       "category": "Document",
