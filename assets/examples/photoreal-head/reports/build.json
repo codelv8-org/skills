@@ -1,0 +1,60 @@
+{
+  "sourceAsset": "Infinite, 3D Head Scan by Lee Perry-Smith (CC BY 3.0)",
+  "modelRoute": "EXISTING_MODEL_REVIEW_AND_WEB_EXPORT",
+  "blenderVersion": "5.2.2 LTS",
+  "meshCount": 1,
+  "vertices": 8626,
+  "triangles": 16429,
+  "heightMeters": 0.205,
+  "scaleNote": "Source normalized then lower shoulders trimmed to an open-neck head of about 0.205m; not independently measured subject size.",
+  "uvLayers": [
+    "UVMap"
+  ],
+  "materials": "Scan color and tangent normal; constant 0.52 roughness, metallic 0.",
+  "renders": [
+    "clay_front.webp",
+    "clay_threequarter.webp",
+    "clay_left_profile.webp",
+    "clay_right_profile.webp",
+    "clay_under_nose.webp",
+    "skin_front.webp",
+    "skin_threequarter.webp"
+  ],
+  "gates": {
+    "G0": "PASS_LICENSE_AND_SOURCE",
+    "G1": "CLAY_MULTI_VIEW_VISUALLY_REVIEWED_WITH_SCAN_LIMITATIONS",
+    "G2": "FEATURE_VOLUMES_VISUALLY_REVIEWED_NO_ANATOMICAL_CERTIFICATION",
+    "G3": "REVIEW_REQUIRED_NO_INDEPENDENT_LANDMARKS",
+    "G4": "REUSED_SCAN_UV_AND_TEXTURES_NOT_NEW_SCULPT_OR_BAKE",
+    "G5": "BROWSER_DESKTOP_AND_390PX_VIEWER_VERIFIED"
+  },
+  "releaseStatus": "DEMONSTRATION_NOT_FINAL_RELEASE",
+  "limitations": [
+    "No independent measured landmarks or subject-specific photo-fit.",
+    "Lower shoulder geometry removed by a planar cut; neck is intentionally open, not a watertight print mesh.",
+    "Closed eyes and scan surface, no separate eyeballs, teeth, rig or hair.",
+    "Visual acceptance remains subjective; no claim of anatomical or identity certification."
+  ],
+  "browserChecks": {
+    "modes": [
+      "skin",
+      "clay",
+      "wireframe"
+    ],
+    "cameraPresets": "three-quarter and left profile observed; front/right buttons present and camera mapping implemented",
+    "keyboard": [
+      "ArrowRight",
+      "+",
+      "Home"
+    ],
+    "autoRotate": "toggle on/off observed",
+    "mobileWidth": 390,
+    "horizontalOverflow": false,
+    "brokenImages": 0,
+    "minimumButtonHeight": 44,
+    "console": "Initial syntax error corrected; no new errors observed after reload.",
+    "limitations": [
+      "No physical mobile-device testing, performance benchmark or full WCAG audit."
+    ]
+  }
+}

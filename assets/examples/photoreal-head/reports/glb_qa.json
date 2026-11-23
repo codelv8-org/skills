@@ -1,0 +1,19 @@
+{
+  "file": "assets\\examples\\photoreal-head\\model\\head.glb",
+  "size_mb": 0.64,
+  "asset_version": "2.0",
+  "mesh_count": 1,
+  "primitive_count": 1,
+  "triangles": 16429,
+  "uv0_primitives": 1,
+  "materials": 1,
+  "textures": 2,
+  "images": 2,
+  "basecolor_maps": 1,
+  "normal_maps": 1,
+  "extensions_required": [],
+  "status": "PASS",
+  "errors": [],
+  "warnings": [],
+  "scope": "structural validation only; visual UV/texture/browser QA still required"
+}
