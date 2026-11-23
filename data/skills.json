@@ -1,0 +1,58 @@
+{
+  "categories": [
+    { "id": "Document", "name": "Documentation & Manuals", "nameTh": "หมวดหมู่เอกสารและคู่มือ", "icon": "📄" },
+    { "id": "UIUX", "name": "UI/UX & Design", "nameTh": "การออกแบบและส่วนต่อประสาน", "icon": "🎨" },
+    { "id": "Architecture", "name": "Architecture & Engineering", "nameTh": "สถาปัตยกรรมและวิศวกรรมซอฟต์แวร์", "icon": "🏛️" },
+    { "id": "Optimization", "name": "Performance & Optimization", "nameTh": "การปรับแต่งประสิทธิภาพและ Token", "icon": "⚡" },
+    { "id": "Tools", "name": "Developer Tools & Utilities", "nameTh": "เครื่องมือและยูทิลิตี้สำหรับนักพัฒนา", "icon": "🛠️" }
+  ],
+  "skills": [
+    {
+      "id": "webapp-user-manual",
+      "name": "Web Application User Manual",
+      "nameTh": "คู่มือใช้งาน Web Application",
+      "category": "Document",
+      "version": "1.0.0",
+      "status": "Ready",
+      "author": "Personal Library",
+      "summary": "สร้างคู่มือการใช้งานระบบ Web Application ครอบคลุมทั้ง Interactive HTML (พร้อม Sidebar, Search, Print-to-PDF) และ Markdown",
+      "description": "Skill สำหรับสร้างคู่มือการใช้งานระบบ Web Application อย่างมืออาชีพ ครอบคลุมโครงสร้าง 10 เสาหลัก (10-Pillar Framework) ตั้งแต่ภาพรวมระบบ, สิทธิ์การเข้าถึง, ฟังก์ชันแบบ Step-by-Step, ตารางข้อมูลแบบฟอร์ม, FAQ และ Support พร้อมส่งมอบในรูปแบบ Interactive HTML หรือ Markdown",
+      "tags": ["Document", "User Manual", "Web App", "Documentation", "HTML", "Markdown"],
+      "triggers": [
+        "คู่มือการใช้งาน",
+        "สร้างคู่มือ",
+        "user manual",
+        "user guide",
+        "web application guide",
+        "คู่มือระบบเว็บ",
+        "how to use"
+      ],
+      "path": "skills/webapp-user-manual",
+      "entryFile": "skills/webapp-user-manual/SKILL.md",
+      "assets": [
+        { "name": "SKILL.md", "type": "skill", "path": "skills/webapp-user-manual/SKILL.md" },
+        { "name": "manual-template.html", "type": "template", "path": "skills/webapp-user-manual/templates/manual-template.html" },
+        { "name": "manual-template.md", "type": "template", "path": "skills/webapp-user-manual/templates/manual-template.md" },
+        { "name": "style-guide.md", "type": "reference", "path": "skills/webapp-user-manual/references/style-guide.md" }
+      ],
+      "examples": [
+        {
+          "title": "SmartHR e-Leave Portal",
+          "description": "ตัวอย่างคู่มือระบบบริหารจัดการการลาและขออนุมัติออนไลน์ ครบ 10 เสาหลัก",
+          "markdownPath": "skills/webapp-user-manual/examples/smart-hr-portal/USER_MANUAL.md",
+          "htmlPath": "skills/webapp-user-manual/examples/smart-hr-portal/manual.html"
+        }
+      ],
+      "highlights": [
+        "มาตรฐาน 10 หมวดหมู่ (The 10-Pillar Framework) ตามคู่มือระดับองค์กร",
+        "รองรับทั้ง Interactive HTML และ GitHub-Flavored Markdown",
+        "เทมเพลต HTML ในตัว มี Sidebar, ค้นหาหัวข้อ, สลับ Dark Mode และจัดหน้าพิมพ์เป็น PDF ได้ทันที",
+        "มาตรฐานพจนานุกรมศัพท์ UI ภาษาไทย-อังกฤษ และวิธีใส่ Placeholder ภาพหน้าจอ"
+      ],
+      "installCommand": {
+        "windows": "Copy-Item -Path \".\\skills\\webapp-user-manual\" -Destination \"$env:USERPROFILE\\.gemini\\config\\skills\\\" -Recurse",
+        "posix": "cp -r ./skills/webapp-user-manual ~/.gemini/config/skills/"
+      }
+    }
+  ]
+}

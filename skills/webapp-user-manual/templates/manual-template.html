@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{SYSTEM_NAME}} - คู่มือการใช้งานระบบ (User Manual)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-light: #eff6ff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --bg-page: #f8fafc;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      --sidebar-width: 290px;
+      --sidebar-bg: #ffffff;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07);
+    }
+
+    [data-theme="dark"] {
+      --primary: #3b82f6;
+      --primary-hover: #60a5fa;
+      --primary-light: #1e293b;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --bg-page: #0f172a;
+      --bg-card: #1e293b;
+      --border-color: #334155;
+      --sidebar-bg: #1e293b;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.4);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Prompt', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.7;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: var(--sidebar-width);
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border-color);
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      overflow-y: auto;
+      z-index: 50;
+      transition: transform 0.25s ease;
+    }
+    .sidebar-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brand-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .search-box {
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .search-input {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background: var(--bg-page);
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 0.85rem;
+    }
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    .nav-list {
+      list-style: none;
+      padding: 12px 10px;
+      flex: 1;
+    }
+    .nav-item { margin-bottom: 4px; }
+    .nav-link {
+      display: block;
+      padding: 8px 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      transition: all 0.15s ease;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: var(--primary);
+      background: var(--primary-light);
+      font-weight: 500;
+    }
+
+    /* Main Content */
+    .main-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .topbar {
+      height: 56px;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+    .toggle-btn, .theme-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .toggle-btn:hover, .theme-btn:hover { background: var(--border-color); }
+    .toggle-btn { display: none; }
+
+    .content {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 30px 80px 30px;
+      width: 100%;
+    }
+
+    /* Typography & Sections */
+    h1, h2, h3, h4 { color: var(--text-main); font-weight: 600; line-height: 1.4; }
+    h1 { font-size: 2rem; margin-bottom: 16px; }
+    h2 {
+      font-size: 1.45rem;
+      margin-top: 40px;
+      margin-bottom: 18px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    h3 { font-size: 1.15rem; margin-top: 24px; margin-bottom: 12px; }
+    p { margin-bottom: 14px; }
+    
+    /* Document Header Banner */
+    .doc-hero {
+      background: linear-gradient(135deg, var(--primary-light), var(--bg-card));
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      margin-bottom: 35px;
+      box-shadow: var(--shadow-sm);
+    }
+    .doc-meta-badge {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+      font-size: 0.85rem;
+    }
+    .meta-label { color: var(--text-muted); font-size: 0.8rem; }
+    .meta-value { font-weight: 600; margin-top: 2px; }
+
+    /* Step Workflows */
+    .step-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-sm);
+    }
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .step-number {
+      background: var(--primary);
+      color: #fff;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .step-title { font-size: 1.05rem; font-weight: 600; }
+
+    /* Screenshot Box */
+    .screenshot-wrapper {
+      background: var(--bg-page);
+      border: 2px dashed var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 30px 20px;
+      text-align: center;
+      margin: 16px 0;
+      color: var(--text-muted);
+    }
+    .screenshot-caption {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    /* Callouts */
+    .callout {
+      border-left: 4px solid;
+      padding: 14px 18px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin: 18px 0;
+      font-size: 0.92rem;
+    }
+    .callout-note { background: #f0f9ff; border-color: #0284c7; color: #0c4a6e; }
+    .callout-tip { background: #f0fdf4; border-color: #16a34a; color: #14532d; }
+    .callout-warning { background: #fffbeb; border-color: #d97706; color: #78350f; }
+    .callout-danger { background: #fef2f2; border-color: #dc2626; color: #7f1d1d; }
+    [data-theme="dark"] .callout-note { background: #0c4a6e33; color: #7dd3fc; }
+    [data-theme="dark"] .callout-tip { background: #14532d33; color: #86efac; }
+    [data-theme="dark"] .callout-warning { background: #78350f33; color: #fde68a; }
+    [data-theme="dark"] .callout-danger { background: #7f1d1d33; color: #fca5a5; }
+
+    /* Tables */
+    .table-container {
+      overflow-x: auto;
+      margin: 20px 0;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+      background: var(--bg-card);
+    }
+    th, td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    th {
+      background: var(--bg-page);
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--primary-light); }
+
+    /* Inline elements */
+    kbd {
+      background: var(--bg-page);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 1px 0 var(--border-color);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+    }
+    .badge-btn {
+      display: inline-block;
+      padding: 2px 8px;
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+
+    /* Print styling */
+    @media print {
+      body { background: #fff; color: #000; }
+      .sidebar, .topbar { display: none !important; }
+      .content { max-width: 100%; padding: 0; }
+      .step-card, .doc-hero { border: 1px solid #ccc; box-shadow: none; break-inside: avoid; }
+      h2 { break-after: avoid; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar {
+        position: fixed;
+        left: -100%;
+        transform: translateX(0);
+      }
+      .sidebar.open {
+        left: 0;
+        transform: translateX(0);
+      }
+      .toggle-btn { display: inline-flex; }
+      .content { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="brand-title">📘 {{SYSTEM_NAME}}</div>
+      <div class="brand-sub">คู่มือการใช้งานระบบ (User Manual)</div>
+    </div>
+    <div class="search-box">
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 ค้นหาหัวข้อในคู่มือ...">
+    </div>
+    <ul class="nav-list" id="navList">
+      <li class="nav-item"><a href="#section-overview" class="nav-link">1. ภาพรวมระบบ (Overview)</a></li>
+      <li class="nav-item"><a href="#section-requirements" class="nav-link">2. ข้อกำหนดและการเข้าถึง</a></li>
+      <li class="nav-item"><a href="#section-auth" class="nav-link">3. การเข้าสู่ระบบ & โปรไฟล์</a></li>
+      <li class="nav-item"><a href="#section-navigation" class="nav-link">4. หน้าจอหลักและเมนู</a></li>
+      <li class="nav-item"><a href="#section-workflows" class="nav-link">5. ขั้นตอนการใช้งานหลัก</a></li>
+      <li class="nav-item"><a href="#section-forms" class="nav-link">6. การกรอกข้อมูล & แบบฟอร์ม</a></li>
+      <li class="nav-item"><a href="#section-reports" class="nav-link">7. การค้นหา & รายงาน</a></li>
+      <li class="nav-item"><a href="#section-faq" class="nav-link">8. ปัญหาที่พบบ่อย (FAQ)</a></li>
+      <li class="nav-item"><a href="#section-support" class="nav-link">9. ติดต่อสอบถาม</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Container -->
+  <div class="main-wrapper">
+    <!-- Topbar -->
+    <header class="topbar">
+      <button class="toggle-btn" id="menuToggle" aria-label="Toggle Menu">☰ เมนู</button>
+      <div style="font-size: 0.9rem; font-weight: 500; color: var(--text-muted);">
+        เวอร์ชันเอกสาร: {{DOC_VERSION}}
+      </div>
+      <button class="theme-btn" id="themeToggle">🌓 สลับโหมด</button>
+    </header>
+
+    <!-- Main Content Body -->
+    <main class="content">
+
+      <!-- Hero Header -->
+      <section class="doc-hero">
+        <span class="doc-meta-badge">คู่มือผู้ใช้งาน (Official User Guide)</span>
+        <h1>{{SYSTEM_NAME}}</h1>
+        <p>{{SYSTEM_TAGLINE_OR_BRIEF}}</p>
+        <div class="meta-grid">
+          <div>
+            <div class="meta-label">เวอร์ชันระบบ</div>
+            <div class="meta-value">{{APP_VERSION}}</div>
+          </div>
+          <div>
+            <div class="meta-label">ปรับปรุงล่าสุด</div>
+            <div class="meta-value">{{LAST_UPDATED}}</div>
+          </div>
+          <div>
+            <div class="meta-label">กลุ่มผู้ใช้งาน</div>
+            <div class="meta-value">{{TARGET_AUDIENCE}}</div>
+          </div>
+          <div>
+            <div class="meta-label">หน่วยงาน / แผนก</div>
+            <div class="meta-value">{{ORGANIZATION}}</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 1. ภาพรวมระบบ -->
+      <section id="section-overview">
+        <h2>📌 1. ภาพรวมระบบ (System Overview)</h2>
+        <p>{{SYSTEM_OVERVIEW_PARAGRAPH}}</p>
+        <div class="callout callout-note">
+          <strong>💡 ประโยชน์หลักของระบบ:</strong>
+          <ul>
+            <li>ช่วยลดระยะเวลาการทำงานและลดความผิดพลาดในการป้อนข้อมูล</li>
+            <li>ติดตามสถานะงานได้แบบ Real-time ทุกขั้นตอน</li>
+            <li>รองรับการเข้าใช้งานได้จากทุกที่ผ่านเว็บเบราว์เซอร์</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 2. ข้อกำหนดและการเข้าถึง -->
+      <section id="section-requirements">
+        <h2>💻 2. ข้อกำหนดและการเข้าถึงระบบ (Requirements)</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>รายการ</th>
+                <th>ข้อกำหนดที่แนะนำ</th>
+                <th>หมายเหตุ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>เว็บเบราว์เซอร์</strong></td>
+                <td>Google Chrome (v110+), Microsoft Edge (v110+), Safari (v16+)</td>
+                <td>ไม่รองรับ Internet Explorer</td>
+              </tr>
+              <tr>
+                <td><strong>ความละเอียดจอ</strong></td>
+                <td>1366 x 768 พิกเซล ขึ้นไป (แนะนำ 1920 x 1080)</td>
+                <td>รองรับ Responsive บนแท็บเล็ต</td>
+              </tr>
+              <tr>
+                <td><strong>URL เข้าใช้งาน</strong></td>
+                <td><code>https://{{SYSTEM_DOMAIN}}/login</code></td>
+                <td>แนะนำบันทึกเป็น Bookmark</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 3. การเข้าสู่ระบบ -->
+      <section id="section-auth">
+        <h2>🔐 3. การเข้าสู่ระบบ & การจัดการบัญชี (Authentication)</h2>
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-number">1</span>
+            <span class="step-title">เข้าสู่หน้าเว็บไซต์และกรอกข้อมูลเข้าสู่ระบบ</span>
+          </div>
+          <p>เปิดเบราว์เซอร์และเข้าไปที่ลิงก์ระบบ จากนั้นระบุ <strong>ชื่อผู้ใช้งาน (Username/Email)</strong> และ <strong>รหัสผ่าน (Password)</strong></p>
+          <div class="screenshot-wrapper">
+            🖼️ <strong>[ตำแหน่งภาพหน้าจอ: หน้า Login เข้าสู่ระบบ]</strong>
+            <div class="screenshot-caption">ภาพที่ 1: หน้าจอการเข้าสู่ระบบ</div>
+          </div>
+          <p>คลิกปุ่ม <span class="badge-btn">เข้าสู่ระบบ (Sign In)</span> เพื่อดำเนินการต่อ</p>
+        </div>
+
+        <div class="callout callout-warning">
+          <strong>⚠️ ข้อควรระวัง:</strong> หากกรอกรหัสผ่านผิดเกิน 5 ครั้ง ระบบจะระงับการใช้งานชั่วคราวเป็นเวลา 15 นาที เพื่อความปลอดภัยของข้อมูล
+        </div>
+      </section>
+
+      <!-- 4. หน้าจอหลักและเมนู -->
+      <section id="section-navigation">
+        <h2>🧭 4. โครงสร้างหน้าจอหลักและแถบนำทาง (Navigation)</h2>
+        <p>เมื่อเข้าสู่ระบบสำเร็จ จะพบหน้าจอแดชบอร์ดหลัก ประกอบไปด้วย 4 โซนสำคัญ:</p>
+        <div class="screenshot-wrapper">
+          🖼️ <strong>[ตำแหน่งภาพหน้าจอ: หน้า Dashboard พร้อม Callout ตัวเลข ❶ ❷ ❸ ❹]</strong>
+          <div class="screenshot-caption">ภาพที่ 2: ส่วนประกอบของหน้าจอหลัก</div>
+        </div>
+        <ul>
+          <li><strong>❶ แถบเมนูด้านข้าง (Sidebar Menu):</strong> สำหรับสลับไปยังโมดูลและฟังก์ชันการทำงานต่างๆ</li>
+          <li><strong>❷ แถบค้นหาด่วน (Global Search):</strong> สำหรับค้นหารายการเอกสาร, เลขที่คำขอ, หรือชื่อผู้ติดต่อ</li>
+          <li><strong>❸ กล่องแจ้งเตือน (Notifications):</strong> แสดงการอัปเดตสถานะงานและรายการที่รอการอนุมัติ</li>
+          <li><strong>❹ เมนูโปรไฟล์ผู้ใช้ (User Avatar):</strong> สำหรับเปลี่ยนรหัสผ่าน ตั้งค่าระบบ และกดออกจากระบบ (Logout)</li>
+        </ul>
+      </section>
+
+      <!-- 5. ขั้นตอนการใช้งานหลัก -->
+      <section id="section-workflows">
+        <h2>⚡ 5. ขั้นตอนการปฏิบัติงานหลัก (Core Workflows)</h2>
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-number">1</span>
+            <span class="step-title">สร้างรายการคำขอใหม่ (New Request)</span>
+          </div>
+          <p>1. ไปที่เมนูด้านข้าง เลือก <strong>"รายการคำขอ" > "สร้างรายการใหม่"</strong></p>
+          <p>2. หรือคลิกที่ปุ่ม <span class="badge-btn">+ สร้างคำขอใหม่</span> ที่มุมขวาบนของหน้าจอ</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-number">2</span>
+            <span class="step-title">กรอกข้อมูลและแนบเอกสาร</span>
+          </div>
+          <p>กรอกข้อมูลในช่องที่มีเครื่องหมายดอกจันสีแดง <span style="color:red">*</span> ให้ครบถ้วน จากนั้นลากไฟล์เอกสารหลักฐานมาวางในช่องแนบไฟล์ (รองรับ PDF, JPG, PNG ขนาดไม่เกิน 10MB)</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-number">3</span>
+            <span class="step-title">ตรวจสอบและยืนยันการส่งข้อมูล</span>
+          </div>
+          <p>คลิกปุ่ม <span class="badge-btn">ส่งคำขอ (Submit)</span> เพื่อส่งข้อมูลเข้าสู่กระบวนการอนุมัติ ระบบจะแสดงรหัสอ้างอิงเอกสาร (เช่น <code>REQ-2026-00123</code>) ให้จดบันทึกไว้สำหรับติดตาม</p>
+        </div>
+      </section>
+
+      <!-- 6. ฟอร์มและข้อมูล -->
+      <section id="section-forms">
+        <h2>📝 6. คู่มือการกรอกแบบฟอร์ม (Form Field Dictionary)</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ชื่อฟิลด์ข้อมูล</th>
+                <th>ประเภท</th>
+                <th>จำเป็น (*)</th>
+                <th>คำอธิบายและตัวอย่างข้อมูล</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>หัวข้อคำขอ</strong></td>
+                <td>ข้อความ (Text)</td>
+                <td><span style="color:red; font-weight:bold;">ใช่</span></td>
+                <td>ระบุสั้นๆ กระชับ เช่น "ขออนุมัติจัดซื้อหมึกพิมพ์"</td>
+              </tr>
+              <tr>
+                <td><strong>วันที่ต้องการ</strong></td>
+                <td>วันที่ (Date Picker)</td>
+                <td><span style="color:red; font-weight:bold;">ใช่</span></td>
+                <td>ต้องเป็นวันทำการล่วงหน้าอย่างน้อย 3 วัน</td>
+              </tr>
+              <tr>
+                <td><strong>หมายเหตุเพิ่มเติม</strong></td>
+                <td>กล่องข้อความ (Textarea)</td>
+                <td>ไม่บังคับ</td>
+                <td>ข้อมูลอธิบายเพิ่มเติมสำหรับผู้อนุมัติ</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 7. การค้นหาและรายงาน -->
+      <section id="section-reports">
+        <h2>📊 7. การค้นหา การกรอง และการส่งออกข้อมูล (Export)</h2>
+        <p>ผู้ใช้สามารถค้นหาข้อมูลย้อนหลังและดาวน์โหลดไฟล์รายงานได้ตามขั้นตอน:</p>
+        <ol style="margin-left: 20px; margin-bottom: 15px;">
+          <li>ใช้ตัวกรองด้านบนเพื่อเลือกช่วงวันที่ หรือเลือกสถานะ (เช่น "อนุมัติแล้ว", "รอพิจารณา")</li>
+          <li>คลิกปุ่ม <span class="badge-btn">🔍 ค้นหา (Search)</span> เพื่อแสดงผลลัพธ์ในตาราง</li>
+          <li>หากต้องการนำไปใช้งานต่อ ให้คลิกที่ปุ่ม <span class="badge-btn">📥 Export to Excel</span> หรือ <span class="badge-btn">📄 Export to PDF</span></li>
+        </ol>
+      </section>
+
+      <!-- 8. FAQ -->
+      <section id="section-faq">
+        <h2>❓ 8. ปัญหาที่พบบ่อยและวิธีแก้ไข (Troubleshooting & FAQ)</h2>
+        <div class="step-card">
+          <h3 style="margin-top:0; color:var(--primary);">Q: ลืมรหัสผ่านต้องทำอย่างไร?</h3>
+          <p><strong>A:</strong> ในหน้าจอเข้าสู่ระบบ ให้คลิกที่ลิงก์ <em>"ลืมรหัสผ่าน? (Forgot Password)"</em> จากนั้นกรอกอีเมลองค์กรของคุณ ระบบจะส่งลิงก์สำหรับรีเซ็ตรหัสผ่านไปยังกล่องข้อความอีเมลของคุณภายใน 1-2 นาที</p>
+        </div>
+        <div class="step-card">
+          <h3 style="margin-top:0; color:var(--primary);">Q: กดปุ่มส่งข้อมูลแล้วหน้าจอค้างหรือไม่ไปต่อ?</h3>
+          <p><strong>A:</strong> ตรวจสอบว่ากรอกข้อมูลในช่องที่มีดอกจันสีแดงครบทุกช่องหรือไม่ หรือตรวจสอบขนาดไฟล์แนบว่ามีขนาดเกิน 10MB หรือไม่ หากยังพบปัญหาให้กด <kbd>Ctrl</kbd> + <kbd>F5</kbd> เพื่อรีเฟรชหน้าเว็บ</p>
+        </div>
+      </section>
+
+      <!-- 9. Support -->
+      <section id="section-support">
+        <h2>📞 9. ช่องทางการติดต่อและความช่วยเหลือ (Support)</h2>
+        <p>หากพบปัญหาการใช้งานระบบขัดข้อง หรือมีข้อสงสัยเพิ่มเติม สามารถติดต่อทีมสนับสนุนได้ที่:</p>
+        <div class="callout callout-note">
+          <strong>ฝ่ายสนับสนุนเทคโนโลยีสารสนเทศ (IT Support Helpdesk):</strong>
+          <ul style="margin-top: 8px;">
+            <li>📧 อีเมล: <strong>support@yourcompany.com</strong></li>
+            <li>☎️ เบอร์ภายใน: <strong>ต่อ 1234, 1235</strong></li>
+            <li>⏰ เวลาทำการ: วันจันทร์ - ศุกร์ (08:30 - 17:30 น.)</li>
+          </ul>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    // Theme toggle
+    const themeBtn = document.getElementById('themeToggle');
+    themeBtn.addEventListener('click', () => {
+      const isDark = document.body.getAttribute('data-theme') === 'dark';
+      document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+    });
+
+    // Search filter in sidebar
+    const searchInput = document.getElementById('searchInput');
+    const navItems = document.querySelectorAll('#navList .nav-item');
+    searchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase();
+      navItems.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(query) ? '' : 'none';
+      });
+    });
+
+    // Active link highlighting on scroll
+    const sections = document.querySelectorAll('main section[id]');
+    const navLinks = document.querySelectorAll('#navList .nav-link');
+    window.addEventListener('scroll', () => {
+      let currentId = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if (pageYOffset >= sectionTop) {
+          currentId = section.getAttribute('id');
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + currentId) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
