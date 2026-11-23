@@ -1,0 +1,9 @@
+{
+  "name": "thai-krathong-3d-tools",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Optional independent GLB validation for the Thai krathong skill",
+  "engines": { "node": ">=18" },
+  "scripts": { "test": "node --test tests/validate-glb.test.cjs" },
+  "dependencies": { "gltf-validator": "2.0.0-dev.3.10" }
+}
