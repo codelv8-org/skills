@@ -411,6 +411,7 @@
     }
     .card-footer {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       padding-top: 16px;
@@ -446,6 +447,11 @@
       align-items: center;
       gap: 5px;
       transition: all 0.2s;
+    }
+    .skill-download {
+      display: inline-block;
+      text-decoration: none;
+      white-space: nowrap;
     }
     .btn-quick-copy:hover {
       background: var(--border);
@@ -499,6 +505,7 @@
     }
     .list-actions {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       gap: 8px;
       flex-shrink: 0;
@@ -1025,6 +1032,11 @@
       return `<img class="skill-overview" src="${path}" width="960" height="540" alt="" decoding="async">`;
     }
 
+    function renderDownloadLink(skill) {
+      if (skill.id !== 'lowpoly-character-web') return '';
+      return `<a class="btn-quick-copy skill-download" href="downloads/lowpoly-character-web.zip" download="lowpoly-character-web.zip">ดาวน์โหลด ZIP</a>`;
+    }
+
     function renderSkills() {
       const items = getFilteredSkills();
       const container = document.getElementById('viewContainer');
@@ -1066,6 +1078,7 @@
                 ${(skill.tags || []).map(t => `<span class="tag">#${t}</span>`).join('')}
               </div>
               <div class="card-footer">
+                ${renderDownloadLink(skill)}
                 <button class="btn-detail" onclick="openDetailModal('${skill.id}')">
                   📖 ดูรายละเอียด
                 </button>
@@ -1094,6 +1107,7 @@
                 <div class="list-desc">${skill.summary || skill.description}</div>
               </div>
               <div class="list-actions">
+                ${renderDownloadLink(skill)}
                 <button class="btn-quick-copy" onclick="quickCopyInstall('${skill.id}')">📋 Copy</button>
                 <button class="btn-detail" onclick="openDetailModal('${skill.id}')">📖 รายละเอียด</button>
               </div>
@@ -1132,6 +1146,7 @@
                     ${(skill.tags || []).slice(0, 3).map(t => `<span class="tag">#${t}</span>`).join(' ')}
                   </td>
                   <td style="text-align: right;">
+                    ${renderDownloadLink(skill)}
                     <button class="btn-detail" style="padding:4px 10px; font-size:0.8rem;" onclick="openDetailModal('${skill.id}')">
                       ดูรายละเอียด
                     </button>
