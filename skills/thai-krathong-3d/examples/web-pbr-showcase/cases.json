@@ -1,0 +1,41 @@
+[
+  {
+    "id": "banana",
+    "family": "banana_classic",
+    "title": "กระทงใบตอง",
+    "subtitle": "ทรงกลม · ใบตองพับ · ฐานหยวกกล้วย",
+    "prompt": "ใช้ $thai-krathong-3d สร้างกระทงใบตองทรงกลมตาม preset banana_classic มีชั้นใบตองพับ ดอกไม้ เทียนและธูป ใช้สีเขียวธรรมชาติ เก็บลายเส้นใบตองให้ถูกทิศ ส่งออก GLB สำหรับเว็บ พร้อม Mesh/UV QA, baked PBR และภาพตรวจด้านหน้า ด้านบน และมุมเฉียง",
+    "preset": "ref-banana-classic.json",
+    "triangles": 9256,
+    "islands": 1586,
+    "resolution": 1024,
+    "bytes": 5540352,
+    "sha256": "b42d5218ddd5132766a1002efdf34ab8dd759f0779cba692996718717aa2414d"
+  },
+  {
+    "id": "lotus",
+    "family": "white_lotus",
+    "title": "กระทงดอกบัว",
+    "subtitle": "กลีบโค้ง · สีขาวนวล · ซ้อนหลายวง",
+    "prompt": "ใช้ $thai-krathong-3d สร้างกระทงทรงดอกบัวสีขาวนวลตาม preset white_lotus กลีบกว้างมีความหนาและแอ่งโค้ง แยกชั้นกลีบชัดเจน ตรวจ silhouette และ UV overlap ก่อน bake Normal และ ORM ส่งออก GLB ฝัง texture พร้อมเปิดกลับตรวจและเรนเดอร์สามมุม",
+    "preset": "ref-white-lotus.json",
+    "triangles": 34928,
+    "islands": 2486,
+    "resolution": 2048,
+    "bytes": 24294432,
+    "sha256": "700f991c8c961880740e0a8fe65bfd8db2f3ea68d58dcf73592a024b2b69a5d9"
+  },
+  {
+    "id": "clay",
+    "family": "clay_bowl",
+    "title": "กระทงดินเผา",
+    "subtitle": "ภาชนะกลวง · ผนังหนา · ผิวดินด้าน",
+    "prompt": "ใช้ $thai-krathong-3d สร้างกระทงดินเผาตาม preset clay_bowl ให้เห็นช่องภายใน ผนังและขอบภาชนะจริง ผิวสีดินเผาไม่เป็นโลหะ มีเทียนและธูป ส่งออก GLB สำหรับเว็บ พร้อม baked PBR, UV QA และรายงานตรวจไฟล์หลัง reimport",
+    "preset": "ref-clay-bowl.json",
+    "triangles": 6064,
+    "islands": 85,
+    "resolution": 1024,
+    "bytes": 4552784,
+    "sha256": "e8ed7251770fa6ebd632f1e9f404385fe88ca07d4b00088f8c6408e360aa9783"
+  }
+]

@@ -1,8 +1,8 @@
 ---
 name: thai-krathong-3d
-description: Create, sculpt, customize, review and optimize Thai krathong 3D models from Thai/English text, reference photos and screenshots. Use for ปั้นกระทง 3D, กระทงใบตอง, กระทงดอกบัว, Loy Krathong assets, matching Posy For You or SeasonSnap references, improving an existing krathong, or exporting GLB/Blender assets for Three.js and games. Includes research-grounded structural families, actual Blender geometry and materials, per-image reference analysis, staged visual checks and export validation.
+description: Create, sculpt, customize, review and optimize Thai krathong 3D models from Thai/English text, reference photos and screenshots. Use for ปั้นกระทง 3D, กระทงใบตอง, กระทงดอกบัว, Loy Krathong assets, matching Posy For You or SeasonSnap references, improving an existing krathong, or exporting GLB/Blender assets for Three.js and games. Includes research-grounded structural families, actual Blender geometry and materials, Mesh/UV QA, real Cycles PBR baking, packed ORM, strict web GLB validation and per-image reference review.
 category: UIUX
-version: 3.1.0
+version: 3.2.0
 agents: [antigravity, claude-code, codex]
 compatibility:
   antigravity: ">=1.0.0"
@@ -11,6 +11,40 @@ compatibility:
 ---
 
 # Thai Krathong 3D Builder
+
+## R3.2 — mesh/UV QA and baked web PBR
+
+For a textured web/game release, read [mesh-uv-web-pbr.md](references/mesh-uv-web-pbr.md).
+Run source mesh/UV QA, preserve the editable source, then use
+`scripts/bake_web_pbr.py` in isolated background Blender to produce a separate
+triangulated BakeUV atlas, actual BaseColor/Normal/Roughness/Metallic/AO bakes,
+packed ORM, web BLEND and embedded-texture GLB. Use
+`scripts/check_reference_model.py --web-pbr` for strict reimport validation.
+The baseline export below remains a source/preview route, not proof of baked
+PBR completeness. Do not claim a bake merely because a shader has a Bump node.
+
+Mesh QA rejects degenerate/duplicate/nonmanifold/inconsistently wound geometry,
+inward closed components, loose vertices and invalid transforms. Open craft
+surfaces need an explicit policy. Bake UV QA rejects collapsed/overlapping UVs,
+insufficient island padding, out-of-tile coordinates and excessive stretch or
+density variation. Repair demonstrated defects on an authorized working copy;
+never silently weld thin folds, overwrite source assets or waive failed gates.
+
+Inspect front/top/three-quarter renders of the reopened GLB. Record technical
+pass/fail separately from visual/reference acceptance and target-device tests.
+The pipeline does not automatically retopologize, project high-to-low detail,
+remove self-intersections or bake SSS/transmission/emission into core PBR maps.
+Tested runtime is Blender 5.2.2 LTS; reproducible tests live in `tests/`.
+
+## Verified overview and examples
+
+Open [the overview](examples/web-pbr-showcase/overview.html) or
+[the example gallery](examples/web-pbr-showcase/index.html) for three actual
+Blender-generated krathong families, rendered GLB views, Thai example prompts,
+embedded-PBR GLB downloads and per-example hashes. Read the
+[example README](examples/web-pbr-showcase/README.md) for exact reproduction
+commands and limits. The gallery is rendered-image evidence, not a realtime
+3D viewer; its prompt copy is guidance, not a claim of a new chat execution.
 
 ## Research integration R3.1 — primary reference workflow
 

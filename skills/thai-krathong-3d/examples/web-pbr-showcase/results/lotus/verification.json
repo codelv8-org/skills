@@ -1,0 +1,64 @@
+{
+  "family": "white_lotus",
+  "resolution": 2048,
+  "samples": 16,
+  "margin_px": 4,
+  "triangles": 34928,
+  "uv_islands": 2486,
+  "uv_p05_texels_per_cm": 23.630400959249354,
+  "source_unchanged": true,
+  "source_sha256": "343983b85e16da6dd30cc7df15457029a63855b1fdcf6a84283ab5f2764bf695",
+  "glb_sha256": "700f991c8c961880740e0a8fe65bfd8db2f3ea68d58dcf73592a024b2b69a5d9",
+  "glb_bytes": 24294432,
+  "cycles_maps": [
+    "BaseColor",
+    "Normal",
+    "Roughness",
+    "Metallic",
+    "AO"
+  ],
+  "orm": "R=AO,G=Roughness,B=Metallic",
+  "roundtrip_passed": true,
+  "khronos_validator": {
+    "version": "2.0.0-dev.3.10",
+    "errors": 0,
+    "warnings": 0
+  },
+  "atlas_preparation": {
+    "method": "split projection overlaps once, metric triangle projection, repack",
+    "split_triangles": 347,
+    "islands": 2486,
+    "uniform_scale": 1.1900540185160935,
+    "packing": "deterministic bounding-box shelf"
+  },
+  "tangent_preparation": {
+    "flat_shaded_web_faces": [
+      29816
+    ],
+    "unit_tangents": true
+  },
+  "visual_status": "local imported-GLB renders inspected; reference likeness not assessed",
+  "schema_version": 1,
+  "skill_version": "3.2.0",
+  "blender": "5.2.2 LTS",
+  "provenance": "Reused unchanged verified Blender 5.2.2 outputs; original pixels/model bytes, not illustrative generated images.",
+  "files": {
+    "front.png": {
+      "bytes": 282345,
+      "sha256": "aefaa5b44296ed7f7fdd250b1aa7dcb7890bb09e14425733da02030e8db57a47"
+    },
+    "iso.png": {
+      "bytes": 301860,
+      "sha256": "cb06b4f3cd209b4212e15367e80dd7b51ecba2395167f125004de89a6da75206"
+    },
+    "krathong.glb": {
+      "bytes": 24294432,
+      "sha256": "700f991c8c961880740e0a8fe65bfd8db2f3ea68d58dcf73592a024b2b69a5d9"
+    },
+    "top.png": {
+      "bytes": 343347,
+      "sha256": "f6519972060550acb58b642a666e2bd5ead4f80f7732a0c753bee6aa874d8ab2"
+    }
+  },
+  "source_report_sha256": "3109a94c9e47aa7ff893eaa3cff254cf6a0b31adea6b64fab7a791f0aaf865cf"
+}

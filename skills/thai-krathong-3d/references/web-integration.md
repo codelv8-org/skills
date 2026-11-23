@@ -40,4 +40,4 @@ animate();
 - Add `LOD` copies or lower-quality presets if using many simultaneous krathongs.
 - Use `InstancedMesh` only for compatible repeated geometries with shared materials; a krathong with many separate groups is better batched off-line before instancing.
 - Do not mistake decorative bobbing for physically correct floating. Use mass, water surface, center of buoyancy and collisions if a simulation requires physical realism.
-- The sample GLB is not UV texture baked. For art-directed photoreal materials, unwrap UVs and bake original PBR textures in Blender (base color, normal, roughness).
+- The legacy/sample baseline GLB is not a complete PBR bake. For a web release use the [R3.2 mesh/UV and baking workflow](mesh-uv-web-pbr.md) and load `krathong-web.glb`. It embeds sRGB BaseColor, Non-Color tangent Normal and packed ORM (R=AO, G=roughness, B=metallic). Retain GLTFLoader's imported material/texture settings.

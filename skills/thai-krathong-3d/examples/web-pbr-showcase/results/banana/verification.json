@@ -1,0 +1,86 @@
+{
+  "family": "banana_classic",
+  "resolution": 1024,
+  "samples": 16,
+  "margin_px": 4,
+  "triangles": 9256,
+  "uv_islands": 1586,
+  "uv_p05_texels_per_cm": 6.1385962024743295,
+  "source_unchanged": true,
+  "source_sha256": "c4a1763610d1aac7dc2ca205bb37e7848b7298a556a5739c9269c588b41a5b7d",
+  "glb_sha256": "b42d5218ddd5132766a1002efdf34ab8dd759f0779cba692996718717aa2414d",
+  "glb_bytes": 5540352,
+  "cycles_maps": [
+    "BaseColor",
+    "Normal",
+    "Roughness",
+    "Metallic",
+    "AO"
+  ],
+  "orm": "R=AO,G=Roughness,B=Metallic",
+  "roundtrip_passed": true,
+  "khronos_validator": {
+    "version": "2.0.0-dev.3.10",
+    "errors": 0,
+    "warnings": 0
+  },
+  "atlas_preparation": {
+    "method": "split projection overlaps once, metric triangle projection, repack",
+    "split_triangles": 261,
+    "islands": 1586,
+    "uniform_scale": 0.5636388836428523,
+    "packing": "deterministic bounding-box shelf"
+  },
+  "tangent_preparation": {
+    "flat_shaded_web_faces": [],
+    "unit_tangents": true
+  },
+  "visual_status": "local imported-GLB renders inspected; reference likeness not assessed",
+  "schema_version": 1,
+  "skill_version": "3.2.0",
+  "blender": "5.2.2 LTS",
+  "provenance": "Reused unchanged verified Blender 5.2.2 outputs; original pixels/model bytes, not illustrative generated images.",
+  "files": {
+    "front.png": {
+      "bytes": 290533,
+      "sha256": "af29fc02d668ec6df7286e1469ef9e392753a5d07407e5efc976abc7326a8b49"
+    },
+    "iso.png": {
+      "bytes": 319693,
+      "sha256": "649cef7db8ff5043cd157f9f97295377657c6ee3865bfb152db55fc34d3fbc48"
+    },
+    "krathong.glb": {
+      "bytes": 5540352,
+      "sha256": "b42d5218ddd5132766a1002efdf34ab8dd759f0779cba692996718717aa2414d"
+    },
+    "top.png": {
+      "bytes": 369191,
+      "sha256": "06468fd5802fec34b42eb80f09632c18d642ce4b3e698bf139bab7a8a9804c82"
+    },
+    "textures/BaseColor.png": {
+      "bytes": 2274977,
+      "sha256": "7874eba549bac90c412647c5d097c7df542d31340649912a039dfaf648e5ba87"
+    },
+    "textures/Normal.png": {
+      "bytes": 1680909,
+      "sha256": "bbc687b342d147a5bedd1d248ada9146fdf56aa703efa968aa53f9910b0235e5"
+    },
+    "textures/Roughness.png": {
+      "bytes": 116296,
+      "sha256": "38c6bbcad65370921c3145721cfefe96b1636a67b38bec2382d94057696ee8dc"
+    },
+    "textures/Metallic.png": {
+      "bytes": 27749,
+      "sha256": "cfdc1f47e218f9d66f6422f8cc2e489e03ce211052defba65a0ae9256a6adb3d"
+    },
+    "textures/AO.png": {
+      "bytes": 668982,
+      "sha256": "c77070fc320bce93af4bca0103e4349e976b4fd9e7949a82b5381670e9f69af0"
+    },
+    "textures/ORM.png": {
+      "bytes": 727006,
+      "sha256": "c67496645fda1deccac021796c8130bc4440c1a0f1025149e00ca0178f5bb6c2"
+    }
+  },
+  "source_report_sha256": "84f03867e818ff6fac58f700e272b8d33a5e24f7c70d6256a6df9328c651ed64"
+}

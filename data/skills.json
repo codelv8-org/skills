@@ -587,7 +587,7 @@
       "name": "Thai Krathong 3D",
       "nameTh": "สร้างโมเดลกระทงไทย 3D",
       "category": "UIUX",
-      "version": "3.1.0",
+      "version": "3.2.0",
       "status": "Ready",
       "phase": "Phase 1",
       "author": "Personal Library",
@@ -792,9 +792,75 @@
           "name": "SKILL.md",
           "type": "skill",
           "path": "skills/thai-krathong-3d/SKILL.md"
+        },
+        {
+          "name": "mesh_uv_qa.py",
+          "type": "script",
+          "path": "skills/thai-krathong-3d/scripts/mesh_uv_qa.py"
+        },
+        {
+          "name": "bake_web_pbr.py",
+          "type": "script",
+          "path": "skills/thai-krathong-3d/scripts/bake_web_pbr.py"
+        },
+        {
+          "name": "mesh-uv-web-pbr.md",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/references/mesh-uv-web-pbr.md"
+        },
+        {
+          "name": "test_mesh_uv_blender.py",
+          "type": "test",
+          "path": "skills/thai-krathong-3d/tests/test_mesh_uv_blender.py"
+        },
+        {
+          "name": "test_web_pbr_blender.py",
+          "type": "test",
+          "path": "skills/thai-krathong-3d/tests/test_web_pbr_blender.py"
+        },
+        {
+          "name": "web-pbr-verification.json",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/references/web-pbr-verification.json"
+        },
+        {
+          "name": "index.html",
+          "type": "example",
+          "path": "skills/thai-krathong-3d/examples/web-pbr-showcase/index.html"
+        },
+        {
+          "name": "overview.html",
+          "type": "example",
+          "path": "skills/thai-krathong-3d/examples/web-pbr-showcase/overview.html"
+        },
+        {
+          "name": "README.md",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/examples/web-pbr-showcase/README.md"
+        },
+        {
+          "name": "cases.json",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/examples/web-pbr-showcase/cases.json"
+        },
+        {
+          "name": "overview.webp",
+          "type": "asset",
+          "path": "skills/thai-krathong-3d/examples/web-pbr-showcase/overview.webp"
         }
       ],
       "examples": [
+        {
+          "title": "กระทง 3 แบบ · ภาพเรนเดอร์และไฟล์ GLB",
+          "description": "ใบตอง ดอกบัว และดินเผา พร้อม prompt, มุมภาพ 3 มุม, baked PBR และผลตรวจจาก Blender จริง",
+          "htmlPath": "skills/thai-krathong-3d/examples/web-pbr-showcase/index.html",
+          "markdownPath": "skills/thai-krathong-3d/examples/web-pbr-showcase/README.md"
+        },
+        {
+          "title": "ภาพรวม Thai Krathong 3D",
+          "description": "Overview จากโมเดลที่ตรวจแล้ว: Mesh/UV QA → Bake PBR → GLB",
+          "htmlPath": "skills/thai-krathong-3d/examples/web-pbr-showcase/overview.html"
+        },
         {
           "title": "ตัวอย่าง brief และ presets กระทงไทย",
           "description": "แนวทางสร้างกระทงจากข้อความและภาพอ้างอิง",
@@ -805,8 +871,11 @@
         "R3.1 รองรับรูปทรงกระทง 8 ตระกูลและ presets สำหรับภาพอ้างอิง",
         "ตรวจรูปทรงก่อนเพิ่มรายละเอียดวัสดุและแสง",
         "ตรวจ GLB round-trip และแยกผลเทคนิคจาก visual review",
-        "เก็บ workflow low-poly เดิมสำหรับงานที่ต้องการโมเดลเรียบง่าย"
-      ]
+        "เก็บ workflow low-poly เดิมสำหรับงานที่ต้องการโมเดลเรียบง่าย",
+        "Mesh/UV QA ตรวจ topology, overlap, stretch, texel density และระยะห่าง UV islands",
+        "Bake BaseColor, Normal, Roughness, Metallic, AO และ packed ORM พร้อม strict GLB QA"
+      ],
+      "overviewImage": "assets/skill-overviews/thai-krathong-3d.webp"
     }
   ]
 }

@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "skill_version": "3.2.0",
+  "verified_at": "2026-11-23T23:39:56.518327+07:00",
+  "blender": "5.2.2 LTS",
+  "base_commit": "acbcce33479794ea7c8fd08ea50aa3b6fc507092",
+  "state": "local uncommitted R3.2 implementation",
+  "tests": {
+    "mesh_uv": {
+      "passed": 17,
+      "failed": 0,
+      "evidence": "work/krathong-pbr/mesh-uv-verified-tests.log"
+    },
+    "pbr_bake_export": {
+      "passed": 8,
+      "failed": 0,
+      "evidence": "work/krathong-pbr/pbr-verified-tests.log"
+    }
+  },
+  "representative_runs": [
+    {
+      "family": "clay_bowl",
+      "resolution": 1024,
+      "samples": 16,
+      "margin_px": 8,
+      "triangles": 6064,
+      "uv_islands": 85,
+      "uv_p05_texels_per_cm": 13.189591801569433,
+      "source_unchanged": true,
+      "source_sha256": "1c43f306c0ee2d347ce28d727a9324f702a0e8868ddea62186bc3059ac689b48",
+      "glb_sha256": "e8ed7251770fa6ebd632f1e9f404385fe88ca07d4b00088f8c6408e360aa9783",
+      "glb_bytes": 4552784,
+      "cycles_maps": [
+        "BaseColor",
+        "Normal",
+        "Roughness",
+        "Metallic",
+        "AO"
+      ],
+      "orm": "R=AO,G=Roughness,B=Metallic",
+      "roundtrip_passed": true,
+      "khronos_validator": {
+        "version": "2.0.0-dev.3.10",
+        "errors": 0,
+        "warnings": 0
+      },
+      "atlas_preparation": {
+        "method": "split projection overlaps once, metric triangle projection, repack",
+        "split_triangles": 8,
+        "islands": 85,
+        "uniform_scale": 0.7751261689700186,
+        "packing": "deterministic bounding-box shelf"
+      },
+      "tangent_preparation": {
+        "flat_shaded_web_faces": [],
+        "unit_tangents": true
+      },
+      "visual_status": "local imported-GLB renders inspected; reference likeness not assessed",
+      "evidence": "work/krathong-pbr/clay-verified"
+    },
+    {
+      "family": "banana_classic",
+      "resolution": 1024,
+      "samples": 16,
+      "margin_px": 4,
+      "triangles": 9256,
+      "uv_islands": 1586,
+      "uv_p05_texels_per_cm": 6.1385962024743295,
+      "source_unchanged": true,
+      "source_sha256": "c4a1763610d1aac7dc2ca205bb37e7848b7298a556a5739c9269c588b41a5b7d",
+      "glb_sha256": "b42d5218ddd5132766a1002efdf34ab8dd759f0779cba692996718717aa2414d",
+      "glb_bytes": 5540352,
+      "cycles_maps": [
+        "BaseColor",
+        "Normal",
+        "Roughness",
+        "Metallic",
+        "AO"
+      ],
+      "orm": "R=AO,G=Roughness,B=Metallic",
+      "roundtrip_passed": true,
+      "khronos_validator": {
+        "version": "2.0.0-dev.3.10",
+        "errors": 0,
+        "warnings": 0
+      },
+      "atlas_preparation": {
+        "method": "split projection overlaps once, metric triangle projection, repack",
+        "split_triangles": 261,
+        "islands": 1586,
+        "uniform_scale": 0.5636388836428523,
+        "packing": "deterministic bounding-box shelf"
+      },
+      "tangent_preparation": {
+        "flat_shaded_web_faces": [],
+        "unit_tangents": true
+      },
+      "visual_status": "local imported-GLB renders inspected; reference likeness not assessed",
+      "evidence": "work/krathong-pbr/banana-verified"
+    },
+    {
+      "family": "white_lotus",
+      "resolution": 2048,
+      "samples": 16,
+      "margin_px": 4,
+      "triangles": 34928,
+      "uv_islands": 2486,
+      "uv_p05_texels_per_cm": 23.630400959249354,
+      "source_unchanged": true,
+      "source_sha256": "343983b85e16da6dd30cc7df15457029a63855b1fdcf6a84283ab5f2764bf695",
+      "glb_sha256": "700f991c8c961880740e0a8fe65bfd8db2f3ea68d58dcf73592a024b2b69a5d9",
+      "glb_bytes": 24294432,
+      "cycles_maps": [
+        "BaseColor",
+        "Normal",
+        "Roughness",
+        "Metallic",
+        "AO"
+      ],
+      "orm": "R=AO,G=Roughness,B=Metallic",
+      "roundtrip_passed": true,
+      "khronos_validator": {
+        "version": "2.0.0-dev.3.10",
+        "errors": 0,
+        "warnings": 0
+      },
+      "atlas_preparation": {
+        "method": "split projection overlaps once, metric triangle projection, repack",
+        "split_triangles": 347,
+        "islands": 2486,
+        "uniform_scale": 1.1900540185160935,
+        "packing": "deterministic bounding-box shelf"
+      },
+      "tangent_preparation": {
+        "flat_shaded_web_faces": [
+          29816
+        ],
+        "unit_tangents": true
+      },
+      "visual_status": "local imported-GLB renders inspected; reference likeness not assessed",
+      "evidence": "work/krathong-pbr/lotus-verified"
+    }
+  ],
+  "limitations": [
+    "No target-device browser performance/visual acceptance",
+    "No automatic retopology, high-to-low projection or complete self-intersection detection",
+    "Core PBR does not bake SSS/transmission/emission",
+    "Other Blender versions are not verified",
+    "Local evidence paths are not shipped modeling artifacts; rerun documented commands to reproduce"
+  ],
+  "code_sha256": {
+    "scripts/bake_web_pbr.py": "7a3f76bc425080c1cde1b41d77a377ab8980f523dc3160a9f4760fd3d9e6a367",
+    "scripts/blender_finish.py": "0f674764c341d889054c77068aee695b7fc4a4b7ed5d123b45ef0b9a2710744f",
+    "scripts/build_reference.py": "cf45c4b8395776dc24e906f125d866dc061d0b5d233c920f36c60f23b2597985",
+    "scripts/check_reference_model.py": "8323c8a3715ee646395cb0b96bcd5bc2d82b4e38d9c352fd27cd5d973c90318e",
+    "scripts/generate_krathong.py": "365d5caba2ab32f7ee7aef2251ae4c4d95e60003ec67e2bccd0a49030bd8e9cf",
+    "scripts/mesh_uv_qa.py": "8744513fa7f8ae18ef650efdca0cd052c8d30c4a49ec68d5ca9213eacbd851ae",
+    "scripts/qa_model.py": "05daca743db034d6889a2b54c82e31e35fee3af066863c0383c4bd2310c5cda0",
+    "scripts/reference_finish.py": "200b994a2672edf56952dd96fb97bc804284c4addf666f5c29320e0035c13211",
+    "scripts/render_preview.py": "3ba98197a83e4333a0d8eb65424c8bd2468809181deab5142866627a119f3246",
+    "scripts/smoke_test.py": "d46d4e73feb137d2e5e6045727098bb8baec27d3cdcdf24adc86a0136c0626f2",
+    "tests/test_mesh_uv_blender.py": "cc807f50491aaf9343dd2ba3e8888d0a30aed999a611734cb5fc69dbcad64cba",
+    "tests/test_web_pbr_blender.py": "6639f7103faac0eb17b954003a752cd2a1f5475b34846c6e1cec27f244f0f3ca"
+  }
+}

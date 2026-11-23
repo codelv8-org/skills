@@ -411,7 +411,10 @@ def setup_scene(asset_collection, resolution=640, samples=24):
     target = (lo + hi) * 0.5
     span = max(hi.x - lo.x, hi.y - lo.y, hi.z - lo.z, 0.01)
     stage = _new_stage()
-    scene.render.engine = "BLENDER_EEVEE_NEXT" if bpy.app.version >= (4, 2, 0) else "BLENDER_EEVEE"
+    # EEVEE_NEXT was renamed back to EEVEE in Blender 5.x. Inspect available
+    # engines rather than assuming a monotonic version-to-name mapping.
+    engines = scene.render.bl_rna.properties["engine"].enum_items.keys()
+    scene.render.engine = "BLENDER_EEVEE_NEXT" if "BLENDER_EEVEE_NEXT" in engines else "BLENDER_EEVEE"
     if hasattr(scene, "eevee"):
         if hasattr(scene.eevee, "taa_render_samples"):
             scene.eevee.taa_render_samples = samples

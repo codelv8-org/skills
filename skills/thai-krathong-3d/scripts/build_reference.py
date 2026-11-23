@@ -72,6 +72,27 @@ class Builder:
         for polygon in mesh.polygons:
             for li in polygon.loop_indices:
                 layer.data[li].uv = uv[mesh.loops[li].vertex_index]
+        # Thin perimeter walls cannot reuse identical front/back UV coordinates:
+        # that collapses their UV triangles to lines. Preserve authored broad
+        # surfaces and project only collapsed polygons onto their own plane.
+        mesh.calc_loop_triangles()
+        collapsed = set()
+        for tri in mesh.loop_triangles:
+            a, b, c = [layer.data[li].uv.copy() for li in tri.loops]
+            if abs((b.x-a.x)*(c.y-a.y)-(b.y-a.y)*(c.x-a.x)) < 1e-12:
+                collapsed.add(tri.polygon_index)
+        for pi in collapsed:
+            polygon = mesh.polygons[pi]
+            ids = list(polygon.loop_indices)
+            points = [mesh.vertices[mesh.loops[li].vertex_index].co for li in ids]
+            edge = max((b-a for a, b in zip(points, points[1:]+points[:1])), key=lambda v: v.length)
+            axis_u = edge.normalized()
+            axis_v = polygon.normal.cross(axis_u).normalized()
+            projected = [(p.dot(axis_u), p.dot(axis_v)) for p in points]
+            lo = [min(p[k] for p in projected) for k in (0, 1)]
+            scale = max(max(p[k] for p in projected)-lo[k] for k in (0, 1)) or 1
+            for li, p in zip(ids, projected):
+                layer.data[li].uv = ((p[0]-lo[0])/scale, (p[1]-lo[1])/scale)
         self.parts[obj["krathong_part"]] += 1
         return obj
 
@@ -132,6 +153,14 @@ class Builder:
         # Flat caps need planar UVs: cylindrical UVs collapse their area to a line.
         radius = max(r for r, _ in profile) or 1.0
         layer = obj.data.uv_layers.active
+        # The closing longitude needs U=1 on this face, not a backwards jump
+        # across the whole image to U=0. UVs live on loops, not vertices.
+        for polygon in obj.data.polygons:
+            us = [layer.data[li].uv.x for li in polygon.loop_indices]
+            if max(us)-min(us) > .5:
+                for li in polygon.loop_indices:
+                    if layer.data[li].uv.x < .5:
+                        layer.data[li].uv.x = 1.0
         for polygon in obj.data.polygons:
             zs = [obj.data.vertices[k].co.z for k in polygon.vertices]
             if max(zs) - min(zs) < 1e-8:

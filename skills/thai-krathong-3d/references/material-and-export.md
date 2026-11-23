@@ -1,8 +1,16 @@
 # Materials, rendering and GLB verification
 
+For complete baked web materials, use the R3.2 route in
+[mesh-uv-web-pbr.md](mesh-uv-web-pbr.md). The following describes the editable
+source material and baseline export, not the final baked-web contract.
+
 ## Portable materials and source look development
 
 `reference_finish.py` creates original image textures and nonmetallic Principled materials. Petal UVs run across width in U and base-to-tip in V. Base-colour images are exportable; fine Blender bump/subsurface is additional look development and is not automatically baked. Do not claim identical web appearance solely from identical material names.
+
+`bake_web_pbr.py` explicitly bakes that micro-bump to a tangent normal map on a
+separate atlas; it also bakes roughness/metallic/AO and packs ORM. SSS remains
+outside this core PBR contract. Keep both source and baked materials available.
 
 The [official Blender glTF guide](https://docs.blender.org/manual/en/latest/addons/import_export/scene_gltf2.html) describes recognised node connections. Direct Image Texture to Principled Base Color supplies a portable colour image. Constant roughness and metallic values export directly. Packed roughness/metallic uses green/blue channels. Unsupported graphs need an actual bake or a verified runtime shader.
 

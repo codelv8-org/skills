@@ -1,6 +1,6 @@
 interface:
   display_name: Thai Krathong 3D Builder
-  short_description: ปั้นกระทงตามภาพอ้างอิง ด้วยโครงสร้าง วัสดุ และ Blender
+  short_description: ปั้นกระทง 3D พร้อม Mesh/UV QA และ bake PBR สำหรับเว็บ
   default_prompt: ใช้ $thai-krathong-3d สร้างกระทงตามภาพอ้างอิง ตรวจรูปทรง วัสดุ และ
     GLB ที่ส่งออกจริง
   brand_color: '#317C47'

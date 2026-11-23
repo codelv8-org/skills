@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "browser": "Microsoft Edge via Playwright CLI",
+  "desktop": {
+    "viewport": [
+      1440,
+      1000
+    ],
+    "axe_violations": 0,
+    "axe_passes": 43
+  },
+  "mobile": {
+    "viewport": [
+      390,
+      844
+    ],
+    "scroll_width": 390,
+    "axe_violations": 0,
+    "axe_passes": 44
+  },
+  "axe_version": "4.14.1",
+  "axe_scope": [
+    "wcag2a",
+    "wcag2aa",
+    "wcag21aa",
+    "best-practice"
+  ],
+  "case_view_checks": 9,
+  "glb_downloads_byte_verified": 3,
+  "keyboard_family_and_view": true,
+  "copy_prompt_status": "passed",
+  "selected_view_preserved_on_family_switch": true,
+  "catalog_cover_and_example_links": "passed",
+  "http_link_checks": 35,
+  "cover": {
+    "format": "WEBP",
+    "width": 960,
+    "height": 540
+  },
+  "static_checker": {
+    "version": "0.16.3",
+    "new_page_findings": 0,
+    "inherited_catalog_warnings": 167,
+    "inherited_catalog_info": 6,
+    "new_signatures": 0
+  },
+  "limits": [
+    "file:// browser check blocked by tool policy; HTTP verified",
+    "Automated accessibility checks are not full WCAG conformance or device acceptance",
+    "Uses unchanged outputs from the prior Blender verification run, not a newly executed prompt or bake"
+  ]
+}
