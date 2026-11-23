@@ -462,6 +462,118 @@
         "เดินตามขั้นตอนจริงและจับภาพผ่าน Browser เมื่อมี URL ทดสอบที่ได้รับอนุญาต",
         "ใช้ข้อมูลสมมติและภาพจำลองสำหรับขั้นตอนยืนยันตัวตนเพิ่มเติม"
       ]
+    },
+    {
+      "id": "photoreal-head-web",
+      "name": "Photoreal Head for Web",
+      "nameTh": "โมเดลศีรษะสมจริงสำหรับเว็บ",
+      "category": "UIUX",
+      "version": "2.0.0",
+      "status": "Ready",
+      "phase": "Phase 1",
+      "author": "Personal Library",
+      "summary": "สร้างและแก้โมเดลศีรษะ 3D สมจริงด้วย Blender ตรวจสัดส่วนใบหน้าก่อนทำ UV และ PBR พร้อมส่งออก GLB สำหรับ Three.js",
+      "description": "สร้างหรือปรับโมเดลศีรษะมนุษย์โดยตรวจ cranial silhouette, ตา จมูก หู ปาก และขากรรไกรก่อนทำ texture ใช้ facial landmarks และ photo-fit ประกอบการตรวจ รองรับ UV0, PBR, eyebrow decals และ GLB พร้อม release gates ที่แยกผลตรวจอัตโนมัติจากการยอมรับภาพจริง",
+      "tags": [
+        "3D",
+        "Photoreal",
+        "Facial Anatomy",
+        "Blender",
+        "GLB",
+        "Three.js",
+        "Multi-Agent"
+      ],
+      "supportedAgents": [
+        "antigravity",
+        "claude-code",
+        "codex"
+      ],
+      "agentCompatibility": {
+        "antigravity": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "claudeCode": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "codex": {
+          "supported": true,
+          "version": ">=1.0.0"
+        }
+      },
+      "triggers": [
+        "สร้างหัวคนสมจริง",
+        "แก้สัดส่วนใบหน้า 3D",
+        "โมเดลศีรษะสำหรับเว็บ",
+        "photoreal head",
+        "facial anatomy QA",
+        "photo-fit landmarks",
+        "eyebrow tattoo texture",
+        "Blender GLB export"
+      ],
+      "path": "skills/photoreal-head-web",
+      "entryFile": "skills/photoreal-head-web/SKILL.md",
+      "assets": [
+        {
+          "name": "SKILL.md",
+          "type": "skill",
+          "path": "skills/photoreal-head-web/SKILL.md"
+        },
+        {
+          "name": "analyze_anatomy.py",
+          "type": "script",
+          "path": "skills/photoreal-head-web/scripts/analyze_anatomy.py"
+        },
+        {
+          "name": "compare_photo_landmarks.py",
+          "type": "script",
+          "path": "skills/photoreal-head-web/scripts/compare_photo_landmarks.py"
+        },
+        {
+          "name": "blender_export_head.py",
+          "type": "script",
+          "path": "skills/photoreal-head-web/scripts/blender_export_head.py"
+        },
+        {
+          "name": "inspect_glb.py",
+          "type": "script",
+          "path": "skills/photoreal-head-web/scripts/inspect_glb.py"
+        },
+        {
+          "name": "landmarks_3d_template.json",
+          "type": "template",
+          "path": "skills/photoreal-head-web/assets/templates/landmarks_3d_template.json"
+        },
+        {
+          "name": "anatomy_review_template.md",
+          "type": "template",
+          "path": "skills/photoreal-head-web/assets/templates/anatomy_review_template.md"
+        },
+        {
+          "name": "anatomy-release-gates.md",
+          "type": "reference",
+          "path": "skills/photoreal-head-web/references/anatomy-release-gates.md"
+        },
+        {
+          "name": "HeadViewer.tsx",
+          "type": "template",
+          "path": "skills/photoreal-head-web/assets/web/HeadViewer.tsx"
+        }
+      ],
+      "examples": [
+        {
+          "title": "แนวทางสร้างและแก้โมเดลศีรษะ",
+          "description": "ตัวอย่าง brief สำหรับหัวคนสมจริง งาน likeness และการแก้รูปทรงก่อนทำ texture",
+          "markdownPath": "skills/photoreal-head-web/references/example-briefs.md"
+        }
+      ],
+      "highlights": [
+        "ตรวจ anatomy และภาพ clay หลายมุมก่อน UV และ texture",
+        "ตรวจ facial landmarks และเทียบภาพอ้างอิงด้วย photo-fit",
+        "ส่งออก GLB พร้อมหลักฐานและ release gates",
+        "มี React Three Fiber viewer สำหรับตรวจโมเดลบนเว็บ"
+      ]
     }
   ]
 }

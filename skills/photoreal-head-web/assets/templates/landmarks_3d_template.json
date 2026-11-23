@@ -1,0 +1,31 @@
+{
+  "schema": "photoreal-head-landmarks-3d/v1",
+  "coordinate_system": "blender_local_z_up_front_minus_y",
+  "units": "meters",
+  "landmarks": {
+    "n": null,
+    "se": null,
+    "rh": null,
+    "prn": null,
+    "sn": null,
+    "sto": null,
+    "gn": null,
+    "en_l": null,
+    "en_r": null,
+    "ex_l": null,
+    "ex_r": null,
+    "al_l": null,
+    "al_r": null,
+    "ch_l": null,
+    "ch_r": null,
+    "t_l": null,
+    "t_r": null,
+    "sa_l": null,
+    "sa_r": null,
+    "sba_l": null,
+    "sba_r": null,
+    "g": null,
+    "pg": null
+  },
+  "instructions": "Replace each null landmark with its [x,y,z] coordinate in meters. Remove unmeasured optional keys instead of guessing. Never run this placeholder through the validator without annotating it."
+}

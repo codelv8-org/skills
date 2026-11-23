@@ -1,0 +1,8 @@
+{
+  "schema": "photoreal-head-landmarks-2d/v1",
+  "coordinate_space": "image_pixels_xy_down",
+  "image_size": [1024, 1024],
+  "view": "front",
+  "points": {},
+  "instructions": "Set image_size to actual pixels, label at least five visible points incl three eye anchors on front or n/prn/sn/gn on profile; replace empty points with coordinates; do not annotate invisible anatomy. Use same view for source and render."
+}
