@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://codelv8-org.github.io/skills/sitemap.xml

@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>e-Procure Plus - คู่มือการใช้งานระบบจัดซื้อจัดจ้างและบริหารพัสดุ (PDF สิ่งพิมพ์ A4)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ==========================================================================
+       CSS Paged Media & Print Rules for A4 PDF Output
+       ========================================================================== */
+    @page {
+      size: A4 portrait; /* 210mm x 297mm */
+      margin: 20mm 16mm 20mm 16mm;
+
+      @top-left {
+        content: "e-Procure Plus Enterprise • คู่มือการใช้งานระบบจัดซื้อจัดจ้าง";
+        font-family: 'Sarabun', sans-serif;
+        font-size: 8pt;
+        color: #64748b;
+        border-bottom: 0.5pt solid #cbd5e1;
+        padding-bottom: 4px;
+      }
+      @top-right {
+        content: "รหัสเอกสาร: DOC-EPROC-UM-2026-V1.0";
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 8pt;
+        color: #64748b;
+        border-bottom: 0.5pt solid #cbd5e1;
+        padding-bottom: 4px;
+      }
+      @bottom-left {
+        content: "เอกสารทางการระดับส่งมอบโครงการ • กรมบริหารพัสดุและเทคโนโลยีสารสนเทศ";
+        font-family: 'Sarabun', sans-serif;
+        font-size: 7.5pt;
+        color: #94a3b8;
+        border-top: 0.5pt solid #cbd5e1;
+        padding-top: 4px;
+      }
+      @bottom-right {
+        content: "หน้าที่ " counter(page);
+        font-family: 'Sarabun', sans-serif;
+        font-size: 8pt;
+        font-weight: bold;
+        color: #0f172a;
+        border-top: 0.5pt solid #cbd5e1;
+        padding-top: 4px;
+      }
+    }
+
+    /* Remove headers & footers on Cover Page */
+    @page:first {
+      margin: 0;
+      @top-left { content: normal; border: none; }
+      @top-right { content: normal; border: none; }
+      @bottom-left { content: normal; border: none; }
+      @bottom-right { content: normal; border: none; }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Sarabun', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 10pt;
+      line-height: 1.6;
+      color: #1e293b;
+      background: #ffffff;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* Page Breaks */
+    .page-break {
+      break-before: page;
+      page-break-before: always;
+    }
+    .avoid-break {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+    h1, h2, h3, h4 {
+      break-after: avoid;
+      page-break-after: avoid;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    /* ==========================================================================
+       1. Cover Page (Full-bleed A4)
+       ========================================================================== */
+    .cover-page {
+      width: 210mm;
+      height: 297mm;
+      padding: 30mm 24mm 24mm 24mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #0369a1 100%);
+      color: #ffffff;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover-accent-circle {
+      position: absolute;
+      top: -60mm;
+      right: -60mm;
+      width: 180mm;
+      height: 180mm;
+      border-radius: 50%;
+      background: rgba(14, 165, 233, 0.15);
+      filter: blur(40px);
+    }
+    .cover-stripe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 8mm;
+      background: #38bdf8;
+    }
+    .cover-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(56, 189, 248, 0.2);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #7dd3fc;
+      font-size: 8.5pt;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 999px;
+      letter-spacing: 0.5px;
+      margin-bottom: 18px;
+    }
+    .cover-title {
+      font-size: 26pt;
+      line-height: 1.25;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+    .cover-subtitle {
+      font-size: 13.5pt;
+      color: #94a3b8;
+      font-weight: 400;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    .cover-divider {
+      width: 70mm;
+      height: 4px;
+      background: #38bdf8;
+      border-radius: 2px;
+      margin-bottom: 28mm;
+    }
+    .cover-meta {
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 10px;
+      padding: 18px 22px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      font-size: 9.5pt;
+    }
+    .cover-meta-item { display: flex; flex-direction: column; }
+    .cover-meta-label { font-size: 8pt; color: #94a3b8; font-weight: 500; text-transform: uppercase; }
+    .cover-meta-val { font-weight: 700; color: #f8fafc; margin-top: 3px; font-family: 'JetBrains Mono', 'Sarabun'; }
+    .cover-footer {
+      font-size: 8.5pt;
+      color: #94a3b8;
+      text-align: center;
+      border-top: 1px solid rgba(148, 163, 184, 0.2);
+      padding-top: 14px;
+    }
+
+    /* ==========================================================================
+       2. Document Control Sheet
+       ========================================================================== */
+    .section-title {
+      font-size: 15pt;
+      font-weight: 700;
+      color: #0369a1;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #0284c7;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 20px 0;
+      font-size: 9pt;
+      page-break-inside: avoid;
+    }
+    table.data-table th, table.data-table td {
+      border: 1px solid #cbd5e1;
+      padding: 7px 10px;
+      text-align: left;
+    }
+    table.data-table th {
+      background: #f1f5f9;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    table.data-table tbody tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    /* Sign-off Matrix */
+    .signoff-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-top: 15px;
+      margin-bottom: 25px;
+      page-break-inside: avoid;
+    }
+    .signoff-box {
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 12px;
+      background: #f8fafc;
+      text-align: center;
+    }
+    .signoff-role {
+      font-size: 8.5pt;
+      font-weight: 700;
+      color: #0369a1;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+    }
+    .signoff-line {
+      border-bottom: 1px dotted #94a3b8;
+      margin: 0 10px 6px 10px;
+    }
+    .signoff-name { font-size: 9pt; font-weight: 600; color: #1e293b; }
+    .signoff-date { font-size: 8pt; color: #64748b; margin-top: 2px; }
+
+    /* ==========================================================================
+       3. Table of Contents
+       ========================================================================== */
+    .toc-list {
+      list-style: none;
+      margin: 16px 0 24px 0;
+    }
+    .toc-item {
+      display: flex;
+      align-items: baseline;
+      margin-bottom: 7px;
+      font-size: 9.5pt;
+    }
+    .toc-title { font-weight: 600; color: #1e293b; }
+    .toc-leader {
+      flex: 1;
+      border-bottom: 1px dotted #94a3b8;
+      margin: 0 8px;
+    }
+    .toc-page {
+      font-weight: 700;
+      color: #0284c7;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ==========================================================================
+       4. Chapters & Workflows
+       ========================================================================== */
+    .chapter-header {
+      margin-top: 6px;
+      margin-bottom: 18px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #0284c7;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .chapter-badge {
+      font-size: 9pt;
+      font-weight: 700;
+      color: #0284c7;
+      background: #e0f2fe;
+      padding: 3px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+    .chapter-title {
+      font-size: 14pt;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    h3 {
+      font-size: 11pt;
+      margin: 16px 0 8px 0;
+      color: #0369a1;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    p { margin-bottom: 10px; text-align: justify; }
+
+    /* Step Cards */
+    .step-card {
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid #0284c7;
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin-bottom: 12px;
+      background: #f8fafc;
+      page-break-inside: avoid;
+    }
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-weight: 700;
+      font-size: 10pt;
+      color: #0f172a;
+    }
+    .step-num {
+      background: #0284c7;
+      color: #ffffff;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8.5pt;
+      font-weight: 700;
+    }
+    .step-desc {
+      font-size: 9.5pt;
+      color: #334155;
+      margin-bottom: 6px;
+    }
+    .step-result {
+      font-size: 8.5pt;
+      background: #e0f2fe;
+      color: #0369a1;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    /* Simulated UI Mockup */
+    .ui-mockup {
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      background: #f8fafc;
+      margin: 12px 0;
+      overflow: hidden;
+      page-break-inside: avoid;
+    }
+    .ui-mockup-header {
+      background: #e2e8f0;
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #cbd5e1;
+      font-size: 8pt;
+      color: #475569;
+      font-weight: 600;
+    }
+    .ui-dots { display: flex; gap: 4px; }
+    .ui-dot { width: 8px; height: 8px; border-radius: 50%; background: #94a3b8; }
+    .ui-mockup-body {
+      padding: 12px;
+      font-size: 8.5pt;
+    }
+    .mockup-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8pt;
+    }
+    .mockup-table th, .mockup-table td {
+      border: 1px solid #e2e8f0;
+      padding: 5px 8px;
+      text-align: left;
+    }
+    .mockup-table th { background: #f1f5f9; font-weight: 600; }
+    .status-pill {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 999px;
+      font-size: 7.5pt;
+      font-weight: 600;
+    }
+    .status-approved { background: #dcfce7; color: #15803d; }
+    .status-pending { background: #fef9c3; color: #854d0e; }
+    .figure-caption {
+      font-size: 8pt;
+      color: #64748b;
+      text-align: center;
+      padding: 6px;
+      background: #f1f5f9;
+      border-top: 1px solid #cbd5e1;
+      font-style: italic;
+    }
+
+    /* Callout Boxes */
+    .callout {
+      border-left: 3.5px solid;
+      padding: 8px 12px;
+      margin: 12px 0;
+      border-radius: 0 4px 4px 0;
+      font-size: 9pt;
+      page-break-inside: avoid;
+    }
+    .callout-info { background: #f0f9ff; border-color: #0284c7; color: #0c4a6e; }
+    .callout-tip { background: #f0fdf4; border-color: #16a34a; color: #14532d; }
+    .callout-warning { background: #fffbeb; border-color: #d97706; color: #78350f; }
+
+    /* UI Badges */
+    .btn-ui {
+      display: inline-block;
+      padding: 1px 6px;
+      border: 1px solid #0284c7;
+      background: #f0f9ff;
+      color: #0284c7;
+      border-radius: 3px;
+      font-weight: 600;
+      font-size: 8.5pt;
+    }
+    kbd {
+      padding: 1px 5px;
+      border: 1px solid #cbd5e1;
+      border-radius: 3px;
+      background: #f8fafc;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8pt;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================================
+       PAGE 1: Official Cover Page
+       ========================================================================= -->
+  <div class="cover-page">
+    <div class="cover-stripe"></div>
+    <div class="cover-accent-circle"></div>
+
+    <div style="margin-top: 15mm; position: relative; z-index: 2;">
+      <span class="cover-badge">
+        <span>📋</span> เอกสารทางการระดับส่งมอบโครงการ (Official Deliverable)
+      </span>
+      <h1 class="cover-title">e-Procure Plus Enterprise</h1>
+      <div class="cover-subtitle">
+        คู่มือการใช้งานระบบจัดซื้อจัดจ้างและบริหารสินทรัพย์พัสดุออนไลน์<br>
+        (Web-based Electronic Procurement & Asset Management System)
+      </div>
+      <div class="cover-divider"></div>
+
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <span class="cover-meta-label">รหัสเอกสาร (Doc Code)</span>
+          <span class="cover-meta-val">DOC-EPROC-UM-2026-V1.0</span>
+        </div>
+        <div class="cover-meta-item">
+          <span class="cover-meta-label">เวอร์ชันระบบ (App Version)</span>
+          <span class="cover-meta-val">v2.4.0 (Enterprise LTS)</span>
+        </div>
+        <div class="cover-meta-item">
+          <span class="cover-meta-label">วันที่จัดทำ (Date)</span>
+          <span class="cover-meta-val">23 พฤศจิกายน 2026</span>
+        </div>
+        <div class="cover-meta-item">
+          <span class="cover-meta-label">หน่วยงานเจ้าของระบบ</span>
+          <span class="cover-meta-val">กรมบริหารพัสดุและสารสนเทศ</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cover-footer" style="position: relative; z-index: 2;">
+      สงวนลิขสิทธิ์ &copy; 2026 กรมบริหารพัสดุและเทคโนโลยีสารสนเทศ • จัดทำตามมาตรฐาน CSS Paged Media A4
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       PAGE 2: Document Control & Sign-off Sheet
+       ========================================================================= -->
+  <div class="page-break" style="padding-top: 5mm;">
+    <div class="section-title">
+      <span>แผ่นควบคุมเอกสารและการลงนามตรวจรับ (Document Control & Sign-off)</span>
+      <span style="font-size:9pt; font-weight:normal; color:#64748b;">ส่วนควบคุมคุณภาพ</span>
+    </div>
+
+    <h3>1. ประวัติการปรับปรุงเอกสาร (Revision History)</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width: 12%;">เวอร์ชัน</th>
+          <th style="width: 18%;">วันที่แก้ไข</th>
+          <th style="width: 48%;">รายละเอียดการเปลี่ยนแปลง</th>
+          <th style="width: 22%;">ผู้จัดทำ / ปรับปรุง</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="font-family:'JetBrains Mono';">v1.0.0</strong></td>
+          <td>23 พ.ย. 2026</td>
+          <td>จัดทำคู่มือฉบับส่งมอบงานโครงการ ครบ 5 หมวดหลัก</td>
+          <td>ทีมวิศวกรรมระบบ e-Procure</td>
+        </tr>
+        <tr>
+          <td><strong style="font-family:'JetBrains Mono';">v0.9.0</strong></td>
+          <td>15 พ.ย. 2026</td>
+          <td>ปรับปรุงขั้นตอนขออนุมัติจัดซื้อแบบ 3 ระดับขั้น (Approval Matrix)</td>
+          <td>นักวิเคราะห์ระบบ (SA)</td>
+        </tr>
+        <tr>
+          <td><strong style="font-family:'JetBrains Mono';">v0.1.0</strong></td>
+          <td>01 พ.ย. 2026</td>
+          <td>ร่างโครงสร้างคู่มือตาม The 10-Pillar Framework</td>
+          <td>ทีมพัฒนาคู่มือ</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top: 18px;">2. บัญชีรายชื่อผู้รับเอกสาร (Document Distribution List)</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width: 30%;">กลุ่มผู้ใช้งานเป้าหมาย</th>
+          <th style="width: 45%;">วัตถุประสงค์การใช้งาน</th>
+          <th style="width: 25%;">ระดับสิทธิ์ (Role)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>เจ้าหน้าที่ผู้ขอซื้อ (Requester)</td>
+          <td>สร้างใบขอซื้อ (PR), ตรวจสอบสถานะ และรับพัสดุ</td>
+          <td><code>ROLE_REQUESTER</code></td>
+        </tr>
+        <tr>
+          <td>หัวหน้าฝ่าย / ผู้อนุมัติ (Approver)</td>
+          <td>ตรวจสอบงบประมาณและอนุมัติใบขอซื้อทางดิจิทัล</td>
+          <td><code>ROLE_APPROVER</code></td>
+        </tr>
+        <tr>
+          <td>เจ้าหน้าที่จัดซื้อ (Procurement Officer)</td>
+          <td>ออกใบสั่งซื้อ (PO), เทียบราคา และส่งต่อผู้ขาย</td>
+          <td><code>ROLE_PURCHASER</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top: 18px;">3. ตารางลงนามตรวจรับมอบงานโครงการ (Project Acceptance Matrix)</h3>
+    <div class="signoff-grid">
+      <div class="signoff-box">
+        <div class="signoff-role">ผู้จัดทำเอกสารคู่มือ</div>
+        <div class="signoff-line"></div>
+        <div class="signoff-name">( นายเดชรัตน์ นันทพัฒน์ )</div>
+        <div class="signoff-date">Lead Technical Writer</div>
+        <div class="signoff-date">วันที่ ...../...../..........</div>
+      </div>
+      <div class="signoff-box">
+        <div class="signoff-role">ผู้ตรวจทานความถูกต้อง</div>
+        <div class="signoff-line"></div>
+        <div class="signoff-name">( นางสาวกานดา วิทยาการ )</div>
+        <div class="signoff-date">Project Manager (IT)</div>
+        <div class="signoff-date">วันที่ ...../...../..........</div>
+      </div>
+      <div class="signoff-box">
+        <div class="signoff-role">ประธานคณะกรรมการตรวจรับ</div>
+        <div class="signoff-line"></div>
+        <div class="signoff-name">( ดร.อนุพงษ์ เกียรติพิบูลย์ )</div>
+        <div class="signoff-date">ผู้อำนวยการฝ่ายสารสนเทศ</div>
+        <div class="signoff-date">วันที่ ...../...../..........</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       PAGE 3: Table of Contents
+       ========================================================================= -->
+  <div class="page-break" style="padding-top: 5mm;">
+    <div class="section-title">
+      <span>สารบัญเนื้อหา (Table of Contents)</span>
+      <span style="font-size:9pt; font-weight:normal; color:#64748b;">หน้าสารบัญ</span>
+    </div>
+
+    <ul class="toc-list">
+      <li class="toc-item">
+        <span class="toc-title">แผ่นควบคุมเอกสารและการตรวจรับโครงการ</span>
+        <span class="toc-leader"></span>
+        <span class="toc-page">2</span>
+      </li>
+      <li class="toc-item">
+        <span class="toc-title">บทที่ 1: ภาพรวมระบบและวัตถุประสงค์ (System Overview)</span>
+        <span class="toc-leader"></span>
+        <span class="toc-page">4</span>
+      </li>
+      <li class="toc-item" style="padding-left: 15px;">
+        <span class="toc-title">1.1 วัตถุประสงค์และประโยชน์ของระบบ e-Procure Plus</span>
+        <span class="toc-leader"></span>
+        <span class="toc-page">4</span>
+      </li>
+      <li class="toc-item" style="padding-left: 15px;">
+        <span class="toc-title">1.2 แผนผังกระบวนการจัดซื้อจัดจ้างแบบครบวงจร (End-to-End Workflow)</span>
+        <span class="toc-leader"></span>
+        <span class="toc-page">4</span>
+      </li>
+      <li class="toc-item">
+        <span class="toc-title">บทที่ 2: ข้อกำหนดระบบและการเข้าสู่ระบบ (Access & UI Layout)</span>
+        <span class="toc-leader"></span>
+        <span class="toc-page">5</span>
+      </li>
+      <li class="toc-item" style="padding-left: 15px;">
+        <span class="toc-title">2.1 เว็บบราวเซอร์และความต้องการของระบบ</span>
+        <span class="toc-leader"></span>
+        <span class="toc-page">5</span>
+      </li>
+      <li class="toc-item" style="padding-left: 15px;">
+        <span class="toc-title">2.2 การเข้าสู่ระบบด้วยสิทธิ์ 2-Factor Authentication (2FA)</span>
+        <span class="toc-leader"></span>
+        <span class="toc-page">5</span>
+      </li>
+      <li class="toc-item" style="padding-left: 15px;">
+        <span class="toc-title">2.3 โครงสร้างหน้าต่างแดชบอร์ดและการนำทาง</span>
+        <span class="toc-leader"></span>
+        <span class="toc-page">5</span>
+      </li>
+      <li class="toc-item">
+        <span class="toc-title">บทที่ 3: ขั้นตอนการปฏิบัติงานหลักแบบ Step-by-Step</span>
+        <span class="toc-leader"></span>
+        <span class="toc-page">6</span>
+      </li>
+      <li class="toc-item" style="padding-left: 15px;">
+        <span class="toc-title">3.1 การสร้างใบขอซื้อพัสดุใหม่ (Create Purchase Requisition - PR)</span>
+        <span class="toc-leader"></span>
+        <span class="toc-page">6</span>
+      </li>
+      <li class="toc-item" style="padding-left: 15px;">
+        <span class="toc-title">3.2 การพิจารณาและอนุมัติใบขอซื้อ (Manager Approval Workflow)</span>
+        <span class="toc-leader"></span>
+        <span class="toc-page">7</span>
+      </li>
+      <li class="toc-item" style="padding-left: 15px;">
+        <span class="toc-title">3.3 การออกใบสั่งซื้อ (PO) และการตรวจรับสินค้า (Goods Receipt)</span>
+        <span class="toc-leader"></span>
+        <span class="toc-page">7</span>
+      </li>
+      <li class="toc-item">
+        <span class="toc-title">บทที่ 4: พจนานุกรมฟิลด์และแบบฟอร์ม (Form Field Dictionary)</span>
+        <span class="toc-leader"></span>
+        <span class="toc-page">8</span>
+      </li>
+      <li class="toc-item">
+        <span class="toc-title">บทที่ 5: การค้นหา รายงาน และปัญหาที่พบบ่อย (FAQs & Support)</span>
+        <span class="toc-leader"></span>
+        <span class="toc-page">9</span>
+      </li>
+    </ul>
+
+    <h3 style="margin-top: 20px;">สารบัญภาพและตาราง (List of Figures & Tables)</h3>
+    <ul class="toc-list" style="margin-top: 8px;">
+      <li class="toc-item">
+        <span class="toc-title">ภาพที่ 1: หน้าจอหลักแดชบอร์ดแสดงสถานะใบคำขอและแจ้งเตือน</span>
+        <span class="toc-leader"></span>
+        <span class="toc-page">5</span>
+      </li>
+      <li class="toc-item">
+        <span class="toc-title">ภาพที่ 2: หน้าต่างแบบฟอร์มบันทึกรายการขอซื้อพัสดุ (PR Form)</span>
+        <span class="toc-leader"></span>
+        <span class="toc-page">6</span>
+      </li>
+      <li class="toc-item">
+        <span class="toc-title">ตารางที่ 1: ตารางอธิบายฟิลด์ข้อมูลการขอซื้อพัสดุ (PR Field Dictionary)</span>
+        <span class="toc-leader"></span>
+        <span class="toc-page">8</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- =========================================================================
+       PAGE 4: Chapter 1 - Overview
+       ========================================================================= -->
+  <div class="page-break" style="padding-top: 5mm;">
+    <div class="chapter-header">
+      <span class="chapter-badge">บทที่ 1</span>
+      <h2 class="chapter-title">ภาพรวมระบบและวัตถุประสงค์ (System Overview)</h2>
+    </div>
+
+    <h3>1.1 วัตถุประสงค์และประโยชน์ของระบบ</h3>
+    <p>
+      ระบบ <strong>e-Procure Plus Enterprise</strong> เป็นเว็บแอปพลิเคชันที่ได้รับการพัฒนาขึ้นเพื่อยกระดับและเปลี่ยนผ่านกระบวนการจัดซื้อจัดจ้างภายในองค์กรให้เป็นระบบอิเล็กทรอนิกส์ไร้กระดาษ (Paperless) แบบ 100% เชื่อมโยงข้อมูลระหว่างฝ่ายผู้ขอใช้งาน, ฝ่ายงบประมาณ, ฝ่ายจัดซื้อ และผู้บริหารระดับสูงอย่างราบรื่น
+    </p>
+
+    <div class="callout callout-info">
+      <strong>🎯 ประโยชน์สำคัญที่องค์กรได้รับ:</strong>
+      <ul style="margin-left: 20px; margin-top: 4px;">
+        <li>ลดระยะเวลาอนุมัติจัดซื้อลงกว่า 65% ด้วยระบบดิจิทัลเวิร์กโฟลว์อัตโนมัติ</li>
+        <li>ตรวจสอบความสอดคล้องของวงเงินงบประมาณแบบ Real-time ก่อนส่งคำขอ</li>
+        <li>เก็บบันทึกประวัติการกระทำ (Audit Trail) ครบถ้วน โปร่งใส ตรวจสอบย้อนหลังได้ทุกขั้นตอน</li>
+      </ul>
+    </div>
+
+    <h3 style="margin-top: 18px;">1.2 แผนผังกระบวนการจัดซื้อจัดจ้าง (End-to-End Workflow)</h3>
+    <p>
+      ขั้นตอนการปฏิบัติงานในระบบ e-Procure Plus ประกอบด้วย 4 ลำดับขั้นหลักตามมาตรฐานสากล:
+    </p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width: 8%; text-align:center;">ลำดับ</th>
+          <th style="width: 25%;">ขั้นตอนหลัก</th>
+          <th style="width: 45%;">กิจกรรมที่ระบบดำเนินการ</th>
+          <th style="width: 22%;">ผู้รับผิดชอบ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align:center;"><strong>1</strong></td>
+          <td><strong>สร้างใบขอซื้อ (PR)</strong></td>
+          <td>เลือกรายการพัสดุจากระบบ Catalog, กำหนดหมวดหมู่งบประมาณ และแนบเอกสารใบเสนอราคา</td>
+          <td>เจ้าหน้าที่ผู้ขอซื้อ</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;"><strong>2</strong></td>
+          <td><strong>อนุมัติใบขอซื้อ (Approval)</strong></td>
+          <td>ระบบตัดยอดงบประมาณจำลอง (Budget Hold) และแจ้งเตือนหัวหน้างานผ่านอีเมลเพื่ออนุมัติ</td>
+          <td>หัวหน้าฝ่าย / ผู้มีอำนาจ</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;"><strong>3</strong></td>
+          <td><strong>ออกใบสั่งซื้อ (PO)</strong></td>
+          <td>ฝ่ายจัดซื้อตรวจสอบความถูกต้อง และสร้างใบ PO ส่งต่อไปยังผู้ขาย (Vendor) อัตโนมัติ</td>
+          <td>เจ้าหน้าที่จัดซื้อ</td>
+        </tr>
+        <tr>
+          <td style="text-align:center;"><strong>4</strong></td>
+          <td><strong>ตรวจรับพัสดุ (GR)</strong></td>
+          <td>บันทึกตรวจนับจำนวนสินค้า, แนบใบส่งของ และตัดจ่ายเข้าระบบคลังพัสดุ</td>
+          <td>คณะกรรมการตรวจรับ</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- =========================================================================
+       PAGE 5: Chapter 2 - System Access & Navigation
+       ========================================================================= -->
+  <div class="page-break" style="padding-top: 5mm;">
+    <div class="chapter-header">
+      <span class="chapter-badge">บทที่ 2</span>
+      <h2 class="chapter-title">ข้อกำหนดระบบและการเข้าใช้งาน (Access & Navigation)</h2>
+    </div>
+
+    <h3>2.1 ข้อกำหนดของระบบและบราวเซอร์ที่รองรับ</h3>
+    <p>ระบบทำงานในรูปแบบ Web Application โดยผู้ใช้งานสามารถเข้าถึงผ่านเว็บบราวเซอร์มาตรฐาน:</p>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>เว็บบราวเซอร์</th>
+          <th>เวอร์ชันขั้นต่ำ</th>
+          <th>ความละเอียดหน้าจอที่แนะนำ</th>
+          <th>ข้อกำหนดเครือข่าย</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Google Chrome / Microsoft Edge</td>
+          <td>เวอร์ชัน 115 ขึ้นไป</td>
+          <td>1920 &times; 1080 (Full HD) หรือสูงกว่า</td>
+          <td>เครือข่ายภายในองค์กร (Intranet) หรือผ่าน VPN</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top: 14px;">2.2 การเข้าสู่ระบบด้วยสิทธิ์ 2-Factor Authentication (2FA)</h3>
+    <p>
+      เพื่อความปลอดภัยสูงสุดในการทำธุรกรรมงบประมาณ ระบบบังคับใช้การยืนยันตัวตน 2 ขั้นตอน:
+    </p>
+    <ol style="margin-left: 20px; margin-bottom: 12px; font-size: 9.5pt;">
+      <li>เปิดเบราว์เซอร์แล้วไปที่ URL: <kbd>https://eprocure.internal.corp</kbd></li>
+      <li>ระบุ <strong>Username</strong> และ <strong>Password</strong> ประจำตัวของท่าน</li>
+      <li>กรอกรหัส <strong>OTP 6 หลัก</strong> ที่ได้รับจากแอปพลิเคชัน Google Authenticator หรือ SMS แล้วคลิก <span class="btn-ui">[เข้าสู่ระบบ]</span></li>
+    </ol>
+
+    <h3 style="margin-top: 14px;">2.3 หน้าจอภาพรวมแดชบอร์ด (Dashboard Navigation)</h3>
+    <div class="ui-mockup">
+      <div class="ui-mockup-header">
+        <div class="ui-dots"><div class="ui-dot"></div><div class="ui-dot"></div><div class="ui-dot"></div></div>
+        <span>e-Procure Plus Enterprise — Dashboard Overview</span>
+        <span>User: S08000201 (Requester)</span>
+      </div>
+      <div class="ui-mockup-body">
+        <table class="mockup-table">
+          <thead>
+            <tr>
+              <th>รหัสคำขอ (PR No.)</th>
+              <th>รายการจัดซื้อ</th>
+              <th>วงเงินงบประมาณ</th>
+              <th>วันที่ยื่น</th>
+              <th>สถานะปัจจุบัน</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>PR-2026-0045</code></td>
+              <td>คอมพิวเตอร์พกพาสำหรับทีมพัฒนา (5 เครื่อง)</td>
+              <td>225,000 บาท</td>
+              <td>22 พ.ย. 2026</td>
+              <td><span class="status-pill status-approved">อนุมัติแล้ว (Approved)</span></td>
+            </tr>
+            <tr>
+              <td><code>PR-2026-0046</code></td>
+              <td>เก้าอี้เพื่อสุขภาพประจำสำนักงาน (10 ตัว)</td>
+              <td>85,000 บาท</td>
+              <td>23 พ.ย. 2026</td>
+              <td><span class="status-pill status-pending">รอพิจารณา (Pending)</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="figure-caption">ภาพที่ 1: หน้าจอหลักแดชบอร์ดแสดงสถานะใบคำขอและแถบแจ้งเตือน</div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       PAGE 6: Chapter 3 - Step-by-Step Workflows (Part 1)
+       ========================================================================= -->
+  <div class="page-break" style="padding-top: 5mm;">
+    <div class="chapter-header">
+      <span class="chapter-badge">บทที่ 3</span>
+      <h2 class="chapter-title">ขั้นตอนการปฏิบัติงานหลัก (Core Workflows)</h2>
+    </div>
+
+    <h3>3.1 การสร้างใบขอซื้อพัสดุใหม่ (Create Purchase Requisition - PR)</h3>
+    <p>
+      เจ้าหน้าที่ผู้มีความประสงค์จะขออนุมัติจัดซื้อพัสดุ อุปกรณ์ หรือจ้างบริการ ให้ปฏิบัติตาม 4 ขั้นตอน:
+    </p>
+
+    <div class="step-card">
+      <div class="step-header">
+        <span class="step-num">1</span>
+        <span>เข้าสู่เมนูขอซื้อพัสดุ</span>
+      </div>
+      <div class="step-desc">
+        คลิกที่เมนูด้านซ้าย <strong>"การจัดซื้อ" (Procurement) &gt; "สร้างใบขอซื้อใหม่" (+ New PR)</strong>
+      </div>
+      <div class="step-result">
+        ผลลัพธ์: ระบบจะเปิดแบบฟอร์มบันทึกข้อมูล PR และออกเลขที่คำขอชั่วคราว (เช่น <code>PR-2026-XXXX</code>)
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header">
+        <span class="step-num">2</span>
+        <span>ระบุข้อมูลส่วนหัวและรหัสงบประมาณ</span>
+      </div>
+      <div class="step-desc">
+        เลือก **"ปีงบประมาณ"**, **"โครงการ/แผนงาน"** และ **"หมวดเงินงบประมาณ"** ที่ต้องการใช้ ระบบจะดึงยอดเงินคงเหลือมาแสดงให้ตรวจสอบทันที
+      </div>
+      <div class="step-result">
+        ผลลัพธ์: ตรวจสอบวงเงินคงเหลือ หากยอดเงินไม่เพียงพอระบบจะแสดงแถบเตือนสีแดง
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header">
+        <span class="step-num">3</span>
+        <span>เพิ่มรายการพัสดุและจำนวนที่ต้องการ</span>
+      </div>
+      <div class="step-desc">
+        คลิกปุ่ม <span class="btn-ui">[+ เพิ่มรายการ]</span> ระบุชื่อพัสดุ, สเปกย่อ, จำนวน และราคาประมาณการต่อหน่วย
+      </div>
+      <div class="step-result">
+        ผลลัพธ์: ระบบจะคำนวณราคารวมและภาษีมูลค่าเพิ่ม 7% ให้โดยอัตโนมัติ
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header">
+        <span class="step-num">4</span>
+        <span>แนบไฟล์และยืนยันส่งขออนุมัติ</span>
+      </div>
+      <div class="step-desc">
+        ลากวางไฟล์ใบเสนอราคา (Quotation) หรือ TOR ในช่องแนบไฟล์ (รองรับ PDF สูงสุด 15 MB) จากนั้นคลิกปุ่ม <span class="btn-ui">[ส่งขออนุมัติ] (Submit for Approval)</span>
+      </div>
+      <div class="step-result">
+        ผลลัพธ์: สถานะจะเปลี่ยนเป็น <strong>"Pending Manager Approval"</strong> พร้อมส่งอีเมลแจ้งเตือนผู้อนุมัติ
+      </div>
+    </div>
+
+    <div class="callout callout-warning">
+      <strong>⚠️ ข้อควรระวัง:</strong> การกดยกเลิกเอกสารหลังจากที่ส่งขออนุมัติแล้ว จะต้องส่งคำร้องขอยกเลิกผ่านระบบเท่านั้น ไม่สามารถลบไฟล์ข้อมูลออกจากฐานข้อมูลได้โดยตรง
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       PAGE 7: Chapter 3 - Approval & PO Workflow (Part 2)
+       ========================================================================= -->
+  <div class="page-break" style="padding-top: 5mm;">
+    <div class="chapter-header">
+      <span class="chapter-badge">บทที่ 3 (ต่อ)</span>
+      <h2 class="chapter-title">ขั้นตอนการอนุมัติและออกใบสั่งซื้อ (Approval & PO)</h2>
+    </div>
+
+    <h3>3.2 การพิจารณาและอนุมัติใบขอซื้อ (Manager Approval Workflow)</h3>
+    <p>สำหรับผู้มีอำนาจอนุมัติ (Approver) เมื่อได้รับแจ้งเตือนคำขอใหม่ในระบบ:</p>
+
+    <div class="step-card">
+      <div class="step-header">
+        <span class="step-num">1</span>
+        <span>ตรวจสอบความถูกต้องของรายการ</span>
+      </div>
+      <div class="step-desc">
+        คลิกเปิดเอกสารจากแถบ <strong>"รายการรออนุมัติของฉัน" (Pending Approvals)</strong> ตรวจสอบสเปก, เอกสารแนบ และยอดงบประมาณ
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header">
+        <span class="step-num">2</span>
+        <span>เลือกคำสั่งการตัดสินใจ</span>
+      </div>
+      <div class="step-desc">
+        ผู้มีอำนาจสามารถเลือกดำเนินการได้ 3 รูปแบบ:
+        <ul style="margin-left: 20px; margin-top: 4px;">
+          <li><span class="btn-ui" style="border-color:#16a34a; background:#f0fdf4; color:#16a34a;">[อนุมัติ] (Approve)</span> — อนุมัติคำขอเพื่อส่งต่อฝ่ายจัดซื้อ</li>
+          <li><span class="btn-ui" style="border-color:#d97706; background:#fffbeb; color:#d97706;">[ส่งกลับแก้ไข] (Request Revision)</span> — ส่งกลับให้ผู้ขอกรอกข้อมูลเพิ่ม</li>
+          <li><span class="btn-ui" style="border-color:#dc2626; background:#fef2f2; color:#dc2626;">[ไม่อนุมัติ] (Reject)</span> — ปฏิเสธคำขอพร้อมระบุเหตุผลประกอบ</li>
+        </ul>
+      </div>
+      <div class="step-result">
+        ผลลัพธ์: ระบบลงนามดิจิทัล (Digital Signature Timestamp) และแจ้งผลให้ผู้ขอซื้อทราบทันที
+      </div>
+    </div>
+
+    <h3 style="margin-top: 18px;">3.3 การออกใบสั่งซื้อ (PO) และการตรวจรับสินค้า</h3>
+    <p>
+      เมื่อคำขอได้รับอนุมัติครบถ้วน ฝ่ายจัดซื้อจะดำเนินการสร้างใบสั่งซื้อ (Purchase Order - PO) เชื่อมโยงไปยังผู้ขายภายนอก:
+    </p>
+
+    <div class="callout callout-tip">
+      <strong>💡 เคล็ดลับการตรวจรับพัสดุ:</strong>
+      เมื่อผู้ขายจัดส่งสินค้าเรียบร้อย เจ้าหน้าที่สามารถใช้แท็บเล็ตหรือสมาร์ตโฟนเปิดหน้า <strong>"ตรวจรับพัสดุ"</strong> สแกน QR Code บนกล่องพัสดุเพื่อบันทึกตัดรับเข้าสต็อกได้ทันทีโดยไม่ต้องพิมพ์เอกสาร
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       PAGE 8: Chapter 4 - Form Field Dictionary
+       ========================================================================= -->
+  <div class="page-break" style="padding-top: 5mm;">
+    <div class="chapter-header">
+      <span class="chapter-badge">บทที่ 4</span>
+      <h2 class="chapter-title">พจนานุกรมฟิลด์และแบบฟอร์ม (Form Field Dictionary)</h2>
+    </div>
+
+    <h3>ตารางที่ 1: ตารางอธิบายฟิลด์ข้อมูลการขอซื้อพัสดุ (PR Form Fields)</h3>
+    <p>รายละเอียดข้อกำหนดของแต่ละช่องข้อมูลในหน้าต่างสร้างใบขอซื้อ (PR Form):</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width: 22%;">ชื่อฟิลด์ข้อมูล</th>
+          <th style="width: 15%;">ชนิดข้อมูล</th>
+          <th style="width: 12%; text-align:center;">ฟิลด์บังคับ (*)</th>
+          <th style="width: 51%;">คำอธิบายและข้อกำหนดรูปแบบ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>รหัสคำขอ (PR No.)</strong></td>
+          <td>ข้อความอัตโนมัติ</td>
+          <td style="text-align:center;">-</td>
+          <td>ระบบสร้างให้อัตโนมัติในรูปแบบ <code>PR-YYYY-NNNN</code> เช่น <code>PR-2026-0045</code></td>
+        </tr>
+        <tr>
+          <td><strong>หัวข้อความต้องการ</strong></td>
+          <td>ข้อความสั้น (Text)</td>
+          <td style="text-align:center;">✅ บังคับ</td>
+          <td>ระบุวัตถุประสงค์โดยสรุป เช่น "จัดซื้อเครื่องคอมพิวเตอร์พกพาฝ่ายวิจัย" (ไม่เกิน 150 ตัวอักษร)</td>
+        </tr>
+        <tr>
+          <td><strong>หมวดเงินงบประมาณ</strong></td>
+          <td>Dropdown</td>
+          <td style="text-align:center;">✅ บังคับ</td>
+          <td>เลือกหมวดงบประมาณ เช่น <em>งบดำเนินงาน / งบลงทุน / งบโครงการพิเศษ</em></td>
+        </tr>
+        <tr>
+          <td><strong>วันที่ต้องการพัสดุ</strong></td>
+          <td>วันที่ (Date Picker)</td>
+          <td style="text-align:center;">✅ บังคับ</td>
+          <td>ต้องเป็นวันที่ล่วงหน้าไม่น้อยกว่า 7 วันทำการสำหรับสินค้าทั่วไป และ 15 วันสำหรับรายการพิเศษ</td>
+        </tr>
+        <tr>
+          <td><strong>จำนวนและหน่วยนับ</strong></td>
+          <td>ตัวเลข + หน่วย</td>
+          <td style="text-align:center;">✅ บังคับ</td>
+          <td>ระบุจำนวนเต็มบวก และเลือกหน่วยนับมาตรฐาน (เช่น เครื่อง, ตัว, กล่อง, ชุด)</td>
+        </tr>
+        <tr>
+          <td><strong>ราคาต่อหน่วย (บาท)</strong></td>
+          <td>ทศนิยม 2 ตำแหน่ง</td>
+          <td style="text-align:center;">✅ บังคับ</td>
+          <td>ระบุราคาประเมินก่อนรวมภาษีมูลค่าเพิ่ม (VAT 7%)</td>
+        </tr>
+        <tr>
+          <td><strong>เอกสารแนบ (Attachments)</strong></td>
+          <td>ไฟล์ดิจิทัล</td>
+          <td style="text-align:center;">❌ ทางเลือก</td>
+          <td>รองรับไฟล์ประเภท <code>.pdf</code>, <code>.xlsx</code>, <code>.jpg</code> ขนาดสูงสุด 15 MB ต่อไฟล์</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- =========================================================================
+       PAGE 9: Chapter 5 - Search, FAQs & Support
+       ========================================================================= -->
+  <div class="page-break" style="padding-top: 5mm;">
+    <div class="chapter-header">
+      <span class="chapter-badge">บทที่ 5</span>
+      <h2 class="chapter-title">การค้นหา รายงาน และปัญหาที่พบบ่อย (FAQs & Support)</h2>
+    </div>
+
+    <h3>5.1 การค้นหาและการส่งออกรายงาน (Search & Export)</h3>
+    <p>
+      ผู้ใช้งานสามารถค้นหารายการคำขอย้อนหลังได้ตลอดเวลาผ่านแถบค้นหาอัจฉริยะ (Smart Filter) และสั่งพิมพ์รายงานสรุปผล:
+    </p>
+    <ul style="margin-left: 20px; font-size: 9.5pt; margin-bottom: 12px;">
+      <li><strong>ค้นหาด้วยคีย์เวิร์ด:</strong> ระบุเลขที่ PR, ชื่อพัสดุ หรือชื่อผู้ขอซื้อ แล้วกดปุ่ม <kbd>Enter</kbd></li>
+      <li><strong>ส่งออกเป็น Excel (.xlsx):</strong> คลิกปุ่ม <span class="btn-ui">[Export Excel]</span> เพื่อนำข้อมูลดิบไปจัดทำสถิติฝ่าย</li>
+      <li><strong>พิมพ์ใบคำขอเป็น PDF ทางการ:</strong> คลิกไอคอน <span class="btn-ui">[Print Official PDF]</span> เพื่อดาวน์โหลดเอกสารมาตรฐานพร้อมลายเซ็นดิจิทัล</li>
+    </ul>
+
+    <h3 style="margin-top: 14px;">5.2 คำถามและปัญหาที่พบบ่อย (Troubleshooting & FAQs)</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width: 40%;">อาการ / ปัญหาที่พบ</th>
+          <th style="width: 60%;">แนวทางแก้ไขปัญหาทีละขั้นตอน</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>ไม่สามารถกดส่งขออนุมัติได้ ปุ่มเป็นสีเทา</strong></td>
+          <td>ตรวจสอบว่าได้กรอกฟิลด์ที่มีดอกจันสีแดง (*) ครบถ้วนหรือไม่ และตรวจสอบว่าได้เพิ่มรายการพัสดุอย่างน้อย 1 รายการแล้ว</td>
+        </tr>
+        <tr>
+          <td><strong>ระบบแจ้งเตือน "Budget Exceeded" (งบประมาณไม่พอ)</strong></td>
+          <td>วงเงินที่ขอซื้อเกินกว่ายอดเงินคงเหลือในหมวดงบที่เลือก ให้ติดต่อฝ่ายแผนงานเพื่อขอโอนเงินงบประมาณก่อนดำเนินการต่อ</td>
+        </tr>
+        <tr>
+          <td><strong>ไม่ได้รับรหัส OTP สำหรับเข้าสู่ระบบ</strong></td>
+          <td>ตรวจสอบสัญญาณเครือข่าย หรือคลิก "ส่งรหัสใหม่อีกครั้ง" หากยังไม่ได้รับให้แจ้งเจ้าหน้าที่ไอทีเพื่อรีเซ็ต 2FA Profile</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top: 16px;">5.3 ช่องทางการติดต่อและความช่วยเหลือ (IT Helpdesk)</h3>
+    <div class="callout callout-info" style="font-size: 9.5pt;">
+      <strong>ศูนย์บริการช่วยเหลือระบบสารสนเทศ (IT Service Desk):</strong>
+      <div style="margin-top: 6px; line-height: 1.8;">
+        📍 <strong>หน่วยงาน:</strong> กองพัฒนาระบบเทคโนโลยีสารสนเทศ ชั้น 4 อาคารศูนย์ราชการ<br>
+        📞 <strong>โทรศัพท์ภายใน:</strong> 0-2123-4567 ต่อ 8801 - 8805 (สายด่วน)<br>
+        📧 <strong>อีเมลสนับสนุน:</strong> <code style="color:#0369a1;">helpdesk-eprocure@internal.corp</code><br>
+        ⏰ <strong>เวลาทำการ:</strong> จันทร์ - ศุกร์ เวลา 08:30 - 17:00 น. (เว้นวันหยุดราชการ)
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

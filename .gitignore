@@ -1,0 +1,20 @@
+# AI Agent Workspace local directories (installed via install scripts)
+.agent/
+.claude/
+.codex/
+.gemini/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor directories
+.vscode/
+.idea/
+
+# Node & package artifacts
+node_modules/
+dist/
+*.log
+/downloads/

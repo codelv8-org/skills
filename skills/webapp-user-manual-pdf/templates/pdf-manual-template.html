@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>{{SYSTEM_NAME}} - คู่มือการใช้งานระบบ (Print-Ready PDF)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ==========================================================================
+       CSS Paged Media & Print Rules for A4 PDF Output
+       ========================================================================== */
+    @page {
+      size: A4 portrait; /* 210mm x 297mm */
+      margin: 22mm 18mm 22mm 18mm;
+
+      @top-left {
+        content: "{{SYSTEM_NAME}} - คู่มือการใช้งานระบบ";
+        font-family: 'Sarabun', sans-serif;
+        font-size: 8pt;
+        color: #64748b;
+        border-bottom: 0.5pt solid #cbd5e1;
+        padding-bottom: 4px;
+      }
+      @top-right {
+        content: "รหัสเอกสาร: {{DOC_CODE}}";
+        font-family: 'Sarabun', sans-serif;
+        font-size: 8pt;
+        color: #64748b;
+        border-bottom: 0.5pt solid #cbd5e1;
+        padding-bottom: 4px;
+      }
+      @bottom-left {
+        content: "เอกสารควบคุมภายใน • ห้ามคัดลอกหรือเผยแพร่โดยไม่ได้รับอนุญาต";
+        font-family: 'Sarabun', sans-serif;
+        font-size: 7.5pt;
+        color: #94a3b8;
+        border-top: 0.5pt solid #cbd5e1;
+        padding-top: 4px;
+      }
+      @bottom-right {
+        content: "หน้าที่ " counter(page);
+        font-family: 'Sarabun', sans-serif;
+        font-size: 8pt;
+        font-weight: bold;
+        color: #1e293b;
+        border-top: 0.5pt solid #cbd5e1;
+        padding-top: 4px;
+      }
+    }
+
+    /* Remove headers & footers on Cover Page */
+    @page:first {
+      margin: 0;
+      @top-left { content: normal; border: none; }
+      @top-right { content: normal; border: none; }
+      @bottom-left { content: normal; border: none; }
+      @bottom-right { content: normal; border: none; }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Sarabun', -apple-system, sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.6;
+      color: #1e293b;
+      background: #ffffff;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* Page Breaks */
+    .page-break {
+      break-before: page;
+      page-break-before: always;
+    }
+    .avoid-break {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+    h1, h2, h3 {
+      break-after: avoid;
+      page-break-after: avoid;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    /* ==========================================================================
+       1. Cover Page (Full-bleed A4)
+       ========================================================================== */
+    .cover-page {
+      width: 210mm;
+      height: 297mm;
+      padding: 35mm 25mm 25mm 25mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: linear-gradient(145deg, #f8fafc 0%, #e2e8f0 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .cover-stripe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 12mm;
+      background: #0284c7;
+    }
+    .cover-top {
+      margin-top: 20mm;
+    }
+    .cover-badge {
+      display: inline-block;
+      background: #0284c7;
+      color: #ffffff;
+      font-size: 9pt;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+    .cover-title {
+      font-size: 26pt;
+      line-height: 1.25;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 12px;
+    }
+    .cover-subtitle {
+      font-size: 14pt;
+      color: #475569;
+      font-weight: 500;
+      margin-bottom: 30px;
+    }
+    .cover-divider {
+      width: 80mm;
+      height: 4px;
+      background: #0284c7;
+      margin-bottom: 35mm;
+    }
+    .cover-meta {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 16px 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      font-size: 9.5pt;
+    }
+    .cover-meta-item { display: flex; flex-direction: column; }
+    .cover-meta-label { font-size: 8pt; color: #64748b; font-weight: 500; }
+    .cover-meta-val { font-weight: 700; color: #0f172a; margin-top: 2px; }
+    .cover-footer {
+      font-size: 9pt;
+      color: #64748b;
+      text-align: center;
+      border-top: 1px solid #cbd5e1;
+      padding-top: 15px;
+    }
+
+    /* ==========================================================================
+       2. Document Control Sheet
+       ========================================================================== */
+    .control-sheet {
+      padding-top: 5mm;
+    }
+    .sheet-title {
+      font-size: 16pt;
+      font-weight: 700;
+      color: #0284c7;
+      margin-bottom: 15px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #0284c7;
+    }
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0 25px 0;
+      font-size: 9.5pt;
+    }
+    table.data-table th, table.data-table td {
+      border: 1px solid #cbd5e1;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    table.data-table th {
+      background: #f1f5f9;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    /* ==========================================================================
+       3. Table of Contents (with dot leaders)
+       ========================================================================== */
+    .toc-list {
+      list-style: none;
+      margin: 20px 0;
+    }
+    .toc-item {
+      display: flex;
+      align-items: baseline;
+      margin-bottom: 8px;
+      font-size: 10pt;
+    }
+    .toc-title { font-weight: 600; color: #1e293b; }
+    .toc-leader {
+      flex: 1;
+      border-bottom: 1px dotted #94a3b8;
+      margin: 0 8px;
+    }
+    .toc-page { font-weight: 700; color: #0284c7; }
+
+    /* ==========================================================================
+       4. Chapters & Sections
+       ========================================================================== */
+    .chapter-header {
+      margin-top: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #0284c7;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .chapter-number {
+      font-size: 12pt;
+      font-weight: 700;
+      color: #0284c7;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .chapter-title {
+      font-size: 16pt;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    h3 {
+      font-size: 12pt;
+      margin: 20px 0 10px 0;
+      color: #1e293b;
+    }
+    p { margin-bottom: 12px; text-align: justify; }
+
+    /* Workflows & Step Cards */
+    .step-box {
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid #0284c7;
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-bottom: 14px;
+      background: #f8fafc;
+      page-break-inside: avoid;
+    }
+    .step-box-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-weight: 700;
+      font-size: 10.5pt;
+      color: #0f172a;
+    }
+    .step-num-badge {
+      background: #0284c7;
+      color: #ffffff;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9pt;
+      font-weight: 700;
+    }
+
+    /* Screenshots in PDF */
+    .figure-box {
+      border: 1px solid #cbd5e1;
+      background: #f1f5f9;
+      padding: 14px;
+      border-radius: 6px;
+      text-align: center;
+      margin: 14px 0;
+      page-break-inside: avoid;
+    }
+    .figure-caption {
+      font-size: 8.5pt;
+      color: #64748b;
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    /* Callouts */
+    .callout-box {
+      border-left: 3.5px solid;
+      padding: 10px 14px;
+      margin: 14px 0;
+      border-radius: 0 4px 4px 0;
+      font-size: 9.5pt;
+      page-break-inside: avoid;
+    }
+    .callout-info { background: #f0f9ff; border-color: #0284c7; color: #0c4a6e; }
+    .callout-warn { background: #fffbeb; border-color: #d97706; color: #78350f; }
+
+    /* Inline notation */
+    .btn-key {
+      display: inline-block;
+      padding: 1px 6px;
+      border: 1px solid #0284c7;
+      background: #f0f9ff;
+      color: #0284c7;
+      border-radius: 3px;
+      font-weight: 600;
+      font-size: 9pt;
+    }
+    kbd {
+      padding: 1px 5px;
+      border: 1px solid #cbd5e1;
+      border-radius: 3px;
+      background: #f8fafc;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5pt;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================================
+       PAGE 1: Official Cover Page
+       ========================================================================= -->
+  <div class="cover-page">
+    <div class="cover-stripe"></div>
+    <div class="cover-top">
+      <span class="cover-badge">เอกสารส่งมอบโครงการ (Official User Manual)</span>
+      <h1 class="cover-title">{{SYSTEM_NAME}}</h1>
+      <div class="cover-subtitle">คู่มือการใช้งานระบบ Web Application ฉบับทางการ</div>
+      <div class="cover-divider"></div>
+
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <span class="cover-meta-label">รหัสเอกสาร</span>
+          <span class="cover-meta-val">{{DOC_CODE}}</span>
+        </div>
+        <div class="cover-meta-item">
+          <span class="cover-meta-label">เวอร์ชันระบบ</span>
+          <span class="cover-meta-val">{{APP_VERSION}}</span>
+        </div>
+        <div class="cover-meta-item">
+          <span class="cover-meta-label">วันที่จัดทำ</span>
+          <span class="cover-meta-val">{{PUBLISH_DATE}}</span>
+        </div>
+        <div class="cover-meta-item">
+          <span class="cover-meta-label">หน่วยงาน / โครงการ</span>
+          <span class="cover-meta-val">{{ORGANIZATION}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cover-footer">
+      สงวนลิขสิทธิ์ &copy; {{PUBLISH_YEAR}} {{ORGANIZATION}} • ห้ามคัดลอก ทำซ้ำ หรือดัดแปลงส่วนใดส่วนหนึ่ง
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       PAGE 2: Document Control & Sign-off Sheet
+       ========================================================================= -->
+  <div class="control-sheet page-break">
+    <div class="sheet-title">แผ่นควบคุมเอกสารและการตรวจรับ (Document Control & Sign-off)</div>
+
+    <h3 style="margin-top: 10px;">1. ประวัติการแก้ไขเอกสาร (Revision History)</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width: 15%;">เวอร์ชัน</th>
+          <th style="width: 20%;">วันที่แก้ไข</th>
+          <th style="width: 45%;">รายละเอียดการปรับปรุง</th>
+          <th style="width: 20%;">ผู้จัดทำ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>v1.0.0</strong></td>
+          <td>{{PUBLISH_DATE}}</td>
+          <td>จัดทำคู่มือฉบับสมบูรณ์สำหรับส่งมอบระบบ</td>
+          <td>{{AUTHOR_NAME}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>2. การลงนามอนุมัติและตรวจรับเอกสาร (Sign-off & Approvals)</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width: 25%;">บทบาท</th>
+          <th style="width: 35%;">ชื่อ - นามสกุล / ตำแหน่ง</th>
+          <th style="width: 20%;">ลายมือชื่อ</th>
+          <th style="width: 20%;">วันที่ลงนาม</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>ผู้จัดทำ (Prepared by)</strong></td>
+          <td>{{AUTHOR_NAME}}<br><small style="color:#64748b;">Technical Writer / Specialist</small></td>
+          <td></td>
+          <td>____/____/________</td>
+        </tr>
+        <tr>
+          <td><strong>ผู้ตรวจทาน (Reviewed by)</strong></td>
+          <td>{{REVIEWER_NAME}}<br><small style="color:#64748b;">Project Manager / Lead</small></td>
+          <td></td>
+          <td>____/____/________</td>
+        </tr>
+        <tr>
+          <td><strong>ผู้อนุมัติ (Approved by)</strong></td>
+          <td>{{APPROVER_NAME}}<br><small style="color:#64748b;">System Owner / Director</small></td>
+          <td></td>
+          <td>____/____/________</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout-box callout-info" style="margin-top: 25px;">
+      <strong>หมายเหตุ:</strong> เอกสารฉบับนี้เป็นส่วนหนึ่งของชุดเอกสารส่งมอบโครงการ กรุณาเก็บรักษาไว้ในสถานที่ปลอดภัย หรือเก็บบนระบบ Document Management กลางขององค์กร
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       PAGE 3: Table of Contents
+       ========================================================================= -->
+  <div class="control-sheet page-break">
+    <div class="sheet-title">สารบัญเนื้อหา (Table of Contents)</div>
+
+    <ul class="toc-list">
+      <li class="toc-item">
+        <span class="toc-title">แผ่นควบคุมเอกสารและการตรวจรับ</span>
+        <span class="toc-leader"></span>
+        <span class="toc-page">2</span>
+      </li>
+      <li class="toc-item">
+        <span class="toc-title">บทที่ 1: บทนำและภาพรวมระบบ (Overview & Objectives)</span>
+        <span class="toc-leader"></span>
+        <span class="toc-page">4</span>
+      </li>
+      <li class="toc-item">
+        <span class="toc-title">บทที่ 2: ข้อกำหนดระบบและการเข้าใช้งาน (Requirements & Access)</span>
+        <span class="toc-leader"></span>
+        <span class="toc-page">5</span>
+      </li>
+      <li class="toc-item">
+        <span class="toc-title">บทที่ 3: โครงสร้างหน้าจอและเมนูนำทาง (UI & Navigation)</span>
+        <span class="toc-leader"></span>
+        <span class="toc-page">6</span>
+      </li>
+      <li class="toc-item">
+        <span class="toc-title">บทที่ 4: ขั้นตอนการปฏิบัติงานหลักแบบ Step-by-Step</span>
+        <span class="toc-leader"></span>
+        <span class="toc-page">7</span>
+      </li>
+      <li class="toc-item">
+        <span class="toc-title">บทที่ 5: พจนานุกรมฟิลด์และแบบฟอร์ม (Form Dictionary)</span>
+        <span class="toc-leader"></span>
+        <span class="toc-page">9</span>
+      </li>
+      <li class="toc-item">
+        <span class="toc-title">บทที่ 6: ปัญหาที่พบบ่อยและช่องทางติดต่อ (FAQ & Support)</span>
+        <span class="toc-leader"></span>
+        <span class="toc-page">10</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- =========================================================================
+       CHAPTER 1: Overview
+       ========================================================================= -->
+  <div class="control-sheet page-break">
+    <div class="chapter-header">
+      <div class="chapter-title">บทที่ 1: บทนำและภาพรวมระบบ</div>
+      <div class="chapter-number">Chapter 1</div>
+    </div>
+
+    <p>{{SYSTEM_OVERVIEW_PARAGRAPH}}</p>
+
+    <div class="callout-box callout-info">
+      <strong>วัตถุประสงค์หลักของระบบ:</strong>
+      <ul style="margin-left: 20px; margin-top: 6px;">
+        <li>เพิ่มประสิทธิภาพการทำงานและลดความซ้ำซ้อนในกระบวนการเอกสาร</li>
+        <li>สามารถติดตามสถานะการดำเนินงานได้แบบ Real-time</li>
+        <li>รองรับการเข้าถึงได้อย่างปลอดภัยผ่านระบบเครือข่ายองค์กร</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       CHAPTER 2: Requirements & Access
+       ========================================================================= -->
+  <div class="control-sheet page-break">
+    <div class="chapter-header">
+      <div class="chapter-title">บทที่ 2: ข้อกำหนดระบบและการเข้าใช้งาน</div>
+      <div class="chapter-number">Chapter 2</div>
+    </div>
+
+    <h3>2.1 สภาพแวดล้อมที่แนะนำ</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>รายการ</th>
+          <th>ข้อกำหนด</th>
+          <th>หมายเหตุ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>เว็บบราวเซอร์</strong></td>
+          <td>Google Chrome, Microsoft Edge, Safari</td>
+          <td>แนะนำเวอร์ชันล่าสุดเพื่อความเสถียร</td>
+        </tr>
+        <tr>
+          <td><strong>ความละเอียดจอ</strong></td>
+          <td>1366 x 768 พิกเซล ขึ้นไป</td>
+          <td>แนะนำ 1920 x 1080 (Full HD)</td>
+        </tr>
+        <tr>
+          <td><strong>URL ระบบ</strong></td>
+          <td><code>https://{{SYSTEM_DOMAIN}}</code></td>
+          <td>เชื่อมต่อผ่านเครือข่าย Intranet / VPN</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>2.2 การเข้าสู่ระบบ (Sign In)</h3>
+    <div class="step-box avoid-break">
+      <div class="step-box-header">
+        <span class="step-num-badge">1</span>
+        <span>ระบุชื่อผู้ใช้และรหัสผ่าน</span>
+      </div>
+      <p>เปิดเบราว์เซอร์ไปที่ URL ระบบ แล้วระบุบัญชีผู้ใช้และรหัสผ่าน จากนั้นคลิกปุ่ม <span class="btn-key">เข้าสู่ระบบ</span></p>
+    </div>
+
+    <div class="callout-box callout-warn">
+      <strong>ข้อควรระวัง:</strong> หากป้อนรหัสผ่านผิดติดต่อกัน 5 ครั้ง ระบบจะระงับการเข้าใช้เป็นเวลา 15 นาที เพื่อความปลอดภัย
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       CHAPTER 3: Navigation
+       ========================================================================= -->
+  <div class="control-sheet page-break">
+    <div class="chapter-header">
+      <div class="chapter-title">บทที่ 3: โครงสร้างหน้าจอและเมนูนำทาง</div>
+      <div class="chapter-number">Chapter 3</div>
+    </div>
+
+    <p>เมื่อเข้าสู่ระบบสำเร็จ จะพบหน้าจอหลักซึ่งแบ่งเป็นส่วนประกอบสำคัญดังนี้:</p>
+
+    <div class="figure-box avoid-break">
+      <div style="background:#0f172a; color:#38bdf8; font-family:'JetBrains Mono',monospace; font-size:8pt; padding:12px; border-radius:4px; text-align:left;">
++-----------------------------------------------------------------------+
+| [LOGO] {{SYSTEM_NAME}}         [🔍 ค้นหาด่วน]      (🔔)   [👤 บัญชีผู้ใช้]  |
++-------------+---------------------------------------------------------+
+| 📁 เมนูหลัก  |  พื้นที่แสดงผลข้อมูลหลัก (Main Content Area)             |
+| 📝 สร้างคำขอ |                                                         |
+| 📊 รายงาน   |                                                         |
++-------------+---------------------------------------------------------+
+      </div>
+      <div class="figure-caption">ภาพที่ 1: แผนผังหน้าจอหลักและแถบเครื่องมือ</div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       CHAPTER 4: Core Workflows
+       ========================================================================= -->
+  <div class="control-sheet page-break">
+    <div class="chapter-header">
+      <div class="chapter-title">บทที่ 4: ขั้นตอนการปฏิบัติงานหลัก</div>
+      <div class="chapter-number">Chapter 4</div>
+    </div>
+
+    <h3>4.1 ขั้นตอนการสร้างรายการใหม่</h3>
+
+    <div class="step-box avoid-break">
+      <div class="step-box-header">
+        <span class="step-num-badge">1</span>
+        <span>คลิกปุ่มสร้างรายการใหม่</span>
+      </div>
+      <p>ไปที่เมนูด้านข้าง เลือก <strong>"รายการคำขอ" > "สร้างรายการใหม่"</strong> หรือคลิกปุ่ม <span class="btn-key">+ สร้างรายการใหม่</span></p>
+    </div>
+
+    <div class="step-box avoid-break">
+      <div class="step-box-header">
+        <span class="step-num-badge">2</span>
+        <span>กรอกข้อมูลและแนบเอกสาร</span>
+      </div>
+      <p>กรอกข้อมูลในช่องที่มีเครื่องหมายดอกจันสีแดง (*) ให้ครบถ้วน และแนบไฟล์เอกสารประกอบตามที่ระบบกำหนด</p>
+    </div>
+
+    <div class="step-box avoid-break">
+      <div class="step-box-header">
+        <span class="step-num-badge">3</span>
+        <span>ส่งข้อมูลเพื่อดำเนินการ</span>
+      </div>
+      <p>คลิกปุ่ม <span class="btn-key">บันทึกข้อมูล (Submit)</span> ระบบจะออกรหัสอ้างอิงเอกสารสำหรับติดตามสถานะ</p>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       BACK COVER / SUPPORT
+       ========================================================================= -->
+  <div class="control-sheet page-break">
+    <div class="chapter-header">
+      <div class="chapter-title">ช่องทางการติดต่อและความช่วยเหลือ</div>
+      <div class="chapter-number">Support</div>
+    </div>
+
+    <p>หากมีข้อสงสัยหรือพบปัญหาการใช้งาน สามารถติดต่อทีมสนับสนุนระบบได้ตามช่องทางดังต่อไปนี้:</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>หน่วยงาน</th>
+          <th>ช่องทางติดต่อ</th>
+          <th>เวลาทำการ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>ฝ่ายสนับสนุนระบบไอที</strong></td>
+          <td>อีเมล: <code>{{SUPPORT_EMAIL}}</code><br>โทรศัพท์: {{SUPPORT_PHONE}}</td>
+          <td>วันจันทร์ - ศุกร์ (08:30 - 17:30 น.)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="text-align:center; margin-top:60mm; color:#94a3b8; font-size:9pt;">
+      --- สิ้นสุดเอกสารคู่มือการใช้งาน ---
+    </div>
+  </div>
+
+</body>
+</html>

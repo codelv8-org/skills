@@ -1,9 +1,17 @@
 ---
 name: webapp-user-manual
-description: Generate professional, comprehensive user manuals and guides for Web Applications in Markdown or self-contained interactive HTML format. Use when asked to write user manuals, user guides, คู่มือการใช้งาน, คู่มือผู้ใช้, คู่มือระบบเว็บ, or documentation for web systems.
+description: Generate professional, comprehensive user manuals and guides for Web Applications in Markdown or self-contained interactive HTML format. Use when asked to write user manuals, user guides, คู่มือการใช้งาน, คู่มือผู้ใช้, คู่มือระบบเว็บ, or documentation for web systems. Compatible with Antigravity, Claude Code, and Codex.
 category: Document
 tags: [document, user-manual, user-guide, webapp, documentation, html, markdown]
 version: 1.0.0
+agents:
+  - antigravity
+  - claude-code
+  - codex
+compatibility:
+  antigravity: ">=1.0.0"
+  claude-code: ">=1.0.0"
+  codex: ">=1.0.0"
 ---
 
 # Web Application User Manual Skill (คู่มือการใช้งานเว็บแอปพลิเคชัน)
@@ -115,6 +123,32 @@ flowchart LR
 ส่งมอบผลลัพธ์ตามที่ผู้ใช้ต้องการ:
 1. **Interactive HTML (`manual.html`)**: หน้าเว็บ Standalone พร้อม Sidebar นำทาง, ค้นหาหัวข้อ, สลับ Dark/Light mode, และปรับหน้ากระดาษพร้อมสั่ง Print เป็น PDF ทันที (ดูเทมเพลตใน `templates/manual-template.html`)
 2. **Markdown (`USER_MANUAL.md`)**: เอกสาร Markdown มาตรฐานพร้อมสารบัญและตารางครบถ้วน (ดูเทมเพลตใน `templates/manual-template.md`)
+
+---
+
+## 🤖 การทำงานร่วมกับ AI Agent (Multi-Agent Support)
+
+Skill นี้ออกแบบตามมาตรฐาน Phase 1 เพื่อรองรับ AI Coding Agents ชั้นนำทั้ง 3 ค่าย ได้แก่ **Google Antigravity**, **Anthropic Claude Code**, และ **OpenAI Codex**:
+
+### 1. 🔮 Google Antigravity
+- **ตำแหน่งติดตั้ง:** `~/.gemini/config/skills/webapp-user-manual/` หรือ `.agent/skills/webapp-user-manual/`
+- **การตรวจจับ:** ตรวจจับจาก `description` และคีย์เวิร์ดในคำสั่งของผู้ใช้โดยอัตโนมัติ
+- **การจัดการไฟล์:** ใช้คำสั่ง `read_file` อ่านเทมเพลต และใช้ `write_file` สร้างไฟล์ `manual.html` หรือ `USER_MANUAL.md`
+
+### 2. 🟧 Anthropic Claude Code
+- **ตำแหน่งติดตั้ง:** `~/.claude/skills/webapp-user-manual/` หรือ `.claude/skills/webapp-user-manual/`
+- **การตรวจจับ:** Claude Code จะโหลด Skill ผ่าน YAML metadata เมื่อคำค้นตรงกับงานเขียนคู่มือ
+- **การจัดการไฟล์:** ใช้ Tool `Read` เพื่ออ่านเทมเพลต และใช้ `Write` เพื่อบันทึกคู่มือลงใน Workspace
+
+### 3. 🟩 OpenAI Codex
+- **ตำแหน่งติดตั้ง:** `~/.codex/skills/webapp-user-manual/` หรือ `.codex/skills/webapp-user-manual/`
+- **การตรวจจับ:** จับคู่เป้าหมายจาก Prompt และเอกสาร `AGENTS.md` / `CODEX.md`
+- **การจัดการไฟล์:** สั่งสร้างและแก้ไขไฟล์ผ่าน CLI / Shell Command และชุดคำสั่งแก้ไขไฟล์
+
+### 🧭 การอ้างอิงตำแหน่งเทมเพลต (Asset Path Resolution)
+เนื่องจากแต่ละ Agent อาจถูกติดตั้งในระดับ Global หรือ Workspace ให้ Agent ค้นหาตำแหน่งเทมเพลตตามลำดับ:
+1. Workspace Scope: `./skills/webapp-user-manual/templates/` หรือ `./.agent/skills/...` / `./.claude/skills/...`
+2. Global Scope: ค้นหาใน Home Directory ของ Agent นั้นๆ (`~/.gemini/config/skills/`, `~/.claude/skills/`, `~/.codex/skills/`)
 
 ---
 
