@@ -5,6 +5,7 @@ import json
 import subprocess
 import tempfile
 from pathlib import Path
+from xml.etree import ElementTree
 from zipfile import ZipFile
 
 ROOT=Path(__file__).resolve().parent
@@ -72,6 +73,11 @@ def main():
             assert xml.count('<p:sp>')>=15, 'Native shapes missing'
             second=archive.read('ppt/slides/slide2.xml').decode('utf-8')
             assert 'A complete native slide' in second and '69,000.00 THB' in second
+            for slide_xml in (xml, second):
+                slide = ElementTree.fromstring(slide_xml)
+                for script in ('latin', 'ea', 'cs'):
+                    faces = {face.get('typeface') for face in slide.findall(f'.//{{*}}rPr/{{*}}{script}')}
+                    assert faces == {'Sarabun'}, f'Unexpected {script} slide text fonts: {faces}'
         print('PASS slide component registry / grid / stack / invalid inputs / PPTX native text')
         print(result.stdout.strip())
 

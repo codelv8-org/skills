@@ -32,7 +32,7 @@
 ```js
 const { SlideUI, tokens } = require('./slide_components');
 const ui = new SlideUI(pptx, {
-  font: FONT, logoPath: provider.logo_path,
+  logoPath: provider.logo_path,
   brand: provider.name, quoteId: quotation.number
 });
 

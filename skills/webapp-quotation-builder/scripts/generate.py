@@ -4,7 +4,7 @@
 ระบุพาธอินพุตและโฟลเดอร์ปลายทาง
   python scripts/generate.py --input data.json --out-dir /mnt/data/quotes
 
-ต้องมี Python playwright และ pymupdf, Chromium/Chrome, Node pptxgenjs และ LibreOffice
+ต้องมี Python playwright และ pymupdf, Chromium/Chrome, Node pptxgenjs, LibreOffice และ Sarabun
 ใช้ข้อมูลที่ยืนยันจากขั้นตอนเก็บรายละเอียดสำหรับเอกสารลูกค้า
 """
 from __future__ import annotations
@@ -15,12 +15,13 @@ import html
 import json
 import mimetypes
 import os
+import re
 import shutil
 import subprocess
 import sys
 from pathlib import Path
 
-import fitz
+import pymupdf as fitz
 from pricing import QuoteValidationError, calculate, load_quote, money_text, public_math
 
 
@@ -90,7 +91,7 @@ def build_html(data, calc) -> str:
 @page {{ size: A4 portrait; margin: 0; }}
 * {{ box-sizing: border-box; }}
 html, body {{ margin: 0; padding: 0; }}
-body {{ font-family: 'Noto Sans Thai', 'Noto Looped Thai', Tahoma, sans-serif; color: #15243a; font-size: 11.5px; line-height: 1.48; background: white; }}
+body {{ font-family: Sarabun; color: #15243a; font-size: 11.5px; line-height: 1.48; background: white; }}
 .page {{ width: 210mm; min-height: 297mm; padding: 12mm 13mm 10mm; display: flex; flex-direction: column; position: relative; }}
 .demo-banner {{ color: #7c2d12; background: #fff5ed; padding: 5px 10px; border-radius: 4px; font-weight: 700; font-size: 10px; margin: -3mm 0 3mm; }}
 .top {{ display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; padding-bottom: 12px; border-bottom: 2px solid #2365bf; }}
@@ -178,7 +179,7 @@ def require_executable(*names) -> str:
 
 def print_html_to_pdf(html_file: Path, pdf_file: Path):
     from playwright.sync_api import sync_playwright
-    chromium = require_executable("chromium", "chromium-browser", "google-chrome")
+    chromium = require_executable("chromium", "chromium-browser", "google-chrome", "chrome")
     with sync_playwright() as p:
         browser = p.chromium.launch(executable_path=chromium, headless=True, args=["--no-sandbox", "--disable-dev-shm-usage"])
         page = browser.new_page(viewport={"width": 1050, "height": 1485}, device_scale_factor=1)
@@ -189,7 +190,7 @@ def print_html_to_pdf(html_file: Path, pdf_file: Path):
 
 
 def export_slides_to_pdf(pptx_file: Path, destination: Path, temp_dir: Path):
-    soffice = require_executable("soffice", "libreoffice")
+    soffice = require_executable("soffice.com", "soffice", "libreoffice")
     lo_profile = (temp_dir / "lo-profile").absolute().as_uri()
     command = [soffice, f"-env:UserInstallation={lo_profile}", "--headless", "--convert-to", "pdf", "--outdir", str(temp_dir), str(pptx_file)]
     process = subprocess.run(command, capture_output=True, text=True, check=False, timeout=150)
@@ -197,6 +198,31 @@ def export_slides_to_pdf(pptx_file: Path, destination: Path, temp_dir: Path):
     if process.returncode or not intermediate.is_file():
         raise RuntimeError(f"Slide PDF conversion failed: {process.stdout} {process.stderr}")
     shutil.copyfile(intermediate, destination)
+
+
+def verify_sarabun(page: fitz.Page):
+    def is_sarabun(name: str) -> bool:
+        family = name.split("+", 1)[-1]
+        return re.fullmatch(
+            r"Sarabun(?:[- ]?(?:Thin|ExtraLight|Light|Regular|Medium|SemiBold|Bold|ExtraBold)(?:Italic)?|[- ]?Italic)?",
+            family,
+            re.IGNORECASE,
+        ) is not None
+
+    fonts = {font[0] for font in page.get_fonts() if is_sarabun(font[3])}
+    substitutions = {
+        span["font"]
+        for block in page.get_text("dict", flags=fitz.TEXTFLAGS_TEXT)["blocks"]
+        for line in block["lines"]
+        for span in line["spans"]
+        if any(char.isalnum() for char in span["text"]) and not is_sarabun(span["font"])
+    }
+    if substitutions or not fonts or any(not page.parent.extract_font(xref)[-1] for xref in fonts):
+        details = ", ".join(sorted(substitutions)) or "Sarabun is missing or not embedded"
+        raise RuntimeError(
+            f"{Path(page.parent.name).name}, page {page.number + 1}: {details}. "
+            "Install the Sarabun font and export again."
+        )
 
 
 def verify_pdf_files(quotation_path: Path, slides_path: Path, calc: dict):
@@ -211,6 +237,7 @@ def verify_pdf_files(quotation_path: Path, slides_path: Path, calc: dict):
             raise RuntimeError("Quotation verification failed: key heading or grand total absent")
         if len(text.strip()) < 200:
             raise RuntimeError("Quotation has unexpectedly little selectable text")
+        verify_sarabun(page)
     with fitz.open(slides_path) as pdf:
         if not 5 <= len(pdf) <= 12:
             raise RuntimeError(f"Expected 5..12 slides, got {len(pdf)}")
@@ -220,6 +247,7 @@ def verify_pdf_files(quotation_path: Path, slides_path: Path, calc: dict):
                 raise RuntimeError(f"Slide {num} is not approximately 16:9 landscape")
             if len(page.get_text().strip()) < 50:
                 raise RuntimeError(f"Slide {num} might be blank")
+            verify_sarabun(page)
         all_text = "\n".join(page.get_text() for page in pdf)
         if money_text(calc["total"]) not in all_text:
             raise RuntimeError("Slide deck has no matching total")

@@ -8,13 +8,12 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
-const child = require('child_process');
 const pptxgen = require('pptxgenjs');
 let helpers;
 try {
   helpers = require(process.env.SLIDES_HELPERS || '/home/oai/skills/slides/pptxgenjs_helpers/index.js');
 } catch (error) { throw new Error('Slide helpers unavailable; activate slides skill / set SLIDES_HELPERS: '+error.message); }
-const { SlideUI } = require('./slide_components');
+const { SlideUI, FONT } = require('./slide_components');
 const { warnIfSlideElementsOutOfBounds } = helpers;
 const [inputPath, mathPath, outPath] = process.argv.slice(2);
 if (!inputPath || !mathPath || !outPath) throw new Error('Usage: build_slides.js <data.json> <math.json> <out.pptx>');
@@ -31,19 +30,10 @@ pptx.title = 'ข้อเสนอโครงการ ' + q.project_name;
 pptx.subject = 'ภาพรวมบริการ เลขที่ ' + q.number;
 pptx.lang = 'th-TH';
 
-function resolveThaiFont() {
-  const requested = (data.presentation_style && data.presentation_style.font) || 'Noto Sans Thai';
-  try {
-    const found = child.execFileSync('fc-match', ['-f', '%{family}', requested], {encoding:'utf8', timeout:2000});
-    if (found.toLowerCase().includes(requested.toLowerCase())) return requested;
-  } catch (_e) { /* ใช้ฟอนต์ค่าเริ่มต้นด้านล่างเมื่อหาไม่พบ */ }
-  return 'Noto Sans Thai';
-}
-const FONT = resolveThaiFont();
 pptx.theme = {headFontFace: FONT,bodyFontFace:FONT,lang:'th-TH'};
 const W=13.333333333,H=7.5,M=0.68,INNER=W-2*M;
 const S=pptx.ShapeType;
-const ui = new SlideUI(pptx,{font:FONT,logoPath:p.logo_path,brand:p.name,quoteId:q.number});
+const ui = new SlideUI(pptx,{logoPath:p.logo_path,brand:p.name,quoteId:q.number});
 const C=ui.C;
 const PT={hero:35,title:29,number:29,step:19,body:18,detail:16,meta:14,footer:10};
 const slides=[];
@@ -101,7 +91,8 @@ function amount(v){return Number(v).toLocaleString('en-US',{minimumFractionDigit
     {type:'MetricCard',label:'\u0e23\u0e30\u0e22\u0e30\u0e40\u0e27\u0e25\u0e32\u0e14\u0e33\u0e40\u0e19\u0e34\u0e19\u0e07\u0e32\u0e19',value:shortDelivery(q.lead_time),tone:'green'},
     {type:'MetricCard',label:'\u0e40\u0e07\u0e37\u0e48\u0e2d\u0e19\u0e44\u0e02\u0e01\u0e32\u0e23\u0e0a\u0e33\u0e23\u0e30',value:`${milestones.length} \u0e07\u0e27\u0e14\u0e15\u0e32\u0e21\u0e1c\u0e25\u0e07\u0e32\u0e19`,tone:'amber'}
   ]},{x:M,y:4.70,w:INNER,h:1.51});
-  txt(s,`\u0e01\u0e33\u0e2b\u0e19\u0e14\u0e40\u0e27\u0e25\u0e32: ${q.lead_time}`,M,6.40,INNER,.34,PT.meta,{color:C.muted,minSize:13});
+  txt(s,`กำหนดเวลา: ${q.lead_time}`,M,6.26,INNER,.28,PT.meta,{color:C.muted,minSize:13});
+  txt(s,`ผู้รับข้อเสนอ: ${data.customer.name}  |  ใช้ได้ถึง: ${q.valid_until}`,M,6.59,INNER,.28,PT.meta,{color:C.muted,minSize:13});
 }
 
 // หน้าขอบเขตงานแสดงสูงสุด 6 การ์ดต่อหน้า

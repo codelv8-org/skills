@@ -3,7 +3,7 @@ name: webapp-quotation-builder
 description: สร้างใบเสนอราคาพัฒนา Web App/PWA สำหรับลูกค้าไทยหรือสากล ใช้เมื่อผู้ใช้ขอประเมินราคา จัดทำขอบเขตและงวดชำระ หรือสร้างใบเสนอราคา A4 PDF คู่กับสไลด์แนะนำบริการภาษาไทยที่มี Diagram และ Stepper เริ่มจากโปรไฟล์ผู้เสนอราคา ตรวจราคาอ้างอิงและภาษี แล้วเก็บรายละเอียดก่อนคำนวณและสร้างเอกสาร
 category: Document
 tags: [quotation, webapp, pwa, pdf, pricing, proposal]
-version: 1.1.0
+version: 1.1.1
 agents: [antigravity, claude-code, codex]
 compatibility:
   antigravity: ">=1.0.0"
@@ -38,6 +38,8 @@ compatibility:
 
 ## 4. สร้างและตรวจ PDF
 
+ใช้ `Sarabun` กับข้อความไทยและอังกฤษทั้งหมดในใบเสนอราคา A4 และสไลด์ ทั้งไฟล์ต้นฉบับและ PDF ติดตั้งฟอนต์ `Sarabun` ในสภาพแวดล้อมที่สร้างไฟล์ก่อนเริ่ม และตรวจว่าทั้งสอง PDF ฝังฟอนต์จริง หากพบการแทนฟอนต์ ให้แก้การตั้งค่าและส่งออกใหม่ก่อนส่งมอบ
+
 ใช้ [JSON ตัวอย่าง](assets/quote-data.example.json) เป็นแบบโครงสร้าง สร้าง `quote-data.json` จากข้อมูลที่ยืนยันแล้ว ใช้พาธรูปในเครื่องและเลี่ยงข้อมูลลับหรือรายละเอียดต้นทุนภายในในเอกสารลูกค้า ใช้โลโก้และไฟล์ที่ได้รับอนุญาต
 
 อ่าน [โครงสร้างองค์ประกอบ](references/slide-component-architecture.md), [ระบบออกแบบสไลด์](references/slide-design-system.md), [รูปแบบแผนภาพและ Stepper](references/diagram-stepper-patterns.md) และ [เกณฑ์ตรวจสไลด์](references/slide-qa-checklist.md) ก่อนจัดหน้า ใช้ `SlideUI.render(slide, tree, frame)` จาก [slide_components.js](scripts/slide_components.js) เพื่อวาง Grid, Stack, Card, Stepper และ Diagram เป็นข้อความและรูปทรง PPTX ที่แก้ไขได้ แสดงงวดชำระตามสัดส่วนของยอดจริง แบ่งหน้าต่อเมื่อเนื้อหาแน่นและรักษาขนาดข้อความหลักอย่างน้อย 16 pt
@@ -50,7 +52,7 @@ compatibility:
 bash scripts/generate.sh --input ./quote-data.json --out-dir ./quote-results
 ```
 
-เครื่องมือสร้าง PDF ต้องมี Python, `playwright`, Chromium ที่ค้นเจอใน `PATH` ผ่าน `chromium`, `chromium-browser` หรือ `google-chrome`, `pymupdf` (`fitz`), Node.js, `pptxgenjs`, LibreOffice (`soffice`) และฟอนต์ภาษาไทย เช่น `Noto Sans Thai` หากชุด `pptxgenjs_helpers` อยู่คนละตำแหน่งกับค่าเริ่มต้น `/home/oai/skills/slides/pptxgenjs_helpers/index.js` ให้ตั้ง `SLIDES_HELPERS` เป็นพาธเต็มของ `index.js` จากชุดเครื่องมือที่เชื่อถือได้ หาก runtime ไม่พร้อม ใช้เครื่องมือสร้าง PDF/สไลด์ที่ตรวจผลตามเกณฑ์เดียวกันได้
+เครื่องมือสร้าง PDF ต้องมี Python, `playwright`, Chromium ใน `PATH` (`chromium`, `chromium-browser`, `google-chrome` หรือ `chrome`), `pymupdf`, Node.js, `pptxgenjs`, LibreOffice ใน `PATH` (`soffice.com` บน Windows หรือ `soffice`) และ [ฟอนต์ Sarabun](https://github.com/google/fonts/tree/main/ofl/sarabun) หากชุด `pptxgenjs_helpers` อยู่คนละตำแหน่งกับค่าเริ่มต้น `/home/oai/skills/slides/pptxgenjs_helpers/index.js` ให้ตั้ง `SLIDES_HELPERS` เป็นพาธเต็มของ `index.js` จากชุดเครื่องมือที่เชื่อถือได้ หาก runtime ไม่พร้อม ใช้เครื่องมือสร้าง PDF/สไลด์ที่ตรวจผลตามเกณฑ์เดียวกันได้
 
 - ใช้ [pricing.py](scripts/pricing.py) ตรวจข้อมูลและปัดเศษเป็นสตางค์ [generate.py](scripts/generate.py) กับ [build_slides.js](scripts/build_slides.js) สร้างไฟล์และตรวจขนาดหน้า
 - ส่งมอบ `quotation-<number>.pdf` ขนาด A4 แนวตั้งหนึ่งหน้า และ `service-overview-<number>.pdf` แนวนอน 16:9 ปกติ 5 หน้า ขยายได้ถึง 12 หน้า เก็บไฟล์ PPTX/HTML/JSON เป็นไฟล์ระหว่างทำงาน ส่งให้ผู้ใช้เมื่อร้องขอ
@@ -62,4 +64,4 @@ bash scripts/generate.sh --input ./quote-data.json --out-dir ./quote-results
 
 ## ตัวอย่างผลลัพธ์
 
-- [ใบเสนอราคา A4](examples/queue-booking/quotation-DEMO-QT-2026-001.pdf) และ [สไลด์ภาพรวมบริการ](examples/queue-booking/service-overview-DEMO-QT-2026-001.pdf) สำหรับระบบจองคิวออนไลน์ พร้อมผังการจองและ Stepper จาก [ข้อมูลสมมติ](examples/queue-booking/quote-data.json)
+- [ใบเสนอราคา A4](examples/queue-booking/quotation-DEMO-QT-2026-001.pdf) และ [สไลด์ภาพรวมบริการ](examples/queue-booking/service-overview-DEMO-QT-2026-001.pdf) สร้างจาก [ข้อมูลสมมติระบบจองคิวออนไลน์](examples/queue-booking/quote-data.json) และฝัง `Sarabun` ทุกหน้า

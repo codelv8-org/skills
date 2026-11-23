@@ -11,6 +11,7 @@
 const fs=require('fs');
 const helpers=require(process.env.SLIDES_HELPERS || '/home/oai/skills/slides/pptxgenjs_helpers/index.js');
 const {autoFontSize,imageSizingContain,warnIfSlideElementsOutOfBounds}=helpers;
+const FONT='Sarabun';
 const W=40/3, H=7.5;
 const tokens=Object.freeze({
   canvas:{w:W,h:H,margin:.68,footerY:6.95},
@@ -31,7 +32,7 @@ function luminance(hex){const a=rgb(hex).map(c=>c<=.04045?c/12.92:((c+.055)/1.05
 function contrast(a,b){const x=luminance(a),y=luminance(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
 class SlideUI {
   constructor(pptx, options={}){
-    this.pptx=pptx;this.S=pptx.ShapeType;this.font=options.font||'Noto Sans Thai';
+    this.pptx=pptx;this.S=pptx.ShapeType;
     this.logoPath=options.logoPath||'';this.brand=options.brand||'';this.quoteId=options.quoteId||'';
     this.C={...tokens.color,...(options.colors||{})};
     this.used=new Set();this.maxDepth=7;
@@ -55,9 +56,9 @@ class SlideUI {
     position(r);const s=textValue(value);if(!s)return;
     if(s.includes('\ufffd'))throw new Error('Unicode replacement glyph in slide text');
     const lower=min===null?(size>=26?24:(size>=17?16:(size>=14?13:9))):min;
-    const sizes=autoFontSize(s,this.font,{x:r.x,y:r.y,w:r.w,h:r.h,fontSize:size,
+    const sizes=autoFontSize(s,FONT,{x:r.x,y:r.y,w:r.w,h:r.h,fontSize:size,
       minFontSize:lower,maxFontSize:size,mode:'shrink'});
-    const config={...sizes,fontFace:this.font,color,bold,align,valign,margin:0,
+    const config={...sizes,fontFace:FONT,color,bold,align,valign,margin:0,
       breakLine:false,lineSpacingMultiple:1.15,lang:'th-TH',...other};
     delete config.charSpacing;
     slide.addText(s,config);
@@ -294,4 +295,4 @@ class SlideUI {
     });
   }
 }
-module.exports={SlideUI,tokens,contrast};
+module.exports={SlideUI,FONT,tokens,contrast};
