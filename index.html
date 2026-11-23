@@ -952,6 +952,97 @@
             "windows": "Copy-Item -Path \".\\skills\\lowpoly-character-web\" -Destination \"$env:USERPROFILE\\.codex\\skills\\\" -Recurse",
             "posix": "mkdir -p ~/.codex/skills && cp -r ./skills/lowpoly-character-web ~/.codex/skills/"
           }
+        },
+        {
+          "id": "webapp-quotation-builder",
+          "name": "Web App Quotation Builder",
+          "nameTh": "สร้างใบเสนอราคาพัฒนา Web App",
+          "category": "Document",
+          "version": "1.0.0",
+          "status": "Ready",
+          "phase": "Phase 1",
+          "author": "Personal Library",
+          "summary": "เก็บความต้องการ ประเมินราคา และจัดทำใบเสนอราคา A4 พร้อมสไลด์ PDF สำหรับโครงการ Web App หรือ PWA",
+          "description": "ใช้โปรไฟล์ผู้ให้บริการและข้อมูลราคาอ้างอิงเพื่อเก็บขอบเขตโครงการ คำนวณราคา ภาษี และงวดชำระ แล้วสร้างใบเสนอราคา A4 และสไลด์แนะนำบริการ 16:9 จากข้อมูลชุดเดียวกัน",
+          "tags": [
+            "Quotation",
+            "Web App",
+            "PWA",
+            "PDF",
+            "Pricing",
+            "Proposal"
+          ],
+          "supportedAgents": [
+            "antigravity",
+            "claude-code",
+            "codex"
+          ],
+          "agentCompatibility": {
+            "antigravity": {
+              "supported": true,
+              "version": ">=1.0.0"
+            },
+            "claudeCode": {
+              "supported": true,
+              "version": ">=1.0.0"
+            },
+            "codex": {
+              "supported": true,
+              "version": ">=1.0.0"
+            }
+          },
+          "triggers": [
+            "ทำใบเสนอราคา",
+            "ประเมินราคาทำเว็บแอป",
+            "เสนอราคาพัฒนา PWA",
+            "web app quotation",
+            "software development proposal"
+          ],
+          "path": "skills/webapp-quotation-builder",
+          "entryFile": "skills/webapp-quotation-builder/SKILL.md",
+          "assets": [
+            {
+              "name": "SKILL.md",
+              "type": "skill",
+              "path": "skills/webapp-quotation-builder/SKILL.md"
+            },
+            {
+              "name": "provider-profile.template.md",
+              "type": "template",
+              "path": "skills/webapp-quotation-builder/templates/provider-profile.template.md"
+            },
+            {
+              "name": "quote-data.example.json",
+              "type": "template",
+              "path": "skills/webapp-quotation-builder/assets/quote-data.example.json"
+            },
+            {
+              "name": "generate.ps1",
+              "type": "script",
+              "path": "skills/webapp-quotation-builder/scripts/generate.ps1"
+            },
+            {
+              "name": "generate.sh",
+              "type": "script",
+              "path": "skills/webapp-quotation-builder/scripts/generate.sh"
+            },
+            {
+              "name": "generate.py",
+              "type": "script",
+              "path": "skills/webapp-quotation-builder/scripts/generate.py"
+            },
+            {
+              "name": "output-qa.md",
+              "type": "reference",
+              "path": "skills/webapp-quotation-builder/references/output-qa.md"
+            }
+          ],
+          "examples": [],
+          "highlights": [
+            "มีแบบฟอร์มข้อมูลผู้ให้บริการและชุดคำถามสำหรับเก็บขอบเขตโครงการ",
+            "คำนวณยอดรวม VAT และงวดชำระจากข้อมูลที่ยืนยันแล้ว",
+            "สร้างใบเสนอราคา A4 หนึ่งหน้าและสไลด์แนะนำบริการ PDF ขนาด 16:9"
+          ]
         }
       ]
     };
@@ -1033,8 +1124,9 @@
     }
 
     function renderDownloadLink(skill) {
-      if (skill.id !== 'lowpoly-character-web') return '';
-      return `<a class="btn-quick-copy skill-download" href="downloads/lowpoly-character-web.zip" download="lowpoly-character-web.zip">ดาวน์โหลด ZIP</a>`;
+      if (!['lowpoly-character-web', 'webapp-quotation-builder'].includes(skill.id)) return '';
+      const filename = `${skill.id}.zip`;
+      return `<a class="btn-quick-copy skill-download" href="downloads/${filename}" download="${filename}">ดาวน์โหลด ZIP</a>`;
     }
 
     function renderSkills() {
