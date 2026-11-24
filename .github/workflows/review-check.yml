@@ -1,0 +1,30 @@
+name: Skill review checks
+
+on:
+  pull_request:
+    paths:
+      - 'assets/js/skill-reviews.js'
+      - 'assets/css/skill-reviews.css'
+      - 'scripts/*rating*.mjs'
+      - 'data/ratings.json'
+      - 'data/reviews.json'
+      - 'index.html'
+      - '.github/workflows/deploy.yml'
+      - '.github/workflows/review-check.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          node --check assets/js/skill-reviews.js
+          node --test scripts/skill-ratings.test.mjs

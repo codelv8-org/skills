@@ -1293,6 +1293,7 @@
       .workflow-native { height:520px; }
     }
   </style>
+  <link rel="stylesheet" href="assets/css/skill-reviews.css">
 </head>
 <body>
 
@@ -1458,6 +1459,10 @@
         </div>
       </div>
 
+      <div class="sr-controls"><label for="skillSort">จัดเรียง Skill</label>
+        <select id="skillSort"><option value="default">ตามหมวดหมู่เดิม</option><option value="rated">คะแนนสูงสุด</option><option value="reviewed">รีวิวมากที่สุด</option><option value="updated">อัปเดตล่าสุด</option></select>
+        <span id="skillReviewStatus" role="status"></span></div>
+
       <!-- Category Filter Pills -->
       <div class="filter-pills" id="categoryFilterContainer">
         <span class="filter-label">หมวดหมู่:</span>
@@ -1504,6 +1509,8 @@
           <h4 class="modal-bento-title">📝 คำอธิบายรายละเอียด (Description)</h4>
           <p style="font-size:0.9rem; color:var(--text-sub); line-height:1.6;" id="modalDescription"></p>
         </div>
+
+        <section id="modalReviews" class="modal-bento-card sr-panel" aria-labelledby="srHeading"></section>
 
         <section id="modalWorkflowSection" class="modal-bento-card workflow-card" hidden aria-labelledby="modalWorkflowTitle">
           <h4 class="modal-bento-title" id="modalWorkflowTitle">Workflow Diagram · ขั้นตอนการทำงาน</h4>
@@ -1574,6 +1581,7 @@
     Personal AI Skill Library &copy; 2026 &bull; Designed for Antigravity, Gemini & Claude Assistants
   </footer>
 
+  <script src="assets/js/skill-reviews.js"></script>
   <script>
     // Embedded initial data for 100% offline & file:// protocol reliability
     const EMBEDDED_DATA = {
@@ -3779,6 +3787,8 @@
       } catch (e) {
         console.log('Using embedded fallback data:', e);
       }
+      await SkillReviews.init();
+      document.getElementById("skillSort").addEventListener("change", renderSkills);
       renderCategoryFilters();
       renderAgentFilters();
       renderStats();
@@ -3848,7 +3858,7 @@
     }
 
     function renderSkills() {
-      const items = getFilteredSkills();
+      const items = SkillReviews.sort(getFilteredSkills(), document.getElementById("skillSort").value);
       const container = document.getElementById('viewContainer');
 
       if (items.length === 0) {
@@ -3949,6 +3959,7 @@
                     <div class="bento-card-header">
                       <h3 class="bento-card-title">${skill.nameTh || skill.name}</h3>
                       <div class="bento-card-sub">${skill.name} • <span class="version-tag">v${skill.version}</span></div>
+                      ${SkillReviews.badge(skill)}
                     </div>
                     <p class="bento-card-desc">${skill.summary || skill.description}</p>
                     ${renderAgentBadgesHtml(skill)}
@@ -3984,6 +3995,7 @@
               <div class="bento-card-header">
                 <h3 class="bento-card-title">${skill.nameTh || skill.name}</h3>
                 <div class="bento-card-sub">${skill.name} • <span class="version-tag">v${skill.version}</span></div>
+                      ${SkillReviews.badge(skill)}
               </div>
               <p class="bento-card-desc">${skill.summary || skill.description}</p>
               ${renderAgentBadgesHtml(skill)}
@@ -4023,6 +4035,7 @@
               </div>
               <h3 class="card-title">${skill.nameTh || skill.name}</h3>
               <div class="card-sub">${skill.name} • v${skill.version}</div>
+              ${SkillReviews.badge(skill)}
               <p class="card-desc">${skill.summary || skill.description}</p>
               ${renderAgentBadgesHtml(skill)}
               <div class="card-tags">
@@ -4056,6 +4069,7 @@
                   <span class="list-title">${skill.nameTh || skill.name}</span>
                   <span class="version-tag">v${skill.version}</span>
                 </div>
+                ${SkillReviews.badge(skill)}
                 <div class="list-desc">${skill.summary || skill.description}</div>
                 <div style="margin-top:6px;">${renderAgentBadgesHtml(skill)}</div>
               </div>
@@ -4080,6 +4094,7 @@
                 <th>หมวดหมู่</th>
                 <th>เฟส / เวอร์ชัน</th>
                 <th>AI Agent ที่รองรับ</th>
+                <th>คะแนน / รีวิว</th>
                 <th>คำอธิบายย่อ</th>
                 <th style="text-align: right;">การจัดการ</th>
               </tr>
@@ -4100,6 +4115,7 @@
                   <td>
                     ${renderAgentBadgesHtml(skill)}
                   </td>
+                  <td>${SkillReviews.badge(skill)}</td>
                   <td style="max-width: 280px;">${skill.summary || skill.description}</td>
                   <td style="text-align: right;">
                     <button class="btn-detail" style="padding:4px 10px; font-size:0.8rem;" onclick="openDetailModal('${skill.id}')">
@@ -4307,6 +4323,7 @@
       document.getElementById('modalTitle').textContent = skill.nameTh || skill.name;
       document.getElementById('modalSub').textContent = `${skill.name} • v${skill.version}`;
       document.getElementById('modalDescription').textContent = skill.description;
+      SkillReviews.render(skill, document.getElementById("modalReviews"));
       renderSkillWorkflow(skill);
       document.getElementById('modalDownload').innerHTML = renderDownloadLink(skill);
 
