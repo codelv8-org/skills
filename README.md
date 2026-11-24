@@ -87,6 +87,27 @@ skills/
 
 ---
 
+## 🖼️ ตัวอย่างผลลัพธ์ Documentation Skills
+
+| Skill | Overview / Example | เอกสารต้นฉบับ |
+|---|---|---|
+| Privacy-First Database Documentation Builder | [Example Showcase](https://codelv8-org.github.io/skills/skills/privacy-first-database-documentation-builder/examples/synthetic-demo/) | [Data Dictionary](skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/data-dictionary.md) |
+| API Documentation Builder | [Example Showcase](https://codelv8-org.github.io/skills/skills/api-documentation-builder/examples/synthetic-demo/) | [API Consumer Guide](skills/api-documentation-builder/examples/synthetic-demo/output/api-consumer-guide.md) · [OpenAPI](skills/api-documentation-builder/examples/synthetic-demo/output/openapi.yaml) |
+
+ทั้งสองชุดใช้ Synthetic Metadata/Contract เท่านั้น ไม่เรียกฐานข้อมูลหรือ API จริง ไม่ใช้ข้อมูลส่วนบุคคลหรือ credentials จริง ภาพ Overview แสดงโครงสร้างและผลลัพธ์ของตัวอย่าง ไม่ใช่ภาพหน้าจอของระบบจริง
+
+**PDF ตัวอย่าง (7 + 6 เอกสาร)** สร้างใน GitHub Pages workflow จาก Markdown ที่ตรวจสอบแล้วก่อน Build ZIP โดยไม่ commit ไฟล์ PDF ที่สร้างซ้ำได้ลง repository เมื่อต้องการสร้างในเครื่อง ให้เตรียม Python 3.12, WeasyPrint system dependencies, ฟอนต์ Noto Sans Thai และ Poppler (pdftotext) แล้วรัน:
+
+```bash
+python -m pip install -r scripts/documentation-examples-requirements.txt
+python scripts/build-documentation-examples.py
+python scripts/build-skill-zips.py
+```
+
+จากนั้นเปิด `examples/synthetic-demo/index.html` ภายในโฟลเดอร์ Skill ที่ต้องการผ่าน Local Web Server
+
+---
+
 ## 🚀 วิธีเปิดใช้งานหน้า Web Catalog
 
 คุณสามารถเปิดดูรายการ Skill ผ่านเบราว์เซอร์ได้ทันทีโดยไม่ต้องติดตั้ง Backend:

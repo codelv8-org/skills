@@ -1,0 +1,12 @@
+# Synthetic Department Directory
+
+> Example API contract only. No live calls or authorization.
+
+- [API Catalog](api-catalog.md)
+- [API Data Dictionary](api-data-dictionary.md)
+- [API Reference](api-reference.md)
+- [API Consumer Guide](api-consumer-guide.md)
+- [Governance](api-governance.md)
+- [AI Agent Guide](ai-agent-integration-guide.md)
+- [OpenAPI](openapi.yaml)
+- [Agent boundaries](AGENTS.md)

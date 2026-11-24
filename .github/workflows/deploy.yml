@@ -27,6 +27,20 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      - name: Set up Python for documentation examples
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install example PDF dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-core poppler-utils libpango-1.0-0 libpangoft2-1.0-0 libharfbuzz-subset0
+          python -m pip install -r scripts/documentation-examples-requirements.txt
+
+      - name: Build and validate synthetic documentation examples
+        run: python scripts/build-documentation-examples.py
+
       - name: Build skill ZIP files
         run: python3 scripts/build-skill-zips.py
 

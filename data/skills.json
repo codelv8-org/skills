@@ -1137,9 +1137,83 @@
           "name": "validate_metadata.py",
           "type": "script",
           "path": "skills/privacy-first-database-documentation-builder/scripts/validate_metadata.py"
+        },
+        {
+          "name": "Example Showcase (HTML)",
+          "type": "example",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/index.html"
+        },
+        {
+          "name": "Overview (SVG)",
+          "type": "asset",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/overview.svg"
+        },
+        {
+          "name": "Example guide",
+          "type": "example",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/README.md"
+        },
+        {
+          "name": "data-catalog.md",
+          "type": "example",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/data-catalog.md"
+        },
+        {
+          "name": "data-dictionary.md",
+          "type": "example",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/data-dictionary.md"
+        },
+        {
+          "name": "er-diagram.md",
+          "type": "example",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/er-diagram.md"
+        },
+        {
+          "name": "data-classification.md",
+          "type": "example",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/data-classification.md"
+        },
+        {
+          "name": "data-lineage.md",
+          "type": "example",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/data-lineage.md"
+        },
+        {
+          "name": "database-consumer-guide.md",
+          "type": "example",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/database-consumer-guide.md"
+        },
+        {
+          "name": "ai-agent-guide.md",
+          "type": "example",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/ai-agent-guide.md"
+        },
+        {
+          "name": "er-diagram.mmd",
+          "type": "example",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/er-diagram.mmd"
+        },
+        {
+          "name": "llms.txt",
+          "type": "example",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/llms.txt"
+        },
+        {
+          "name": "release-manifest.md",
+          "type": "example",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/release-manifest.md"
         }
       ],
-      "examples": []
+      "examples": [
+        {
+          "title": "Synthetic Database Documentation",
+          "description": "ตัวอย่างผลลัพธ์จากการรัน Skill จริง: 2 ตาราง 5 คอลัมน์ พร้อม Data Catalog, Dictionary, ERD, Classification, Lineage และคู่มือสำหรับผู้ใช้/AI",
+          "htmlPath": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/index.html",
+          "markdownPath": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/data-dictionary.md",
+          "pdfPath": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/data-dictionary.pdf"
+        }
+      ],
+      "overviewImage": "assets/skill-overviews/privacy-first-database-documentation-builder.svg"
     },
     {
       "id": "api-documentation-builder",
@@ -1267,9 +1341,88 @@
           "name": "validate_openapi.py",
           "type": "script",
           "path": "skills/api-documentation-builder/scripts/validate_openapi.py"
+        },
+        {
+          "name": "Example Showcase (HTML)",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/index.html"
+        },
+        {
+          "name": "Overview (SVG)",
+          "type": "asset",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/overview.svg"
+        },
+        {
+          "name": "Example guide",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/README.md"
+        },
+        {
+          "name": "api-catalog.md",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/output/api-catalog.md"
+        },
+        {
+          "name": "api-data-dictionary.md",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/output/api-data-dictionary.md"
+        },
+        {
+          "name": "api-reference.md",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/output/api-reference.md"
+        },
+        {
+          "name": "api-consumer-guide.md",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/output/api-consumer-guide.md"
+        },
+        {
+          "name": "api-governance.md",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/output/api-governance.md"
+        },
+        {
+          "name": "ai-agent-integration-guide.md",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/output/ai-agent-integration-guide.md"
+        },
+        {
+          "name": "openapi.yaml",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/output/openapi.yaml"
+        },
+        {
+          "name": "tools.json",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/output/tools.json"
+        },
+        {
+          "name": "AGENTS.md",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/output/AGENTS.md"
+        },
+        {
+          "name": "llms.txt",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/output/llms.txt"
+        },
+        {
+          "name": "release-manifest.md",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/output/release-manifest.md"
         }
       ],
-      "examples": []
+      "examples": [
+        {
+          "title": "Synthetic Department Directory API",
+          "description": "ตัวอย่าง API Documentation จาก OpenAPI Contract สมมุติ 2 GET operations พร้อม API Reference, Consumer Guide, Data Dictionary, Governance และคู่มือ AI Agent/MCP (0 approved tools)",
+          "htmlPath": "skills/api-documentation-builder/examples/synthetic-demo/index.html",
+          "markdownPath": "skills/api-documentation-builder/examples/synthetic-demo/output/api-consumer-guide.md",
+          "pdfPath": "skills/api-documentation-builder/examples/synthetic-demo/output/api-consumer-guide.pdf"
+        }
+      ],
+      "overviewImage": "assets/skill-overviews/api-documentation-builder.svg"
     }
   ]
 }
