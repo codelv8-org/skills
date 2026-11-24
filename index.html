@@ -1245,6 +1245,53 @@
       .skill-list-item .skill-overview { width: 88px; }
       .list-actions { flex-basis: 100%; justify-content: flex-end; }
     }
+  
+    /* Workflow diagrams: accessible compact path + native Archify viewer. */
+    .workflow-card { min-width:0; }
+    .workflow-lead { color:var(--text-muted);font-size:.82rem;line-height:1.6;margin-bottom:12px; }
+    .workflow-toolbar { display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0; }
+    .workflow-toolbar a,.workflow-toolbar button { font:inherit;font-size:.76rem;line-height:1.3;cursor:pointer;text-decoration:none;border:1px solid var(--border);background:var(--bg-card);color:var(--text-main);border-radius:8px;padding:7px 11px; }
+    .workflow-toolbar a:hover,.workflow-toolbar button:hover { border-color:var(--primary);color:var(--primary); }
+    .workflow-board { background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:14px; }
+    .workflow-rows { display:grid;gap:0; }
+    .workflow-row { display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);align-items:start;gap:24px;position:relative; }
+    .workflow-main { min-width:0;position:relative;padding-bottom:23px; }
+    .workflow-row:last-child .workflow-main { padding-bottom:0; }
+    .workflow-row:not(:last-child) .workflow-main::after { content:"";position:absolute;left:25px;bottom:0;width:2px;height:23px;background:var(--primary);opacity:.58; }
+    .workflow-row:not(:last-child) .workflow-main::before { content:"";position:absolute;left:21px;bottom:1px;width:8px;height:8px;border-right:2px solid var(--primary);border-bottom:2px solid var(--primary);transform:rotate(45deg);z-index:1; }
+    .workflow-node { border:1px solid var(--border);border-left:3px solid var(--primary);border-radius:10px;background:var(--bg-subtle);padding:10px 12px;min-width:0;width:100%;color:var(--text-main);text-align:left;display:flex;gap:10px;align-items:flex-start;cursor:pointer;font:inherit; }
+    .workflow-node:hover,.workflow-node[aria-pressed="true"] { border-color:var(--primary);background:var(--primary-light); }
+    .workflow-node:focus-visible,.workflow-toolbar button:focus-visible { outline:2px solid var(--primary);outline-offset:3px; }
+    .workflow-node[data-kind="security"] { border-left-color:#d97706; }
+    .workflow-node[data-kind="frontend"] { border-left-color:#10b981; }
+    .workflow-node-index { background:var(--primary-light);color:var(--primary);font-size:.73rem;font-weight:650;display:flex;align-items:center;justify-content:center;width:24px;height:24px;flex:0 0 24px;border-radius:7px; }
+    .workflow-node-label { min-width:0;display:flex;flex-direction:column;gap:2px; }
+    .workflow-node-label strong { font-size:.82rem;line-height:1.4;overflow-wrap:anywhere; }
+    .workflow-node-label small { font-size:.73rem;color:var(--text-sub);line-height:1.45;overflow-wrap:anywhere; }
+    .workflow-branches { display:flex;flex-direction:column;gap:9px;min-width:0; }
+    .workflow-branch { position:relative;min-width:0;border:1px dashed #d97706;border-radius:9px;padding:8px 10px;background:var(--bg-card);font-size:.76rem;text-align:left;color:var(--text-main);cursor:pointer;font-family:inherit; }
+    .workflow-branch::before { content:"";position:absolute;left:-25px;top:24px;width:23px;border-top:1px dashed #d97706; }
+    .workflow-branch[aria-pressed="true"],.workflow-branch:hover { background:var(--bg-subtle);border-style:solid; }
+    .workflow-condition { color:var(--text-muted);font-size:.68rem;font-weight:600;display:block;margin-bottom:2px; }
+    .workflow-branch strong { display:block;font-size:.78rem;line-height:1.45;overflow-wrap:anywhere; }
+    .workflow-return { display:block;font-size:.67rem;color:var(--text-muted);margin-top:4px;overflow-wrap:anywhere; }
+    .workflow-inspector { margin-top:14px;padding:12px 14px;background:var(--bg-subtle);border:1px solid var(--border);border-radius:10px; }
+    .workflow-inspector strong { font-size:.86rem;color:var(--text-main); }
+    .workflow-inspector p { font-size:.8rem;line-height:1.65;color:var(--text-sub);margin-top:5px; }
+    .workflow-inspector a { color:var(--primary);font-size:.73rem;display:inline-block;margin-top:8px; }
+    .workflow-note-list { margin:10px 0 0 18px;color:var(--text-sub);font-size:.76rem;line-height:1.65; }
+    .workflow-native { width:100%;height:620px;border:1px solid var(--border);border-radius:10px;background:var(--bg-card);display:block; }
+    .workflow-status { font-size:.72rem;color:var(--text-muted);margin-top:6px; }
+    [hidden] { display:none !important; }
+    @media(max-width:560px) {
+      .workflow-board { padding:9px; }
+      .workflow-row { grid-template-columns:minmax(0,1fr);gap:0; }
+      .workflow-row .workflow-main { padding-bottom:18px; }
+      .workflow-row:not(:last-child) .workflow-main::after { height:18px; }
+      .workflow-branches:not(:empty) { margin:0 0 12px 33px; }
+      .workflow-branch::before { left:-18px;width:16px; }
+      .workflow-native { height:520px; }
+    }
   </style>
 </head>
 <body>
@@ -1458,6 +1505,20 @@
           <p style="font-size:0.9rem; color:var(--text-sub); line-height:1.6;" id="modalDescription"></p>
         </div>
 
+        <section id="modalWorkflowSection" class="modal-bento-card workflow-card" hidden aria-labelledby="modalWorkflowTitle">
+          <h4 class="modal-bento-title" id="modalWorkflowTitle">Workflow Diagram · ขั้นตอนการทำงาน</h4>
+          <p class="workflow-lead">แผนภาพจาก SKILL.md ของ Skill นี้ · เลือกแต่ละขั้นเพื่อดูรายละเอียด จุดตัดสินใจ และแหล่งอ้างอิง</p>
+          <div class="workflow-toolbar">
+            <button type="button" id="workflowToggle" aria-expanded="false" aria-controls="workflowViewer" hidden>เปิด Archify Interactive</button>
+            <a id="workflowOpen" target="_blank" rel="noopener noreferrer" hidden>เปิดเต็มจอ ↗</a>
+            <a id="workflowSource" target="_blank" rel="noopener noreferrer">Archify JSON</a>
+            <a href="https://github.com/tt-a1i/archify" target="_blank" rel="noopener noreferrer">About Archify</a>
+          </div>
+          <div id="workflowViewer" hidden></div>
+          <div class="workflow-board" id="workflowBoard"></div>
+          <p class="workflow-status" id="workflowStatus" role="status"></p>
+        </section>
+
         <div class="modal-bento-card">
           <h4 class="modal-bento-title">✨ จุดเด่นและฟีเจอร์สำคัญ (Highlights)</h4>
           <ul id="modalHighlights" style="margin-left: 20px; font-size:0.88rem; color:var(--text-sub); display:flex; flex-direction:column; gap:4px;"></ul>
@@ -1659,6 +1720,54 @@
               "posix": "cp -r ./skills/webapp-user-manual ~/.codex/skills/",
               "workspace": "powershell -File .\\scripts\\install-skill.ps1 -Skill webapp-user-manual -Agent codex -Scope workspace"
             }
+          },
+          "workflow": {
+            "sourcePath": "assets/skill-workflows/webapp-user-manual.workflow.json",
+            "htmlPath": "assets/skill-workflows/webapp-user-manual.html",
+            "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+            "steps": [
+              {
+                "id": "audience",
+                "title": "Audience profiling",
+                "subtitle": "สำรวจระบบและผู้ใช้",
+                "description": "วิเคราะห์ระบบ ฟังก์ชัน และบทบาท End User, Approver หรือ Admin เพื่อเลือกเนื้อหาตามหน้าที่",
+                "kind": "external",
+                "line": 108,
+                "endLine": 112
+              },
+              {
+                "id": "outline",
+                "title": "10-pillar outline",
+                "subtitle": "วางโครงสารบัญ",
+                "description": "จัดสารบัญตามกรอบ 10 หมวด โดยเลือกหัวข้อให้ตรงกับฟีเจอร์ของระบบ",
+                "kind": "backend",
+                "line": 33,
+                "endLine": 60
+              },
+              {
+                "id": "draft",
+                "title": "Step-by-step draft",
+                "subtitle": "เขียนคู่มือทีละขั้น",
+                "description": "ระบุการกระทำของผู้ใช้ ผลลัพธ์บนหน้าจอ และภาพประกอบจำลอง ใช้ชื่อเมนูและฟิลด์ที่เหมาะสม",
+                "kind": "backend",
+                "line": 117,
+                "endLine": 120
+              },
+              {
+                "id": "deliver",
+                "title": "HTML / Markdown",
+                "subtitle": "ส่งมอบตามรูปแบบ",
+                "description": "สร้าง manual.html แบบ standalone พร้อม Sidebar, Search, Dark/Light, Print หรือ USER_MANUAL.md ตามที่ขอ",
+                "kind": "frontend",
+                "line": 122,
+                "endLine": 125
+              }
+            ],
+            "branches": [],
+            "notes": [
+              "Workflow หลักมี 4 ขั้นตาม SKILL.md",
+              "HTML รองรับสั่งพิมพ์; Skill PDF แยกต่างหากสำหรับเล่ม A4 ทางการ"
+            ]
           }
         },
         {
@@ -1761,6 +1870,75 @@
               "posix": "cp -r ./skills/webapp-user-manual-pdf ~/.codex/skills/",
               "workspace": "powershell -File .\\scripts\\install-skill.ps1 -Skill webapp-user-manual-pdf -Agent codex -Scope workspace"
             }
+          },
+          "workflow": {
+            "sourcePath": "assets/skill-workflows/webapp-user-manual-pdf.workflow.json",
+            "htmlPath": "assets/skill-workflows/webapp-user-manual-pdf.html",
+            "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+            "steps": [
+              {
+                "id": "brief",
+                "title": "Manual scope",
+                "subtitle": "กำหนดขอบเขตเล่ม",
+                "description": "เลือกคู่มือ A4 เพื่อส่งมอบโครงการ พร้อมหน้าปกทางการและข้อมูลควบคุมเอกสาร",
+                "kind": "external",
+                "line": 17,
+                "endLine": 29
+              },
+              {
+                "id": "structure",
+                "title": "Book structure",
+                "subtitle": "จัดโครงสร้างเล่ม",
+                "description": "วางปกและ Sign-off, สารบัญและรายการภาพ, บทเนื้อหาหลัก 6 บท และปกหลัง/Support",
+                "kind": "backend",
+                "line": 46,
+                "endLine": 68
+              },
+              {
+                "id": "paged",
+                "title": "Paged Media",
+                "subtitle": "จัดหน้า A4",
+                "description": "กำหนด @page, margins, running headers/footers และ page break; ไม่ตัดกลางตารางหรือรูป",
+                "kind": "backend",
+                "line": 73,
+                "endLine": 114
+              },
+              {
+                "id": "export",
+                "title": "Export PDF",
+                "subtitle": "แปลง HTML เป็น PDF",
+                "description": "ใช้ PowerShell/Bash, Headless Chrome/Edge หรือ Browser Print Dialog ตามแพลตฟอร์ม",
+                "kind": "messagebus",
+                "line": 137,
+                "endLine": 168
+              },
+              {
+                "id": "deliver",
+                "title": "Print-ready PDF",
+                "subtitle": "เล่มพร้อมพิมพ์",
+                "description": "ผลลัพธ์ PDF A4 ที่คงโครงสร้างเล่มและพื้นที่ตรวจรับ/อนุมัติ",
+                "kind": "frontend",
+                "line": 33,
+                "endLine": 68
+              }
+            ],
+            "branches": [
+              {
+                "from": "export",
+                "id": "manual-print",
+                "title": "Browser print",
+                "subtitle": "ทางเลือกส่งออก",
+                "description": "เมื่อเลือกส่งออกด้วยตนเอง ใช้ Ctrl/Cmd+P, A4, margins None และ Background graphics",
+                "condition": "ทางเลือก",
+                "returnTo": null,
+                "line": 161,
+                "endLine": 168
+              }
+            ],
+            "notes": [
+              "เส้นทางหลักคือเอกสารแบบ CSS Paged Media",
+              "Browser Print เป็นวิธีส่งออกทางเลือก ไม่ใช่ขั้นบังคับหลัง Headless"
+            ]
           }
         },
         {
@@ -1859,7 +2037,107 @@
             "เก็บบริบทโครงการและหลักฐานตรวจงานเพื่อทำต่อจากรอบก่อน",
             "ตรวจโครงสร้าง GLB, skin weights และ animation clips",
             "ประเมิน LOD และงบการเรนเดอร์สำหรับฉากหลายตัวละคร"
-          ]
+          ],
+          "workflow": {
+            "sourcePath": "assets/skill-workflows/lowpoly-character-web.workflow.json",
+            "htmlPath": "assets/skill-workflows/lowpoly-character-web.html",
+            "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+            "steps": [
+              {
+                "id": "intake",
+                "title": "G0 · Reference",
+                "subtitle": "อ่าน Ref และบริบท",
+                "description": "อ่านภาพต้นฉบับทุกมุม ตรวจภาพ crop, landmarks, อุปกรณ์และกล้อง แยกสิ่งที่เห็นจริงกับส่วนที่อนุมาน",
+                "kind": "external",
+                "line": 46,
+                "endLine": 51
+              },
+              {
+                "id": "parts",
+                "title": "G1 · Part fidelity",
+                "subtitle": "ปั้นทีละส่วน + Gate",
+                "description": "HEAD → TORSO → ARMS_HANDS → LEGS_FEET → OUTFIT_GEAR → INTEGRATION; แต่ละส่วนต้องเทียบ GLB จริง, mask, landmarks และ independent review ก่อนผ่าน",
+                "kind": "security",
+                "line": 53,
+                "endLine": 66
+              },
+              {
+                "id": "surface",
+                "title": "G2–G3 · Mesh / UV",
+                "subtitle": "Topology และวัสดุ",
+                "description": "ประกอบชิ้นส่วนเป็น topology เหมาะกับการเคลื่อนไหว วาง UV/วัสดุหลังผ่าน shape gates",
+                "kind": "backend",
+                "line": 78,
+                "endLine": 87
+              },
+              {
+                "id": "rig",
+                "title": "G4 · Rig & poses",
+                "subtitle": "Rig เมื่อร้องขอ",
+                "description": "ตรวจ skeleton, skin weights, deformation และ sampled poses ตามคลิปที่ผู้ใช้ต้องการ; งาน static ไม่บังคับ rig/clip ที่ไม่ได้ขอ",
+                "kind": "backend",
+                "line": 89,
+                "endLine": 101
+              },
+              {
+                "id": "webqa",
+                "title": "G5–G6 · Web QA",
+                "subtitle": "LOD / WebGL / Preview",
+                "description": "เลือก HERO/NPC/CROWD, วัด scene budget และ FPS บนอุปกรณ์จริง พร้อม preview ทุก stage; ไม่อ้าง FPS เมื่อยังไม่ได้ทดสอบ",
+                "kind": "security",
+                "line": 103,
+                "endLine": 114
+              },
+              {
+                "id": "release",
+                "title": "G7 · Release",
+                "subtitle": "ส่ง GLB + หลักฐาน",
+                "description": "ส่ง GLB/LOD, source เมื่อสร้างจริง, previews และรายงาน gate; ห้ามเรียก production-ready หากหลักฐานสำคัญไม่ครบ",
+                "kind": "frontend",
+                "line": 116,
+                "endLine": 118
+              }
+            ],
+            "branches": [
+              {
+                "from": "intake",
+                "id": "reference-stop",
+                "title": "Reference blocked",
+                "subtitle": "หยุดก่อนสร้าง",
+                "description": "หาก crop สูญเสียส่วนสำคัญ มุมผิด หรือยังไม่บันทึก feature ให้หยุดและแก้ reference",
+                "condition": "Ref ไม่ครบ",
+                "returnTo": null,
+                "line": 48,
+                "endLine": 51
+              },
+              {
+                "from": "parts",
+                "id": "part-repair",
+                "title": "Fix current part",
+                "subtitle": "แก้เฉพาะส่วน",
+                "description": "เมื่อ metrics หรือ reviewer ไม่ผ่าน ให้แก้ real geometry ของส่วนเดิมและ render/re-measure ใหม่; ถ้าแก้ไม่ได้ให้ REVIEW_REQUIRED",
+                "condition": "ไม่ผ่าน",
+                "returnTo": "parts",
+                "line": 60,
+                "endLine": 66
+              },
+              {
+                "from": "webqa",
+                "id": "prototype",
+                "title": "Prototype only",
+                "subtitle": "ไม่รับรอง production",
+                "description": "หาก gate ด้านศิลป์, deformation หรือ WebGL ยังไม่ผ่าน/ไม่ทดสอบ ให้ระบุ PROTOTYPE/REVIEW_REQUIRED พร้อมข้อแก้ไข",
+                "condition": "QA ไม่ครบ",
+                "returnTo": null,
+                "line": 110,
+                "endLine": 118
+              }
+            ],
+            "notes": [
+              "G1 เป็น hard gate ต่อส่วน; Integration ตรวจส่วนเดิมซ้ำบน GLB ประกอบจริง",
+              "ผลทดสอบเชิงตัวเลขไม่แทน visual acceptance; IoU ไม่ใช่เปอร์เซ็นต์ความเหมือน"
+            ]
+          }
         },
         {
           "id": "webapp-quotation-builder",
@@ -1996,7 +2274,96 @@
             "สร้างใบเสนอราคา A4 หนึ่งหน้าและสไลด์แนะนำบริการ PDF ขนาด 16:9",
             "ใช้ Grid, Card, Diagram และ Stepper ที่ประกอบเป็นองค์ประกอบ PPTX และแบ่งหน้าได้",
             "ตรวจขนาดหน้า ข้อความ และยอดสำคัญของสไลด์ PDF ด้วย preflight"
-          ]
+          ],
+          "workflow": {
+            "sourcePath": "assets/skill-workflows/webapp-quotation-builder.workflow.json",
+            "htmlPath": "assets/skill-workflows/webapp-quotation-builder.html",
+            "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+            "steps": [
+              {
+                "id": "profile",
+                "title": "Provider profile",
+                "subtitle": "โปรไฟล์ + ราคาตลาด",
+                "description": "สร้างแบบฟอร์ม Markdown ใหม่ ตรวจราคาอย่างน้อยสองแหล่งอิสระและภาษี แล้วให้ผู้ใช้ยืนยันข้อมูลผู้เสนอราคา",
+                "kind": "external",
+                "line": 18,
+                "endLine": 23
+              },
+              {
+                "id": "continue",
+                "title": "Continue gate",
+                "subtitle": "รอคำสั่ง ทำต่อ",
+                "description": "เมื่อข้อมูลผู้เสนอราคาครบ ให้รอผู้ใช้พิมพ์ ทำต่อ หรือคำสั่งเทียบเท่าก่อนถามรายละเอียดโครงการ",
+                "kind": "security",
+                "line": 20,
+                "endLine": 23
+              },
+              {
+                "id": "scope",
+                "title": "Project scope",
+                "subtitle": "เก็บ Requirement",
+                "description": "ถามครั้งละ 2–4 ข้อ แต่ละข้ออย่างน้อย 3 ตัวเลือกและ Other; ยืนยันลูกค้า ขอบเขต งบ เวลา งวดชำระ และข้อยกเว้น",
+                "kind": "backend",
+                "line": 25,
+                "endLine": 29
+              },
+              {
+                "id": "pricing",
+                "title": "Pricing & tax",
+                "subtitle": "คำนวณและตรวจภาษี",
+                "description": "รวมงาน 3–7 รายการ คำนวณต้นทุน/กำไร ยืนยัน VAT/WHT และเงื่อนไข งวดชำระรวม 100%; ข้อมูลสำคัญต้องครบก่อนสร้างไฟล์",
+                "kind": "security",
+                "line": 31,
+                "endLine": 37
+              },
+              {
+                "id": "generate",
+                "title": "Generate & QA",
+                "subtitle": "สร้างและตรวจ 2 PDF",
+                "description": "สร้าง quote-data.json ที่ยืนยันแล้ว จัด A4 + สไลด์ 16:9 ด้วย Sarabun และ component layout; ตรวจยอด สัญญา ฟอนต์ และทุกหน้า",
+                "kind": "backend",
+                "line": 39,
+                "endLine": 60
+              },
+              {
+                "id": "deliver",
+                "title": "2 PDF files",
+                "subtitle": "ส่งมอบใบเสนอราคา",
+                "description": "ส่งใบเสนอราคา A4 หนึ่งหน้าและ Service Overview PDF แนวนอน พร้อมยอด สถานะ VAT อายุใบเสนอราคา และสมมติฐาน",
+                "kind": "frontend",
+                "line": 57,
+                "endLine": 61
+              }
+            ],
+            "branches": [
+              {
+                "from": "continue",
+                "id": "wait",
+                "title": "Wait for user",
+                "subtitle": "ยังไม่ทำต่อ",
+                "description": "พักที่ข้อมูลผู้เสนอราคา จนได้รับคำสั่งทำต่อ; ไม่เริ่มประเมินโครงการก่อน",
+                "condition": "ยังไม่ยืนยัน",
+                "returnTo": null,
+                "line": 20,
+                "endLine": 23
+              },
+              {
+                "from": "pricing",
+                "id": "revise",
+                "title": "Clarify terms",
+                "subtitle": "ปรับ Scope / งบ",
+                "description": "หากขอบเขต เวลา งบ หรือความปลอดภัยขัดกัน ให้ตกลงสมมติฐานและถามเฉพาะข้อมูลที่ยังขาด",
+                "condition": "ข้อมูลไม่ครบ",
+                "returnTo": "pricing",
+                "line": 25,
+                "endLine": 37
+              }
+            ],
+            "notes": [
+              "ต้องตรวจราคาตลาดและภาษีสำหรับใบเสนอราคาใหม่ทุกครั้ง",
+              "ทั้งสอง PDF ต้องมาจากยอดและเงื่อนไขเดียวกัน"
+            ]
+          }
         },
         {
           "id": "user-manual-writer",
@@ -2066,7 +2433,96 @@
             "เขียนคู่มือแบบทีละขั้นสำหรับบทบาทของผู้อ่าน",
             "เดินตามขั้นตอนจริงและจับภาพผ่าน Browser เมื่อมี URL ทดสอบที่ได้รับอนุญาต",
             "ใช้ข้อมูลสมมติและภาพจำลองสำหรับขั้นตอนยืนยันตัวตนเพิ่มเติม"
-          ]
+          ],
+          "workflow": {
+            "sourcePath": "assets/skill-workflows/user-manual-writer.workflow.json",
+            "htmlPath": "assets/skill-workflows/user-manual-writer.html",
+            "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+            "steps": [
+              {
+                "id": "scope",
+                "title": "Scope & roles",
+                "subtitle": "ระบุงานและกลุ่มผู้ใช้",
+                "description": "กำหนดงาน บทบาท และขอบเขตของคู่มือจากบันทึก/หลักฐานที่ได้รับอนุญาต",
+                "kind": "external",
+                "line": 21,
+                "endLine": 24
+              },
+              {
+                "id": "browser",
+                "title": "Evidence review",
+                "subtitle": "ตรวจ UI ทดสอบ",
+                "description": "ถ้ามี URL ทดสอบที่ได้รับอนุญาต ต้องเดินขั้นตอนจริงผ่าน Browser ด้วยบัญชีทดสอบและ mock data; ตรวจปุ่ม เมนู สิทธิ์ และผลลัพธ์",
+                "kind": "security",
+                "line": 34,
+                "endLine": 40
+              },
+              {
+                "id": "draft",
+                "title": "Write steps",
+                "subtitle": "ร่างคู่มือทีละขั้น",
+                "description": "จัดตามวัตถุประสงค์ บทบาท สิ่งที่ต้องเตรียม ขั้นตอน และปัญหาที่ตรวจสอบได้; หนึ่งการกระทำหลักต่อ Step",
+                "kind": "backend",
+                "line": 42,
+                "endLine": 49
+              },
+              {
+                "id": "images",
+                "title": "Screenshots",
+                "subtitle": "ภาพตรงกับทุก Step",
+                "description": "แทรกภาพจาก Browser ใต้ขั้นตอน; ใช้ภาพจำลองที่ติดป้ายสำหรับ 2FA/OTP และ placeholder เมื่อมีข้อจำกัด ห้ามใช้ข้อมูลจริง",
+                "kind": "backend",
+                "line": 51,
+                "endLine": 57
+              },
+              {
+                "id": "review",
+                "title": "Review & format",
+                "subtitle": "ตรวจความถูกต้อง",
+                "description": "ตรวจการเดินตามขั้นตอน ชื่อปุ่ม ภาพ ไม่มีข้อมูลอ่อนไหว และ Sarabun ในไฟล์ที่กำหนดฟอนต์ได้",
+                "kind": "security",
+                "line": 23,
+                "endLine": 32
+              },
+              {
+                "id": "deliver",
+                "title": "Reviewed draft",
+                "subtitle": "ส่งฉบับร่าง",
+                "description": "ส่งคู่มือให้ผู้ขอตรวจทาน ปรับตามข้อเสนอแนะ และระบุภาพหรือขั้นตอนที่ยังตรวจไม่ได้",
+                "kind": "frontend",
+                "line": 26,
+                "endLine": 32
+              }
+            ],
+            "branches": [
+              {
+                "from": "browser",
+                "id": "evidence-gap",
+                "title": "Evidence gap",
+                "subtitle": "หยุดหรือขอหลักฐาน",
+                "description": "หากเข้าไม่ได้ สิทธิ์ไม่พอ หรือไม่มีบัญชีทดสอบ ให้หยุดก่อนล็อกอิน ขอหลักฐานที่ใช้ mock data และรอข้อมูลสำคัญ",
+                "condition": "หลักฐานไม่พอ",
+                "returnTo": "browser",
+                "line": 36,
+                "endLine": 40
+              },
+              {
+                "from": "review",
+                "id": "correct",
+                "title": "Correct draft",
+                "subtitle": "แก้ตามข้อเสนอแนะ",
+                "description": "แก้ขั้นตอน ภาพ และฟอนต์ที่ยังไม่ถูกต้อง แล้วตรวจซ้ำ; ระบุข้อจำกัดที่ยังแก้ไม่ได้",
+                "condition": "ต้องแก้",
+                "returnTo": "review",
+                "line": 26,
+                "endLine": 32
+              }
+            ],
+            "notes": [
+              "ห้ามขอรหัสผ่าน/OTP ผ่านแชตหรือใช้บัญชีผู้ใช้จริง",
+              "ห้ามอ้างว่าตรวจผ่าน Browser หากใช้เพียงหลักฐานจากผู้ขอ"
+            ]
+          }
         },
         {
           "id": "photoreal-head-web",
@@ -2185,7 +2641,96 @@
             "ส่งออก GLB พร้อมหลักฐานและ release gates",
             "มี React Three Fiber viewer สำหรับตรวจโมเดลบนเว็บ"
           ],
-          "overviewImage": "assets/skill-overviews/photoreal-head-web.webp"
+          "overviewImage": "assets/skill-overviews/photoreal-head-web.webp",
+          "workflow": {
+            "sourcePath": "assets/skill-workflows/photoreal-head-web.workflow.json",
+            "htmlPath": "assets/skill-workflows/photoreal-head-web.html",
+            "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+            "steps": [
+              {
+                "id": "intake",
+                "title": "G0 · Intake",
+                "subtitle": "Ref / สิทธิ์ / Blender",
+                "description": "ตรวจสิทธิ์และความพร้อมของ Blender, reference หลายมุมและกล้อง; ไม่สร้าง model ปลอมหากเครื่องมือไม่พร้อม",
+                "kind": "external",
+                "line": 44,
+                "endLine": 48
+              },
+              {
+                "id": "primary",
+                "title": "G1 · Anatomy",
+                "subtitle": "โครงกะโหลกและมวล",
+                "description": "เริ่มจาก base topology ที่เชื่อถือได้ ปั้น cranial vault, maxilla, mandible และ silhouette; ตรวจ flat gray หลายมุม",
+                "kind": "backend",
+                "line": 50,
+                "endLine": 54
+              },
+              {
+                "id": "detail",
+                "title": "G2 · Face forms",
+                "subtitle": "ตา จมูก หู ปาก",
+                "description": "ปั้นโครงสร้างจริงของ orbital rim, nose cartilage, ears, cheeks/lips/jaw โดยยังไม่ใช้ texture",
+                "kind": "backend",
+                "line": 56,
+                "endLine": 63
+              },
+              {
+                "id": "landmarks",
+                "title": "G3 · Landmarks",
+                "subtitle": "วัดและเทียบภาพ",
+                "description": "วัด normalized landmarks, ตรวจ clay และ photo-fit; แก้ camera mismatch ก่อนบิด geometry; หยุดหาก BLOCKED",
+                "kind": "security",
+                "line": 65,
+                "endLine": 71
+              },
+              {
+                "id": "texture",
+                "title": "G4 · UV / PBR",
+                "subtitle": "Retopo และ Texture",
+                "description": "จัด face loops/UV0, bake normal, roughness และ eyebrow layers แยก; ห้ามใช้ texture ปกปิด anatomy ที่ผิด",
+                "kind": "backend",
+                "line": 73,
+                "endLine": 80
+              },
+              {
+                "id": "release",
+                "title": "G5 · GLB / QA",
+                "subtitle": "Export + Browser",
+                "description": "ตรวจ GLB/UV/ภาพจริงบนมือถือและ desktop พร้อมหลักฐานกายวิภาคก่อน final release; ไม่อ้าง browser หรือ likeness ถ้าไม่ได้ทดสอบ",
+                "kind": "frontend",
+                "line": 82,
+                "endLine": 87
+              }
+            ],
+            "branches": [
+              {
+                "from": "intake",
+                "id": "no-runtime",
+                "title": "No 3D runtime",
+                "subtitle": "ส่งคำแนะนำแทน",
+                "description": "ถ้าไม่มีเครื่องมือ 3D ให้ส่งสคริปต์/วิธีทำ และระบุว่าการสร้างโมเดลยังไม่ได้ดำเนินการ",
+                "condition": "เครื่องมือไม่พร้อม",
+                "returnTo": null,
+                "line": 44,
+                "endLine": 48
+              },
+              {
+                "from": "landmarks",
+                "id": "anatomy-fix",
+                "title": "Anatomy repair",
+                "subtitle": "แก้โครงก่อน Texture",
+                "description": "แก้ clay, landmarks หรือการจัดกล้องที่ผิด; ห้ามผ่านไป UV/texture เมื่อ anatomy ยัง BLOCKED",
+                "condition": "Gate ไม่ผ่าน",
+                "returnTo": "primary",
+                "line": 65,
+                "endLine": 71
+              }
+            ],
+            "notes": [
+              "Anatomy-first: Texture ปิดตลอด G1–G3",
+              "ภาพเดียวไม่พอสำหรับยืนยันรูปทรง 3D หรือความเหมือนเฉพาะบุคคล"
+            ]
+          }
         },
         {
           "id": "thai-krathong-3d",
@@ -2480,7 +3025,107 @@
             "Mesh/UV QA ตรวจ topology, overlap, stretch, texel density และระยะห่าง UV islands",
             "Bake BaseColor, Normal, Roughness, Metallic, AO และ packed ORM พร้อม strict GLB QA"
           ],
-          "overviewImage": "assets/skill-overviews/thai-krathong-3d.webp"
+          "overviewImage": "assets/skill-overviews/thai-krathong-3d.webp",
+          "workflow": {
+            "sourcePath": "assets/skill-workflows/thai-krathong-3d.workflow.json",
+            "htmlPath": "assets/skill-workflows/thai-krathong-3d.html",
+            "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+            "steps": [
+              {
+                "id": "brief",
+                "title": "Reference intake",
+                "subtitle": "อ่านภาพและ Brief",
+                "description": "เลือก reference หลัก บันทึก family, silhouette, layers, material cues, accessories, camera และสิ่งที่อนุมานใน reference_analysis.json",
+                "kind": "external",
+                "line": 49,
+                "endLine": 74
+              },
+              {
+                "id": "family",
+                "title": "Structure family",
+                "subtitle": "เลือกโครงสร้างก่อนสี",
+                "description": "เลือก folded banana-leaf, lotus, tiered, diamond, bread, clay หรือ legacy simple baseline ตามลักษณะรูปทรงจริง",
+                "kind": "backend",
+                "line": 55,
+                "endLine": 70
+              },
+              {
+                "id": "shape",
+                "title": "Shape-first build",
+                "subtitle": "ปั้นและตรวจทีละส่วน",
+                "description": "สร้าง whole form → folds/petals → assembly → materials/presentation; ใช้ Blender สำหรับงานภาพอ้างอิงและปรับเฉพาะส่วนที่ผิด",
+                "kind": "security",
+                "line": 83,
+                "endLine": 96
+              },
+              {
+                "id": "mesh",
+                "title": "Mesh & UV QA",
+                "subtitle": "ตรวจ Geometry / UV",
+                "description": "ตรวจ mesh, transforms, UV overlap, padding, stretch; รักษา editable source และแยก technical QA จาก visual acceptance",
+                "kind": "security",
+                "line": 15,
+                "endLine": 37
+              },
+              {
+                "id": "bake",
+                "title": "Web PBR bake",
+                "subtitle": "Bake PBR เมื่อจำเป็น",
+                "description": "สำหรับ textured web/game release สร้าง BakeUV atlas, BaseColor/Normal/Roughness/Metallic/AO และ packed ORM แล้ว export GLB",
+                "kind": "backend",
+                "line": 15,
+                "endLine": 24
+              },
+              {
+                "id": "deliver",
+                "title": "Reimport & deliver",
+                "subtitle": "ตรวจ GLB และส่งมอบ",
+                "description": "เปิด GLB ใน clean scene ตรวจ front/top/three-quarter, texture และ geometry; ส่ง GLB, preview, report, BLEND เมื่อมีจริง พร้อมข้อจำกัด",
+                "kind": "frontend",
+                "line": 33,
+                "endLine": 37
+              }
+            ],
+            "branches": [
+              {
+                "from": "shape",
+                "id": "shape-fix",
+                "title": "Fix mismatch",
+                "subtitle": "ย้อนแก้ส่วนที่ผิด",
+                "description": "แก้ footprint, leaf folds, petals, layers หรือ camera ที่ผิดก่อนเพิ่มรายละเอียด; บันทึกภาพเทียบและตรวจซ้ำ",
+                "condition": "รูปทรงไม่ผ่าน",
+                "returnTo": "shape",
+                "line": 87,
+                "endLine": 98
+              },
+              {
+                "from": "mesh",
+                "id": "mesh-fix",
+                "title": "Repair mesh / UV",
+                "subtitle": "แก้ Defect จริง",
+                "description": "แก้ degenerate/nonmanifold geometry, UV overlap/padding/stretch บน working copy; ไม่ waive gate หรือทับ source",
+                "condition": "QA ไม่ผ่าน",
+                "returnTo": "mesh",
+                "line": 26,
+                "endLine": 37
+              },
+              {
+                "from": "bake",
+                "id": "preview-only",
+                "title": "Preview route",
+                "subtitle": "งานที่ไม่ต้อง bake",
+                "description": "baseline/source preview ใช้เส้นทาง export ปกติ ไม่อ้าง baked PBR; ส่งเฉพาะ artifact ที่มีจริง",
+                "condition": "ไม่ใช่ textured release",
+                "returnTo": "deliver",
+                "line": 119,
+                "endLine": 124
+              }
+            ],
+            "notes": [
+              "เส้นทางหลักสำหรับงาน textured web/game; legacy low-poly เป็นเส้นทางง่ายแยกต่างหาก",
+              "ผลเทคนิคผ่านไม่เท่ากับผ่านความเหมือน ต้องมี visual review จริง"
+            ]
+          }
         },
         {
           "id": "privacy-first-database-documentation-builder",
@@ -2699,7 +3344,107 @@
               "pdfPath": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/data-dictionary.pdf"
             }
           ],
-          "overviewImage": "assets/skill-overviews/privacy-first-database-documentation-builder.svg"
+          "overviewImage": "assets/skill-overviews/privacy-first-database-documentation-builder.svg",
+          "workflow": {
+            "sourcePath": "assets/skill-workflows/privacy-first-database-documentation-builder.workflow.json",
+            "htmlPath": "assets/skill-workflows/privacy-first-database-documentation-builder.html",
+            "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+            "steps": [
+              {
+                "id": "scope",
+                "title": "Scope & mode",
+                "subtitle": "ระบุระบบและโหมด",
+                "description": "ระบุ engine, schema revision, scope, audience และเลือก full/dictionary/catalog/erd/privacy/consumer/ai/lineage/diff ตามคำขอ",
+                "kind": "external",
+                "line": 19,
+                "endLine": 37
+              },
+              {
+                "id": "approval",
+                "title": "Owner approval",
+                "subtitle": "อนุมัติก่อนอ่าน",
+                "description": "รับเฉพาะ artifact schema-only ที่ DBA/Data Owner ตรวจและอนุมัติขอบเขตกับผู้รับก่อน Agent อ่าน ห้ามต่อ DB และอ่าน records",
+                "kind": "security",
+                "line": 15,
+                "endLine": 17
+              },
+              {
+                "id": "validate",
+                "title": "Strict validation",
+                "subtitle": "ตรวจ Metadata v2",
+                "description": "รัน validate_metadata.py กับ input ที่ผ่านอนุมัติเท่านั้น ตรวจคีย์/ความสัมพันธ์/classification; diff ต้องมีสอง snapshot อนุมัติแยกกัน",
+                "kind": "security",
+                "line": 37,
+                "endLine": 38
+              },
+              {
+                "id": "generate",
+                "title": "Generate docs",
+                "subtitle": "สร้างตามโหมด",
+                "description": "สร้าง Markdown/PDF, ERD, classification, lineage หรือคู่มือ Agent จาก metadata ที่ผ่านการรับรอง; Unknown → Restricted",
+                "kind": "backend",
+                "line": 39,
+                "endLine": 39
+              },
+              {
+                "id": "review",
+                "title": "Review & lint",
+                "subtitle": "Privacy / PDF QA",
+                "description": "ตรวจ coverage, keys, FK, classification และความตรงกันของ PDF/Markdown; release_check.py ใช้เฉพาะ staging และยังต้องตรวจทานด้วยคน",
+                "kind": "security",
+                "line": 40,
+                "endLine": 41
+              },
+              {
+                "id": "release",
+                "title": "Safe release",
+                "subtitle": "เผยแพร่เฉพาะที่ผ่าน",
+                "description": "ส่งเฉพาะเอกสารที่อนุมัติ พร้อม release-manifest, scope, gap, QA และสถานะ review; ไม่เผยแพร่ raw source",
+                "kind": "frontend",
+                "line": 41,
+                "endLine": 45
+              }
+            ],
+            "branches": [
+              {
+                "from": "approval",
+                "id": "template",
+                "title": "Template only",
+                "subtitle": "ไม่อ่านแหล่งข้อมูล",
+                "description": "หากไม่มี independent approval ให้หยุด acquisition และส่ง blank/synthetic template ที่ติดป้ายเท่านั้น",
+                "condition": "ไม่อนุมัติ",
+                "returnTo": null,
+                "line": 37,
+                "endLine": 37
+              },
+              {
+                "from": "validate",
+                "id": "invalid",
+                "title": "Reject input",
+                "subtitle": "ขอ Metadata ที่แก้แล้ว",
+                "description": "Validation ไม่ผ่าน ให้ขอ artifact ที่ owner แก้และรับรองใหม่; ไม่ sanitize ข้อมูลผสมหลังอ่าน",
+                "condition": "ไม่ผ่าน",
+                "returnTo": null,
+                "line": 38,
+                "endLine": 38
+              },
+              {
+                "from": "review",
+                "id": "withhold",
+                "title": "Withhold output",
+                "subtitle": "ระงับเอกสาร",
+                "description": "หากพบ privacy blocker หรือยังไม่อนุมัติการเปิดเผย ให้ระงับไฟล์ที่เกี่ยวข้อง แก้และตรวจซ้ำ",
+                "condition": "มี Blocker",
+                "returnTo": null,
+                "line": 40,
+                "endLine": 41
+              }
+            ],
+            "notes": [
+              "ห้ามอ่านข้อมูลส่วนบุคคลจริงแม้ชั่วคราว ไม่อ่าน live DB, raw dumps, defaults, comments หรือ sample rows",
+              "เอกสาร metadata ไม่ใช่สิทธิ์เข้าถึงข้อมูลจริง"
+            ]
+          }
         },
         {
           "id": "api-documentation-builder",
@@ -2908,7 +3653,107 @@
               "pdfPath": "skills/api-documentation-builder/examples/synthetic-demo/output/api-consumer-guide.pdf"
             }
           ],
-          "overviewImage": "assets/skill-overviews/api-documentation-builder.svg"
+          "overviewImage": "assets/skill-overviews/api-documentation-builder.svg",
+          "workflow": {
+            "sourcePath": "assets/skill-workflows/api-documentation-builder.workflow.json",
+            "htmlPath": "assets/skill-workflows/api-documentation-builder.html",
+            "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+            "steps": [
+              {
+                "id": "scope",
+                "title": "Scope",
+                "subtitle": "กำหนด API และผู้รับ",
+                "description": "ระบุ API style, domain, audience, approved operation, version และ deliverables จากหลักฐาน",
+                "kind": "external",
+                "line": 21,
+                "endLine": 21
+              },
+              {
+                "id": "acquire",
+                "title": "Contract approval",
+                "subtitle": "รับ Contract ที่คัดกรอง",
+                "description": "รับเฉพาะ owner-reviewed static contract, sanitized route/DTO/schema; ไม่เรียก endpoint จริง ไม่เปิด logs, payloads หรือ credentials",
+                "kind": "security",
+                "line": 15,
+                "endLine": 22
+              },
+              {
+                "id": "normalize",
+                "title": "Normalize OpenAPI",
+                "subtitle": "สร้างสัญญากลาง",
+                "description": "เก็บ operation ID, method/path, params, request/response, errors, security และ class ตามหลักฐาน; ค่าไม่ทราบต้องระบุ Unknown",
+                "kind": "backend",
+                "line": 23,
+                "endLine": 23
+              },
+              {
+                "id": "author",
+                "title": "Author docs",
+                "subtitle": "เอกสาร 6 หมวด",
+                "description": "สร้าง Catalog, Dictionary, Reference, Consumer Guide, Governance และ AI Integration Guide; ใช้ placeholder หรือไม่ใส่ตัวอย่าง restricted",
+                "kind": "backend",
+                "line": 24,
+                "endLine": 24
+              },
+              {
+                "id": "tools",
+                "title": "Agent allowlist",
+                "subtitle": "Draft Tools / MCP",
+                "description": "สร้าง tools.json สำหรับ operation ที่ได้รับอนุมัติและ schema ครบเท่านั้น; default-deny, ไม่เปิดใช้งานจริง, llms.txt และ AGENTS.md",
+                "kind": "security",
+                "line": 25,
+                "endLine": 25
+              },
+              {
+                "id": "release",
+                "title": "Validate & publish",
+                "subtitle": "ตรวจและส่งมอบ",
+                "description": "ตรวจ OpenAPI แบบ offline, coverage, examples, security, privacy lint, PDF QA; ส่งเฉพาะ artifact ปลอดภัยและระบุ gaps",
+                "kind": "frontend",
+                "line": 26,
+                "endLine": 26
+              }
+            ],
+            "branches": [
+              {
+                "from": "acquire",
+                "id": "template",
+                "title": "Template only",
+                "subtitle": "ไม่อ่านหรือเรียกจริง",
+                "description": "หากไม่มี safe source ให้ใช้ intake-template และ contract สมมุติที่ติดป้าย ไม่สร้าง endpoint จริงขึ้นเอง",
+                "condition": "ไม่มี Safe source",
+                "returnTo": null,
+                "line": 21,
+                "endLine": 22
+              },
+              {
+                "from": "tools",
+                "id": "empty",
+                "title": "Empty tool list",
+                "subtitle": "0 approved tools",
+                "description": "ถ้าไม่มี operation ที่ผ่านการอนุมัติ ให้ tools.json เป็นรายการว่างและอธิบายข้อจำกัด",
+                "condition": "ไม่มี Approval",
+                "returnTo": "release",
+                "line": 25,
+                "endLine": 25
+              },
+              {
+                "from": "release",
+                "id": "hold",
+                "title": "Withhold release",
+                "subtitle": "ระงับผลลัพธ์ไม่ผ่าน",
+                "description": "ห้ามเผยแพร่ contract ไม่ถูกต้อง หรือ tool ที่ชวนเข้าใจผิดว่าใช้จริงได้; ระบุ artifact ที่ระงับ",
+                "condition": "Validation fail",
+                "returnTo": null,
+                "line": 26,
+                "endLine": 26
+              }
+            ],
+            "notes": [
+              "Contract-only: no live calls, real data, tokens or payloads",
+              "Agent tool manifest เป็น draft ไม่ใช่ MCP server และไม่ให้สิทธิ์เรียก API"
+            ]
+          }
         }
       ]
     };
@@ -3273,9 +4118,14 @@
     // Modal Details Logic
     const modal = document.getElementById('detailModal');
     const modalCloseBtn = document.getElementById('modalCloseBtn');
-    modalCloseBtn.addEventListener('click', () => modal.classList.remove('open'));
+    function closeSkillModal() {
+      workflowRenderToken++;
+      document.getElementById('workflowViewer').replaceChildren();
+      modal.classList.remove('open');
+    }
+    modalCloseBtn.addEventListener('click', closeSkillModal);
     modal.addEventListener('click', (e) => {
-      if (e.target === modal) modal.classList.remove('open');
+      if (e.target === modal) closeSkillModal();
     });
 
     function setupModalTabs() {
@@ -3340,6 +4190,113 @@
       document.getElementById('modalInstallCode').textContent = cmd;
     }
 
+
+    // The overview and standalone Archify viewer are generated from the same authored graph.
+    // No external runtime or CDN is required for the compact diagram (including file://).
+    let workflowRenderToken = 0;
+    function renderSkillWorkflow(skill) {
+      const token = ++workflowRenderToken;
+      const section = document.getElementById('modalWorkflowSection');
+      const board = document.getElementById('workflowBoard');
+      const viewer = document.getElementById('workflowViewer');
+      const toggle = document.getElementById('workflowToggle');
+      const full = document.getElementById('workflowOpen');
+      const source = document.getElementById('workflowSource');
+      const status = document.getElementById('workflowStatus');
+      const wf = skill.workflow;
+      const validId = /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(skill.id);
+      section.hidden = !wf || !validId || !Array.isArray(wf.steps) || !wf.steps.length;
+      board.replaceChildren(); viewer.replaceChildren();
+      viewer.hidden = true; toggle.hidden = true; full.hidden = true;
+      toggle.setAttribute('aria-expanded','false'); toggle.textContent = 'เปิด Archify Interactive';
+      toggle.onclick = null;
+      status.textContent = '';
+      if (section.hidden) return;
+      const base = 'assets/skill-workflows/' + skill.id;
+      const nativePath = base + '.html';
+      source.href = base + '.workflow.json';
+      full.href = nativePath;
+      const pinned = /^[a-f0-9]{40}$/.test(wf.revision) ? wf.revision : 'main';
+      const skillDoc = 'https://github.com/codelv8-org/skills/blob/' + pinned + '/skills/' + skill.id + '/SKILL.md';
+      const make = (tag, cls, value) => {
+        const el = document.createElement(tag);
+        if (cls) el.className = cls;
+        if (value !== undefined) el.textContent = value;
+        return el;
+      };
+      const rows = make('div','workflow-rows');
+      const inspector = make('div','workflow-inspector');
+      inspector.setAttribute('aria-live','polite');
+      const allButtons = [];
+      const steps = wf.steps;
+      const branches = Array.isArray(wf.branches) ? wf.branches : [];
+      function select(node, button) {
+        allButtons.forEach(btn => btn.setAttribute('aria-pressed',String(btn===button)));
+        const title = make('strong',null,node.title+' · '+node.subtitle);
+        const detail = make('p',null,node.description);
+        const link = make('a',null,'SKILL.md · L'+node.line+'–'+node.endLine+' ↗');
+        link.href = skillDoc + '#L' + Number(node.line) + '-L' + Number(node.endLine);
+        link.target='_blank'; link.rel='noopener noreferrer';
+        inspector.replaceChildren(title,detail,link);
+      }
+      steps.forEach((step,index) => {
+        const row=make('div','workflow-row');
+        const main=make('div','workflow-main');
+        const btn=make('button','workflow-node');
+        btn.type='button'; btn.dataset.kind=step.kind; btn.setAttribute('aria-pressed','false');
+        const text=make('span','workflow-node-label');
+        text.append(make('strong',null,step.title),make('small',null,step.subtitle));
+        btn.append(make('span','workflow-node-index',String(index+1).padStart(2,'0')),text);
+        allButtons.push(btn); btn.addEventListener('click',()=>select(step,btn));main.append(btn);
+        const aside=make('div','workflow-branches');
+        branches.filter(x=>x.from===step.id).forEach(branch=>{
+          const el=make('button','workflow-branch');el.type='button';el.setAttribute('aria-pressed','false');
+          el.append(make('span','workflow-condition',branch.condition),make('strong',null,branch.subtitle));
+          const target=steps.find(s=>s.id===branch.returnTo);
+          if(target) el.append(make('span','workflow-return','↩ '+target.title));
+          allButtons.push(el);el.addEventListener('click',()=>select(branch,el));aside.append(el);
+        });
+        row.append(main,aside);rows.append(row);
+      });
+      board.append(rows,inspector);
+      if (Array.isArray(wf.notes) && wf.notes.length) {
+        const notes=make('ul','workflow-note-list');
+        wf.notes.forEach(note=>notes.append(make('li',null,note)));board.append(notes);
+      }
+      if(allButtons.length) select(steps[0],allButtons[0]);
+      // Do not show a dead full-screen link if the native renderer has not been built.
+      // Local file mode offers the source and a full interactive compact path immediately.
+      const activate=()=>{
+        if(token!==workflowRenderToken)return;
+        full.hidden=false;toggle.hidden=false;
+        status.textContent='Archify Interactive · native HTML พร้อมใช้งาน';
+        toggle.onclick=()=>{
+          if(viewer.hidden){
+            const frame=document.createElement('iframe');
+            frame.className='workflow-native';frame.title=skill.name+' — Archify workflow';
+            frame.loading='lazy';frame.src=nativePath;
+            frame.setAttribute('referrerpolicy','no-referrer');
+            viewer.replaceChildren(frame);viewer.hidden=false;
+            toggle.setAttribute('aria-expanded','true');toggle.textContent='ซ่อน Archify Interactive';
+          } else {
+            viewer.hidden=true;viewer.replaceChildren();
+            toggle.setAttribute('aria-expanded','false');toggle.textContent='เปิด Archify Interactive';
+          }
+        };
+      };
+      if(location.protocol==='file:') {
+        // Offline source checkout may not yet contain native build files; no fetch(file://).
+        status.textContent='เปิดจากไฟล์ในเครื่อง · ใช้ Flow ที่ฝังไว้ได้ทันที; สร้าง Archify HTML ตาม README เมื่อต้องการตัวดูเต็มรูปแบบ';
+        return;
+      }
+      status.textContent='Flow พร้อมใช้งาน · กำลังตรวจไฟล์ Archify HTML';
+      fetch(nativePath,{method:'HEAD',cache:'no-cache'}).then(response=>{
+        if(token!==workflowRenderToken)return;
+        if(response.ok && (response.headers.get('content-type')||'').includes('text/html'))activate();
+        else status.textContent='Flow พร้อมใช้งาน · Archify HTML ยังไม่เผยแพร่ (ดู JSON หรือ Build ตาม README)';
+      }).catch(()=>{if(token===workflowRenderToken)status.textContent='Flow พร้อมใช้งาน · ไม่สามารถตรวจไฟล์ Archify HTML ได้';});
+    }
+
     window.openDetailModal = function(id) {
       const skill = appData.skills.find(s => s.id === id);
       if (!skill) return;
@@ -3350,6 +4307,7 @@
       document.getElementById('modalTitle').textContent = skill.nameTh || skill.name;
       document.getElementById('modalSub').textContent = `${skill.name} • v${skill.version}`;
       document.getElementById('modalDescription').textContent = skill.description;
+      renderSkillWorkflow(skill);
       document.getElementById('modalDownload').innerHTML = renderDownloadLink(skill);
 
       // Agent Badges

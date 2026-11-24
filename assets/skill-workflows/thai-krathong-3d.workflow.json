@@ -1,0 +1,326 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Thai Krathong 3D · Workflow",
+    "subtitle": "v3.2.0 / documented procedure",
+    "output": "assets/skill-workflows/thai-krathong-3d.html",
+    "visual_preset": "signal-flow",
+    "quality_profile": "showcase",
+    "animation": "trace",
+    "feedback_links": false,
+    "repository": {
+      "url": "https://github.com/codelv8-org/skills",
+      "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+      "provider": "github"
+    },
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "external": {
+          "label": "Input / Intake"
+        },
+        "backend": {
+          "label": "Work"
+        },
+        "security": {
+          "label": "Gate / Alternative"
+        },
+        "frontend": {
+          "label": "Delivery"
+        },
+        "messagebus": {
+          "label": "Export"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "Main workflow"
+    },
+    {
+      "id": "exceptions",
+      "label": "Decision / alternative",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "brief",
+    "family",
+    "shape",
+    "mesh",
+    "bake",
+    "deliver"
+  ],
+  "nodes": [
+    {
+      "id": "brief",
+      "lane": "main",
+      "col": 0,
+      "type": "external",
+      "label": "Reference intake",
+      "sublabel": "อ่านภาพและ Brief",
+      "explanation": "เลือก reference หลัก บันทึก family, silhouette, layers, material cues, accessories, camera และสิ่งที่อนุมานใน reference_analysis.json",
+      "icon": "start",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/thai-krathong-3d/SKILL.md",
+          "line": 49,
+          "end_line": 74,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "family",
+      "lane": "main",
+      "col": 1,
+      "type": "backend",
+      "label": "Structure family",
+      "sublabel": "เลือกโครงสร้างก่อนสี",
+      "explanation": "เลือก folded banana-leaf, lotus, tiered, diamond, bread, clay หรือ legacy simple baseline ตามลักษณะรูปทรงจริง",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/thai-krathong-3d/SKILL.md",
+          "line": 55,
+          "end_line": 70,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "shape",
+      "lane": "main",
+      "col": 2,
+      "type": "security",
+      "label": "Shape-first build",
+      "sublabel": "ปั้นและตรวจทีละส่วน",
+      "explanation": "สร้าง whole form → folds/petals → assembly → materials/presentation; ใช้ Blender สำหรับงานภาพอ้างอิงและปรับเฉพาะส่วนที่ผิด",
+      "icon": "decision",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/thai-krathong-3d/SKILL.md",
+          "line": 83,
+          "end_line": 96,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "mesh",
+      "lane": "main",
+      "col": 3,
+      "type": "security",
+      "label": "Mesh & UV QA",
+      "sublabel": "ตรวจ Geometry / UV",
+      "explanation": "ตรวจ mesh, transforms, UV overlap, padding, stretch; รักษา editable source และแยก technical QA จาก visual acceptance",
+      "icon": "decision",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/thai-krathong-3d/SKILL.md",
+          "line": 15,
+          "end_line": 37,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "bake",
+      "lane": "main",
+      "col": 4,
+      "type": "backend",
+      "label": "Web PBR bake",
+      "sublabel": "Bake PBR เมื่อจำเป็น",
+      "explanation": "สำหรับ textured web/game release สร้าง BakeUV atlas, BaseColor/Normal/Roughness/Metallic/AO และ packed ORM แล้ว export GLB",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/thai-krathong-3d/SKILL.md",
+          "line": 15,
+          "end_line": 24,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "deliver",
+      "lane": "main",
+      "col": 5,
+      "type": "frontend",
+      "label": "Reimport & deliver",
+      "sublabel": "ตรวจ GLB และส่งมอบ",
+      "explanation": "เปิด GLB ใน clean scene ตรวจ front/top/three-quarter, texture และ geometry; ส่ง GLB, preview, report, BLEND เมื่อมีจริง พร้อมข้อจำกัด",
+      "icon": "success",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/thai-krathong-3d/SKILL.md",
+          "line": 33,
+          "end_line": 37,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "shape-fix",
+      "lane": "exceptions",
+      "col": 2,
+      "type": "security",
+      "label": "Fix mismatch",
+      "sublabel": "ย้อนแก้ส่วนที่ผิด",
+      "explanation": "แก้ footprint, leaf folds, petals, layers หรือ camera ที่ผิดก่อนเพิ่มรายละเอียด; บันทึกภาพเทียบและตรวจซ้ำ",
+      "icon": "decision",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/thai-krathong-3d/SKILL.md",
+          "line": 87,
+          "end_line": 98,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "mesh-fix",
+      "lane": "exceptions",
+      "col": 3,
+      "type": "security",
+      "label": "Repair mesh / UV",
+      "sublabel": "แก้ Defect จริง",
+      "explanation": "แก้ degenerate/nonmanifold geometry, UV overlap/padding/stretch บน working copy; ไม่ waive gate หรือทับ source",
+      "icon": "decision",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/thai-krathong-3d/SKILL.md",
+          "line": 26,
+          "end_line": 37,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "preview-only",
+      "lane": "exceptions",
+      "col": 4,
+      "type": "security",
+      "label": "Preview route",
+      "sublabel": "งานที่ไม่ต้อง bake",
+      "explanation": "baseline/source preview ใช้เส้นทาง export ปกติ ไม่อ้าง baked PBR; ส่งเฉพาะ artifact ที่มีจริง",
+      "icon": "decision",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/thai-krathong-3d/SKILL.md",
+          "line": 119,
+          "end_line": 124,
+          "label": "SKILL.md"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "main-1",
+      "from": "brief",
+      "to": "family",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-2",
+      "from": "family",
+      "to": "shape",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-3",
+      "from": "shape",
+      "to": "mesh",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-4",
+      "from": "mesh",
+      "to": "bake",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-5",
+      "from": "bake",
+      "to": "deliver",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "branch-1",
+      "from": "shape",
+      "to": "shape-fix",
+      "label": "รูปทรงไม่ผ่าน",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "return-1",
+      "from": "shape-fix",
+      "to": "shape",
+      "variant": "dashed",
+      "role": "return",
+      "fromSide": "left",
+      "toSide": "left",
+      "route": "return-left"
+    },
+    {
+      "id": "branch-2",
+      "from": "mesh",
+      "to": "mesh-fix",
+      "label": "QA ไม่ผ่าน",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "return-2",
+      "from": "mesh-fix",
+      "to": "mesh",
+      "variant": "dashed",
+      "role": "return",
+      "fromSide": "left",
+      "toSide": "left",
+      "route": "return-left"
+    },
+    {
+      "id": "branch-3",
+      "from": "bake",
+      "to": "preview-only",
+      "label": "ไม่ใช่ textured release",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "return-3",
+      "from": "preview-only",
+      "to": "deliver",
+      "variant": "dashed",
+      "role": "return"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Workflow notes",
+      "items": [
+        "เส้นทางหลักสำหรับงาน textured web/game; legacy low-poly เป็นเส้นทางง่ายแยกต่างหาก",
+        "ผลเทคนิคผ่านไม่เท่ากับผ่านความเหมือน ต้องมี visual review จริง"
+      ]
+    }
+  ]
+}

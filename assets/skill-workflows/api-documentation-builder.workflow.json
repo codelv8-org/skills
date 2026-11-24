@@ -1,0 +1,306 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "API Documentation Builder · Workflow",
+    "subtitle": "v1.0.0 / documented procedure",
+    "output": "assets/skill-workflows/api-documentation-builder.html",
+    "visual_preset": "signal-flow",
+    "quality_profile": "showcase",
+    "animation": "trace",
+    "feedback_links": false,
+    "repository": {
+      "url": "https://github.com/codelv8-org/skills",
+      "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+      "provider": "github"
+    },
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "external": {
+          "label": "Input / Intake"
+        },
+        "backend": {
+          "label": "Work"
+        },
+        "security": {
+          "label": "Gate / Alternative"
+        },
+        "frontend": {
+          "label": "Delivery"
+        },
+        "messagebus": {
+          "label": "Export"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "Main workflow"
+    },
+    {
+      "id": "exceptions",
+      "label": "Decision / alternative",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "scope",
+    "acquire",
+    "normalize",
+    "author",
+    "tools",
+    "release"
+  ],
+  "nodes": [
+    {
+      "id": "scope",
+      "lane": "main",
+      "col": 0,
+      "type": "external",
+      "label": "Scope",
+      "sublabel": "กำหนด API และผู้รับ",
+      "explanation": "ระบุ API style, domain, audience, approved operation, version และ deliverables จากหลักฐาน",
+      "icon": "start",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/api-documentation-builder/SKILL.md",
+          "line": 21,
+          "end_line": 21,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "acquire",
+      "lane": "main",
+      "col": 1,
+      "type": "security",
+      "label": "Contract approval",
+      "sublabel": "รับ Contract ที่คัดกรอง",
+      "explanation": "รับเฉพาะ owner-reviewed static contract, sanitized route/DTO/schema; ไม่เรียก endpoint จริง ไม่เปิด logs, payloads หรือ credentials",
+      "icon": "decision",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/api-documentation-builder/SKILL.md",
+          "line": 15,
+          "end_line": 22,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "normalize",
+      "lane": "main",
+      "col": 2,
+      "type": "backend",
+      "label": "Normalize OpenAPI",
+      "sublabel": "สร้างสัญญากลาง",
+      "explanation": "เก็บ operation ID, method/path, params, request/response, errors, security และ class ตามหลักฐาน; ค่าไม่ทราบต้องระบุ Unknown",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/api-documentation-builder/SKILL.md",
+          "line": 23,
+          "end_line": 23,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "author",
+      "lane": "main",
+      "col": 3,
+      "type": "backend",
+      "label": "Author docs",
+      "sublabel": "เอกสาร 6 หมวด",
+      "explanation": "สร้าง Catalog, Dictionary, Reference, Consumer Guide, Governance และ AI Integration Guide; ใช้ placeholder หรือไม่ใส่ตัวอย่าง restricted",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/api-documentation-builder/SKILL.md",
+          "line": 24,
+          "end_line": 24,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "tools",
+      "lane": "main",
+      "col": 4,
+      "type": "security",
+      "label": "Agent allowlist",
+      "sublabel": "Draft Tools / MCP",
+      "explanation": "สร้าง tools.json สำหรับ operation ที่ได้รับอนุมัติและ schema ครบเท่านั้น; default-deny, ไม่เปิดใช้งานจริง, llms.txt และ AGENTS.md",
+      "icon": "decision",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/api-documentation-builder/SKILL.md",
+          "line": 25,
+          "end_line": 25,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "release",
+      "lane": "main",
+      "col": 5,
+      "type": "frontend",
+      "label": "Validate & publish",
+      "sublabel": "ตรวจและส่งมอบ",
+      "explanation": "ตรวจ OpenAPI แบบ offline, coverage, examples, security, privacy lint, PDF QA; ส่งเฉพาะ artifact ปลอดภัยและระบุ gaps",
+      "icon": "success",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/api-documentation-builder/SKILL.md",
+          "line": 26,
+          "end_line": 26,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "template",
+      "lane": "exceptions",
+      "col": 1,
+      "type": "security",
+      "label": "Template only",
+      "sublabel": "ไม่อ่านหรือเรียกจริง",
+      "explanation": "หากไม่มี safe source ให้ใช้ intake-template และ contract สมมุติที่ติดป้าย ไม่สร้าง endpoint จริงขึ้นเอง",
+      "icon": "stop",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/api-documentation-builder/SKILL.md",
+          "line": 21,
+          "end_line": 22,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "empty",
+      "lane": "exceptions",
+      "col": 4,
+      "type": "security",
+      "label": "Empty tool list",
+      "sublabel": "0 approved tools",
+      "explanation": "ถ้าไม่มี operation ที่ผ่านการอนุมัติ ให้ tools.json เป็นรายการว่างและอธิบายข้อจำกัด",
+      "icon": "decision",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/api-documentation-builder/SKILL.md",
+          "line": 25,
+          "end_line": 25,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "hold",
+      "lane": "exceptions",
+      "col": 5,
+      "type": "security",
+      "label": "Withhold release",
+      "sublabel": "ระงับผลลัพธ์ไม่ผ่าน",
+      "explanation": "ห้ามเผยแพร่ contract ไม่ถูกต้อง หรือ tool ที่ชวนเข้าใจผิดว่าใช้จริงได้; ระบุ artifact ที่ระงับ",
+      "icon": "stop",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/api-documentation-builder/SKILL.md",
+          "line": 26,
+          "end_line": 26,
+          "label": "SKILL.md"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "main-1",
+      "from": "scope",
+      "to": "acquire",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-2",
+      "from": "acquire",
+      "to": "normalize",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-3",
+      "from": "normalize",
+      "to": "author",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-4",
+      "from": "author",
+      "to": "tools",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-5",
+      "from": "tools",
+      "to": "release",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "branch-1",
+      "from": "acquire",
+      "to": "template",
+      "label": "ไม่มี Safe source",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "branch-2",
+      "from": "tools",
+      "to": "empty",
+      "label": "ไม่มี Approval",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "return-2",
+      "from": "empty",
+      "to": "release",
+      "variant": "dashed",
+      "role": "return"
+    },
+    {
+      "id": "branch-3",
+      "from": "release",
+      "to": "hold",
+      "label": "Validation fail",
+      "variant": "security",
+      "role": "branch"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Workflow notes",
+      "items": [
+        "Contract-only: no live calls, real data, tokens or payloads",
+        "Agent tool manifest เป็น draft ไม่ใช่ MCP server และไม่ให้สิทธิ์เรียก API"
+      ]
+    }
+  ]
+}

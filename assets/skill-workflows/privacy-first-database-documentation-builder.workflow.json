@@ -1,0 +1,300 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Privacy-First Database Documentation Builder · Workflow",
+    "subtitle": "v2.0.0 / documented procedure",
+    "output": "assets/skill-workflows/privacy-first-database-documentation-builder.html",
+    "visual_preset": "signal-flow",
+    "quality_profile": "showcase",
+    "animation": "trace",
+    "feedback_links": false,
+    "repository": {
+      "url": "https://github.com/codelv8-org/skills",
+      "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+      "provider": "github"
+    },
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "external": {
+          "label": "Input / Intake"
+        },
+        "backend": {
+          "label": "Work"
+        },
+        "security": {
+          "label": "Gate / Alternative"
+        },
+        "frontend": {
+          "label": "Delivery"
+        },
+        "messagebus": {
+          "label": "Export"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "Main workflow"
+    },
+    {
+      "id": "exceptions",
+      "label": "Decision / alternative",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "scope",
+    "approval",
+    "validate",
+    "generate",
+    "review",
+    "release"
+  ],
+  "nodes": [
+    {
+      "id": "scope",
+      "lane": "main",
+      "col": 0,
+      "type": "external",
+      "label": "Scope & mode",
+      "sublabel": "ระบุระบบและโหมด",
+      "explanation": "ระบุ engine, schema revision, scope, audience และเลือก full/dictionary/catalog/erd/privacy/consumer/ai/lineage/diff ตามคำขอ",
+      "icon": "start",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/privacy-first-database-documentation-builder/SKILL.md",
+          "line": 19,
+          "end_line": 37,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "approval",
+      "lane": "main",
+      "col": 1,
+      "type": "security",
+      "label": "Owner approval",
+      "sublabel": "อนุมัติก่อนอ่าน",
+      "explanation": "รับเฉพาะ artifact schema-only ที่ DBA/Data Owner ตรวจและอนุมัติขอบเขตกับผู้รับก่อน Agent อ่าน ห้ามต่อ DB และอ่าน records",
+      "icon": "decision",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/privacy-first-database-documentation-builder/SKILL.md",
+          "line": 15,
+          "end_line": 17,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "validate",
+      "lane": "main",
+      "col": 2,
+      "type": "security",
+      "label": "Strict validation",
+      "sublabel": "ตรวจ Metadata v2",
+      "explanation": "รัน validate_metadata.py กับ input ที่ผ่านอนุมัติเท่านั้น ตรวจคีย์/ความสัมพันธ์/classification; diff ต้องมีสอง snapshot อนุมัติแยกกัน",
+      "icon": "decision",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/privacy-first-database-documentation-builder/SKILL.md",
+          "line": 37,
+          "end_line": 38,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "generate",
+      "lane": "main",
+      "col": 3,
+      "type": "backend",
+      "label": "Generate docs",
+      "sublabel": "สร้างตามโหมด",
+      "explanation": "สร้าง Markdown/PDF, ERD, classification, lineage หรือคู่มือ Agent จาก metadata ที่ผ่านการรับรอง; Unknown → Restricted",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/privacy-first-database-documentation-builder/SKILL.md",
+          "line": 39,
+          "end_line": 39,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "review",
+      "lane": "main",
+      "col": 4,
+      "type": "security",
+      "label": "Review & lint",
+      "sublabel": "Privacy / PDF QA",
+      "explanation": "ตรวจ coverage, keys, FK, classification และความตรงกันของ PDF/Markdown; release_check.py ใช้เฉพาะ staging และยังต้องตรวจทานด้วยคน",
+      "icon": "decision",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/privacy-first-database-documentation-builder/SKILL.md",
+          "line": 40,
+          "end_line": 41,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "release",
+      "lane": "main",
+      "col": 5,
+      "type": "frontend",
+      "label": "Safe release",
+      "sublabel": "เผยแพร่เฉพาะที่ผ่าน",
+      "explanation": "ส่งเฉพาะเอกสารที่อนุมัติ พร้อม release-manifest, scope, gap, QA และสถานะ review; ไม่เผยแพร่ raw source",
+      "icon": "success",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/privacy-first-database-documentation-builder/SKILL.md",
+          "line": 41,
+          "end_line": 45,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "template",
+      "lane": "exceptions",
+      "col": 1,
+      "type": "security",
+      "label": "Template only",
+      "sublabel": "ไม่อ่านแหล่งข้อมูล",
+      "explanation": "หากไม่มี independent approval ให้หยุด acquisition และส่ง blank/synthetic template ที่ติดป้ายเท่านั้น",
+      "icon": "stop",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/privacy-first-database-documentation-builder/SKILL.md",
+          "line": 37,
+          "end_line": 37,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "invalid",
+      "lane": "exceptions",
+      "col": 2,
+      "type": "security",
+      "label": "Reject input",
+      "sublabel": "ขอ Metadata ที่แก้แล้ว",
+      "explanation": "Validation ไม่ผ่าน ให้ขอ artifact ที่ owner แก้และรับรองใหม่; ไม่ sanitize ข้อมูลผสมหลังอ่าน",
+      "icon": "stop",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/privacy-first-database-documentation-builder/SKILL.md",
+          "line": 38,
+          "end_line": 38,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "withhold",
+      "lane": "exceptions",
+      "col": 4,
+      "type": "security",
+      "label": "Withhold output",
+      "sublabel": "ระงับเอกสาร",
+      "explanation": "หากพบ privacy blocker หรือยังไม่อนุมัติการเปิดเผย ให้ระงับไฟล์ที่เกี่ยวข้อง แก้และตรวจซ้ำ",
+      "icon": "stop",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/privacy-first-database-documentation-builder/SKILL.md",
+          "line": 40,
+          "end_line": 41,
+          "label": "SKILL.md"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "main-1",
+      "from": "scope",
+      "to": "approval",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-2",
+      "from": "approval",
+      "to": "validate",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-3",
+      "from": "validate",
+      "to": "generate",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-4",
+      "from": "generate",
+      "to": "review",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-5",
+      "from": "review",
+      "to": "release",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "branch-1",
+      "from": "approval",
+      "to": "template",
+      "label": "ไม่อนุมัติ",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "branch-2",
+      "from": "validate",
+      "to": "invalid",
+      "label": "ไม่ผ่าน",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "branch-3",
+      "from": "review",
+      "to": "withhold",
+      "label": "มี Blocker",
+      "variant": "security",
+      "role": "branch"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Workflow notes",
+      "items": [
+        "ห้ามอ่านข้อมูลส่วนบุคคลจริงแม้ชั่วคราว ไม่อ่าน live DB, raw dumps, defaults, comments หรือ sample rows",
+        "เอกสาร metadata ไม่ใช่สิทธิ์เข้าถึงข้อมูลจริง"
+      ]
+    }
+  ]
+}

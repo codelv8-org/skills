@@ -108,6 +108,29 @@ python scripts/build-skill-zips.py
 
 ---
 
+## Workflow Diagrams — Archify
+
+เปิดรายละเอียดของแต่ละ Skill แล้วเลือกขั้นตอนใน Workflow Diagram เพื่อดูคำอธิบาย เงื่อนไขการหยุด/แก้ไข และหลักฐาน `SKILL.md` ที่อ้างอิง commit ต้นทาง ทุก Skill ใน Catalog มีแผนภาพเฉพาะของตัวเอง ไม่ใช่ flow ตัวอย่างร่วมกัน
+
+- `assets/skill-workflows/<id>.workflow.json`: แหล่งข้อมูล editable ตาม Workflow Schema v2 ของ [Archify](https://github.com/tt-a1i/archify) (Apache-2.0)
+- `data/skills.json` และ Embedded Catalog: compact interactive flow ที่เปิดจากเครื่องได้โดยไม่ต้องเชื่อมต่ออินเทอร์เน็ตหรือโหลด CDN
+- `assets/skill-workflows/<id>.html`: Native Archify standalone HTML ที่สร้างด้วย `finalize workflow` (validate, delivery, strict check และ browser-check) เมื่อ Build สำเร็จ จึงแสดงปุ่มเปิดตัวดู Interactive และเต็มจอในรายละเอียด Skill
+- Workflow เป็นข้อกำหนดตามเอกสารของ Skill ไม่ได้แสดงว่างานของผู้ใช้กำลังรันหรือผ่าน QA จริง
+
+สร้างหรือทดสอบในเครื่องจาก repository root (Node.js 22+, Git, Chrome/Chromium, Git history ที่มี commit ต้นทางครบถ้วน):
+
+```bash
+node scripts/build-skill-workflows.mjs --check
+git clone https://github.com/tt-a1i/archify.git ../archify
+git -C ../archify checkout --detach 3ca198d867ce4b616332f846ff66e5c8e5e60f95
+node scripts/build-skill-workflows.mjs --archify=../archify
+python -m http.server 3000
+```
+
+หากต้องการปรับ flow ให้แก้ Workflow JSON และ compact workflow ใน Catalog ทั้งสองชุดให้สอดคล้องกับ SKILL.md รุ่นที่อ้างถึง แล้วรัน build/check ใหม่ ห้ามใช้ข้อมูลจริงเป็นตัวอย่างในแผนภาพของ Privacy-First และ API Documentation Builder
+
+---
+
 ## 🚀 วิธีเปิดใช้งานหน้า Web Catalog
 
 คุณสามารถเปิดดูรายการ Skill ผ่านเบราว์เซอร์ได้ทันทีโดยไม่ต้องติดตั้ง Backend:

@@ -7,22 +7,24 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
+    permissions:
+      contents: read
+      actions: read
+      pages: read
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -41,6 +43,21 @@ jobs:
       - name: Build and validate synthetic documentation examples
         run: python scripts/build-documentation-examples.py
 
+      - name: Set up Node.js for Archify
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate catalog workflow sources
+        run: node scripts/build-skill-workflows.mjs --check
+
+      - name: Build native Archify diagrams (pinned upstream)
+        run: |
+          git init "$RUNNER_TEMP/archify"
+          git -C "$RUNNER_TEMP/archify" fetch --depth=1 https://github.com/tt-a1i/archify.git 3ca198d867ce4b616332f846ff66e5c8e5e60f95
+          git -C "$RUNNER_TEMP/archify" checkout --detach FETCH_HEAD
+          node scripts/build-skill-workflows.mjs --archify="$RUNNER_TEMP/archify"
+
       - name: Build skill ZIP files
         run: python3 scripts/build-skill-zips.py
 
@@ -49,6 +66,18 @@ jobs:
         with:
           path: '.'
 
+  deploy:
+    needs: build
+    permissions:
+      contents: read
+      actions: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

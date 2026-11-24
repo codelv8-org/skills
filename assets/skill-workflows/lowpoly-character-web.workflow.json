@@ -1,0 +1,309 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Low-poly Character Web Studio · Workflow",
+    "subtitle": "v5.0.0 / documented procedure",
+    "output": "assets/skill-workflows/lowpoly-character-web.html",
+    "visual_preset": "signal-flow",
+    "quality_profile": "showcase",
+    "animation": "trace",
+    "feedback_links": false,
+    "repository": {
+      "url": "https://github.com/codelv8-org/skills",
+      "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+      "provider": "github"
+    },
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "external": {
+          "label": "Input / Intake"
+        },
+        "backend": {
+          "label": "Work"
+        },
+        "security": {
+          "label": "Gate / Alternative"
+        },
+        "frontend": {
+          "label": "Delivery"
+        },
+        "messagebus": {
+          "label": "Export"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "Main workflow"
+    },
+    {
+      "id": "exceptions",
+      "label": "Decision / alternative",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "intake",
+    "parts",
+    "surface",
+    "rig",
+    "webqa",
+    "release"
+  ],
+  "nodes": [
+    {
+      "id": "intake",
+      "lane": "main",
+      "col": 0,
+      "type": "external",
+      "label": "G0 · Reference",
+      "sublabel": "อ่าน Ref และบริบท",
+      "explanation": "อ่านภาพต้นฉบับทุกมุม ตรวจภาพ crop, landmarks, อุปกรณ์และกล้อง แยกสิ่งที่เห็นจริงกับส่วนที่อนุมาน",
+      "icon": "start",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/lowpoly-character-web/SKILL.md",
+          "line": 46,
+          "end_line": 51,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "parts",
+      "lane": "main",
+      "col": 1,
+      "type": "security",
+      "label": "G1 · Part fidelity",
+      "sublabel": "ปั้นทีละส่วน + Gate",
+      "explanation": "HEAD → TORSO → ARMS_HANDS → LEGS_FEET → OUTFIT_GEAR → INTEGRATION; แต่ละส่วนต้องเทียบ GLB จริง, mask, landmarks และ independent review ก่อนผ่าน",
+      "icon": "decision",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/lowpoly-character-web/SKILL.md",
+          "line": 53,
+          "end_line": 66,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "surface",
+      "lane": "main",
+      "col": 2,
+      "type": "backend",
+      "label": "G2–G3 · Mesh / UV",
+      "sublabel": "Topology และวัสดุ",
+      "explanation": "ประกอบชิ้นส่วนเป็น topology เหมาะกับการเคลื่อนไหว วาง UV/วัสดุหลังผ่าน shape gates",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/lowpoly-character-web/SKILL.md",
+          "line": 78,
+          "end_line": 87,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "rig",
+      "lane": "main",
+      "col": 3,
+      "type": "backend",
+      "label": "G4 · Rig & poses",
+      "sublabel": "Rig เมื่อร้องขอ",
+      "explanation": "ตรวจ skeleton, skin weights, deformation และ sampled poses ตามคลิปที่ผู้ใช้ต้องการ; งาน static ไม่บังคับ rig/clip ที่ไม่ได้ขอ",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/lowpoly-character-web/SKILL.md",
+          "line": 89,
+          "end_line": 101,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "webqa",
+      "lane": "main",
+      "col": 4,
+      "type": "security",
+      "label": "G5–G6 · Web QA",
+      "sublabel": "LOD / WebGL / Preview",
+      "explanation": "เลือก HERO/NPC/CROWD, วัด scene budget และ FPS บนอุปกรณ์จริง พร้อม preview ทุก stage; ไม่อ้าง FPS เมื่อยังไม่ได้ทดสอบ",
+      "icon": "decision",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/lowpoly-character-web/SKILL.md",
+          "line": 103,
+          "end_line": 114,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "release",
+      "lane": "main",
+      "col": 5,
+      "type": "frontend",
+      "label": "G7 · Release",
+      "sublabel": "ส่ง GLB + หลักฐาน",
+      "explanation": "ส่ง GLB/LOD, source เมื่อสร้างจริง, previews และรายงาน gate; ห้ามเรียก production-ready หากหลักฐานสำคัญไม่ครบ",
+      "icon": "success",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/lowpoly-character-web/SKILL.md",
+          "line": 116,
+          "end_line": 118,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "reference-stop",
+      "lane": "exceptions",
+      "col": 0,
+      "type": "security",
+      "label": "Reference blocked",
+      "sublabel": "หยุดก่อนสร้าง",
+      "explanation": "หาก crop สูญเสียส่วนสำคัญ มุมผิด หรือยังไม่บันทึก feature ให้หยุดและแก้ reference",
+      "icon": "stop",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/lowpoly-character-web/SKILL.md",
+          "line": 48,
+          "end_line": 51,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "part-repair",
+      "lane": "exceptions",
+      "col": 1,
+      "type": "security",
+      "label": "Fix current part",
+      "sublabel": "แก้เฉพาะส่วน",
+      "explanation": "เมื่อ metrics หรือ reviewer ไม่ผ่าน ให้แก้ real geometry ของส่วนเดิมและ render/re-measure ใหม่; ถ้าแก้ไม่ได้ให้ REVIEW_REQUIRED",
+      "icon": "decision",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/lowpoly-character-web/SKILL.md",
+          "line": 60,
+          "end_line": 66,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "prototype",
+      "lane": "exceptions",
+      "col": 4,
+      "type": "security",
+      "label": "Prototype only",
+      "sublabel": "ไม่รับรอง production",
+      "explanation": "หาก gate ด้านศิลป์, deformation หรือ WebGL ยังไม่ผ่าน/ไม่ทดสอบ ให้ระบุ PROTOTYPE/REVIEW_REQUIRED พร้อมข้อแก้ไข",
+      "icon": "stop",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/lowpoly-character-web/SKILL.md",
+          "line": 110,
+          "end_line": 118,
+          "label": "SKILL.md"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "main-1",
+      "from": "intake",
+      "to": "parts",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-2",
+      "from": "parts",
+      "to": "surface",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-3",
+      "from": "surface",
+      "to": "rig",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-4",
+      "from": "rig",
+      "to": "webqa",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-5",
+      "from": "webqa",
+      "to": "release",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "branch-1",
+      "from": "intake",
+      "to": "reference-stop",
+      "label": "Ref ไม่ครบ",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "branch-2",
+      "from": "parts",
+      "to": "part-repair",
+      "label": "ไม่ผ่าน",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "return-2",
+      "from": "part-repair",
+      "to": "parts",
+      "variant": "dashed",
+      "role": "return",
+      "fromSide": "left",
+      "toSide": "left",
+      "route": "return-left"
+    },
+    {
+      "id": "branch-3",
+      "from": "webqa",
+      "to": "prototype",
+      "label": "QA ไม่ครบ",
+      "variant": "security",
+      "role": "branch"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Workflow notes",
+      "items": [
+        "G1 เป็น hard gate ต่อส่วน; Integration ตรวจส่วนเดิมซ้ำบน GLB ประกอบจริง",
+        "ผลทดสอบเชิงตัวเลขไม่แทน visual acceptance; IoU ไม่ใช่เปอร์เซ็นต์ความเหมือน"
+      ]
+    }
+  ]
+}

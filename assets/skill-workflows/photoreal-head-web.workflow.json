@@ -1,0 +1,278 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Photoreal Head for Web · Workflow",
+    "subtitle": "v2.0.0 / documented procedure",
+    "output": "assets/skill-workflows/photoreal-head-web.html",
+    "visual_preset": "signal-flow",
+    "quality_profile": "showcase",
+    "animation": "trace",
+    "feedback_links": false,
+    "repository": {
+      "url": "https://github.com/codelv8-org/skills",
+      "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+      "provider": "github"
+    },
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "external": {
+          "label": "Input / Intake"
+        },
+        "backend": {
+          "label": "Work"
+        },
+        "security": {
+          "label": "Gate / Alternative"
+        },
+        "frontend": {
+          "label": "Delivery"
+        },
+        "messagebus": {
+          "label": "Export"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "Main workflow"
+    },
+    {
+      "id": "exceptions",
+      "label": "Decision / alternative",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "intake",
+    "primary",
+    "detail",
+    "landmarks",
+    "texture",
+    "release"
+  ],
+  "nodes": [
+    {
+      "id": "intake",
+      "lane": "main",
+      "col": 0,
+      "type": "external",
+      "label": "G0 · Intake",
+      "sublabel": "Ref / สิทธิ์ / Blender",
+      "explanation": "ตรวจสิทธิ์และความพร้อมของ Blender, reference หลายมุมและกล้อง; ไม่สร้าง model ปลอมหากเครื่องมือไม่พร้อม",
+      "icon": "start",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/photoreal-head-web/SKILL.md",
+          "line": 44,
+          "end_line": 48,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "primary",
+      "lane": "main",
+      "col": 1,
+      "type": "backend",
+      "label": "G1 · Anatomy",
+      "sublabel": "โครงกะโหลกและมวล",
+      "explanation": "เริ่มจาก base topology ที่เชื่อถือได้ ปั้น cranial vault, maxilla, mandible และ silhouette; ตรวจ flat gray หลายมุม",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/photoreal-head-web/SKILL.md",
+          "line": 50,
+          "end_line": 54,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "detail",
+      "lane": "main",
+      "col": 2,
+      "type": "backend",
+      "label": "G2 · Face forms",
+      "sublabel": "ตา จมูก หู ปาก",
+      "explanation": "ปั้นโครงสร้างจริงของ orbital rim, nose cartilage, ears, cheeks/lips/jaw โดยยังไม่ใช้ texture",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/photoreal-head-web/SKILL.md",
+          "line": 56,
+          "end_line": 63,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "landmarks",
+      "lane": "main",
+      "col": 3,
+      "type": "security",
+      "label": "G3 · Landmarks",
+      "sublabel": "วัดและเทียบภาพ",
+      "explanation": "วัด normalized landmarks, ตรวจ clay และ photo-fit; แก้ camera mismatch ก่อนบิด geometry; หยุดหาก BLOCKED",
+      "icon": "decision",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/photoreal-head-web/SKILL.md",
+          "line": 65,
+          "end_line": 71,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "texture",
+      "lane": "main",
+      "col": 4,
+      "type": "backend",
+      "label": "G4 · UV / PBR",
+      "sublabel": "Retopo และ Texture",
+      "explanation": "จัด face loops/UV0, bake normal, roughness และ eyebrow layers แยก; ห้ามใช้ texture ปกปิด anatomy ที่ผิด",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/photoreal-head-web/SKILL.md",
+          "line": 73,
+          "end_line": 80,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "release",
+      "lane": "main",
+      "col": 5,
+      "type": "frontend",
+      "label": "G5 · GLB / QA",
+      "sublabel": "Export + Browser",
+      "explanation": "ตรวจ GLB/UV/ภาพจริงบนมือถือและ desktop พร้อมหลักฐานกายวิภาคก่อน final release; ไม่อ้าง browser หรือ likeness ถ้าไม่ได้ทดสอบ",
+      "icon": "success",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/photoreal-head-web/SKILL.md",
+          "line": 82,
+          "end_line": 87,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "no-runtime",
+      "lane": "exceptions",
+      "col": 0,
+      "type": "security",
+      "label": "No 3D runtime",
+      "sublabel": "ส่งคำแนะนำแทน",
+      "explanation": "ถ้าไม่มีเครื่องมือ 3D ให้ส่งสคริปต์/วิธีทำ และระบุว่าการสร้างโมเดลยังไม่ได้ดำเนินการ",
+      "icon": "stop",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/photoreal-head-web/SKILL.md",
+          "line": 44,
+          "end_line": 48,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "anatomy-fix",
+      "lane": "exceptions",
+      "col": 3,
+      "type": "security",
+      "label": "Anatomy repair",
+      "sublabel": "แก้โครงก่อน Texture",
+      "explanation": "แก้ clay, landmarks หรือการจัดกล้องที่ผิด; ห้ามผ่านไป UV/texture เมื่อ anatomy ยัง BLOCKED",
+      "icon": "decision",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/photoreal-head-web/SKILL.md",
+          "line": 65,
+          "end_line": 71,
+          "label": "SKILL.md"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "main-1",
+      "from": "intake",
+      "to": "primary",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-2",
+      "from": "primary",
+      "to": "detail",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-3",
+      "from": "detail",
+      "to": "landmarks",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-4",
+      "from": "landmarks",
+      "to": "texture",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-5",
+      "from": "texture",
+      "to": "release",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "branch-1",
+      "from": "intake",
+      "to": "no-runtime",
+      "label": "เครื่องมือไม่พร้อม",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "branch-2",
+      "from": "landmarks",
+      "to": "anatomy-fix",
+      "label": "Gate ไม่ผ่าน",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "return-2",
+      "from": "anatomy-fix",
+      "to": "primary",
+      "variant": "dashed",
+      "role": "return"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Workflow notes",
+      "items": [
+        "Anatomy-first: Texture ปิดตลอด G1–G3",
+        "ภาพเดียวไม่พอสำหรับยืนยันรูปทรง 3D หรือความเหมือนเฉพาะบุคคล"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,217 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Web App User Manual (Print-Ready PDF) · Workflow",
+    "subtitle": "v1.0.0 / documented procedure",
+    "output": "assets/skill-workflows/webapp-user-manual-pdf.html",
+    "visual_preset": "signal-flow",
+    "quality_profile": "showcase",
+    "animation": "trace",
+    "feedback_links": false,
+    "repository": {
+      "url": "https://github.com/codelv8-org/skills",
+      "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+      "provider": "github"
+    },
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "external": {
+          "label": "Input / Intake"
+        },
+        "backend": {
+          "label": "Work"
+        },
+        "security": {
+          "label": "Gate / Alternative"
+        },
+        "frontend": {
+          "label": "Delivery"
+        },
+        "messagebus": {
+          "label": "Export"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "Main workflow"
+    },
+    {
+      "id": "exceptions",
+      "label": "Decision / alternative",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "brief",
+    "structure",
+    "paged",
+    "export",
+    "deliver"
+  ],
+  "nodes": [
+    {
+      "id": "brief",
+      "lane": "main",
+      "col": 0,
+      "type": "external",
+      "label": "Manual scope",
+      "sublabel": "กำหนดขอบเขตเล่ม",
+      "explanation": "เลือกคู่มือ A4 เพื่อส่งมอบโครงการ พร้อมหน้าปกทางการและข้อมูลควบคุมเอกสาร",
+      "icon": "start",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/webapp-user-manual-pdf/SKILL.md",
+          "line": 17,
+          "end_line": 29,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "structure",
+      "lane": "main",
+      "col": 1,
+      "type": "backend",
+      "label": "Book structure",
+      "sublabel": "จัดโครงสร้างเล่ม",
+      "explanation": "วางปกและ Sign-off, สารบัญและรายการภาพ, บทเนื้อหาหลัก 6 บท และปกหลัง/Support",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/webapp-user-manual-pdf/SKILL.md",
+          "line": 46,
+          "end_line": 68,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "paged",
+      "lane": "main",
+      "col": 2,
+      "type": "backend",
+      "label": "Paged Media",
+      "sublabel": "จัดหน้า A4",
+      "explanation": "กำหนด @page, margins, running headers/footers และ page break; ไม่ตัดกลางตารางหรือรูป",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/webapp-user-manual-pdf/SKILL.md",
+          "line": 73,
+          "end_line": 114,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "export",
+      "lane": "main",
+      "col": 3,
+      "type": "messagebus",
+      "label": "Export PDF",
+      "sublabel": "แปลง HTML เป็น PDF",
+      "explanation": "ใช้ PowerShell/Bash, Headless Chrome/Edge หรือ Browser Print Dialog ตามแพลตฟอร์ม",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/webapp-user-manual-pdf/SKILL.md",
+          "line": 137,
+          "end_line": 168,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "deliver",
+      "lane": "main",
+      "col": 4,
+      "type": "frontend",
+      "label": "Print-ready PDF",
+      "sublabel": "เล่มพร้อมพิมพ์",
+      "explanation": "ผลลัพธ์ PDF A4 ที่คงโครงสร้างเล่มและพื้นที่ตรวจรับ/อนุมัติ",
+      "icon": "success",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/webapp-user-manual-pdf/SKILL.md",
+          "line": 33,
+          "end_line": 68,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "manual-print",
+      "lane": "exceptions",
+      "col": 3,
+      "type": "security",
+      "label": "Browser print",
+      "sublabel": "ทางเลือกส่งออก",
+      "explanation": "เมื่อเลือกส่งออกด้วยตนเอง ใช้ Ctrl/Cmd+P, A4, margins None และ Background graphics",
+      "icon": "stop",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/webapp-user-manual-pdf/SKILL.md",
+          "line": 161,
+          "end_line": 168,
+          "label": "SKILL.md"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "main-1",
+      "from": "brief",
+      "to": "structure",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-2",
+      "from": "structure",
+      "to": "paged",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-3",
+      "from": "paged",
+      "to": "export",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-4",
+      "from": "export",
+      "to": "deliver",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "branch-1",
+      "from": "export",
+      "to": "manual-print",
+      "label": "ทางเลือก",
+      "variant": "security",
+      "role": "branch"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Workflow notes",
+      "items": [
+        "เส้นทางหลักคือเอกสารแบบ CSS Paged Media",
+        "Browser Print เป็นวิธีส่งออกทางเลือก ไม่ใช่ขั้นบังคับหลัง Headless"
+      ]
+    }
+  ]
+}
