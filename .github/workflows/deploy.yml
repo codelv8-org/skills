@@ -18,7 +18,7 @@ concurrency:
 
 jobs:
   build:
-    if: github.event_name != 'issues' || startsWith(github.event.issue.title, '[Skill Review]') || contains(github.event.issue.labels.*.name, 'skill-review-approved') || github.event.label.name == 'skill-review-approved'
+    if: github.event_name != 'issues' || contains(github.event.issue.labels.*.name, 'skill-review-approved') || github.event.label.name == 'skill-review-approved'
     permissions:
       contents: read
       actions: read
@@ -64,6 +64,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/build-skill-ratings.mjs
+
+      - name: Install benchmark dependencies
+        run: python -m pip install -r scripts/skill-benchmark-requirements.txt
+      - name: Run allowlisted skill tool benchmarks
+        run: python scripts/run-skill-tool-benchmarks.py
 
       - name: Build benchmark and review analytics
         env:

@@ -80,6 +80,12 @@ async function main(){
   const catalog=JSON.parse(await fs.readFile('data/skills.json','utf8'));
   const data=JSON.parse(await fs.readFile('data/reviews.json','utf8'));
   const benchmarks={},skills={};
+  const sourceCommit=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
+  let tools={};
+  try{
+    const run=JSON.parse(await fs.readFile('data/skill-tool-benchmarks.json','utf8'));
+    if(run.schemaVersion===1&&run.sourceCommit===sourceCommit&&run.method==='allowlisted-synthetic-tool-tests-v1')tools=run.skills||{};
+  }catch{}
   const model=process.env.SKILL_REVIEW_AI_MODEL||'',apiKey=process.env.OPENAI_API_KEY||'';
   const enabled=process.env.SKILL_REVIEW_AI_ENABLED==='true'&&Boolean(model&&apiKey);
   let remaining=20;
@@ -91,6 +97,8 @@ async function main(){
       try{fresh=execFileSync('git',['show',skill.workflow.revision+':'+skill.entryFile],{encoding:'utf8',maxBuffer:4*1024*1024})===source;}catch{}
     }
     benchmarks[skill.id]=benchmarkChecks(skill,source,safeFile,fresh);
+    const tool=tools[skill.id];
+    benchmarks[skill.id].toolTests=tool&&Array.isArray(tool.suites)?tool:{status:'not_run',suites:[]};
     const reviews=data.reviews.filter(r=>r.skillId===skill.id);
     const versions=Object.fromEntries([...new Set([skill.version,...reviews.map(r=>r.version)])].map(v=>[v,metrics(reviews.filter(r=>r.version===v))]));
     const current=reviews.filter(r=>r.version===skill.version);
@@ -99,7 +107,7 @@ async function main(){
     else if(enabled&&summary.commentCount>=3)summary.status='budget_limit';
     skills[skill.id]={currentVersion:skill.version,versions,summary};
   }
-  const result={schemaVersion:1,generatedAt:data.generatedAt,sourceCommit:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),skills,benchmarks};
+  const result={schemaVersion:1,generatedAt:data.generatedAt,sourceCommit,skills,benchmarks};
   await fs.writeFile('data/skill-insights.json',JSON.stringify(result,null,2)+'\n');
   console.log('Built insights for '+Object.keys(skills).length+' skills; '+Object.values(benchmarks).filter(b=>b.passed===b.total).length+' passed all static checks');
 }

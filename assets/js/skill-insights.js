@@ -34,7 +34,7 @@
       result.replaceChildren();
       if(selected.length<2||ids.length!==unique.length){result.append(el('p','sr-muted','เลือก Skill ที่ไม่ซ้ำกันอย่างน้อย 2 รายการ'));return;}
       const row=(label,fn)=>[label,...selected.map(fn)];
-      const rows=[row('Version',s=>s.version),row('หมวดหมู่',s=>s.category),row('Community rating',s=>fmt(get(s)?.average)+' / 5'),row('จำนวนรีวิว',s=>state?(get(s)?.count||0):'—'),...Object.entries(dims).map(([key,label])=>row(label,s=>fmt(get(s)?.dimensions?.[key]))),row('Helpful votes',s=>state?(get(s)?.helpful||0):'—'),row('Static benchmark',s=>bench(s)?bench(s).passed+'/'+bench(s).total+' checks':'—'),row('AI Agent',s=>(s.supportedAgents||[]).map(a=>agents[a]||a).join(', '))];
+      const rows=[row('Version',s=>s.version),row('หมวดหมู่',s=>s.category),row('Community rating',s=>fmt(get(s)?.average)+' / 5'),row('จำนวนรีวิว',s=>state?(get(s)?.count||0):'—'),...Object.entries(dims).map(([key,label])=>row(label,s=>fmt(get(s)?.dimensions?.[key]))),row('Helpful votes',s=>state?(get(s)?.helpful||0):'—'),row('Static benchmark',s=>bench(s)?bench(s).passed+'/'+bench(s).total+' checks':'—'),row('Tool regression',s=>bench(s)?.toolTests?.status||'not_run'),row('AI Agent',s=>(s.supportedAgents||[]).map(a=>agents[a]||a).join(', '))];
       result.append(table(['Metric',...selected.map(s=>s.name)],rows));
     }
     analytics.append(el('h4','','Quality Analytics'));
@@ -47,7 +47,7 @@
       }
       analytics.append(stats,table(['Skill','คะแนน','รีวิว','Benchmark'],all.sort((a,b)=>(b.m?.average??-1)-(a.m?.average??-1)||(b.m?.count||0)-(a.m?.count||0)).map(({s,m,b})=>[s.name,fmt(m?.average),m?.count||0,b?b.passed+'/'+b.total:'—'])),el('p','sr-muted','อัปเดต '+(state.generatedAt||'ยังไม่เผยแพร่')+' · คะแนนเฉพาะเวอร์ชันปัจจุบัน'));
     }
-    panels.append(comparison,analytics);root.replaceChildren(h,subtitle,panels);draw();
+    panels.append(comparison,analytics);const details=el('details','si-disclosure');const summary=el('summary');summary.append(h);details.append(summary,subtitle,panels);root.replaceChildren(details);draw();
   }
   async function init(skills,root){
     catalog=skills;
@@ -83,6 +83,11 @@
     checks.append(el('p','si-bench-value',b.passed+' / '+b.total+' checks · '+b.score+'%'));
     checks.append(el('p','sr-muted','ตรวจโครงสร้างจาก source commit '+String(state.sourceCommit||'').slice(0,8)+' · ไม่ได้รัน Agent หรือวัดผลลัพธ์จริง (NOT RUN)'));
     const list=el('div','si-check-list');for(const c of b.checks){const item=el('div','si-check');item.append(el('span',c.pass?'si-pass':'si-fail',c.pass?'PASS':'FAIL'),el('span','',c.label),el('span','sr-muted',c.detail));list.append(item);}checks.append(list);
+    const tool=b.toolTests||{status:'not_run',suites:[]};
+    checks.append(el('h5','','Functional tool regression · '+String(tool.status).toUpperCase()));
+    if(tool.suites.length)checks.append(table(['Suite','สถานะ','Tests','เวลารัน (ms)'],tool.suites.map(t=>[t.suite,t.status,t.tests??'—',t.durationMs])));
+    else checks.append(el('p','sr-muted','ยังไม่มีชุดทดสอบแบบ allowlist สำหรับ Skill นี้ หรือยังไม่ได้รัน'));
+    checks.append(el('p','sr-muted','ชุดทดสอบใช้ synthetic fixtures จาก Repository ไม่ใช่การประเมินผลงานของ Agent หรือข้อมูลจริงของผู้ใช้'));
     root.append(summary,history,checks);
   }
   window.SkillInsights={init,render};
