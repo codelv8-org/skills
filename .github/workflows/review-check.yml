@@ -40,8 +40,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m pip install -r scripts/skill-benchmark-requirements.txt
+      - run: python -m pip install -r scripts/skill-benchmark-requirements.txt -r skills/photoreal-head-web/scripts/requirements-projection.txt
       - run: python scripts/run-skill-tool-benchmarks.py
+      - name: Build public Photoreal Head example
+        run: |
+          node --check assets/examples/photoreal-head/viewer.js
+          node --check assets/examples/photoreal-head/projection-lab.js
+          python scripts/build-photoreal-example.py --strict
       - run: node scripts/build-skill-insights.mjs
       - run: node scripts/build-skill-workflows.mjs --check
       - name: Install browser test library
