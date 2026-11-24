@@ -154,7 +154,7 @@
       "label": "Browser print",
       "sublabel": "ทางเลือกส่งออก",
       "explanation": "เมื่อเลือกส่งออกด้วยตนเอง ใช้ Ctrl/Cmd+P, A4, margins None และ Background graphics",
-      "icon": "stop",
+      "icon": "decision",
       "width": 176,
       "sources": [
         {
@@ -202,6 +202,13 @@
       "label": "ทางเลือก",
       "variant": "security",
       "role": "branch"
+    },
+    {
+      "id": "return-1",
+      "from": "manual-print",
+      "to": "deliver",
+      "variant": "dashed",
+      "role": "return"
     }
   ],
   "cards": [

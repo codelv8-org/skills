@@ -255,10 +255,7 @@
       "from": "evidence-gap",
       "to": "browser",
       "variant": "dashed",
-      "role": "return",
-      "fromSide": "left",
-      "toSide": "left",
-      "route": "return-left"
+      "role": "return"
     },
     {
       "id": "branch-2",
@@ -273,10 +270,7 @@
       "from": "correct",
       "to": "review",
       "variant": "dashed",
-      "role": "return",
-      "fromSide": "left",
-      "toSide": "left",
-      "route": "return-left"
+      "role": "return"
     }
   ],
   "cards": [

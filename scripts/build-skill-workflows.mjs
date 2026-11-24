@@ -83,7 +83,9 @@ try{
     fs.accessSync(cli,fs.constants.R_OK);
     fs.mkdirSync(path.join(tmp,folder),{recursive:true});
     const results=[];
+    const failures=[];
     for(const c of candidates){
+      try{
       const evidence=path.join(tmp,'qa',c.id);
       fs.mkdirSync(evidence,{recursive:true});
       console.log('Archify finalize: '+c.id);
@@ -94,7 +96,9 @@ try{
       assert(bytes.length>10000&&bytes.toString('utf8',0,256).toLowerCase().includes('<!doctype html'),'Missing native HTML');
       console.log(stdout.slice(0,1800));
       results.push({id:c.id,source:c.source,source_sha256:sha(fs.readFileSync(path.join(root,c.source))),html:c.output,html_sha256:sha(bytes),bytes:bytes.length,validation:'archify-finalize-pass'});
+      }catch(error){failures.push(c.id);console.error('ARCHIFY FAILED: '+c.id+' — '+error.message);}
     }
+    if(failures.length)throw new Error('Archify finalize failed: '+failures.join(', '));
     // Publish only after every diagram is successfully finalized.
     for(const r of results)fs.copyFileSync(path.join(tmp,r.html),path.join(root,r.html));
     fs.writeFileSync(path.join(root,folder,'archify-build.json'),JSON.stringify({archify:{url:'https://github.com/tt-a1i/archify',revision:expectedArchify,version:'3.3.0',license:'Apache-2.0'},diagrams:results},null,2)+'\n');

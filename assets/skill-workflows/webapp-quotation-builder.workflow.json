@@ -263,10 +263,7 @@
       "from": "revise",
       "to": "pricing",
       "variant": "dashed",
-      "role": "return",
-      "fromSide": "left",
-      "toSide": "left",
-      "route": "return-left"
+      "role": "return"
     }
   ],
   "cards": [
