@@ -86,16 +86,30 @@ def measure(p, u, winding, max_anisotropy=4., max_density_ratio=4.):
     flipped = good & ((signed < 0) if winding=='ccw' else (signed > 0))
     # Spatial bins + exact intersection. Stop once enough counterexamples prove failure.
     bins = defaultdict(list); pairs = []; capped = False
+    uv_min, uv_max = u.min(axis=1), u.max(axis=1)
     for i,t in enumerate(u):
         if not good[i] or outside[i]:
             continue
         lo = np.maximum(0,np.floor(t.min(0)*128).astype(int)); hi=np.minimum(127,np.floor(t.max(0)*128).astype(int))
         lo=np.minimum(lo,127)
         keys=[(j,k) for j in range(lo[0],hi[0]+1) for k in range(lo[1],hi[1]+1)]
-        candidates=set(j for key in keys for j in bins[key])
+        candidates=np.array(sorted(set(j for key in keys for j in bins[key])),dtype=int)
+        if len(candidates):
+            # Exact intersection requires positive area. Reject disjoint bounding boxes first.
+            box_overlap=np.minimum(uv_max[candidates],uv_max[i])-np.maximum(uv_min[candidates],uv_min[i])
+            candidates=candidates[(box_overlap>0).all(axis=1)]
+        if len(candidates):
+            # Separating axis test, conservatively retaining near-touching pairs for clipping.
+            other=u[candidates]
+            e1=np.roll(t,-1,axis=0)-t; e2=np.roll(other,-1,axis=1)-other
+            edges=np.concatenate([np.broadcast_to(e1,(len(other),3,2)),e2],axis=1)
+            axes=np.stack([-edges[:,:,1],edges[:,:,0]],axis=-1)
+            p1=np.einsum('ij,nkj->nik',t,axes); p2=np.einsum('nij,nkj->nik',other,axes)
+            extent=np.minimum(p1.max(1),p2.max(1))-np.maximum(p1.min(1),p2.min(1))
+            candidates=candidates[(extent>1e-15).all(1)]
         for j in candidates:
             if overlap_area(t,u[j]) > 1e-11:
-                pairs.append([j,i])
+                pairs.append([int(j),i])
                 if len(pairs)>=100:
                     capped=True; break
         if capped: break

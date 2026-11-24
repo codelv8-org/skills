@@ -1,3 +1,3 @@
 interface:
-  display_name: "Photoreal Head - Digital Skin Lab"
-  short_description: "ปั้นหัวคนสมจริง ตรวจ Anatomy, UV, Skin Texture/PBR และ GLB"
+  display_name: "Photoreal Head - Projection & Benchmark Lab"
+  short_description: "ปั้นหัวคน ตรวจ UV ฉาย Texture หลายมุม และ Benchmark หัว 3D"
