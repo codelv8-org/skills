@@ -1293,6 +1293,7 @@
       .workflow-native { height:520px; }
     }
   </style>
+  <link rel="stylesheet" href="assets/css/skill-reviews.css">
 </head>
 <body>
 
@@ -1458,6 +1459,10 @@
         </div>
       </div>
 
+      <div class="sr-controls"><label for="skillSort">จัดเรียง Skill</label>
+        <select id="skillSort"><option value="default">ตามหมวดหมู่เดิม</option><option value="rated">คะแนนสูงสุด</option><option value="reviewed">รีวิวมากที่สุด</option><option value="updated">อัปเดตล่าสุด</option></select>
+        <span id="skillReviewStatus" role="status"></span></div>
+
       <!-- Category Filter Pills -->
       <div class="filter-pills" id="categoryFilterContainer">
         <span class="filter-label">หมวดหมู่:</span>
@@ -1474,6 +1479,8 @@
         <button class="filter-pill" data-agent="codex">🟩 Codex</button>
       </div>
     </section>
+
+    <section id="skillInsightsDashboard" class="sr-insights-dashboard" aria-label="Skill comparison and quality analytics"></section>
 
     <!-- Content Displays -->
     <div id="viewContainer">
@@ -1504,6 +1511,9 @@
           <h4 class="modal-bento-title">📝 คำอธิบายรายละเอียด (Description)</h4>
           <p style="font-size:0.9rem; color:var(--text-sub); line-height:1.6;" id="modalDescription"></p>
         </div>
+
+        <section id="modalReviews" class="modal-bento-card sr-panel" aria-labelledby="srHeading"></section>
+        <section id="modalInsights" class="modal-bento-card sr-panel" aria-labelledby="siHeading"></section>
 
         <section id="modalWorkflowSection" class="modal-bento-card workflow-card" hidden aria-labelledby="modalWorkflowTitle">
           <h4 class="modal-bento-title" id="modalWorkflowTitle">Workflow Diagram · ขั้นตอนการทำงาน</h4>
@@ -1574,2189 +1584,2191 @@
     Personal AI Skill Library &copy; 2026 &bull; Designed for Antigravity, Gemini & Claude Assistants
   </footer>
 
+  <script src="assets/js/skill-insights.js"></script>
+  <script src="assets/js/skill-reviews.js"></script>
   <script>
     // Embedded initial data for 100% offline & file:// protocol reliability
     const EMBEDDED_DATA = {
-      "categories": [
+  "categories": [
+    {
+      "id": "Document",
+      "name": "Documentation & Manuals",
+      "nameTh": "หมวดหมู่เอกสารและคู่มือ",
+      "icon": "📄"
+    },
+    {
+      "id": "UIUX",
+      "name": "UI/UX & Design",
+      "nameTh": "การออกแบบและส่วนต่อประสาน",
+      "icon": "🎨"
+    },
+    {
+      "id": "Architecture",
+      "name": "Architecture & Engineering",
+      "nameTh": "สถาปัตยกรรมและวิศวกรรมซอฟต์แวร์",
+      "icon": "🏛️"
+    },
+    {
+      "id": "Optimization",
+      "name": "Performance & Optimization",
+      "nameTh": "การปรับแต่งประสิทธิภาพและ Token",
+      "icon": "⚡"
+    },
+    {
+      "id": "Tools",
+      "name": "Developer Tools & Utilities",
+      "nameTh": "เครื่องมือและยูทิลิตี้สำหรับนักพัฒนา",
+      "icon": "🛠️"
+    }
+  ],
+  "agents": [
+    {
+      "id": "antigravity",
+      "name": "Google Antigravity",
+      "icon": "🔮"
+    },
+    {
+      "id": "claude-code",
+      "name": "Anthropic Claude Code",
+      "icon": "🟧"
+    },
+    {
+      "id": "codex",
+      "name": "OpenAI Codex",
+      "icon": "🟩"
+    }
+  ],
+  "skills": [
+    {
+      "id": "webapp-user-manual",
+      "overviewImage": "assets/skill-overviews/webapp-user-manual.webp",
+      "name": "Web Application User Manual",
+      "nameTh": "คู่มือใช้งาน Web Application",
+      "category": "Document",
+      "version": "1.0.0",
+      "status": "Ready",
+      "phase": "Phase 1",
+      "author": "Personal Library",
+      "summary": "สร้างคู่มือการใช้งานระบบ Web Application ครอบคลุมทั้ง Interactive HTML (พร้อม Sidebar, Search, Print-to-PDF) และ Markdown รองรับ Antigravity, Claude Code, Codex",
+      "description": "Skill สำหรับสร้างคู่มือการใช้งานระบบ Web Application อย่างมืออาชีพ ครอบคลุมโครงสร้าง 10 เสาหลัก (10-Pillar Framework) ตั้งแต่ภาพรวมระบบ, สิทธิ์การเข้าถึง, ฟังก์ชันแบบ Step-by-Step, ตารางข้อมูลแบบฟอร์ม, FAQ และ Support พร้อมส่งมอบในรูปแบบ Interactive HTML หรือ Markdown ออกแบบตามมาตรฐาน Phase 1 รองรับ AI Coding Agents ชั้นนำ (Codex, Claude Code, Antigravity)",
+      "tags": [
+        "Document",
+        "User Manual",
+        "Web App",
+        "Documentation",
+        "HTML",
+        "Markdown",
+        "Multi-Agent"
+      ],
+      "supportedAgents": [
+        "antigravity",
+        "claude-code",
+        "codex"
+      ],
+      "triggers": [
+        "คู่มือการใช้งาน",
+        "สร้างคู่มือ",
+        "user manual",
+        "user guide",
+        "web application guide",
+        "คู่มือระบบเว็บ",
+        "how to use",
+        "เอกสารการใช้งาน"
+      ],
+      "path": "skills/webapp-user-manual",
+      "entryFile": "skills/webapp-user-manual/SKILL.md",
+      "assets": [
         {
-          "id": "Document",
-          "name": "Documentation & Manuals",
-          "nameTh": "หมวดหมู่เอกสารและคู่มือ",
-          "icon": "📄"
+          "name": "SKILL.md",
+          "type": "skill",
+          "path": "skills/webapp-user-manual/SKILL.md"
         },
         {
-          "id": "UIUX",
-          "name": "UI/UX & Design",
-          "nameTh": "การออกแบบและส่วนต่อประสาน",
-          "icon": "🎨"
+          "name": "manual-template.html",
+          "type": "template",
+          "path": "skills/webapp-user-manual/templates/manual-template.html"
         },
         {
-          "id": "Architecture",
-          "name": "Architecture & Engineering",
-          "nameTh": "สถาปัตยกรรมและวิศวกรรมซอฟต์แวร์",
-          "icon": "🏛️"
+          "name": "manual-template.md",
+          "type": "template",
+          "path": "skills/webapp-user-manual/templates/manual-template.md"
         },
         {
-          "id": "Optimization",
-          "name": "Performance & Optimization",
-          "nameTh": "การปรับแต่งประสิทธิภาพและ Token",
-          "icon": "⚡"
-        },
-        {
-          "id": "Tools",
-          "name": "Developer Tools & Utilities",
-          "nameTh": "เครื่องมือและยูทิลิตี้สำหรับนักพัฒนา",
-          "icon": "🛠️"
+          "name": "style-guide.md",
+          "type": "reference",
+          "path": "skills/webapp-user-manual/references/style-guide.md"
         }
       ],
-      "agents": [
+      "examples": [
         {
-          "id": "antigravity",
-          "name": "Google Antigravity",
-          "icon": "🔮"
-        },
-        {
-          "id": "claude-code",
-          "name": "Anthropic Claude Code",
-          "icon": "🟧"
-        },
-        {
-          "id": "codex",
-          "name": "OpenAI Codex",
-          "icon": "🟩"
+          "title": "SmartHR e-Leave Portal",
+          "description": "ตัวอย่างคู่มือระบบบริหารจัดการการลาและขออนุมัติออนไลน์ ครบ 10 เสาหลัก",
+          "markdownPath": "skills/webapp-user-manual/examples/smart-hr-portal/USER_MANUAL.md",
+          "htmlPath": "skills/webapp-user-manual/examples/smart-hr-portal/manual.html"
         }
       ],
-      "skills": [
-        {
-          "id": "webapp-user-manual",
-          "overviewImage": "assets/skill-overviews/webapp-user-manual.webp",
-          "name": "Web Application User Manual",
-          "nameTh": "คู่มือใช้งาน Web Application",
-          "category": "Document",
-          "version": "1.0.0",
-          "status": "Ready",
-          "phase": "Phase 1",
-          "author": "Personal Library",
-          "summary": "สร้างคู่มือการใช้งานระบบ Web Application ครอบคลุมทั้ง Interactive HTML (พร้อม Sidebar, Search, Print-to-PDF) และ Markdown รองรับ Antigravity, Claude Code, Codex",
-          "description": "Skill สำหรับสร้างคู่มือการใช้งานระบบ Web Application อย่างมืออาชีพ ครอบคลุมโครงสร้าง 10 เสาหลัก (10-Pillar Framework) ตั้งแต่ภาพรวมระบบ, สิทธิ์การเข้าถึง, ฟังก์ชันแบบ Step-by-Step, ตารางข้อมูลแบบฟอร์ม, FAQ และ Support พร้อมส่งมอบในรูปแบบ Interactive HTML หรือ Markdown ออกแบบตามมาตรฐาน Phase 1 รองรับ AI Coding Agents ชั้นนำ (Codex, Claude Code, Antigravity)",
-          "tags": [
-            "Document",
-            "User Manual",
-            "Web App",
-            "Documentation",
-            "HTML",
-            "Markdown",
-            "Multi-Agent"
-          ],
-          "supportedAgents": [
-            "antigravity",
-            "claude-code",
-            "codex"
-          ],
-          "triggers": [
-            "คู่มือการใช้งาน",
-            "สร้างคู่มือ",
-            "user manual",
-            "user guide",
-            "web application guide",
-            "คู่มือระบบเว็บ",
-            "how to use",
-            "เอกสารการใช้งาน"
-          ],
-          "path": "skills/webapp-user-manual",
-          "entryFile": "skills/webapp-user-manual/SKILL.md",
-          "assets": [
-            {
-              "name": "SKILL.md",
-              "type": "skill",
-              "path": "skills/webapp-user-manual/SKILL.md"
-            },
-            {
-              "name": "manual-template.html",
-              "type": "template",
-              "path": "skills/webapp-user-manual/templates/manual-template.html"
-            },
-            {
-              "name": "manual-template.md",
-              "type": "template",
-              "path": "skills/webapp-user-manual/templates/manual-template.md"
-            },
-            {
-              "name": "style-guide.md",
-              "type": "reference",
-              "path": "skills/webapp-user-manual/references/style-guide.md"
-            }
-          ],
-          "examples": [
-            {
-              "title": "SmartHR e-Leave Portal",
-              "description": "ตัวอย่างคู่มือระบบบริหารจัดการการลาและขออนุมัติออนไลน์ ครบ 10 เสาหลัก",
-              "markdownPath": "skills/webapp-user-manual/examples/smart-hr-portal/USER_MANUAL.md",
-              "htmlPath": "skills/webapp-user-manual/examples/smart-hr-portal/manual.html"
-            }
-          ],
-          "highlights": [
-            "มาตรฐาน 10 หมวดหมู่ (The 10-Pillar Framework) ตามคู่มือระดับองค์กร",
-            "รองรับทั้ง Interactive HTML และ GitHub-Flavored Markdown",
-            "เทมเพลต HTML ในตัว มี Sidebar, ค้นหาหัวข้อ, สลับ Dark Mode และจัดหน้าพิมพ์เป็น PDF ได้ทันที",
-            "มาตรฐานพจนานุกรมศัพท์ UI ภาษาไทย-อังกฤษ และวิธีใส่ Placeholder ภาพหน้าจอ",
-            "รองรับการเรียกใช้ผ่าน Google Antigravity, Anthropic Claude Code และ OpenAI Codex ใน Phase 1"
-          ],
-          "installCommand": {
-            "windows": "Copy-Item -Path \".\\skills\\webapp-user-manual\" -Destination \"$env:USERPROFILE\\.gemini\\config\\skills\\\" -Recurse",
-            "posix": "cp -r ./skills/webapp-user-manual ~/.gemini/config/skills/",
-            "antigravity": {
-              "windows": "Copy-Item -Path \".\\skills\\webapp-user-manual\" -Destination \"$env:USERPROFILE\\.gemini\\config\\skills\\\" -Recurse",
-              "posix": "cp -r ./skills/webapp-user-manual ~/.gemini/config/skills/",
-              "workspace": "powershell -File .\\scripts\\install-skill.ps1 -Skill webapp-user-manual -Agent antigravity -Scope workspace"
-            },
-            "claudeCode": {
-              "windows": "Copy-Item -Path \".\\skills\\webapp-user-manual\" -Destination \"$env:USERPROFILE\\.claude\\skills\\\" -Recurse",
-              "posix": "cp -r ./skills/webapp-user-manual ~/.claude/skills/",
-              "workspace": "powershell -File .\\scripts\\install-skill.ps1 -Skill webapp-user-manual -Agent claude -Scope workspace"
-            },
-            "codex": {
-              "windows": "Copy-Item -Path \".\\skills\\webapp-user-manual\" -Destination \"$env:USERPROFILE\\.codex\\skills\\\" -Recurse",
-              "posix": "cp -r ./skills/webapp-user-manual ~/.codex/skills/",
-              "workspace": "powershell -File .\\scripts\\install-skill.ps1 -Skill webapp-user-manual -Agent codex -Scope workspace"
-            }
-          },
-          "workflow": {
-            "sourcePath": "assets/skill-workflows/webapp-user-manual.workflow.json",
-            "htmlPath": "assets/skill-workflows/webapp-user-manual.html",
-            "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
-            "steps": [
-              {
-                "id": "audience",
-                "title": "Audience profiling",
-                "subtitle": "สำรวจระบบและผู้ใช้",
-                "description": "วิเคราะห์ระบบ ฟังก์ชัน และบทบาท End User, Approver หรือ Admin เพื่อเลือกเนื้อหาตามหน้าที่",
-                "kind": "external",
-                "line": 108,
-                "endLine": 112
-              },
-              {
-                "id": "outline",
-                "title": "10-pillar outline",
-                "subtitle": "วางโครงสารบัญ",
-                "description": "จัดสารบัญตามกรอบ 10 หมวด โดยเลือกหัวข้อให้ตรงกับฟีเจอร์ของระบบ",
-                "kind": "backend",
-                "line": 33,
-                "endLine": 60
-              },
-              {
-                "id": "draft",
-                "title": "Step-by-step draft",
-                "subtitle": "เขียนคู่มือทีละขั้น",
-                "description": "ระบุการกระทำของผู้ใช้ ผลลัพธ์บนหน้าจอ และภาพประกอบจำลอง ใช้ชื่อเมนูและฟิลด์ที่เหมาะสม",
-                "kind": "backend",
-                "line": 117,
-                "endLine": 120
-              },
-              {
-                "id": "deliver",
-                "title": "HTML / Markdown",
-                "subtitle": "ส่งมอบตามรูปแบบ",
-                "description": "สร้าง manual.html แบบ standalone พร้อม Sidebar, Search, Dark/Light, Print หรือ USER_MANUAL.md ตามที่ขอ",
-                "kind": "frontend",
-                "line": 122,
-                "endLine": 125
-              }
-            ],
-            "branches": [],
-            "notes": [
-              "Workflow หลักมี 4 ขั้นตาม SKILL.md",
-              "HTML รองรับสั่งพิมพ์; Skill PDF แยกต่างหากสำหรับเล่ม A4 ทางการ"
-            ]
-          }
+      "highlights": [
+        "มาตรฐาน 10 หมวดหมู่ (The 10-Pillar Framework) ตามคู่มือระดับองค์กร",
+        "รองรับทั้ง Interactive HTML และ GitHub-Flavored Markdown",
+        "เทมเพลต HTML ในตัว มี Sidebar, ค้นหาหัวข้อ, สลับ Dark Mode และจัดหน้าพิมพ์เป็น PDF ได้ทันที",
+        "มาตรฐานพจนานุกรมศัพท์ UI ภาษาไทย-อังกฤษ และวิธีใส่ Placeholder ภาพหน้าจอ",
+        "รองรับการเรียกใช้ผ่าน Google Antigravity, Anthropic Claude Code และ OpenAI Codex ใน Phase 1"
+      ],
+      "installCommand": {
+        "windows": "Copy-Item -Path \".\\skills\\webapp-user-manual\" -Destination \"$env:USERPROFILE\\.gemini\\config\\skills\\\" -Recurse",
+        "posix": "cp -r ./skills/webapp-user-manual ~/.gemini/config/skills/",
+        "antigravity": {
+          "windows": "Copy-Item -Path \".\\skills\\webapp-user-manual\" -Destination \"$env:USERPROFILE\\.gemini\\config\\skills\\\" -Recurse",
+          "posix": "cp -r ./skills/webapp-user-manual ~/.gemini/config/skills/",
+          "workspace": "powershell -File .\\scripts\\install-skill.ps1 -Skill webapp-user-manual -Agent antigravity -Scope workspace"
         },
-        {
-          "id": "webapp-user-manual-pdf",
-          "overviewImage": "assets/skill-overviews/webapp-user-manual-pdf.webp",
-          "name": "Web App User Manual (Print-Ready PDF)",
-          "nameTh": "คู่มือใช้งานระบบ PDF พร้อมพิมพ์ (A4)",
-          "category": "Document",
-          "version": "1.0.0",
-          "status": "Ready",
-          "phase": "Phase 1",
-          "author": "Personal Library",
-          "summary": "สร้างคู่มือการใช้งานระบบ Web Application ฉบับสิ่งพิมพ์ A4 ระดับส่งมอบงานโครงการ ด้วย CSS Paged Media (@page) รองรับ Antigravity, Claude Code, Codex",
-          "description": "Skill สำหรับจัดทำคู่มือการใช้งานระบบ Web Application เกรดสิ่งพิมพ์และเอกสารส่งมอบงานโครงการ (Publication-Grade Deliverables) กำหนดขนาด A4 พร้อมหน้าปกทางการ, แผ่นควบคุมเอกสารและการลงนามตรวจรับ (Sign-off Matrix), สารบัญระบุหน้า, หัว/ท้ายกระดาษอัตโนมัติ และการคุม Page Break อย่างแม่นยำ พร้อมสคริปต์ PowerShell (Windows) และ Bash (macOS/Linux) สำหรับแปลงเป็น PDF ด้วย Headless Edge/Chrome",
-          "tags": [
-            "Document",
-            "PDF",
-            "Print-Ready",
-            "CSS-Paged-Media",
-            "A4",
-            "Deliverable",
-            "User-Manual",
-            "Multi-Agent"
-          ],
-          "supportedAgents": [
-            "antigravity",
-            "claude-code",
-            "codex"
-          ],
-          "triggers": [
-            "คู่มือ PDF",
-            "สร้างคู่มือ PDF",
-            "pdf user manual",
-            "print-ready manual",
-            "เอกสารส่งมอบงาน pdf",
-            "คู่มือ a4",
-            "พิมพ์คู่มือเป็น pdf",
-            "ทำเล่มคู่มือ"
-          ],
-          "path": "skills/webapp-user-manual-pdf",
-          "entryFile": "skills/webapp-user-manual-pdf/SKILL.md",
-          "assets": [
-            {
-              "name": "SKILL.md",
-              "type": "skill",
-              "path": "skills/webapp-user-manual-pdf/SKILL.md"
-            },
-            {
-              "name": "pdf-manual-template.html",
-              "type": "template",
-              "path": "skills/webapp-user-manual-pdf/templates/pdf-manual-template.html"
-            },
-            {
-              "name": "export-pdf.ps1",
-              "type": "script",
-              "path": "skills/webapp-user-manual-pdf/scripts/export-pdf.ps1"
-            },
-            {
-              "name": "export-pdf.sh",
-              "type": "script",
-              "path": "skills/webapp-user-manual-pdf/scripts/export-pdf.sh"
-            },
-            {
-              "name": "pdf-styling-guide.md",
-              "type": "reference",
-              "path": "skills/webapp-user-manual-pdf/references/pdf-styling-guide.md"
-            }
-          ],
-          "examples": [
-            {
-              "title": "e-Procure Plus Enterprise",
-              "description": "ตัวอย่างคู่มือระบบจัดซื้อจัดจ้างและบริหารพัสดุ ฉบับทางการ A4 พร้อมแผ่นลงนามตรวจรับและแปลงเป็น PDF ด้วย Headless Edge แล้ว",
-              "htmlPath": "skills/webapp-user-manual-pdf/examples/procurement-flow/manual.html",
-              "pdfPath": "skills/webapp-user-manual-pdf/examples/procurement-flow/manual.pdf",
-              "markdownPath": "skills/webapp-user-manual-pdf/examples/procurement-flow/README.md"
-            }
-          ],
-          "highlights": [
-            "จัดหน้ามาตรฐานกระดาษ A4 (210 x 297 mm) ด้วย CSS Paged Media (@page)",
-            "หน้าปกทางการแบบ Full-bleed พร้อมแผ่นควบคุมเอกสารและตารางลงนามตรวจรับ (Sign-off Matrix)",
-            "ควบคุมการแบ่งหน้า ป้องกันข้อความหรือตารางขาดครึ่งหน้า (break-inside: avoid)",
-            "มีสคริปต์อัตโนมัติ export-pdf.ps1 (Windows) และ export-pdf.sh (macOS/Linux) ผ่าน Chrome/Edge Headless",
-            "รองรับการเรียกใช้ผ่าน Google Antigravity, Anthropic Claude Code และ OpenAI Codex ใน Phase 1"
-          ],
-          "installCommand": {
-            "windows": "Copy-Item -Path \".\\skills\\webapp-user-manual-pdf\" -Destination \"$env:USERPROFILE\\.gemini\\config\\skills\\\" -Recurse",
-            "posix": "cp -r ./skills/webapp-user-manual-pdf ~/.gemini/config/skills/",
-            "antigravity": {
-              "windows": "Copy-Item -Path \".\\skills\\webapp-user-manual-pdf\" -Destination \"$env:USERPROFILE\\.gemini\\config\\skills\\\" -Recurse",
-              "posix": "cp -r ./skills/webapp-user-manual-pdf ~/.gemini/config/skills/",
-              "workspace": "powershell -File .\\scripts\\install-skill.ps1 -Skill webapp-user-manual-pdf -Agent antigravity -Scope workspace"
-            },
-            "claudeCode": {
-              "windows": "Copy-Item -Path \".\\skills\\webapp-user-manual-pdf\" -Destination \"$env:USERPROFILE\\.claude\\skills\\\" -Recurse",
-              "posix": "cp -r ./skills/webapp-user-manual-pdf ~/.claude/skills/",
-              "workspace": "powershell -File .\\scripts\\install-skill.ps1 -Skill webapp-user-manual-pdf -Agent claude -Scope workspace"
-            },
-            "codex": {
-              "windows": "Copy-Item -Path \".\\skills\\webapp-user-manual-pdf\" -Destination \"$env:USERPROFILE\\.codex\\skills\\\" -Recurse",
-              "posix": "cp -r ./skills/webapp-user-manual-pdf ~/.codex/skills/",
-              "workspace": "powershell -File .\\scripts\\install-skill.ps1 -Skill webapp-user-manual-pdf -Agent codex -Scope workspace"
-            }
-          },
-          "workflow": {
-            "sourcePath": "assets/skill-workflows/webapp-user-manual-pdf.workflow.json",
-            "htmlPath": "assets/skill-workflows/webapp-user-manual-pdf.html",
-            "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
-            "steps": [
-              {
-                "id": "brief",
-                "title": "Manual scope",
-                "subtitle": "กำหนดขอบเขตเล่ม",
-                "description": "เลือกคู่มือ A4 เพื่อส่งมอบโครงการ พร้อมหน้าปกทางการและข้อมูลควบคุมเอกสาร",
-                "kind": "external",
-                "line": 17,
-                "endLine": 29
-              },
-              {
-                "id": "structure",
-                "title": "Book structure",
-                "subtitle": "จัดโครงสร้างเล่ม",
-                "description": "วางปกและ Sign-off, สารบัญและรายการภาพ, บทเนื้อหาหลัก 6 บท และปกหลัง/Support",
-                "kind": "backend",
-                "line": 46,
-                "endLine": 68
-              },
-              {
-                "id": "paged",
-                "title": "Paged Media",
-                "subtitle": "จัดหน้า A4",
-                "description": "กำหนด @page, margins, running headers/footers และ page break; ไม่ตัดกลางตารางหรือรูป",
-                "kind": "backend",
-                "line": 73,
-                "endLine": 114
-              },
-              {
-                "id": "export",
-                "title": "Export PDF",
-                "subtitle": "แปลง HTML เป็น PDF",
-                "description": "ใช้ PowerShell/Bash, Headless Chrome/Edge หรือ Browser Print Dialog ตามแพลตฟอร์ม",
-                "kind": "messagebus",
-                "line": 137,
-                "endLine": 168
-              },
-              {
-                "id": "deliver",
-                "title": "Print-ready PDF",
-                "subtitle": "เล่มพร้อมพิมพ์",
-                "description": "ผลลัพธ์ PDF A4 ที่คงโครงสร้างเล่มและพื้นที่ตรวจรับ/อนุมัติ",
-                "kind": "frontend",
-                "line": 33,
-                "endLine": 68
-              }
-            ],
-            "branches": [
-              {
-                "from": "export",
-                "id": "manual-print",
-                "title": "Browser print",
-                "subtitle": "ทางเลือกส่งออก",
-                "description": "เมื่อเลือกส่งออกด้วยตนเอง ใช้ Ctrl/Cmd+P, A4, margins None และ Background graphics",
-                "condition": "ทางเลือก",
-                "returnTo": "deliver",
-                "line": 161,
-                "endLine": 168
-              }
-            ],
-            "notes": [
-              "เส้นทางหลักคือเอกสารแบบ CSS Paged Media",
-              "Browser Print เป็นวิธีส่งออกทางเลือก ไม่ใช่ขั้นบังคับหลัง Headless"
-            ]
-          }
+        "claudeCode": {
+          "windows": "Copy-Item -Path \".\\skills\\webapp-user-manual\" -Destination \"$env:USERPROFILE\\.claude\\skills\\\" -Recurse",
+          "posix": "cp -r ./skills/webapp-user-manual ~/.claude/skills/",
+          "workspace": "powershell -File .\\scripts\\install-skill.ps1 -Skill webapp-user-manual -Agent claude -Scope workspace"
         },
-        {
-          "id": "lowpoly-character-web",
-          "overviewImage": "assets/skill-overviews/lowpoly-character-web.webp",
-          "name": "Low-poly Character Web Studio",
-          "nameTh": "สตูดิโอตัวละคร Low-poly สำหรับเว็บ",
-          "category": "UIUX",
-          "version": "5.0.0",
-          "status": "Ready",
-          "phase": "Phase 1",
-          "author": "Personal Library",
-          "summary": "สร้างและปรับโมเดลตัวละคร 3D จากภาพอ้างอิง พร้อมส่งออก GLB สำหรับ WebGL, Three.js และ React Three Fiber",
-          "description": "สร้าง ตรวจ และปรับโมเดลตัวละคร Low-poly จากข้อความ ภาพอ้างอิง หรือโมเดลเดิม ตรวจรูปทรงแยกตามชิ้นส่วน รองรับ rig, skinning และ animation ตามขอบเขตงาน พร้อมพรีวิว GLB และเครื่องมือประเมิน LOD กับงบการเรนเดอร์สำหรับฉากหลายตัวละคร",
-          "tags": [
-            "3D",
-            "Low-poly",
-            "GLB",
-            "Blender",
-            "WebGL",
-            "Three.js",
-            "Character Modeling"
-          ],
-          "supportedAgents": [
-            "antigravity",
-            "claude-code",
-            "codex"
-          ],
-          "agentCompatibility": {
-            "antigravity": {
-              "supported": true,
-              "version": ">=1.0.0"
-            },
-            "claudeCode": {
-              "supported": true,
-              "version": ">=1.0.0"
-            },
-            "codex": {
-              "supported": true,
-              "version": ">=1.0.0"
-            }
-          },
-          "triggers": [
-            "สร้างโมเดลตัวละคร 3D",
-            "ตัวละคร low-poly",
-            "สร้างตัวละครจากภาพอ้างอิง",
-            "character rigging",
-            "skinning QA",
-            "GLB สำหรับเว็บ",
-            "WebGL crowd budget",
-            "Sentinel"
-          ],
-          "path": "skills/lowpoly-character-web",
-          "entryFile": "skills/lowpoly-character-web/SKILL.md",
-          "assets": [
-            {
-              "name": "SKILL.md",
-              "type": "skill",
-              "path": "skills/lowpoly-character-web/SKILL.md"
-            },
-            {
-              "name": "studio_project.py",
-              "type": "script",
-              "path": "skills/lowpoly-character-web/scripts/studio_project.py"
-            },
-            {
-              "name": "stage_pipeline.py",
-              "type": "script",
-              "path": "skills/lowpoly-character-web/scripts/stage_pipeline.py"
-            },
-            {
-              "name": "character_spec.json",
-              "type": "template",
-              "path": "skills/lowpoly-character-web/assets/templates/character_spec.json"
-            },
-            {
-              "name": "part-by-part-studio.md",
-              "type": "reference",
-              "path": "skills/lowpoly-character-web/references/part-by-part-studio.md"
-            }
-          ],
-          "examples": [
-            {
-              "title": "พยาบาล 3D Low-poly",
-              "description": "ตัวอย่างโมเดลพยาบาลพร้อม skeletal rig 17 ข้อต่อ หมุนดูได้และเลือกเล่น Idle หรือ Walk ในพรีวิว",
-              "htmlPath": "assets/examples/lowpoly-nurse/preview.html"
-            },
-            {
-              "title": "ตัวอย่างโมเดลและ Rig",
-              "description": "โมเดล blockout และ skinned GLB พร้อมภาพพรีวิวและรายงานตรวจโครงสร้าง",
-              "markdownPath": "skills/lowpoly-character-web/references/examples.md"
-            }
-          ],
-          "highlights": [
-            "ตรวจรูปทรงจากภาพอ้างอิงทีละชิ้นส่วน เริ่มจากศีรษะ",
-            "เก็บบริบทโครงการและหลักฐานตรวจงานเพื่อทำต่อจากรอบก่อน",
-            "ตรวจโครงสร้าง GLB, skin weights และ animation clips",
-            "ประเมิน LOD และงบการเรนเดอร์สำหรับฉากหลายตัวละคร"
-          ],
-          "workflow": {
-            "sourcePath": "assets/skill-workflows/lowpoly-character-web.workflow.json",
-            "htmlPath": "assets/skill-workflows/lowpoly-character-web.html",
-            "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
-            "steps": [
-              {
-                "id": "intake",
-                "title": "G0 · Reference",
-                "subtitle": "อ่าน Ref และบริบท",
-                "description": "อ่านภาพต้นฉบับทุกมุม ตรวจภาพ crop, landmarks, อุปกรณ์และกล้อง แยกสิ่งที่เห็นจริงกับส่วนที่อนุมาน",
-                "kind": "external",
-                "line": 46,
-                "endLine": 51
-              },
-              {
-                "id": "parts",
-                "title": "G1 · Part fidelity",
-                "subtitle": "ปั้นทีละส่วน + Gate",
-                "description": "HEAD → TORSO → ARMS_HANDS → LEGS_FEET → OUTFIT_GEAR → INTEGRATION; แต่ละส่วนต้องเทียบ GLB จริง, mask, landmarks และ independent review ก่อนผ่าน",
-                "kind": "security",
-                "line": 53,
-                "endLine": 66
-              },
-              {
-                "id": "surface",
-                "title": "G2–G3 · Mesh / UV",
-                "subtitle": "Topology และวัสดุ",
-                "description": "ประกอบชิ้นส่วนเป็น topology เหมาะกับการเคลื่อนไหว วาง UV/วัสดุหลังผ่าน shape gates",
-                "kind": "backend",
-                "line": 78,
-                "endLine": 87
-              },
-              {
-                "id": "rig",
-                "title": "G4 · Rig & poses",
-                "subtitle": "Rig เมื่อร้องขอ",
-                "description": "ตรวจ skeleton, skin weights, deformation และ sampled poses ตามคลิปที่ผู้ใช้ต้องการ; งาน static ไม่บังคับ rig/clip ที่ไม่ได้ขอ",
-                "kind": "backend",
-                "line": 89,
-                "endLine": 101
-              },
-              {
-                "id": "webqa",
-                "title": "G5–G6 · Web QA",
-                "subtitle": "LOD / WebGL / Preview",
-                "description": "เลือก HERO/NPC/CROWD, วัด scene budget และ FPS บนอุปกรณ์จริง พร้อม preview ทุก stage; ไม่อ้าง FPS เมื่อยังไม่ได้ทดสอบ",
-                "kind": "security",
-                "line": 103,
-                "endLine": 114
-              },
-              {
-                "id": "release",
-                "title": "G7 · Release",
-                "subtitle": "ส่ง GLB + หลักฐาน",
-                "description": "ส่ง GLB/LOD, source เมื่อสร้างจริง, previews และรายงาน gate; ห้ามเรียก production-ready หากหลักฐานสำคัญไม่ครบ",
-                "kind": "frontend",
-                "line": 116,
-                "endLine": 118
-              }
-            ],
-            "branches": [
-              {
-                "from": "intake",
-                "id": "reference-stop",
-                "title": "Reference blocked",
-                "subtitle": "หยุดก่อนสร้าง",
-                "description": "หาก crop สูญเสียส่วนสำคัญ มุมผิด หรือยังไม่บันทึก feature ให้หยุดและแก้ reference",
-                "condition": "Ref ไม่ครบ",
-                "returnTo": null,
-                "line": 48,
-                "endLine": 51
-              },
-              {
-                "from": "parts",
-                "id": "part-repair",
-                "title": "Fix current part",
-                "subtitle": "แก้เฉพาะส่วน",
-                "description": "เมื่อ metrics หรือ reviewer ไม่ผ่าน ให้แก้ real geometry ของส่วนเดิมและ render/re-measure ใหม่; ถ้าแก้ไม่ได้ให้ REVIEW_REQUIRED",
-                "condition": "ไม่ผ่าน",
-                "returnTo": "parts",
-                "line": 60,
-                "endLine": 66
-              },
-              {
-                "from": "webqa",
-                "id": "prototype",
-                "title": "Prototype only",
-                "subtitle": "ไม่รับรอง production",
-                "description": "หาก gate ด้านศิลป์, deformation หรือ WebGL ยังไม่ผ่าน/ไม่ทดสอบ ให้ระบุ PROTOTYPE/REVIEW_REQUIRED พร้อมข้อแก้ไข",
-                "condition": "QA ไม่ครบ",
-                "returnTo": null,
-                "line": 110,
-                "endLine": 118
-              }
-            ],
-            "notes": [
-              "G1 เป็น hard gate ต่อส่วน; Integration ตรวจส่วนเดิมซ้ำบน GLB ประกอบจริง",
-              "ผลทดสอบเชิงตัวเลขไม่แทน visual acceptance; IoU ไม่ใช่เปอร์เซ็นต์ความเหมือน"
-            ]
-          }
-        },
-        {
-          "id": "webapp-quotation-builder",
-          "overviewImage": "assets/skill-overviews/webapp-quotation-builder.webp",
-          "name": "Web App Quotation Builder",
-          "nameTh": "สร้างใบเสนอราคาพัฒนา Web App",
-          "category": "Document",
-          "version": "1.1.0",
-          "status": "Ready",
-          "phase": "Phase 1",
-          "author": "Personal Library",
-          "summary": "ประเมินราคา Web App/PWA และสร้างใบเสนอราคา A4 พร้อมสไลด์ PDF ที่ใช้แผนภาพและ Stepper",
-          "description": "เก็บข้อมูลผู้เสนอราคาและขอบเขตโครงการ คำนวณราคา ภาษี และงวดชำระ แล้วสร้างใบเสนอราคา A4 และสไลด์ 16:9 จากข้อมูลชุดเดียวกัน สไลด์ประกอบจากองค์ประกอบ PPTX ที่แก้ไขได้และแบ่งหน้าเมื่อเนื้อหายาว",
-          "tags": [
-            "Quotation",
-            "Web App",
-            "PWA",
-            "PDF",
-            "Pricing",
-            "Proposal",
-            "Slides",
-            "Diagram"
-          ],
-          "supportedAgents": [
-            "antigravity",
-            "claude-code",
-            "codex"
-          ],
-          "agentCompatibility": {
-            "antigravity": {
-              "supported": true,
-              "version": ">=1.0.0"
-            },
-            "claudeCode": {
-              "supported": true,
-              "version": ">=1.0.0"
-            },
-            "codex": {
-              "supported": true,
-              "version": ">=1.0.0"
-            }
-          },
-          "triggers": [
-            "ทำใบเสนอราคา",
-            "ประเมินราคาทำเว็บแอป",
-            "เสนอราคาพัฒนา PWA",
-            "web app quotation",
-            "software development proposal"
-          ],
-          "path": "skills/webapp-quotation-builder",
-          "entryFile": "skills/webapp-quotation-builder/SKILL.md",
-          "assets": [
-            {
-              "name": "SKILL.md",
-              "type": "skill",
-              "path": "skills/webapp-quotation-builder/SKILL.md"
-            },
-            {
-              "name": "provider-profile.template.md",
-              "type": "template",
-              "path": "skills/webapp-quotation-builder/templates/provider-profile.template.md"
-            },
-            {
-              "name": "quote-data.example.json",
-              "type": "template",
-              "path": "skills/webapp-quotation-builder/assets/quote-data.example.json"
-            },
-            {
-              "name": "generate.ps1",
-              "type": "script",
-              "path": "skills/webapp-quotation-builder/scripts/generate.ps1"
-            },
-            {
-              "name": "generate.sh",
-              "type": "script",
-              "path": "skills/webapp-quotation-builder/scripts/generate.sh"
-            },
-            {
-              "name": "generate.py",
-              "type": "script",
-              "path": "skills/webapp-quotation-builder/scripts/generate.py"
-            },
-            {
-              "name": "output-qa.md",
-              "type": "reference",
-              "path": "skills/webapp-quotation-builder/references/output-qa.md"
-            },
-            {
-              "name": "slide_components.js",
-              "type": "script",
-              "path": "skills/webapp-quotation-builder/scripts/slide_components.js"
-            },
-            {
-              "name": "slide_preflight.py",
-              "type": "script",
-              "path": "skills/webapp-quotation-builder/scripts/slide_preflight.py"
-            },
-            {
-              "name": "slide-design-system.md",
-              "type": "reference",
-              "path": "skills/webapp-quotation-builder/references/slide-design-system.md"
-            },
-            {
-              "name": "diagram-stepper-patterns.md",
-              "type": "reference",
-              "path": "skills/webapp-quotation-builder/references/diagram-stepper-patterns.md"
-            },
-            {
-              "name": "slide-component-architecture.md",
-              "type": "reference",
-              "path": "skills/webapp-quotation-builder/references/slide-component-architecture.md"
-            },
-            {
-              "name": "slide-qa-checklist.md",
-              "type": "reference",
-              "path": "skills/webapp-quotation-builder/references/slide-qa-checklist.md"
-            }
-          ],
-          "examples": [
-            {
-              "title": "ใบเสนอราคาพัฒนาระบบจองคิวออนไลน์",
-              "description": "ใบเสนอราคา A4 จำนวน 1 หน้า แสดงขอบเขตงาน ยอดรวม 69,000 บาท และงวดชำระ 30% / 40% / 30% จากข้อมูลสมมติ",
-              "pdfPath": "skills/webapp-quotation-builder/examples/queue-booking/quotation-DEMO-QT-2026-001.pdf"
-            },
-            {
-              "title": "สไลด์ภาพรวมบริการระบบจองคิวออนไลน์",
-              "description": "สไลด์ PDF แนวนอน 16:9 จำนวน 6 หน้า มีผังการจองคิว แผนส่งมอบ 8 สัปดาห์แบบ Stepper งวดชำระ และเงื่อนไขรับประกันจากชุดข้อมูลเดียวกัน",
-              "pdfPath": "skills/webapp-quotation-builder/examples/queue-booking/service-overview-DEMO-QT-2026-001.pdf"
-            }
-          ],
-          "highlights": [
-            "มีแบบฟอร์มข้อมูลผู้ให้บริการและชุดคำถามสำหรับเก็บขอบเขตโครงการ",
-            "คำนวณยอดรวม VAT และงวดชำระจากข้อมูลที่ยืนยันแล้ว",
-            "สร้างใบเสนอราคา A4 หนึ่งหน้าและสไลด์แนะนำบริการ PDF ขนาด 16:9",
-            "ใช้ Grid, Card, Diagram และ Stepper ที่ประกอบเป็นองค์ประกอบ PPTX และแบ่งหน้าได้",
-            "ตรวจขนาดหน้า ข้อความ และยอดสำคัญของสไลด์ PDF ด้วย preflight"
-          ],
-          "workflow": {
-            "sourcePath": "assets/skill-workflows/webapp-quotation-builder.workflow.json",
-            "htmlPath": "assets/skill-workflows/webapp-quotation-builder.html",
-            "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
-            "steps": [
-              {
-                "id": "profile",
-                "title": "Provider profile",
-                "subtitle": "โปรไฟล์ + ราคาตลาด",
-                "description": "สร้างแบบฟอร์ม Markdown ใหม่ ตรวจราคาอย่างน้อยสองแหล่งอิสระและภาษี แล้วให้ผู้ใช้ยืนยันข้อมูลผู้เสนอราคา",
-                "kind": "external",
-                "line": 18,
-                "endLine": 23
-              },
-              {
-                "id": "continue",
-                "title": "Continue gate",
-                "subtitle": "รอคำสั่ง ทำต่อ",
-                "description": "เมื่อข้อมูลผู้เสนอราคาครบ ให้รอผู้ใช้พิมพ์ ทำต่อ หรือคำสั่งเทียบเท่าก่อนถามรายละเอียดโครงการ",
-                "kind": "security",
-                "line": 20,
-                "endLine": 23
-              },
-              {
-                "id": "scope",
-                "title": "Project scope",
-                "subtitle": "เก็บ Requirement",
-                "description": "ถามครั้งละ 2–4 ข้อ แต่ละข้ออย่างน้อย 3 ตัวเลือกและ Other; ยืนยันลูกค้า ขอบเขต งบ เวลา งวดชำระ และข้อยกเว้น",
-                "kind": "backend",
-                "line": 25,
-                "endLine": 29
-              },
-              {
-                "id": "pricing",
-                "title": "Pricing & tax",
-                "subtitle": "คำนวณและตรวจภาษี",
-                "description": "รวมงาน 3–7 รายการ คำนวณต้นทุน/กำไร ยืนยัน VAT/WHT และเงื่อนไข งวดชำระรวม 100%; ข้อมูลสำคัญต้องครบก่อนสร้างไฟล์",
-                "kind": "security",
-                "line": 31,
-                "endLine": 37
-              },
-              {
-                "id": "generate",
-                "title": "Generate & QA",
-                "subtitle": "สร้างและตรวจ 2 PDF",
-                "description": "สร้าง quote-data.json ที่ยืนยันแล้ว จัด A4 + สไลด์ 16:9 ด้วย Sarabun และ component layout; ตรวจยอด สัญญา ฟอนต์ และทุกหน้า",
-                "kind": "backend",
-                "line": 39,
-                "endLine": 60
-              },
-              {
-                "id": "deliver",
-                "title": "2 PDF files",
-                "subtitle": "ส่งมอบใบเสนอราคา",
-                "description": "ส่งใบเสนอราคา A4 หนึ่งหน้าและ Service Overview PDF แนวนอน พร้อมยอด สถานะ VAT อายุใบเสนอราคา และสมมติฐาน",
-                "kind": "frontend",
-                "line": 57,
-                "endLine": 61
-              }
-            ],
-            "branches": [
-              {
-                "from": "continue",
-                "id": "wait",
-                "title": "Wait for user",
-                "subtitle": "ยังไม่ทำต่อ",
-                "description": "พักที่ข้อมูลผู้เสนอราคา จนได้รับคำสั่งทำต่อ; ไม่เริ่มประเมินโครงการก่อน",
-                "condition": "ยังไม่ยืนยัน",
-                "returnTo": null,
-                "line": 20,
-                "endLine": 23
-              },
-              {
-                "from": "pricing",
-                "id": "revise",
-                "title": "Clarify terms",
-                "subtitle": "ปรับ Scope / งบ",
-                "description": "หากขอบเขต เวลา งบ หรือความปลอดภัยขัดกัน ให้ตกลงสมมติฐานและถามเฉพาะข้อมูลที่ยังขาด",
-                "condition": "ข้อมูลไม่ครบ",
-                "returnTo": "pricing",
-                "line": 25,
-                "endLine": 37
-              }
-            ],
-            "notes": [
-              "ต้องตรวจราคาตลาดและภาษีสำหรับใบเสนอราคาใหม่ทุกครั้ง",
-              "ทั้งสอง PDF ต้องมาจากยอดและเงื่อนไขเดียวกัน"
-            ]
-          }
-        },
-        {
-          "id": "user-manual-writer",
-          "overviewImage": "assets/skill-overviews/user-manual-writer.webp",
-          "name": "User Manual Writer",
-          "nameTh": "เขียนคู่มือการใช้งานระบบ",
-          "category": "Document",
-          "version": "1.0.0",
-          "status": "Ready",
-          "phase": "Phase 1",
-          "author": "Personal Library",
-          "summary": "เขียนคู่มือพร้อมภาพประกอบจากบันทึก เอกสาร หรือภาพหน้าจอ และตรวจขั้นตอนผ่าน Browser เมื่อมีระบบทดสอบที่ได้รับอนุญาต",
-          "description": "เขียนหรือปรับปรุงคู่มือการใช้งานระบบสำหรับผู้ใช้ทั่วไป บทความคลังความรู้ และวิธีใช้ฟีเจอร์แบบทีละขั้นจากบันทึก เอกสาร หรือภาพหน้าจอ พร้อมภาพประกอบ เมื่อมี URL ระบบทดสอบที่ได้รับอนุญาต ต้องใช้ Browser ของ AI Agent เดินตามขั้นตอนจริงและจับภาพหน้าจอ",
-          "tags": [
-            "Document",
-            "User Manual",
-            "User Guide",
-            "Knowledge Base",
-            "Screenshot"
-          ],
-          "supportedAgents": [
-            "antigravity",
-            "claude-code",
-            "codex"
-          ],
-          "agentCompatibility": {
-            "antigravity": {
-              "supported": true,
-              "version": ">=1.0.0"
-            },
-            "claudeCode": {
-              "supported": true,
-              "version": ">=1.0.0"
-            },
-            "codex": {
-              "supported": true,
-              "version": ">=1.0.0"
-            }
-          },
-          "triggers": [
-            "เขียนคู่มือการใช้งาน",
-            "ปรับปรุงคู่มือ",
-            "บทความคลังความรู้",
-            "วิธีใช้ฟีเจอร์",
-            "user manual",
-            "user guide",
-            "knowledge base article"
-          ],
-          "path": "skills/user-manual-writer",
-          "entryFile": "skills/user-manual-writer/SKILL.md",
-          "assets": [
-            {
-              "name": "SKILL.md",
-              "type": "skill",
-              "path": "skills/user-manual-writer/SKILL.md"
-            }
-          ],
-          "examples": [
-            {
-              "title": "เปิดตัวอย่างคู่มือ PDF พร้อมพิมพ์จาก AI Skill Library",
-              "description": "คู่มือภาษาไทย 4 ขั้นตอน ตั้งแต่ค้นหา Skill จนเปิดเอกสารตัวอย่าง พร้อมภาพหน้าจอจาก Codex in-app browser",
-              "htmlPath": "skills/user-manual-writer/examples/catalog-lookup/manual.html",
-              "markdownPath": "skills/user-manual-writer/examples/catalog-lookup/USER_MANUAL.md"
-            }
-          ],
-          "highlights": [
-            "เขียนคู่มือแบบทีละขั้นสำหรับบทบาทของผู้อ่าน",
-            "เดินตามขั้นตอนจริงและจับภาพผ่าน Browser เมื่อมี URL ทดสอบที่ได้รับอนุญาต",
-            "ใช้ข้อมูลสมมติและภาพจำลองสำหรับขั้นตอนยืนยันตัวตนเพิ่มเติม"
-          ],
-          "workflow": {
-            "sourcePath": "assets/skill-workflows/user-manual-writer.workflow.json",
-            "htmlPath": "assets/skill-workflows/user-manual-writer.html",
-            "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
-            "steps": [
-              {
-                "id": "scope",
-                "title": "Scope & roles",
-                "subtitle": "ระบุงานและกลุ่มผู้ใช้",
-                "description": "กำหนดงาน บทบาท และขอบเขตของคู่มือจากบันทึก/หลักฐานที่ได้รับอนุญาต",
-                "kind": "external",
-                "line": 21,
-                "endLine": 24
-              },
-              {
-                "id": "browser",
-                "title": "Evidence review",
-                "subtitle": "ตรวจ UI ทดสอบ",
-                "description": "ถ้ามี URL ทดสอบที่ได้รับอนุญาต ต้องเดินขั้นตอนจริงผ่าน Browser ด้วยบัญชีทดสอบและ mock data; ตรวจปุ่ม เมนู สิทธิ์ และผลลัพธ์",
-                "kind": "security",
-                "line": 34,
-                "endLine": 40
-              },
-              {
-                "id": "draft",
-                "title": "Write steps",
-                "subtitle": "ร่างคู่มือทีละขั้น",
-                "description": "จัดตามวัตถุประสงค์ บทบาท สิ่งที่ต้องเตรียม ขั้นตอน และปัญหาที่ตรวจสอบได้; หนึ่งการกระทำหลักต่อ Step",
-                "kind": "backend",
-                "line": 42,
-                "endLine": 49
-              },
-              {
-                "id": "images",
-                "title": "Screenshots",
-                "subtitle": "ภาพตรงกับทุก Step",
-                "description": "แทรกภาพจาก Browser ใต้ขั้นตอน; ใช้ภาพจำลองที่ติดป้ายสำหรับ 2FA/OTP และ placeholder เมื่อมีข้อจำกัด ห้ามใช้ข้อมูลจริง",
-                "kind": "backend",
-                "line": 51,
-                "endLine": 57
-              },
-              {
-                "id": "review",
-                "title": "Review & format",
-                "subtitle": "ตรวจความถูกต้อง",
-                "description": "ตรวจการเดินตามขั้นตอน ชื่อปุ่ม ภาพ ไม่มีข้อมูลอ่อนไหว และ Sarabun ในไฟล์ที่กำหนดฟอนต์ได้",
-                "kind": "security",
-                "line": 23,
-                "endLine": 32
-              },
-              {
-                "id": "deliver",
-                "title": "Reviewed draft",
-                "subtitle": "ส่งฉบับร่าง",
-                "description": "ส่งคู่มือให้ผู้ขอตรวจทาน ปรับตามข้อเสนอแนะ และระบุภาพหรือขั้นตอนที่ยังตรวจไม่ได้",
-                "kind": "frontend",
-                "line": 26,
-                "endLine": 32
-              }
-            ],
-            "branches": [
-              {
-                "from": "browser",
-                "id": "evidence-gap",
-                "title": "Evidence gap",
-                "subtitle": "หยุดหรือขอหลักฐาน",
-                "description": "หากเข้าไม่ได้ สิทธิ์ไม่พอ หรือไม่มีบัญชีทดสอบ ให้หยุดก่อนล็อกอิน ขอหลักฐานที่ใช้ mock data และรอข้อมูลสำคัญ",
-                "condition": "หลักฐานไม่พอ",
-                "returnTo": "browser",
-                "line": 36,
-                "endLine": 40
-              },
-              {
-                "from": "review",
-                "id": "correct",
-                "title": "Correct draft",
-                "subtitle": "แก้ตามข้อเสนอแนะ",
-                "description": "แก้ขั้นตอน ภาพ และฟอนต์ที่ยังไม่ถูกต้อง แล้วตรวจซ้ำ; ระบุข้อจำกัดที่ยังแก้ไม่ได้",
-                "condition": "ต้องแก้",
-                "returnTo": "review",
-                "line": 26,
-                "endLine": 32
-              }
-            ],
-            "notes": [
-              "ห้ามขอรหัสผ่าน/OTP ผ่านแชตหรือใช้บัญชีผู้ใช้จริง",
-              "ห้ามอ้างว่าตรวจผ่าน Browser หากใช้เพียงหลักฐานจากผู้ขอ"
-            ]
-          }
-        },
-        {
-          "id": "photoreal-head-web",
-          "name": "Photoreal Head for Web",
-          "nameTh": "โมเดลศีรษะสมจริงสำหรับเว็บ",
-          "category": "UIUX",
-          "version": "2.0.0",
-          "status": "Ready",
-          "phase": "Phase 1",
-          "author": "Personal Library",
-          "summary": "สร้างและแก้โมเดลศีรษะ 3D สมจริงด้วย Blender ตรวจสัดส่วนใบหน้าก่อนทำ UV และ PBR พร้อมส่งออก GLB สำหรับ Three.js",
-          "description": "สร้างหรือปรับโมเดลศีรษะมนุษย์โดยตรวจ cranial silhouette, ตา จมูก หู ปาก และขากรรไกรก่อนทำ texture ใช้ facial landmarks และ photo-fit ประกอบการตรวจ รองรับ UV0, PBR, eyebrow decals และ GLB พร้อม release gates ที่แยกผลตรวจอัตโนมัติจากการยอมรับภาพจริง",
-          "tags": [
-            "3D",
-            "Photoreal",
-            "Facial Anatomy",
-            "Blender",
-            "GLB",
-            "Three.js",
-            "Multi-Agent"
-          ],
-          "supportedAgents": [
-            "antigravity",
-            "claude-code",
-            "codex"
-          ],
-          "agentCompatibility": {
-            "antigravity": {
-              "supported": true,
-              "version": ">=1.0.0"
-            },
-            "claudeCode": {
-              "supported": true,
-              "version": ">=1.0.0"
-            },
-            "codex": {
-              "supported": true,
-              "version": ">=1.0.0"
-            }
-          },
-          "triggers": [
-            "สร้างหัวคนสมจริง",
-            "แก้สัดส่วนใบหน้า 3D",
-            "โมเดลศีรษะสำหรับเว็บ",
-            "photoreal head",
-            "facial anatomy QA",
-            "photo-fit landmarks",
-            "eyebrow tattoo texture",
-            "Blender GLB export"
-          ],
-          "path": "skills/photoreal-head-web",
-          "entryFile": "skills/photoreal-head-web/SKILL.md",
-          "assets": [
-            {
-              "name": "SKILL.md",
-              "type": "skill",
-              "path": "skills/photoreal-head-web/SKILL.md"
-            },
-            {
-              "name": "analyze_anatomy.py",
-              "type": "script",
-              "path": "skills/photoreal-head-web/scripts/analyze_anatomy.py"
-            },
-            {
-              "name": "compare_photo_landmarks.py",
-              "type": "script",
-              "path": "skills/photoreal-head-web/scripts/compare_photo_landmarks.py"
-            },
-            {
-              "name": "blender_export_head.py",
-              "type": "script",
-              "path": "skills/photoreal-head-web/scripts/blender_export_head.py"
-            },
-            {
-              "name": "inspect_glb.py",
-              "type": "script",
-              "path": "skills/photoreal-head-web/scripts/inspect_glb.py"
-            },
-            {
-              "name": "landmarks_3d_template.json",
-              "type": "template",
-              "path": "skills/photoreal-head-web/assets/templates/landmarks_3d_template.json"
-            },
-            {
-              "name": "anatomy_review_template.md",
-              "type": "template",
-              "path": "skills/photoreal-head-web/assets/templates/anatomy_review_template.md"
-            },
-            {
-              "name": "anatomy-release-gates.md",
-              "type": "reference",
-              "path": "skills/photoreal-head-web/references/anatomy-release-gates.md"
-            },
-            {
-              "name": "HeadViewer.tsx",
-              "type": "template",
-              "path": "skills/photoreal-head-web/assets/web/HeadViewer.tsx"
-            }
-          ],
-          "examples": [
-            {
-              "title": "ตรวจโมเดลศีรษะจริง: Clay, พื้นผิว และ Wireframe",
-              "description": "ตัวอย่างใช้โมเดลสแกน CC BY 3.0 ตรวจรูปทรงหลายมุม พร้อม GLB, UV layout และรายงานโครงสร้าง แยกข้อจำกัด landmark/photo-fit ชัดเจน",
-              "htmlPath": "assets/examples/photoreal-head/preview.html",
-              "markdownPath": "assets/examples/photoreal-head/README.md"
-            },
-            {
-              "title": "แนวทางสร้างและแก้โมเดลศีรษะ",
-              "description": "ตัวอย่าง brief สำหรับหัวคนสมจริง งาน likeness และการแก้รูปทรงก่อนทำ texture",
-              "markdownPath": "skills/photoreal-head-web/references/example-briefs.md"
-            }
-          ],
-          "highlights": [
-            "ตรวจ anatomy และภาพ clay หลายมุมก่อน UV และ texture",
-            "ตรวจ facial landmarks และเทียบภาพอ้างอิงด้วย photo-fit",
-            "ส่งออก GLB พร้อมหลักฐานและ release gates",
-            "มี React Three Fiber viewer สำหรับตรวจโมเดลบนเว็บ"
-          ],
-          "overviewImage": "assets/skill-overviews/photoreal-head-web.webp",
-          "workflow": {
-            "sourcePath": "assets/skill-workflows/photoreal-head-web.workflow.json",
-            "htmlPath": "assets/skill-workflows/photoreal-head-web.html",
-            "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
-            "steps": [
-              {
-                "id": "intake",
-                "title": "G0 · Intake",
-                "subtitle": "Ref / สิทธิ์ / Blender",
-                "description": "ตรวจสิทธิ์และความพร้อมของ Blender, reference หลายมุมและกล้อง; ไม่สร้าง model ปลอมหากเครื่องมือไม่พร้อม",
-                "kind": "external",
-                "line": 44,
-                "endLine": 48
-              },
-              {
-                "id": "primary",
-                "title": "G1 · Anatomy",
-                "subtitle": "โครงกะโหลกและมวล",
-                "description": "เริ่มจาก base topology ที่เชื่อถือได้ ปั้น cranial vault, maxilla, mandible และ silhouette; ตรวจ flat gray หลายมุม",
-                "kind": "backend",
-                "line": 50,
-                "endLine": 54
-              },
-              {
-                "id": "detail",
-                "title": "G2 · Face forms",
-                "subtitle": "ตา จมูก หู ปาก",
-                "description": "ปั้นโครงสร้างจริงของ orbital rim, nose cartilage, ears, cheeks/lips/jaw โดยยังไม่ใช้ texture",
-                "kind": "backend",
-                "line": 56,
-                "endLine": 63
-              },
-              {
-                "id": "landmarks",
-                "title": "G3 · Landmarks",
-                "subtitle": "วัดและเทียบภาพ",
-                "description": "วัด normalized landmarks, ตรวจ clay และ photo-fit; แก้ camera mismatch ก่อนบิด geometry; หยุดหาก BLOCKED",
-                "kind": "security",
-                "line": 65,
-                "endLine": 71
-              },
-              {
-                "id": "texture",
-                "title": "G4 · UV / PBR",
-                "subtitle": "Retopo และ Texture",
-                "description": "จัด face loops/UV0, bake normal, roughness และ eyebrow layers แยก; ห้ามใช้ texture ปกปิด anatomy ที่ผิด",
-                "kind": "backend",
-                "line": 73,
-                "endLine": 80
-              },
-              {
-                "id": "release",
-                "title": "G5 · GLB / QA",
-                "subtitle": "Export + Browser",
-                "description": "ตรวจ GLB/UV/ภาพจริงบนมือถือและ desktop พร้อมหลักฐานกายวิภาคก่อน final release; ไม่อ้าง browser หรือ likeness ถ้าไม่ได้ทดสอบ",
-                "kind": "frontend",
-                "line": 82,
-                "endLine": 87
-              }
-            ],
-            "branches": [
-              {
-                "from": "intake",
-                "id": "no-runtime",
-                "title": "No 3D runtime",
-                "subtitle": "ส่งคำแนะนำแทน",
-                "description": "ถ้าไม่มีเครื่องมือ 3D ให้ส่งสคริปต์/วิธีทำ และระบุว่าการสร้างโมเดลยังไม่ได้ดำเนินการ",
-                "condition": "เครื่องมือไม่พร้อม",
-                "returnTo": null,
-                "line": 44,
-                "endLine": 48
-              },
-              {
-                "from": "landmarks",
-                "id": "anatomy-fix",
-                "title": "Anatomy repair",
-                "subtitle": "แก้โครงก่อน Texture",
-                "description": "แก้ clay, landmarks หรือการจัดกล้องที่ผิด; ห้ามผ่านไป UV/texture เมื่อ anatomy ยัง BLOCKED",
-                "condition": "Gate ไม่ผ่าน",
-                "returnTo": "primary",
-                "line": 65,
-                "endLine": 71
-              }
-            ],
-            "notes": [
-              "Anatomy-first: Texture ปิดตลอด G1–G3",
-              "ภาพเดียวไม่พอสำหรับยืนยันรูปทรง 3D หรือความเหมือนเฉพาะบุคคล"
-            ]
-          }
-        },
-        {
-          "id": "thai-krathong-3d",
-          "name": "Thai Krathong 3D",
-          "nameTh": "สร้างโมเดลกระทงไทย 3D",
-          "category": "UIUX",
-          "version": "3.2.0",
-          "status": "Ready",
-          "phase": "Phase 1",
-          "author": "Personal Library",
-          "summary": "สร้างและปรับโมเดลกระทงไทยจากข้อความหรือภาพอ้างอิง รองรับ Blender, GLB และ Three.js พร้อมตรวจรูปทรงและไฟล์ส่งออก",
-          "description": "สร้างกระทงใบตอง ดอกบัว แบบหลายชั้น ทรงข้าวหลามตัด ขนมปัง และดินเผา ด้วย workflow R3.1 แยกตรวจรูปทรง วัสดุ ภาพเรนเดอร์ และ GLB round-trip มี presets และแนวทางตรวจเทียบภาพอ้างอิง โดยแยกผลตรวจทางเทคนิคจากการยอมรับด้านภาพ",
-          "tags": [
-            "3D",
-            "Krathong",
-            "Loy Krathong",
-            "Blender",
-            "GLB",
-            "Three.js",
-            "Multi-Agent"
-          ],
-          "supportedAgents": [
-            "antigravity",
-            "claude-code",
-            "codex"
-          ],
-          "agentCompatibility": {
-            "antigravity": {
-              "supported": true,
-              "version": ">=1.0.0"
-            },
-            "claudeCode": {
-              "supported": true,
-              "version": ">=1.0.0"
-            },
-            "codex": {
-              "supported": true,
-              "version": ">=1.0.0"
-            }
-          },
-          "triggers": [
-            "ปั้นกระทง 3D",
-            "กระทงใบตอง",
-            "กระทงดอกบัว",
-            "โมเดลกระทง",
-            "Thai krathong",
-            "Loy Krathong assets",
-            "krathong GLB"
-          ],
-          "path": "skills/thai-krathong-3d",
-          "entryFile": "skills/thai-krathong-3d/SKILL.md",
-          "assets": [
-            {
-              "name": "openai.yaml",
-              "type": "asset",
-              "path": "skills/thai-krathong-3d/agents/openai.yaml"
-            },
-            {
-              "name": "icon.svg",
-              "type": "asset",
-              "path": "skills/thai-krathong-3d/assets/icon.svg"
-            },
-            {
-              "name": "lotus.json",
-              "type": "template",
-              "path": "skills/thai-krathong-3d/assets/lotus.json"
-            },
-            {
-              "name": "ref-banana-classic.json",
-              "type": "template",
-              "path": "skills/thai-krathong-3d/assets/ref-banana-classic.json"
-            },
-            {
-              "name": "ref-bread-flower.json",
-              "type": "template",
-              "path": "skills/thai-krathong-3d/assets/ref-bread-flower.json"
-            },
-            {
-              "name": "ref-clay-bowl.json",
-              "type": "template",
-              "path": "skills/thai-krathong-3d/assets/ref-clay-bowl.json"
-            },
-            {
-              "name": "ref-diamond-leaf.json",
-              "type": "template",
-              "path": "skills/thai-krathong-3d/assets/ref-diamond-leaf.json"
-            },
-            {
-              "name": "ref-orange-bowl.json",
-              "type": "template",
-              "path": "skills/thai-krathong-3d/assets/ref-orange-bowl.json"
-            },
-            {
-              "name": "ref-pink-lotus.json",
-              "type": "template",
-              "path": "skills/thai-krathong-3d/assets/ref-pink-lotus.json"
-            },
-            {
-              "name": "ref-tiered-leaf.json",
-              "type": "template",
-              "path": "skills/thai-krathong-3d/assets/ref-tiered-leaf.json"
-            },
-            {
-              "name": "ref-white-lotus.json",
-              "type": "template",
-              "path": "skills/thai-krathong-3d/assets/ref-white-lotus.json"
-            },
-            {
-              "name": "reference-catalog.json",
-              "type": "template",
-              "path": "skills/thai-krathong-3d/assets/reference-catalog.json"
-            },
-            {
-              "name": "stylized.json",
-              "type": "template",
-              "path": "skills/thai-krathong-3d/assets/stylized.json"
-            },
-            {
-              "name": "traditional.json",
-              "type": "template",
-              "path": "skills/thai-krathong-3d/assets/traditional.json"
-            },
-            {
-              "name": "anatomy.md",
-              "type": "reference",
-              "path": "skills/thai-krathong-3d/references/anatomy.md"
-            },
-            {
-              "name": "craft-and-materials.md",
-              "type": "reference",
-              "path": "skills/thai-krathong-3d/references/craft-and-materials.md"
-            },
-            {
-              "name": "examples.md",
-              "type": "reference",
-              "path": "skills/thai-krathong-3d/references/examples.md"
-            },
-            {
-              "name": "implementation-verification.json",
-              "type": "reference",
-              "path": "skills/thai-krathong-3d/references/implementation-verification.json"
-            },
-            {
-              "name": "material-and-export.md",
-              "type": "reference",
-              "path": "skills/thai-krathong-3d/references/material-and-export.md"
-            },
-            {
-              "name": "reference-qa.md",
-              "type": "reference",
-              "path": "skills/thai-krathong-3d/references/reference-qa.md"
-            },
-            {
-              "name": "research-evidence.md",
-              "type": "reference",
-              "path": "skills/thai-krathong-3d/references/research-evidence.md"
-            },
-            {
-              "name": "screenshot-study.md",
-              "type": "reference",
-              "path": "skills/thai-krathong-3d/references/screenshot-study.md"
-            },
-            {
-              "name": "web-integration.md",
-              "type": "reference",
-              "path": "skills/thai-krathong-3d/references/web-integration.md"
-            },
-            {
-              "name": "blender_finish.py",
-              "type": "script",
-              "path": "skills/thai-krathong-3d/scripts/blender_finish.py"
-            },
-            {
-              "name": "build_reference.py",
-              "type": "script",
-              "path": "skills/thai-krathong-3d/scripts/build_reference.py"
-            },
-            {
-              "name": "check_reference_model.py",
-              "type": "script",
-              "path": "skills/thai-krathong-3d/scripts/check_reference_model.py"
-            },
-            {
-              "name": "generate_krathong.py",
-              "type": "script",
-              "path": "skills/thai-krathong-3d/scripts/generate_krathong.py"
-            },
-            {
-              "name": "qa_model.py",
-              "type": "script",
-              "path": "skills/thai-krathong-3d/scripts/qa_model.py"
-            },
-            {
-              "name": "reference_finish.py",
-              "type": "script",
-              "path": "skills/thai-krathong-3d/scripts/reference_finish.py"
-            },
-            {
-              "name": "render_preview.py",
-              "type": "script",
-              "path": "skills/thai-krathong-3d/scripts/render_preview.py"
-            },
-            {
-              "name": "smoke_test.py",
-              "type": "script",
-              "path": "skills/thai-krathong-3d/scripts/smoke_test.py"
-            },
-            {
-              "name": "SKILL.md",
-              "type": "skill",
-              "path": "skills/thai-krathong-3d/SKILL.md"
-            },
-            {
-              "name": "mesh_uv_qa.py",
-              "type": "script",
-              "path": "skills/thai-krathong-3d/scripts/mesh_uv_qa.py"
-            },
-            {
-              "name": "bake_web_pbr.py",
-              "type": "script",
-              "path": "skills/thai-krathong-3d/scripts/bake_web_pbr.py"
-            },
-            {
-              "name": "mesh-uv-web-pbr.md",
-              "type": "reference",
-              "path": "skills/thai-krathong-3d/references/mesh-uv-web-pbr.md"
-            },
-            {
-              "name": "test_mesh_uv_blender.py",
-              "type": "test",
-              "path": "skills/thai-krathong-3d/tests/test_mesh_uv_blender.py"
-            },
-            {
-              "name": "test_web_pbr_blender.py",
-              "type": "test",
-              "path": "skills/thai-krathong-3d/tests/test_web_pbr_blender.py"
-            },
-            {
-              "name": "web-pbr-verification.json",
-              "type": "reference",
-              "path": "skills/thai-krathong-3d/references/web-pbr-verification.json"
-            },
-            {
-              "name": "index.html",
-              "type": "example",
-              "path": "skills/thai-krathong-3d/examples/web-pbr-showcase/index.html"
-            },
-            {
-              "name": "overview.html",
-              "type": "example",
-              "path": "skills/thai-krathong-3d/examples/web-pbr-showcase/overview.html"
-            },
-            {
-              "name": "README.md",
-              "type": "reference",
-              "path": "skills/thai-krathong-3d/examples/web-pbr-showcase/README.md"
-            },
-            {
-              "name": "cases.json",
-              "type": "reference",
-              "path": "skills/thai-krathong-3d/examples/web-pbr-showcase/cases.json"
-            },
-            {
-              "name": "overview.webp",
-              "type": "asset",
-              "path": "skills/thai-krathong-3d/examples/web-pbr-showcase/overview.webp"
-            }
-          ],
-          "examples": [
-            {
-              "title": "กระทง 3 แบบ · ภาพเรนเดอร์และไฟล์ GLB",
-              "description": "ใบตอง ดอกบัว และดินเผา พร้อม prompt, มุมภาพ 3 มุม, baked PBR และผลตรวจจาก Blender จริง",
-              "htmlPath": "skills/thai-krathong-3d/examples/web-pbr-showcase/index.html",
-              "markdownPath": "skills/thai-krathong-3d/examples/web-pbr-showcase/README.md"
-            },
-            {
-              "title": "ภาพรวม Thai Krathong 3D",
-              "description": "Overview จากโมเดลที่ตรวจแล้ว: Mesh/UV QA → Bake PBR → GLB",
-              "htmlPath": "skills/thai-krathong-3d/examples/web-pbr-showcase/overview.html"
-            },
-            {
-              "title": "ตัวอย่าง brief และ presets กระทงไทย",
-              "description": "แนวทางสร้างกระทงจากข้อความและภาพอ้างอิง",
-              "markdownPath": "skills/thai-krathong-3d/references/examples.md"
-            }
-          ],
-          "highlights": [
-            "R3.1 รองรับรูปทรงกระทง 8 ตระกูลและ presets สำหรับภาพอ้างอิง",
-            "ตรวจรูปทรงก่อนเพิ่มรายละเอียดวัสดุและแสง",
-            "ตรวจ GLB round-trip และแยกผลเทคนิคจาก visual review",
-            "เก็บ workflow low-poly เดิมสำหรับงานที่ต้องการโมเดลเรียบง่าย",
-            "Mesh/UV QA ตรวจ topology, overlap, stretch, texel density และระยะห่าง UV islands",
-            "Bake BaseColor, Normal, Roughness, Metallic, AO และ packed ORM พร้อม strict GLB QA"
-          ],
-          "overviewImage": "assets/skill-overviews/thai-krathong-3d.webp",
-          "workflow": {
-            "sourcePath": "assets/skill-workflows/thai-krathong-3d.workflow.json",
-            "htmlPath": "assets/skill-workflows/thai-krathong-3d.html",
-            "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
-            "steps": [
-              {
-                "id": "brief",
-                "title": "Reference intake",
-                "subtitle": "อ่านภาพและ Brief",
-                "description": "เลือก reference หลัก บันทึก family, silhouette, layers, material cues, accessories, camera และสิ่งที่อนุมานใน reference_analysis.json",
-                "kind": "external",
-                "line": 49,
-                "endLine": 74
-              },
-              {
-                "id": "family",
-                "title": "Structure family",
-                "subtitle": "เลือกโครงสร้างก่อนสี",
-                "description": "เลือก folded banana-leaf, lotus, tiered, diamond, bread, clay หรือ legacy simple baseline ตามลักษณะรูปทรงจริง",
-                "kind": "backend",
-                "line": 55,
-                "endLine": 70
-              },
-              {
-                "id": "shape",
-                "title": "Shape-first build",
-                "subtitle": "ปั้นและตรวจทีละส่วน",
-                "description": "สร้าง whole form → folds/petals → assembly → materials/presentation; ใช้ Blender สำหรับงานภาพอ้างอิงและปรับเฉพาะส่วนที่ผิด",
-                "kind": "security",
-                "line": 83,
-                "endLine": 96
-              },
-              {
-                "id": "mesh",
-                "title": "Mesh & UV QA",
-                "subtitle": "ตรวจ Geometry / UV",
-                "description": "ตรวจ mesh, transforms, UV overlap, padding, stretch; รักษา editable source และแยก technical QA จาก visual acceptance",
-                "kind": "security",
-                "line": 15,
-                "endLine": 37
-              },
-              {
-                "id": "bake",
-                "title": "Web PBR bake",
-                "subtitle": "Bake PBR เมื่อจำเป็น",
-                "description": "สำหรับ textured web/game release สร้าง BakeUV atlas, BaseColor/Normal/Roughness/Metallic/AO และ packed ORM แล้ว export GLB",
-                "kind": "backend",
-                "line": 15,
-                "endLine": 24
-              },
-              {
-                "id": "deliver",
-                "title": "Reimport & deliver",
-                "subtitle": "ตรวจ GLB และส่งมอบ",
-                "description": "เปิด GLB ใน clean scene ตรวจ front/top/three-quarter, texture และ geometry; ส่ง GLB, preview, report, BLEND เมื่อมีจริง พร้อมข้อจำกัด",
-                "kind": "frontend",
-                "line": 33,
-                "endLine": 37
-              }
-            ],
-            "branches": [
-              {
-                "from": "shape",
-                "id": "shape-fix",
-                "title": "Fix mismatch",
-                "subtitle": "ย้อนแก้ส่วนที่ผิด",
-                "description": "แก้ footprint, leaf folds, petals, layers หรือ camera ที่ผิดก่อนเพิ่มรายละเอียด; บันทึกภาพเทียบและตรวจซ้ำ",
-                "condition": "รูปทรงไม่ผ่าน",
-                "returnTo": "shape",
-                "line": 87,
-                "endLine": 98
-              },
-              {
-                "from": "mesh",
-                "id": "mesh-fix",
-                "title": "Repair mesh / UV",
-                "subtitle": "แก้ Defect จริง",
-                "description": "แก้ degenerate/nonmanifold geometry, UV overlap/padding/stretch บน working copy; ไม่ waive gate หรือทับ source",
-                "condition": "QA ไม่ผ่าน",
-                "returnTo": "mesh",
-                "line": 26,
-                "endLine": 37
-              },
-              {
-                "from": "bake",
-                "id": "preview-only",
-                "title": "Preview route",
-                "subtitle": "งานที่ไม่ต้อง bake",
-                "description": "baseline/source preview ใช้เส้นทาง export ปกติ ไม่อ้าง baked PBR; ส่งเฉพาะ artifact ที่มีจริง",
-                "condition": "ไม่ใช่ textured release",
-                "returnTo": "deliver",
-                "line": 119,
-                "endLine": 124
-              }
-            ],
-            "notes": [
-              "เส้นทางหลักสำหรับงาน textured web/game; legacy low-poly เป็นเส้นทางง่ายแยกต่างหาก",
-              "ผลเทคนิคผ่านไม่เท่ากับผ่านความเหมือน ต้องมี visual review จริง"
-            ]
-          }
-        },
-        {
-          "id": "privacy-first-database-documentation-builder",
-          "name": "Privacy-First Database Documentation Builder",
-          "nameTh": "สร้างชุดเอกสารฐานข้อมูลแบบ Privacy-First",
-          "version": "2.0.0",
-          "summary": "สร้าง Data Catalog, Data Dictionary, ERD และเอกสารสำหรับ AI Agent จาก Schema Metadata ที่ผ่านการรับรองเท่านั้น",
-          "description": "สร้างชุดเอกสารฐานข้อมูล PDF + Markdown และ Mermaid จาก DBA/Data Owner-approved schema metadata ผ่าน Strict Input Contract v2.0, Privacy Engine แบบ Fail-Closed และ Release Quality Gate รองรับ 9 โหมด รวม Data Lineage, Classification, Consumer Guide และ Schema Diff โดยห้ามอ่านข้อมูลส่วนบุคคลจริง เชื่อมต่อฐานข้อมูล หรืออ่าน sample records ทุกกรณี",
-          "tags": [
-            "Documentation",
-            "Database",
-            "Data Catalog",
-            "Data Dictionary",
-            "ERD",
-            "Privacy",
-            "Data Governance",
-            "AI Agent",
-            "PDF",
-            "Markdown",
-            "Multi-Agent"
-          ],
-          "triggers": [
-            "สร้าง Data Dictionary",
-            "สร้าง Data Catalog",
-            "พจนานุกรมข้อมูล",
-            "สร้างเอกสารฐานข้อมูล",
-            "ER Diagram",
-            "ERD",
-            "data classification",
-            "data lineage",
-            "schema diff",
-            "database consumer guide",
-            "database documentation",
-            "เอกสารสำหรับ AI Agent"
-          ],
-          "highlights": [
-            "Metadata-only, Offline-first และ Fail-Closed; Unknown มีผลเป็น Restricted",
-            "สร้าง Data Dictionary ภาษาไทย PDF A4 Landscape และ Markdown",
-            "รองรับ 9 execution modes พร้อม Strict Input Contract v2.0",
-            "ตรวจ PK, UK และ FK แบบ composite; ไม่เดาความสัมพันธ์หรือ lineage",
-            "สคริปต์สร้างเอกสารและ regression tests ด้วย synthetic metadata"
-          ],
-          "category": "Document",
-          "status": "Ready",
-          "phase": "Phase 1",
-          "author": "Personal Library",
-          "supportedAgents": [
-            "antigravity",
-            "claude-code",
-            "codex"
-          ],
-          "agentCompatibility": {
-            "antigravity": {
-              "supported": true,
-              "version": ">=1.0.0"
-            },
-            "claudeCode": {
-              "supported": true,
-              "version": ">=1.0.0"
-            },
-            "codex": {
-              "supported": true,
-              "version": ">=1.0.0"
-            }
-          },
-          "path": "skills/privacy-first-database-documentation-builder",
-          "entryFile": "skills/privacy-first-database-documentation-builder/SKILL.md",
-          "assets": [
-            {
-              "name": "SKILL.md",
-              "type": "skill",
-              "path": "skills/privacy-first-database-documentation-builder/SKILL.md"
-            },
-            {
-              "name": "openai.yaml",
-              "type": "asset",
-              "path": "skills/privacy-first-database-documentation-builder/agents/openai.yaml"
-            },
-            {
-              "name": "document-outline.md",
-              "type": "template",
-              "path": "skills/privacy-first-database-documentation-builder/assets/document-outline.md"
-            },
-            {
-              "name": "intake-template.md",
-              "type": "template",
-              "path": "skills/privacy-first-database-documentation-builder/assets/intake-template.md"
-            },
-            {
-              "name": "metadata-template.json",
-              "type": "template",
-              "path": "skills/privacy-first-database-documentation-builder/assets/metadata-template.json"
-            },
-            {
-              "name": "database-model.md",
-              "type": "reference",
-              "path": "skills/privacy-first-database-documentation-builder/references/database-model.md"
-            },
-            {
-              "name": "input-contract.md",
-              "type": "reference",
-              "path": "skills/privacy-first-database-documentation-builder/references/input-contract.md"
-            },
-            {
-              "name": "metadata-acquisition.md",
-              "type": "reference",
-              "path": "skills/privacy-first-database-documentation-builder/references/metadata-acquisition.md"
-            },
-            {
-              "name": "privacy-boundary.md",
-              "type": "reference",
-              "path": "skills/privacy-first-database-documentation-builder/references/privacy-boundary.md"
-            },
-            {
-              "name": "publishing.md",
-              "type": "reference",
-              "path": "skills/privacy-first-database-documentation-builder/references/publishing.md"
-            },
-            {
-              "name": "usage.md",
-              "type": "reference",
-              "path": "skills/privacy-first-database-documentation-builder/references/usage.md"
-            },
-            {
-              "name": "build_dictionary.py",
-              "type": "script",
-              "path": "skills/privacy-first-database-documentation-builder/scripts/build_dictionary.py"
-            },
-            {
-              "name": "release_check.py",
-              "type": "script",
-              "path": "skills/privacy-first-database-documentation-builder/scripts/release_check.py"
-            },
-            {
-              "name": "test_dictionary.py",
-              "type": "script",
-              "path": "skills/privacy-first-database-documentation-builder/scripts/test_dictionary.py"
-            },
-            {
-              "name": "validate_metadata.py",
-              "type": "script",
-              "path": "skills/privacy-first-database-documentation-builder/scripts/validate_metadata.py"
-            },
-            {
-              "name": "Example Showcase (HTML)",
-              "type": "example",
-              "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/index.html"
-            },
-            {
-              "name": "Overview (SVG)",
-              "type": "asset",
-              "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/overview.svg"
-            },
-            {
-              "name": "Example guide",
-              "type": "example",
-              "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/README.md"
-            },
-            {
-              "name": "data-catalog.md",
-              "type": "example",
-              "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/data-catalog.md"
-            },
-            {
-              "name": "data-dictionary.md",
-              "type": "example",
-              "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/data-dictionary.md"
-            },
-            {
-              "name": "er-diagram.md",
-              "type": "example",
-              "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/er-diagram.md"
-            },
-            {
-              "name": "data-classification.md",
-              "type": "example",
-              "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/data-classification.md"
-            },
-            {
-              "name": "data-lineage.md",
-              "type": "example",
-              "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/data-lineage.md"
-            },
-            {
-              "name": "database-consumer-guide.md",
-              "type": "example",
-              "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/database-consumer-guide.md"
-            },
-            {
-              "name": "ai-agent-guide.md",
-              "type": "example",
-              "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/ai-agent-guide.md"
-            },
-            {
-              "name": "er-diagram.mmd",
-              "type": "example",
-              "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/er-diagram.mmd"
-            },
-            {
-              "name": "llms.txt",
-              "type": "example",
-              "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/llms.txt"
-            },
-            {
-              "name": "release-manifest.md",
-              "type": "example",
-              "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/release-manifest.md"
-            }
-          ],
-          "examples": [
-            {
-              "title": "Synthetic Database Documentation",
-              "description": "ตัวอย่างผลลัพธ์จากการรัน Skill จริง: 2 ตาราง 5 คอลัมน์ พร้อม Data Catalog, Dictionary, ERD, Classification, Lineage และคู่มือสำหรับผู้ใช้/AI",
-              "htmlPath": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/index.html",
-              "markdownPath": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/data-dictionary.md",
-              "pdfPath": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/data-dictionary.pdf"
-            }
-          ],
-          "overviewImage": "assets/skill-overviews/privacy-first-database-documentation-builder.svg",
-          "workflow": {
-            "sourcePath": "assets/skill-workflows/privacy-first-database-documentation-builder.workflow.json",
-            "htmlPath": "assets/skill-workflows/privacy-first-database-documentation-builder.html",
-            "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
-            "steps": [
-              {
-                "id": "scope",
-                "title": "Scope & mode",
-                "subtitle": "ระบุระบบและโหมด",
-                "description": "ระบุ engine, schema revision, scope, audience และเลือก full/dictionary/catalog/erd/privacy/consumer/ai/lineage/diff ตามคำขอ",
-                "kind": "external",
-                "line": 19,
-                "endLine": 37
-              },
-              {
-                "id": "approval",
-                "title": "Owner approval",
-                "subtitle": "อนุมัติก่อนอ่าน",
-                "description": "รับเฉพาะ artifact schema-only ที่ DBA/Data Owner ตรวจและอนุมัติขอบเขตกับผู้รับก่อน Agent อ่าน ห้ามต่อ DB และอ่าน records",
-                "kind": "security",
-                "line": 15,
-                "endLine": 17
-              },
-              {
-                "id": "validate",
-                "title": "Strict validation",
-                "subtitle": "ตรวจ Metadata v2",
-                "description": "รัน validate_metadata.py กับ input ที่ผ่านอนุมัติเท่านั้น ตรวจคีย์/ความสัมพันธ์/classification; diff ต้องมีสอง snapshot อนุมัติแยกกัน",
-                "kind": "security",
-                "line": 37,
-                "endLine": 38
-              },
-              {
-                "id": "generate",
-                "title": "Generate docs",
-                "subtitle": "สร้างตามโหมด",
-                "description": "สร้าง Markdown/PDF, ERD, classification, lineage หรือคู่มือ Agent จาก metadata ที่ผ่านการรับรอง; Unknown → Restricted",
-                "kind": "backend",
-                "line": 39,
-                "endLine": 39
-              },
-              {
-                "id": "review",
-                "title": "Review & lint",
-                "subtitle": "Privacy / PDF QA",
-                "description": "ตรวจ coverage, keys, FK, classification และความตรงกันของ PDF/Markdown; release_check.py ใช้เฉพาะ staging และยังต้องตรวจทานด้วยคน",
-                "kind": "security",
-                "line": 40,
-                "endLine": 41
-              },
-              {
-                "id": "release",
-                "title": "Safe release",
-                "subtitle": "เผยแพร่เฉพาะที่ผ่าน",
-                "description": "ส่งเฉพาะเอกสารที่อนุมัติ พร้อม release-manifest, scope, gap, QA และสถานะ review; ไม่เผยแพร่ raw source",
-                "kind": "frontend",
-                "line": 41,
-                "endLine": 45
-              }
-            ],
-            "branches": [
-              {
-                "from": "approval",
-                "id": "template",
-                "title": "Template only",
-                "subtitle": "ไม่อ่านแหล่งข้อมูล",
-                "description": "หากไม่มี independent approval ให้หยุด acquisition และส่ง blank/synthetic template ที่ติดป้ายเท่านั้น",
-                "condition": "ไม่อนุมัติ",
-                "returnTo": null,
-                "line": 37,
-                "endLine": 37
-              },
-              {
-                "from": "validate",
-                "id": "invalid",
-                "title": "Reject input",
-                "subtitle": "ขอ Metadata ที่แก้แล้ว",
-                "description": "Validation ไม่ผ่าน ให้ขอ artifact ที่ owner แก้และรับรองใหม่; ไม่ sanitize ข้อมูลผสมหลังอ่าน",
-                "condition": "ไม่ผ่าน",
-                "returnTo": null,
-                "line": 38,
-                "endLine": 38
-              },
-              {
-                "from": "review",
-                "id": "withhold",
-                "title": "Withhold output",
-                "subtitle": "ระงับเอกสาร",
-                "description": "หากพบ privacy blocker หรือยังไม่อนุมัติการเปิดเผย ให้ระงับไฟล์ที่เกี่ยวข้อง แก้และตรวจซ้ำ",
-                "condition": "มี Blocker",
-                "returnTo": null,
-                "line": 40,
-                "endLine": 41
-              }
-            ],
-            "notes": [
-              "ห้ามอ่านข้อมูลส่วนบุคคลจริงแม้ชั่วคราว ไม่อ่าน live DB, raw dumps, defaults, comments หรือ sample rows",
-              "เอกสาร metadata ไม่ใช่สิทธิ์เข้าถึงข้อมูลจริง"
-            ]
-          }
-        },
-        {
-          "id": "api-documentation-builder",
-          "name": "API Documentation Builder",
-          "nameTh": "สร้างเอกสารและคู่มือการใช้งาน API",
-          "version": "1.0.0",
-          "summary": "สร้าง API Catalog, API Data Dictionary, OpenAPI, Consumer Guide และ AI Agent/MCP Integration Guide จาก API Contract ที่ผ่านการคัดกรอง",
-          "description": "จัดทำ API Documentation Suite สำหรับนักพัฒนา ผู้ใช้ API และ AI Agent ในรูปแบบ PDF, Markdown และ OpenAPI YAML/JSON จาก owner-reviewed contract หรือ route/schema metadata ที่ปลอดภัยเท่านั้น รองรับการตรวจสอบ OpenAPI แบบ Offline และการจัดทำ tool manifest เพื่อทบทวนก่อนใช้งานจริง ห้ามเรียก endpoint จริง อ่าน payload, credentials หรือข้อมูลส่วนบุคคลจริง",
-          "tags": [
-            "Documentation",
-            "API",
-            "REST",
-            "OpenAPI",
-            "Swagger",
-            "User Manual",
-            "Privacy",
-            "MCP",
-            "AI Agent",
-            "PDF",
-            "Markdown",
-            "Multi-Agent"
-          ],
-          "triggers": [
-            "สร้างคู่มือ API",
-            "API User Manual",
-            "API documentation",
-            "API catalog",
-            "API data dictionary",
-            "OpenAPI",
-            "Swagger",
-            "API consumer guide",
-            "API governance",
-            "MCP integration",
-            "AI Agent integration"
-          ],
-          "highlights": [
-            "สร้างเอกสาร API ครบ 6 หมวดสำหรับนักพัฒนาและ AI Agent",
-            "OpenAPI 3.x พร้อม offline structural validation",
-            "Contract-only และ Privacy by Design ห้ามเรียก endpoint จริง",
-            "กำหนด API scope, classification, auth และข้อจำกัดตามหลักฐาน",
-            "รองรับ MCP tool schema แบบ deny-by-default และ synthetic templates"
-          ],
-          "category": "Document",
-          "status": "Ready",
-          "phase": "Phase 1",
-          "author": "Personal Library",
-          "supportedAgents": [
-            "antigravity",
-            "claude-code",
-            "codex"
-          ],
-          "agentCompatibility": {
-            "antigravity": {
-              "supported": true,
-              "version": ">=1.0.0"
-            },
-            "claudeCode": {
-              "supported": true,
-              "version": ">=1.0.0"
-            },
-            "codex": {
-              "supported": true,
-              "version": ">=1.0.0"
-            }
-          },
-          "path": "skills/api-documentation-builder",
-          "entryFile": "skills/api-documentation-builder/SKILL.md",
-          "assets": [
-            {
-              "name": "SKILL.md",
-              "type": "skill",
-              "path": "skills/api-documentation-builder/SKILL.md"
-            },
-            {
-              "name": "openai.yaml",
-              "type": "asset",
-              "path": "skills/api-documentation-builder/agents/openai.yaml"
-            },
-            {
-              "name": "document-outline.md",
-              "type": "template",
-              "path": "skills/api-documentation-builder/assets/document-outline.md"
-            },
-            {
-              "name": "intake-template.md",
-              "type": "template",
-              "path": "skills/api-documentation-builder/assets/intake-template.md"
-            },
-            {
-              "name": "openapi-template.yaml",
-              "type": "template",
-              "path": "skills/api-documentation-builder/assets/openapi-template.yaml"
-            },
-            {
-              "name": "tools-template.json",
-              "type": "template",
-              "path": "skills/api-documentation-builder/assets/tools-template.json"
-            },
-            {
-              "name": "contract-acquisition.md",
-              "type": "reference",
-              "path": "skills/api-documentation-builder/references/contract-acquisition.md"
-            },
-            {
-              "name": "openapi-and-agent.md",
-              "type": "reference",
-              "path": "skills/api-documentation-builder/references/openapi-and-agent.md"
-            },
-            {
-              "name": "privacy-boundary.md",
-              "type": "reference",
-              "path": "skills/api-documentation-builder/references/privacy-boundary.md"
-            },
-            {
-              "name": "publishing.md",
-              "type": "reference",
-              "path": "skills/api-documentation-builder/references/publishing.md"
-            },
-            {
-              "name": "release_check.py",
-              "type": "script",
-              "path": "skills/api-documentation-builder/scripts/release_check.py"
-            },
-            {
-              "name": "validate_openapi.py",
-              "type": "script",
-              "path": "skills/api-documentation-builder/scripts/validate_openapi.py"
-            },
-            {
-              "name": "Example Showcase (HTML)",
-              "type": "example",
-              "path": "skills/api-documentation-builder/examples/synthetic-demo/index.html"
-            },
-            {
-              "name": "Overview (SVG)",
-              "type": "asset",
-              "path": "skills/api-documentation-builder/examples/synthetic-demo/overview.svg"
-            },
-            {
-              "name": "Example guide",
-              "type": "example",
-              "path": "skills/api-documentation-builder/examples/synthetic-demo/README.md"
-            },
-            {
-              "name": "api-catalog.md",
-              "type": "example",
-              "path": "skills/api-documentation-builder/examples/synthetic-demo/output/api-catalog.md"
-            },
-            {
-              "name": "api-data-dictionary.md",
-              "type": "example",
-              "path": "skills/api-documentation-builder/examples/synthetic-demo/output/api-data-dictionary.md"
-            },
-            {
-              "name": "api-reference.md",
-              "type": "example",
-              "path": "skills/api-documentation-builder/examples/synthetic-demo/output/api-reference.md"
-            },
-            {
-              "name": "api-consumer-guide.md",
-              "type": "example",
-              "path": "skills/api-documentation-builder/examples/synthetic-demo/output/api-consumer-guide.md"
-            },
-            {
-              "name": "api-governance.md",
-              "type": "example",
-              "path": "skills/api-documentation-builder/examples/synthetic-demo/output/api-governance.md"
-            },
-            {
-              "name": "ai-agent-integration-guide.md",
-              "type": "example",
-              "path": "skills/api-documentation-builder/examples/synthetic-demo/output/ai-agent-integration-guide.md"
-            },
-            {
-              "name": "openapi.yaml",
-              "type": "example",
-              "path": "skills/api-documentation-builder/examples/synthetic-demo/output/openapi.yaml"
-            },
-            {
-              "name": "tools.json",
-              "type": "example",
-              "path": "skills/api-documentation-builder/examples/synthetic-demo/output/tools.json"
-            },
-            {
-              "name": "AGENTS.md",
-              "type": "example",
-              "path": "skills/api-documentation-builder/examples/synthetic-demo/output/AGENTS.md"
-            },
-            {
-              "name": "llms.txt",
-              "type": "example",
-              "path": "skills/api-documentation-builder/examples/synthetic-demo/output/llms.txt"
-            },
-            {
-              "name": "release-manifest.md",
-              "type": "example",
-              "path": "skills/api-documentation-builder/examples/synthetic-demo/output/release-manifest.md"
-            }
-          ],
-          "examples": [
-            {
-              "title": "Synthetic Department Directory API",
-              "description": "ตัวอย่าง API Documentation จาก OpenAPI Contract สมมุติ 2 GET operations พร้อม API Reference, Consumer Guide, Data Dictionary, Governance และคู่มือ AI Agent/MCP (0 approved tools)",
-              "htmlPath": "skills/api-documentation-builder/examples/synthetic-demo/index.html",
-              "markdownPath": "skills/api-documentation-builder/examples/synthetic-demo/output/api-consumer-guide.md",
-              "pdfPath": "skills/api-documentation-builder/examples/synthetic-demo/output/api-consumer-guide.pdf"
-            }
-          ],
-          "overviewImage": "assets/skill-overviews/api-documentation-builder.svg",
-          "workflow": {
-            "sourcePath": "assets/skill-workflows/api-documentation-builder.workflow.json",
-            "htmlPath": "assets/skill-workflows/api-documentation-builder.html",
-            "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
-            "steps": [
-              {
-                "id": "scope",
-                "title": "Scope",
-                "subtitle": "กำหนด API และผู้รับ",
-                "description": "ระบุ API style, domain, audience, approved operation, version และ deliverables จากหลักฐาน",
-                "kind": "external",
-                "line": 21,
-                "endLine": 21
-              },
-              {
-                "id": "acquire",
-                "title": "Contract approval",
-                "subtitle": "รับ Contract ที่คัดกรอง",
-                "description": "รับเฉพาะ owner-reviewed static contract, sanitized route/DTO/schema; ไม่เรียก endpoint จริง ไม่เปิด logs, payloads หรือ credentials",
-                "kind": "security",
-                "line": 15,
-                "endLine": 22
-              },
-              {
-                "id": "normalize",
-                "title": "Normalize OpenAPI",
-                "subtitle": "สร้างสัญญากลาง",
-                "description": "เก็บ operation ID, method/path, params, request/response, errors, security และ class ตามหลักฐาน; ค่าไม่ทราบต้องระบุ Unknown",
-                "kind": "backend",
-                "line": 23,
-                "endLine": 23
-              },
-              {
-                "id": "author",
-                "title": "Author docs",
-                "subtitle": "เอกสาร 6 หมวด",
-                "description": "สร้าง Catalog, Dictionary, Reference, Consumer Guide, Governance และ AI Integration Guide; ใช้ placeholder หรือไม่ใส่ตัวอย่าง restricted",
-                "kind": "backend",
-                "line": 24,
-                "endLine": 24
-              },
-              {
-                "id": "tools",
-                "title": "Agent allowlist",
-                "subtitle": "Draft Tools / MCP",
-                "description": "สร้าง tools.json สำหรับ operation ที่ได้รับอนุมัติและ schema ครบเท่านั้น; default-deny, ไม่เปิดใช้งานจริง, llms.txt และ AGENTS.md",
-                "kind": "security",
-                "line": 25,
-                "endLine": 25
-              },
-              {
-                "id": "release",
-                "title": "Validate & publish",
-                "subtitle": "ตรวจและส่งมอบ",
-                "description": "ตรวจ OpenAPI แบบ offline, coverage, examples, security, privacy lint, PDF QA; ส่งเฉพาะ artifact ปลอดภัยและระบุ gaps",
-                "kind": "frontend",
-                "line": 26,
-                "endLine": 26
-              }
-            ],
-            "branches": [
-              {
-                "from": "acquire",
-                "id": "template",
-                "title": "Template only",
-                "subtitle": "ไม่อ่านหรือเรียกจริง",
-                "description": "หากไม่มี safe source ให้ใช้ intake-template และ contract สมมุติที่ติดป้าย ไม่สร้าง endpoint จริงขึ้นเอง",
-                "condition": "ไม่มี Safe source",
-                "returnTo": null,
-                "line": 21,
-                "endLine": 22
-              },
-              {
-                "from": "tools",
-                "id": "empty",
-                "title": "Empty tool list",
-                "subtitle": "0 approved tools",
-                "description": "ถ้าไม่มี operation ที่ผ่านการอนุมัติ ให้ tools.json เป็นรายการว่างและอธิบายข้อจำกัด",
-                "condition": "ไม่มี Approval",
-                "returnTo": "release",
-                "line": 25,
-                "endLine": 25
-              },
-              {
-                "from": "release",
-                "id": "hold",
-                "title": "Withhold release",
-                "subtitle": "ระงับผลลัพธ์ไม่ผ่าน",
-                "description": "ห้ามเผยแพร่ contract ไม่ถูกต้อง หรือ tool ที่ชวนเข้าใจผิดว่าใช้จริงได้; ระบุ artifact ที่ระงับ",
-                "condition": "Validation fail",
-                "returnTo": null,
-                "line": 26,
-                "endLine": 26
-              }
-            ],
-            "notes": [
-              "Contract-only: no live calls, real data, tokens or payloads",
-              "Agent tool manifest เป็น draft ไม่ใช่ MCP server และไม่ให้สิทธิ์เรียก API"
-            ]
-          }
+        "codex": {
+          "windows": "Copy-Item -Path \".\\skills\\webapp-user-manual\" -Destination \"$env:USERPROFILE\\.codex\\skills\\\" -Recurse",
+          "posix": "cp -r ./skills/webapp-user-manual ~/.codex/skills/",
+          "workspace": "powershell -File .\\scripts\\install-skill.ps1 -Skill webapp-user-manual -Agent codex -Scope workspace"
         }
-      ]
-    };
+      },
+      "workflow": {
+        "sourcePath": "assets/skill-workflows/webapp-user-manual.workflow.json",
+        "htmlPath": "assets/skill-workflows/webapp-user-manual.html",
+        "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+        "steps": [
+          {
+            "id": "audience",
+            "title": "Audience profiling",
+            "subtitle": "สำรวจระบบและผู้ใช้",
+            "description": "วิเคราะห์ระบบ ฟังก์ชัน และบทบาท End User, Approver หรือ Admin เพื่อเลือกเนื้อหาตามหน้าที่",
+            "kind": "external",
+            "line": 108,
+            "endLine": 112
+          },
+          {
+            "id": "outline",
+            "title": "10-pillar outline",
+            "subtitle": "วางโครงสารบัญ",
+            "description": "จัดสารบัญตามกรอบ 10 หมวด โดยเลือกหัวข้อให้ตรงกับฟีเจอร์ของระบบ",
+            "kind": "backend",
+            "line": 33,
+            "endLine": 60
+          },
+          {
+            "id": "draft",
+            "title": "Step-by-step draft",
+            "subtitle": "เขียนคู่มือทีละขั้น",
+            "description": "ระบุการกระทำของผู้ใช้ ผลลัพธ์บนหน้าจอ และภาพประกอบจำลอง ใช้ชื่อเมนูและฟิลด์ที่เหมาะสม",
+            "kind": "backend",
+            "line": 117,
+            "endLine": 120
+          },
+          {
+            "id": "deliver",
+            "title": "HTML / Markdown",
+            "subtitle": "ส่งมอบตามรูปแบบ",
+            "description": "สร้าง manual.html แบบ standalone พร้อม Sidebar, Search, Dark/Light, Print หรือ USER_MANUAL.md ตามที่ขอ",
+            "kind": "frontend",
+            "line": 122,
+            "endLine": 125
+          }
+        ],
+        "branches": [],
+        "notes": [
+          "Workflow หลักมี 4 ขั้นตาม SKILL.md",
+          "HTML รองรับสั่งพิมพ์; Skill PDF แยกต่างหากสำหรับเล่ม A4 ทางการ"
+        ]
+      }
+    },
+    {
+      "id": "webapp-user-manual-pdf",
+      "overviewImage": "assets/skill-overviews/webapp-user-manual-pdf.webp",
+      "name": "Web App User Manual (Print-Ready PDF)",
+      "nameTh": "คู่มือใช้งานระบบ PDF พร้อมพิมพ์ (A4)",
+      "category": "Document",
+      "version": "1.0.0",
+      "status": "Ready",
+      "phase": "Phase 1",
+      "author": "Personal Library",
+      "summary": "สร้างคู่มือการใช้งานระบบ Web Application ฉบับสิ่งพิมพ์ A4 ระดับส่งมอบงานโครงการ ด้วย CSS Paged Media (@page) รองรับ Antigravity, Claude Code, Codex",
+      "description": "Skill สำหรับจัดทำคู่มือการใช้งานระบบ Web Application เกรดสิ่งพิมพ์และเอกสารส่งมอบงานโครงการ (Publication-Grade Deliverables) กำหนดขนาด A4 พร้อมหน้าปกทางการ, แผ่นควบคุมเอกสารและการลงนามตรวจรับ (Sign-off Matrix), สารบัญระบุหน้า, หัว/ท้ายกระดาษอัตโนมัติ และการคุม Page Break อย่างแม่นยำ พร้อมสคริปต์ PowerShell (Windows) และ Bash (macOS/Linux) สำหรับแปลงเป็น PDF ด้วย Headless Edge/Chrome",
+      "tags": [
+        "Document",
+        "PDF",
+        "Print-Ready",
+        "CSS-Paged-Media",
+        "A4",
+        "Deliverable",
+        "User-Manual",
+        "Multi-Agent"
+      ],
+      "supportedAgents": [
+        "antigravity",
+        "claude-code",
+        "codex"
+      ],
+      "triggers": [
+        "คู่มือ PDF",
+        "สร้างคู่มือ PDF",
+        "pdf user manual",
+        "print-ready manual",
+        "เอกสารส่งมอบงาน pdf",
+        "คู่มือ a4",
+        "พิมพ์คู่มือเป็น pdf",
+        "ทำเล่มคู่มือ"
+      ],
+      "path": "skills/webapp-user-manual-pdf",
+      "entryFile": "skills/webapp-user-manual-pdf/SKILL.md",
+      "assets": [
+        {
+          "name": "SKILL.md",
+          "type": "skill",
+          "path": "skills/webapp-user-manual-pdf/SKILL.md"
+        },
+        {
+          "name": "pdf-manual-template.html",
+          "type": "template",
+          "path": "skills/webapp-user-manual-pdf/templates/pdf-manual-template.html"
+        },
+        {
+          "name": "export-pdf.ps1",
+          "type": "script",
+          "path": "skills/webapp-user-manual-pdf/scripts/export-pdf.ps1"
+        },
+        {
+          "name": "export-pdf.sh",
+          "type": "script",
+          "path": "skills/webapp-user-manual-pdf/scripts/export-pdf.sh"
+        },
+        {
+          "name": "pdf-styling-guide.md",
+          "type": "reference",
+          "path": "skills/webapp-user-manual-pdf/references/pdf-styling-guide.md"
+        }
+      ],
+      "examples": [
+        {
+          "title": "e-Procure Plus Enterprise",
+          "description": "ตัวอย่างคู่มือระบบจัดซื้อจัดจ้างและบริหารพัสดุ ฉบับทางการ A4 พร้อมแผ่นลงนามตรวจรับและแปลงเป็น PDF ด้วย Headless Edge แล้ว",
+          "htmlPath": "skills/webapp-user-manual-pdf/examples/procurement-flow/manual.html",
+          "pdfPath": "skills/webapp-user-manual-pdf/examples/procurement-flow/manual.pdf",
+          "markdownPath": "skills/webapp-user-manual-pdf/examples/procurement-flow/README.md"
+        }
+      ],
+      "highlights": [
+        "จัดหน้ามาตรฐานกระดาษ A4 (210 x 297 mm) ด้วย CSS Paged Media (@page)",
+        "หน้าปกทางการแบบ Full-bleed พร้อมแผ่นควบคุมเอกสารและตารางลงนามตรวจรับ (Sign-off Matrix)",
+        "ควบคุมการแบ่งหน้า ป้องกันข้อความหรือตารางขาดครึ่งหน้า (break-inside: avoid)",
+        "มีสคริปต์อัตโนมัติ export-pdf.ps1 (Windows) และ export-pdf.sh (macOS/Linux) ผ่าน Chrome/Edge Headless",
+        "รองรับการเรียกใช้ผ่าน Google Antigravity, Anthropic Claude Code และ OpenAI Codex ใน Phase 1"
+      ],
+      "installCommand": {
+        "windows": "Copy-Item -Path \".\\skills\\webapp-user-manual-pdf\" -Destination \"$env:USERPROFILE\\.gemini\\config\\skills\\\" -Recurse",
+        "posix": "cp -r ./skills/webapp-user-manual-pdf ~/.gemini/config/skills/",
+        "antigravity": {
+          "windows": "Copy-Item -Path \".\\skills\\webapp-user-manual-pdf\" -Destination \"$env:USERPROFILE\\.gemini\\config\\skills\\\" -Recurse",
+          "posix": "cp -r ./skills/webapp-user-manual-pdf ~/.gemini/config/skills/",
+          "workspace": "powershell -File .\\scripts\\install-skill.ps1 -Skill webapp-user-manual-pdf -Agent antigravity -Scope workspace"
+        },
+        "claudeCode": {
+          "windows": "Copy-Item -Path \".\\skills\\webapp-user-manual-pdf\" -Destination \"$env:USERPROFILE\\.claude\\skills\\\" -Recurse",
+          "posix": "cp -r ./skills/webapp-user-manual-pdf ~/.claude/skills/",
+          "workspace": "powershell -File .\\scripts\\install-skill.ps1 -Skill webapp-user-manual-pdf -Agent claude -Scope workspace"
+        },
+        "codex": {
+          "windows": "Copy-Item -Path \".\\skills\\webapp-user-manual-pdf\" -Destination \"$env:USERPROFILE\\.codex\\skills\\\" -Recurse",
+          "posix": "cp -r ./skills/webapp-user-manual-pdf ~/.codex/skills/",
+          "workspace": "powershell -File .\\scripts\\install-skill.ps1 -Skill webapp-user-manual-pdf -Agent codex -Scope workspace"
+        }
+      },
+      "workflow": {
+        "sourcePath": "assets/skill-workflows/webapp-user-manual-pdf.workflow.json",
+        "htmlPath": "assets/skill-workflows/webapp-user-manual-pdf.html",
+        "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+        "steps": [
+          {
+            "id": "brief",
+            "title": "Manual scope",
+            "subtitle": "กำหนดขอบเขตเล่ม",
+            "description": "เลือกคู่มือ A4 เพื่อส่งมอบโครงการ พร้อมหน้าปกทางการและข้อมูลควบคุมเอกสาร",
+            "kind": "external",
+            "line": 17,
+            "endLine": 29
+          },
+          {
+            "id": "structure",
+            "title": "Book structure",
+            "subtitle": "จัดโครงสร้างเล่ม",
+            "description": "วางปกและ Sign-off, สารบัญและรายการภาพ, บทเนื้อหาหลัก 6 บท และปกหลัง/Support",
+            "kind": "backend",
+            "line": 46,
+            "endLine": 68
+          },
+          {
+            "id": "paged",
+            "title": "Paged Media",
+            "subtitle": "จัดหน้า A4",
+            "description": "กำหนด @page, margins, running headers/footers และ page break; ไม่ตัดกลางตารางหรือรูป",
+            "kind": "backend",
+            "line": 73,
+            "endLine": 114
+          },
+          {
+            "id": "export",
+            "title": "Export PDF",
+            "subtitle": "แปลง HTML เป็น PDF",
+            "description": "ใช้ PowerShell/Bash, Headless Chrome/Edge หรือ Browser Print Dialog ตามแพลตฟอร์ม",
+            "kind": "messagebus",
+            "line": 137,
+            "endLine": 168
+          },
+          {
+            "id": "deliver",
+            "title": "Print-ready PDF",
+            "subtitle": "เล่มพร้อมพิมพ์",
+            "description": "ผลลัพธ์ PDF A4 ที่คงโครงสร้างเล่มและพื้นที่ตรวจรับ/อนุมัติ",
+            "kind": "frontend",
+            "line": 33,
+            "endLine": 68
+          }
+        ],
+        "branches": [
+          {
+            "from": "export",
+            "id": "manual-print",
+            "title": "Browser print",
+            "subtitle": "ทางเลือกส่งออก",
+            "description": "เมื่อเลือกส่งออกด้วยตนเอง ใช้ Ctrl/Cmd+P, A4, margins None และ Background graphics",
+            "condition": "ทางเลือก",
+            "returnTo": "deliver",
+            "line": 161,
+            "endLine": 168
+          }
+        ],
+        "notes": [
+          "เส้นทางหลักคือเอกสารแบบ CSS Paged Media",
+          "Browser Print เป็นวิธีส่งออกทางเลือก ไม่ใช่ขั้นบังคับหลัง Headless"
+        ]
+      }
+    },
+    {
+      "id": "lowpoly-character-web",
+      "overviewImage": "assets/skill-overviews/lowpoly-character-web.webp",
+      "name": "Low-poly Character Web Studio",
+      "nameTh": "สตูดิโอตัวละคร Low-poly สำหรับเว็บ",
+      "category": "UIUX",
+      "version": "5.0.0",
+      "status": "Ready",
+      "phase": "Phase 1",
+      "author": "Personal Library",
+      "summary": "สร้างและปรับโมเดลตัวละคร 3D จากภาพอ้างอิง พร้อมส่งออก GLB สำหรับ WebGL, Three.js และ React Three Fiber",
+      "description": "สร้าง ตรวจ และปรับโมเดลตัวละคร Low-poly จากข้อความ ภาพอ้างอิง หรือโมเดลเดิม ตรวจรูปทรงแยกตามชิ้นส่วน รองรับ rig, skinning และ animation ตามขอบเขตงาน พร้อมพรีวิว GLB และเครื่องมือประเมิน LOD กับงบการเรนเดอร์สำหรับฉากหลายตัวละคร",
+      "tags": [
+        "3D",
+        "Low-poly",
+        "GLB",
+        "Blender",
+        "WebGL",
+        "Three.js",
+        "Character Modeling"
+      ],
+      "supportedAgents": [
+        "antigravity",
+        "claude-code",
+        "codex"
+      ],
+      "agentCompatibility": {
+        "antigravity": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "claudeCode": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "codex": {
+          "supported": true,
+          "version": ">=1.0.0"
+        }
+      },
+      "triggers": [
+        "สร้างโมเดลตัวละคร 3D",
+        "ตัวละคร low-poly",
+        "สร้างตัวละครจากภาพอ้างอิง",
+        "character rigging",
+        "skinning QA",
+        "GLB สำหรับเว็บ",
+        "WebGL crowd budget",
+        "Sentinel"
+      ],
+      "path": "skills/lowpoly-character-web",
+      "entryFile": "skills/lowpoly-character-web/SKILL.md",
+      "assets": [
+        {
+          "name": "SKILL.md",
+          "type": "skill",
+          "path": "skills/lowpoly-character-web/SKILL.md"
+        },
+        {
+          "name": "studio_project.py",
+          "type": "script",
+          "path": "skills/lowpoly-character-web/scripts/studio_project.py"
+        },
+        {
+          "name": "stage_pipeline.py",
+          "type": "script",
+          "path": "skills/lowpoly-character-web/scripts/stage_pipeline.py"
+        },
+        {
+          "name": "character_spec.json",
+          "type": "template",
+          "path": "skills/lowpoly-character-web/assets/templates/character_spec.json"
+        },
+        {
+          "name": "part-by-part-studio.md",
+          "type": "reference",
+          "path": "skills/lowpoly-character-web/references/part-by-part-studio.md"
+        }
+      ],
+      "examples": [
+        {
+          "title": "พยาบาล 3D Low-poly",
+          "description": "ตัวอย่างโมเดลพยาบาลพร้อม skeletal rig 17 ข้อต่อ หมุนดูได้และเลือกเล่น Idle หรือ Walk ในพรีวิว",
+          "htmlPath": "assets/examples/lowpoly-nurse/preview.html"
+        },
+        {
+          "title": "ตัวอย่างโมเดลและ Rig",
+          "description": "โมเดล blockout และ skinned GLB พร้อมภาพพรีวิวและรายงานตรวจโครงสร้าง",
+          "markdownPath": "skills/lowpoly-character-web/references/examples.md"
+        }
+      ],
+      "highlights": [
+        "ตรวจรูปทรงจากภาพอ้างอิงทีละชิ้นส่วน เริ่มจากศีรษะ",
+        "เก็บบริบทโครงการและหลักฐานตรวจงานเพื่อทำต่อจากรอบก่อน",
+        "ตรวจโครงสร้าง GLB, skin weights และ animation clips",
+        "ประเมิน LOD และงบการเรนเดอร์สำหรับฉากหลายตัวละคร"
+      ],
+      "workflow": {
+        "sourcePath": "assets/skill-workflows/lowpoly-character-web.workflow.json",
+        "htmlPath": "assets/skill-workflows/lowpoly-character-web.html",
+        "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+        "steps": [
+          {
+            "id": "intake",
+            "title": "G0 · Reference",
+            "subtitle": "อ่าน Ref และบริบท",
+            "description": "อ่านภาพต้นฉบับทุกมุม ตรวจภาพ crop, landmarks, อุปกรณ์และกล้อง แยกสิ่งที่เห็นจริงกับส่วนที่อนุมาน",
+            "kind": "external",
+            "line": 46,
+            "endLine": 51
+          },
+          {
+            "id": "parts",
+            "title": "G1 · Part fidelity",
+            "subtitle": "ปั้นทีละส่วน + Gate",
+            "description": "HEAD → TORSO → ARMS_HANDS → LEGS_FEET → OUTFIT_GEAR → INTEGRATION; แต่ละส่วนต้องเทียบ GLB จริง, mask, landmarks และ independent review ก่อนผ่าน",
+            "kind": "security",
+            "line": 53,
+            "endLine": 66
+          },
+          {
+            "id": "surface",
+            "title": "G2–G3 · Mesh / UV",
+            "subtitle": "Topology และวัสดุ",
+            "description": "ประกอบชิ้นส่วนเป็น topology เหมาะกับการเคลื่อนไหว วาง UV/วัสดุหลังผ่าน shape gates",
+            "kind": "backend",
+            "line": 78,
+            "endLine": 87
+          },
+          {
+            "id": "rig",
+            "title": "G4 · Rig & poses",
+            "subtitle": "Rig เมื่อร้องขอ",
+            "description": "ตรวจ skeleton, skin weights, deformation และ sampled poses ตามคลิปที่ผู้ใช้ต้องการ; งาน static ไม่บังคับ rig/clip ที่ไม่ได้ขอ",
+            "kind": "backend",
+            "line": 89,
+            "endLine": 101
+          },
+          {
+            "id": "webqa",
+            "title": "G5–G6 · Web QA",
+            "subtitle": "LOD / WebGL / Preview",
+            "description": "เลือก HERO/NPC/CROWD, วัด scene budget และ FPS บนอุปกรณ์จริง พร้อม preview ทุก stage; ไม่อ้าง FPS เมื่อยังไม่ได้ทดสอบ",
+            "kind": "security",
+            "line": 103,
+            "endLine": 114
+          },
+          {
+            "id": "release",
+            "title": "G7 · Release",
+            "subtitle": "ส่ง GLB + หลักฐาน",
+            "description": "ส่ง GLB/LOD, source เมื่อสร้างจริง, previews และรายงาน gate; ห้ามเรียก production-ready หากหลักฐานสำคัญไม่ครบ",
+            "kind": "frontend",
+            "line": 116,
+            "endLine": 118
+          }
+        ],
+        "branches": [
+          {
+            "from": "intake",
+            "id": "reference-stop",
+            "title": "Reference blocked",
+            "subtitle": "หยุดก่อนสร้าง",
+            "description": "หาก crop สูญเสียส่วนสำคัญ มุมผิด หรือยังไม่บันทึก feature ให้หยุดและแก้ reference",
+            "condition": "Ref ไม่ครบ",
+            "returnTo": null,
+            "line": 48,
+            "endLine": 51
+          },
+          {
+            "from": "parts",
+            "id": "part-repair",
+            "title": "Fix current part",
+            "subtitle": "แก้เฉพาะส่วน",
+            "description": "เมื่อ metrics หรือ reviewer ไม่ผ่าน ให้แก้ real geometry ของส่วนเดิมและ render/re-measure ใหม่; ถ้าแก้ไม่ได้ให้ REVIEW_REQUIRED",
+            "condition": "ไม่ผ่าน",
+            "returnTo": "parts",
+            "line": 60,
+            "endLine": 66
+          },
+          {
+            "from": "webqa",
+            "id": "prototype",
+            "title": "Prototype only",
+            "subtitle": "ไม่รับรอง production",
+            "description": "หาก gate ด้านศิลป์, deformation หรือ WebGL ยังไม่ผ่าน/ไม่ทดสอบ ให้ระบุ PROTOTYPE/REVIEW_REQUIRED พร้อมข้อแก้ไข",
+            "condition": "QA ไม่ครบ",
+            "returnTo": null,
+            "line": 110,
+            "endLine": 118
+          }
+        ],
+        "notes": [
+          "G1 เป็น hard gate ต่อส่วน; Integration ตรวจส่วนเดิมซ้ำบน GLB ประกอบจริง",
+          "ผลทดสอบเชิงตัวเลขไม่แทน visual acceptance; IoU ไม่ใช่เปอร์เซ็นต์ความเหมือน"
+        ]
+      }
+    },
+    {
+      "id": "webapp-quotation-builder",
+      "overviewImage": "assets/skill-overviews/webapp-quotation-builder.webp",
+      "name": "Web App Quotation Builder",
+      "nameTh": "สร้างใบเสนอราคาพัฒนา Web App",
+      "category": "Document",
+      "version": "1.1.0",
+      "status": "Ready",
+      "phase": "Phase 1",
+      "author": "Personal Library",
+      "summary": "ประเมินราคา Web App/PWA และสร้างใบเสนอราคา A4 พร้อมสไลด์ PDF ที่ใช้แผนภาพและ Stepper",
+      "description": "เก็บข้อมูลผู้เสนอราคาและขอบเขตโครงการ คำนวณราคา ภาษี และงวดชำระ แล้วสร้างใบเสนอราคา A4 และสไลด์ 16:9 จากข้อมูลชุดเดียวกัน สไลด์ประกอบจากองค์ประกอบ PPTX ที่แก้ไขได้และแบ่งหน้าเมื่อเนื้อหายาว",
+      "tags": [
+        "Quotation",
+        "Web App",
+        "PWA",
+        "PDF",
+        "Pricing",
+        "Proposal",
+        "Slides",
+        "Diagram"
+      ],
+      "supportedAgents": [
+        "antigravity",
+        "claude-code",
+        "codex"
+      ],
+      "agentCompatibility": {
+        "antigravity": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "claudeCode": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "codex": {
+          "supported": true,
+          "version": ">=1.0.0"
+        }
+      },
+      "triggers": [
+        "ทำใบเสนอราคา",
+        "ประเมินราคาทำเว็บแอป",
+        "เสนอราคาพัฒนา PWA",
+        "web app quotation",
+        "software development proposal"
+      ],
+      "path": "skills/webapp-quotation-builder",
+      "entryFile": "skills/webapp-quotation-builder/SKILL.md",
+      "assets": [
+        {
+          "name": "SKILL.md",
+          "type": "skill",
+          "path": "skills/webapp-quotation-builder/SKILL.md"
+        },
+        {
+          "name": "provider-profile.template.md",
+          "type": "template",
+          "path": "skills/webapp-quotation-builder/templates/provider-profile.template.md"
+        },
+        {
+          "name": "quote-data.example.json",
+          "type": "template",
+          "path": "skills/webapp-quotation-builder/assets/quote-data.example.json"
+        },
+        {
+          "name": "generate.ps1",
+          "type": "script",
+          "path": "skills/webapp-quotation-builder/scripts/generate.ps1"
+        },
+        {
+          "name": "generate.sh",
+          "type": "script",
+          "path": "skills/webapp-quotation-builder/scripts/generate.sh"
+        },
+        {
+          "name": "generate.py",
+          "type": "script",
+          "path": "skills/webapp-quotation-builder/scripts/generate.py"
+        },
+        {
+          "name": "output-qa.md",
+          "type": "reference",
+          "path": "skills/webapp-quotation-builder/references/output-qa.md"
+        },
+        {
+          "name": "slide_components.js",
+          "type": "script",
+          "path": "skills/webapp-quotation-builder/scripts/slide_components.js"
+        },
+        {
+          "name": "slide_preflight.py",
+          "type": "script",
+          "path": "skills/webapp-quotation-builder/scripts/slide_preflight.py"
+        },
+        {
+          "name": "slide-design-system.md",
+          "type": "reference",
+          "path": "skills/webapp-quotation-builder/references/slide-design-system.md"
+        },
+        {
+          "name": "diagram-stepper-patterns.md",
+          "type": "reference",
+          "path": "skills/webapp-quotation-builder/references/diagram-stepper-patterns.md"
+        },
+        {
+          "name": "slide-component-architecture.md",
+          "type": "reference",
+          "path": "skills/webapp-quotation-builder/references/slide-component-architecture.md"
+        },
+        {
+          "name": "slide-qa-checklist.md",
+          "type": "reference",
+          "path": "skills/webapp-quotation-builder/references/slide-qa-checklist.md"
+        }
+      ],
+      "examples": [
+        {
+          "title": "ใบเสนอราคาพัฒนาระบบจองคิวออนไลน์",
+          "description": "ใบเสนอราคา A4 จำนวน 1 หน้า แสดงขอบเขตงาน ยอดรวม 69,000 บาท และงวดชำระ 30% / 40% / 30% จากข้อมูลสมมติ",
+          "pdfPath": "skills/webapp-quotation-builder/examples/queue-booking/quotation-DEMO-QT-2026-001.pdf"
+        },
+        {
+          "title": "สไลด์ภาพรวมบริการระบบจองคิวออนไลน์",
+          "description": "สไลด์ PDF แนวนอน 16:9 จำนวน 6 หน้า มีผังการจองคิว แผนส่งมอบ 8 สัปดาห์แบบ Stepper งวดชำระ และเงื่อนไขรับประกันจากชุดข้อมูลเดียวกัน",
+          "pdfPath": "skills/webapp-quotation-builder/examples/queue-booking/service-overview-DEMO-QT-2026-001.pdf"
+        }
+      ],
+      "highlights": [
+        "มีแบบฟอร์มข้อมูลผู้ให้บริการและชุดคำถามสำหรับเก็บขอบเขตโครงการ",
+        "คำนวณยอดรวม VAT และงวดชำระจากข้อมูลที่ยืนยันแล้ว",
+        "สร้างใบเสนอราคา A4 หนึ่งหน้าและสไลด์แนะนำบริการ PDF ขนาด 16:9",
+        "ใช้ Grid, Card, Diagram และ Stepper ที่ประกอบเป็นองค์ประกอบ PPTX และแบ่งหน้าได้",
+        "ตรวจขนาดหน้า ข้อความ และยอดสำคัญของสไลด์ PDF ด้วย preflight"
+      ],
+      "workflow": {
+        "sourcePath": "assets/skill-workflows/webapp-quotation-builder.workflow.json",
+        "htmlPath": "assets/skill-workflows/webapp-quotation-builder.html",
+        "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+        "steps": [
+          {
+            "id": "profile",
+            "title": "Provider profile",
+            "subtitle": "โปรไฟล์ + ราคาตลาด",
+            "description": "สร้างแบบฟอร์ม Markdown ใหม่ ตรวจราคาอย่างน้อยสองแหล่งอิสระและภาษี แล้วให้ผู้ใช้ยืนยันข้อมูลผู้เสนอราคา",
+            "kind": "external",
+            "line": 18,
+            "endLine": 23
+          },
+          {
+            "id": "continue",
+            "title": "Continue gate",
+            "subtitle": "รอคำสั่ง ทำต่อ",
+            "description": "เมื่อข้อมูลผู้เสนอราคาครบ ให้รอผู้ใช้พิมพ์ ทำต่อ หรือคำสั่งเทียบเท่าก่อนถามรายละเอียดโครงการ",
+            "kind": "security",
+            "line": 20,
+            "endLine": 23
+          },
+          {
+            "id": "scope",
+            "title": "Project scope",
+            "subtitle": "เก็บ Requirement",
+            "description": "ถามครั้งละ 2–4 ข้อ แต่ละข้ออย่างน้อย 3 ตัวเลือกและ Other; ยืนยันลูกค้า ขอบเขต งบ เวลา งวดชำระ และข้อยกเว้น",
+            "kind": "backend",
+            "line": 25,
+            "endLine": 29
+          },
+          {
+            "id": "pricing",
+            "title": "Pricing & tax",
+            "subtitle": "คำนวณและตรวจภาษี",
+            "description": "รวมงาน 3–7 รายการ คำนวณต้นทุน/กำไร ยืนยัน VAT/WHT และเงื่อนไข งวดชำระรวม 100%; ข้อมูลสำคัญต้องครบก่อนสร้างไฟล์",
+            "kind": "security",
+            "line": 31,
+            "endLine": 37
+          },
+          {
+            "id": "generate",
+            "title": "Generate & QA",
+            "subtitle": "สร้างและตรวจ 2 PDF",
+            "description": "สร้าง quote-data.json ที่ยืนยันแล้ว จัด A4 + สไลด์ 16:9 ด้วย Sarabun และ component layout; ตรวจยอด สัญญา ฟอนต์ และทุกหน้า",
+            "kind": "backend",
+            "line": 39,
+            "endLine": 60
+          },
+          {
+            "id": "deliver",
+            "title": "2 PDF files",
+            "subtitle": "ส่งมอบใบเสนอราคา",
+            "description": "ส่งใบเสนอราคา A4 หนึ่งหน้าและ Service Overview PDF แนวนอน พร้อมยอด สถานะ VAT อายุใบเสนอราคา และสมมติฐาน",
+            "kind": "frontend",
+            "line": 57,
+            "endLine": 61
+          }
+        ],
+        "branches": [
+          {
+            "from": "continue",
+            "id": "wait",
+            "title": "Wait for user",
+            "subtitle": "ยังไม่ทำต่อ",
+            "description": "พักที่ข้อมูลผู้เสนอราคา จนได้รับคำสั่งทำต่อ; ไม่เริ่มประเมินโครงการก่อน",
+            "condition": "ยังไม่ยืนยัน",
+            "returnTo": null,
+            "line": 20,
+            "endLine": 23
+          },
+          {
+            "from": "pricing",
+            "id": "revise",
+            "title": "Clarify terms",
+            "subtitle": "ปรับ Scope / งบ",
+            "description": "หากขอบเขต เวลา งบ หรือความปลอดภัยขัดกัน ให้ตกลงสมมติฐานและถามเฉพาะข้อมูลที่ยังขาด",
+            "condition": "ข้อมูลไม่ครบ",
+            "returnTo": "pricing",
+            "line": 25,
+            "endLine": 37
+          }
+        ],
+        "notes": [
+          "ต้องตรวจราคาตลาดและภาษีสำหรับใบเสนอราคาใหม่ทุกครั้ง",
+          "ทั้งสอง PDF ต้องมาจากยอดและเงื่อนไขเดียวกัน"
+        ]
+      }
+    },
+    {
+      "id": "user-manual-writer",
+      "overviewImage": "assets/skill-overviews/user-manual-writer.webp",
+      "name": "User Manual Writer",
+      "nameTh": "เขียนคู่มือการใช้งานระบบ",
+      "category": "Document",
+      "version": "1.0.0",
+      "status": "Ready",
+      "phase": "Phase 1",
+      "author": "Personal Library",
+      "summary": "เขียนคู่มือพร้อมภาพประกอบจากบันทึก เอกสาร หรือภาพหน้าจอ และตรวจขั้นตอนผ่าน Browser เมื่อมีระบบทดสอบที่ได้รับอนุญาต",
+      "description": "เขียนหรือปรับปรุงคู่มือการใช้งานระบบสำหรับผู้ใช้ทั่วไป บทความคลังความรู้ และวิธีใช้ฟีเจอร์แบบทีละขั้นจากบันทึก เอกสาร หรือภาพหน้าจอ พร้อมภาพประกอบ เมื่อมี URL ระบบทดสอบที่ได้รับอนุญาต ต้องใช้ Browser ของ AI Agent เดินตามขั้นตอนจริงและจับภาพหน้าจอ",
+      "tags": [
+        "Document",
+        "User Manual",
+        "User Guide",
+        "Knowledge Base",
+        "Screenshot"
+      ],
+      "supportedAgents": [
+        "antigravity",
+        "claude-code",
+        "codex"
+      ],
+      "agentCompatibility": {
+        "antigravity": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "claudeCode": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "codex": {
+          "supported": true,
+          "version": ">=1.0.0"
+        }
+      },
+      "triggers": [
+        "เขียนคู่มือการใช้งาน",
+        "ปรับปรุงคู่มือ",
+        "บทความคลังความรู้",
+        "วิธีใช้ฟีเจอร์",
+        "user manual",
+        "user guide",
+        "knowledge base article"
+      ],
+      "path": "skills/user-manual-writer",
+      "entryFile": "skills/user-manual-writer/SKILL.md",
+      "assets": [
+        {
+          "name": "SKILL.md",
+          "type": "skill",
+          "path": "skills/user-manual-writer/SKILL.md"
+        }
+      ],
+      "examples": [
+        {
+          "title": "เปิดตัวอย่างคู่มือ PDF พร้อมพิมพ์จาก AI Skill Library",
+          "description": "คู่มือภาษาไทย 4 ขั้นตอน ตั้งแต่ค้นหา Skill จนเปิดเอกสารตัวอย่าง พร้อมภาพหน้าจอจาก Codex in-app browser",
+          "htmlPath": "skills/user-manual-writer/examples/catalog-lookup/manual.html",
+          "markdownPath": "skills/user-manual-writer/examples/catalog-lookup/USER_MANUAL.md"
+        }
+      ],
+      "highlights": [
+        "เขียนคู่มือแบบทีละขั้นสำหรับบทบาทของผู้อ่าน",
+        "เดินตามขั้นตอนจริงและจับภาพผ่าน Browser เมื่อมี URL ทดสอบที่ได้รับอนุญาต",
+        "ใช้ข้อมูลสมมติและภาพจำลองสำหรับขั้นตอนยืนยันตัวตนเพิ่มเติม"
+      ],
+      "workflow": {
+        "sourcePath": "assets/skill-workflows/user-manual-writer.workflow.json",
+        "htmlPath": "assets/skill-workflows/user-manual-writer.html",
+        "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+        "steps": [
+          {
+            "id": "scope",
+            "title": "Scope & roles",
+            "subtitle": "ระบุงานและกลุ่มผู้ใช้",
+            "description": "กำหนดงาน บทบาท และขอบเขตของคู่มือจากบันทึก/หลักฐานที่ได้รับอนุญาต",
+            "kind": "external",
+            "line": 21,
+            "endLine": 24
+          },
+          {
+            "id": "browser",
+            "title": "Evidence review",
+            "subtitle": "ตรวจ UI ทดสอบ",
+            "description": "ถ้ามี URL ทดสอบที่ได้รับอนุญาต ต้องเดินขั้นตอนจริงผ่าน Browser ด้วยบัญชีทดสอบและ mock data; ตรวจปุ่ม เมนู สิทธิ์ และผลลัพธ์",
+            "kind": "security",
+            "line": 34,
+            "endLine": 40
+          },
+          {
+            "id": "draft",
+            "title": "Write steps",
+            "subtitle": "ร่างคู่มือทีละขั้น",
+            "description": "จัดตามวัตถุประสงค์ บทบาท สิ่งที่ต้องเตรียม ขั้นตอน และปัญหาที่ตรวจสอบได้; หนึ่งการกระทำหลักต่อ Step",
+            "kind": "backend",
+            "line": 42,
+            "endLine": 49
+          },
+          {
+            "id": "images",
+            "title": "Screenshots",
+            "subtitle": "ภาพตรงกับทุก Step",
+            "description": "แทรกภาพจาก Browser ใต้ขั้นตอน; ใช้ภาพจำลองที่ติดป้ายสำหรับ 2FA/OTP และ placeholder เมื่อมีข้อจำกัด ห้ามใช้ข้อมูลจริง",
+            "kind": "backend",
+            "line": 51,
+            "endLine": 57
+          },
+          {
+            "id": "review",
+            "title": "Review & format",
+            "subtitle": "ตรวจความถูกต้อง",
+            "description": "ตรวจการเดินตามขั้นตอน ชื่อปุ่ม ภาพ ไม่มีข้อมูลอ่อนไหว และ Sarabun ในไฟล์ที่กำหนดฟอนต์ได้",
+            "kind": "security",
+            "line": 23,
+            "endLine": 32
+          },
+          {
+            "id": "deliver",
+            "title": "Reviewed draft",
+            "subtitle": "ส่งฉบับร่าง",
+            "description": "ส่งคู่มือให้ผู้ขอตรวจทาน ปรับตามข้อเสนอแนะ และระบุภาพหรือขั้นตอนที่ยังตรวจไม่ได้",
+            "kind": "frontend",
+            "line": 26,
+            "endLine": 32
+          }
+        ],
+        "branches": [
+          {
+            "from": "browser",
+            "id": "evidence-gap",
+            "title": "Evidence gap",
+            "subtitle": "หยุดหรือขอหลักฐาน",
+            "description": "หากเข้าไม่ได้ สิทธิ์ไม่พอ หรือไม่มีบัญชีทดสอบ ให้หยุดก่อนล็อกอิน ขอหลักฐานที่ใช้ mock data และรอข้อมูลสำคัญ",
+            "condition": "หลักฐานไม่พอ",
+            "returnTo": "browser",
+            "line": 36,
+            "endLine": 40
+          },
+          {
+            "from": "review",
+            "id": "correct",
+            "title": "Correct draft",
+            "subtitle": "แก้ตามข้อเสนอแนะ",
+            "description": "แก้ขั้นตอน ภาพ และฟอนต์ที่ยังไม่ถูกต้อง แล้วตรวจซ้ำ; ระบุข้อจำกัดที่ยังแก้ไม่ได้",
+            "condition": "ต้องแก้",
+            "returnTo": "review",
+            "line": 26,
+            "endLine": 32
+          }
+        ],
+        "notes": [
+          "ห้ามขอรหัสผ่าน/OTP ผ่านแชตหรือใช้บัญชีผู้ใช้จริง",
+          "ห้ามอ้างว่าตรวจผ่าน Browser หากใช้เพียงหลักฐานจากผู้ขอ"
+        ]
+      }
+    },
+    {
+      "id": "photoreal-head-web",
+      "name": "Photoreal Head for Web",
+      "nameTh": "โมเดลศีรษะสมจริงสำหรับเว็บ",
+      "category": "UIUX",
+      "version": "3.0.0",
+      "status": "Ready",
+      "phase": "Phase 1",
+      "author": "Personal Library",
+      "summary": "สร้างและแก้โมเดลศีรษะ 3D สมจริงด้วย Blender ตรวจสัดส่วนใบหน้าก่อนทำ UV และ PBR พร้อมส่งออก GLB สำหรับ Three.js",
+      "description": "สร้างหรือปรับโมเดลศีรษะมนุษย์โดยตรวจ cranial silhouette, ตา จมูก หู ปาก และขากรรไกรก่อนทำ texture ใช้ facial landmarks และ photo-fit ประกอบการตรวจ รองรับ UV0, PBR, eyebrow decals และ GLB พร้อม release gates ที่แยกผลตรวจอัตโนมัติจากการยอมรับภาพจริง",
+      "tags": [
+        "3D",
+        "Photoreal",
+        "Facial Anatomy",
+        "Blender",
+        "GLB",
+        "Three.js",
+        "Multi-Agent"
+      ],
+      "supportedAgents": [
+        "antigravity",
+        "claude-code",
+        "codex"
+      ],
+      "agentCompatibility": {
+        "antigravity": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "claudeCode": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "codex": {
+          "supported": true,
+          "version": ">=1.0.0"
+        }
+      },
+      "triggers": [
+        "สร้างหัวคนสมจริง",
+        "แก้สัดส่วนใบหน้า 3D",
+        "โมเดลศีรษะสำหรับเว็บ",
+        "photoreal head",
+        "facial anatomy QA",
+        "photo-fit landmarks",
+        "eyebrow tattoo texture",
+        "Blender GLB export"
+      ],
+      "path": "skills/photoreal-head-web",
+      "entryFile": "skills/photoreal-head-web/SKILL.md",
+      "assets": [
+        {
+          "name": "SKILL.md",
+          "type": "skill",
+          "path": "skills/photoreal-head-web/SKILL.md"
+        },
+        {
+          "name": "analyze_anatomy.py",
+          "type": "script",
+          "path": "skills/photoreal-head-web/scripts/analyze_anatomy.py"
+        },
+        {
+          "name": "compare_photo_landmarks.py",
+          "type": "script",
+          "path": "skills/photoreal-head-web/scripts/compare_photo_landmarks.py"
+        },
+        {
+          "name": "blender_export_head.py",
+          "type": "script",
+          "path": "skills/photoreal-head-web/scripts/blender_export_head.py"
+        },
+        {
+          "name": "inspect_glb.py",
+          "type": "script",
+          "path": "skills/photoreal-head-web/scripts/inspect_glb.py"
+        },
+        {
+          "name": "landmarks_3d_template.json",
+          "type": "template",
+          "path": "skills/photoreal-head-web/assets/templates/landmarks_3d_template.json"
+        },
+        {
+          "name": "anatomy_review_template.md",
+          "type": "template",
+          "path": "skills/photoreal-head-web/assets/templates/anatomy_review_template.md"
+        },
+        {
+          "name": "anatomy-release-gates.md",
+          "type": "reference",
+          "path": "skills/photoreal-head-web/references/anatomy-release-gates.md"
+        },
+        {
+          "name": "HeadViewer.tsx",
+          "type": "template",
+          "path": "skills/photoreal-head-web/assets/web/HeadViewer.tsx"
+        }
+      ],
+      "examples": [
+        {
+          "title": "ตรวจโมเดลศีรษะจริง: Clay, พื้นผิว และ Wireframe",
+          "description": "ตัวอย่างใช้โมเดลสแกน CC BY 3.0 ตรวจรูปทรงหลายมุม พร้อม GLB, UV layout และรายงานโครงสร้าง แยกข้อจำกัด landmark/photo-fit ชัดเจน",
+          "htmlPath": "assets/examples/photoreal-head/preview.html",
+          "markdownPath": "assets/examples/photoreal-head/README.md"
+        },
+        {
+          "title": "แนวทางสร้างและแก้โมเดลศีรษะ",
+          "description": "ตัวอย่าง brief สำหรับหัวคนสมจริง งาน likeness และการแก้รูปทรงก่อนทำ texture",
+          "markdownPath": "skills/photoreal-head-web/references/example-briefs.md"
+        }
+      ],
+      "highlights": [
+        "ตรวจ anatomy และภาพ clay หลายมุมก่อน UV และ texture",
+        "ตรวจ facial landmarks และเทียบภาพอ้างอิงด้วย photo-fit",
+        "ส่งออก GLB พร้อมหลักฐานและ release gates",
+        "มี React Three Fiber viewer สำหรับตรวจโมเดลบนเว็บ"
+      ],
+      "overviewImage": "assets/skill-overviews/photoreal-head-web.webp",
+      "workflow": {
+        "sourcePath": "assets/skill-workflows/photoreal-head-web.workflow.json",
+        "htmlPath": "assets/skill-workflows/photoreal-head-web.html",
+        "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+        "steps": [
+          {
+            "id": "intake",
+            "title": "G0 · Intake",
+            "subtitle": "Ref / สิทธิ์ / Blender",
+            "description": "ตรวจสิทธิ์และความพร้อมของ Blender, reference หลายมุมและกล้อง; ไม่สร้าง model ปลอมหากเครื่องมือไม่พร้อม",
+            "kind": "external",
+            "line": 44,
+            "endLine": 48
+          },
+          {
+            "id": "primary",
+            "title": "G1 · Anatomy",
+            "subtitle": "โครงกะโหลกและมวล",
+            "description": "เริ่มจาก base topology ที่เชื่อถือได้ ปั้น cranial vault, maxilla, mandible และ silhouette; ตรวจ flat gray หลายมุม",
+            "kind": "backend",
+            "line": 50,
+            "endLine": 54
+          },
+          {
+            "id": "detail",
+            "title": "G2 · Face forms",
+            "subtitle": "ตา จมูก หู ปาก",
+            "description": "ปั้นโครงสร้างจริงของ orbital rim, nose cartilage, ears, cheeks/lips/jaw โดยยังไม่ใช้ texture",
+            "kind": "backend",
+            "line": 56,
+            "endLine": 63
+          },
+          {
+            "id": "landmarks",
+            "title": "G3 · Landmarks",
+            "subtitle": "วัดและเทียบภาพ",
+            "description": "วัด normalized landmarks, ตรวจ clay และ photo-fit; แก้ camera mismatch ก่อนบิด geometry; หยุดหาก BLOCKED",
+            "kind": "security",
+            "line": 65,
+            "endLine": 71
+          },
+          {
+            "id": "texture",
+            "title": "G4 · UV / PBR",
+            "subtitle": "Retopo และ Texture",
+            "description": "จัด face loops/UV0, bake normal, roughness และ eyebrow layers แยก; ห้ามใช้ texture ปกปิด anatomy ที่ผิด",
+            "kind": "backend",
+            "line": 73,
+            "endLine": 80
+          },
+          {
+            "id": "release",
+            "title": "G5 · GLB / QA",
+            "subtitle": "Export + Browser",
+            "description": "ตรวจ GLB/UV/ภาพจริงบนมือถือและ desktop พร้อมหลักฐานกายวิภาคก่อน final release; ไม่อ้าง browser หรือ likeness ถ้าไม่ได้ทดสอบ",
+            "kind": "frontend",
+            "line": 82,
+            "endLine": 87
+          }
+        ],
+        "branches": [
+          {
+            "from": "intake",
+            "id": "no-runtime",
+            "title": "No 3D runtime",
+            "subtitle": "ส่งคำแนะนำแทน",
+            "description": "ถ้าไม่มีเครื่องมือ 3D ให้ส่งสคริปต์/วิธีทำ และระบุว่าการสร้างโมเดลยังไม่ได้ดำเนินการ",
+            "condition": "เครื่องมือไม่พร้อม",
+            "returnTo": null,
+            "line": 44,
+            "endLine": 48
+          },
+          {
+            "from": "landmarks",
+            "id": "anatomy-fix",
+            "title": "Anatomy repair",
+            "subtitle": "แก้โครงก่อน Texture",
+            "description": "แก้ clay, landmarks หรือการจัดกล้องที่ผิด; ห้ามผ่านไป UV/texture เมื่อ anatomy ยัง BLOCKED",
+            "condition": "Gate ไม่ผ่าน",
+            "returnTo": "primary",
+            "line": 65,
+            "endLine": 71
+          }
+        ],
+        "notes": [
+          "Anatomy-first: Texture ปิดตลอด G1–G3",
+          "ภาพเดียวไม่พอสำหรับยืนยันรูปทรง 3D หรือความเหมือนเฉพาะบุคคล"
+        ]
+      }
+    },
+    {
+      "id": "thai-krathong-3d",
+      "name": "Thai Krathong 3D",
+      "nameTh": "สร้างโมเดลกระทงไทย 3D",
+      "category": "UIUX",
+      "version": "3.2.0",
+      "status": "Ready",
+      "phase": "Phase 1",
+      "author": "Personal Library",
+      "summary": "สร้างและปรับโมเดลกระทงไทยจากข้อความหรือภาพอ้างอิง รองรับ Blender, GLB และ Three.js พร้อมตรวจรูปทรงและไฟล์ส่งออก",
+      "description": "สร้างกระทงใบตอง ดอกบัว แบบหลายชั้น ทรงข้าวหลามตัด ขนมปัง และดินเผา ด้วย workflow R3.1 แยกตรวจรูปทรง วัสดุ ภาพเรนเดอร์ และ GLB round-trip มี presets และแนวทางตรวจเทียบภาพอ้างอิง โดยแยกผลตรวจทางเทคนิคจากการยอมรับด้านภาพ",
+      "tags": [
+        "3D",
+        "Krathong",
+        "Loy Krathong",
+        "Blender",
+        "GLB",
+        "Three.js",
+        "Multi-Agent"
+      ],
+      "supportedAgents": [
+        "antigravity",
+        "claude-code",
+        "codex"
+      ],
+      "agentCompatibility": {
+        "antigravity": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "claudeCode": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "codex": {
+          "supported": true,
+          "version": ">=1.0.0"
+        }
+      },
+      "triggers": [
+        "ปั้นกระทง 3D",
+        "กระทงใบตอง",
+        "กระทงดอกบัว",
+        "โมเดลกระทง",
+        "Thai krathong",
+        "Loy Krathong assets",
+        "krathong GLB"
+      ],
+      "path": "skills/thai-krathong-3d",
+      "entryFile": "skills/thai-krathong-3d/SKILL.md",
+      "assets": [
+        {
+          "name": "openai.yaml",
+          "type": "asset",
+          "path": "skills/thai-krathong-3d/agents/openai.yaml"
+        },
+        {
+          "name": "icon.svg",
+          "type": "asset",
+          "path": "skills/thai-krathong-3d/assets/icon.svg"
+        },
+        {
+          "name": "lotus.json",
+          "type": "template",
+          "path": "skills/thai-krathong-3d/assets/lotus.json"
+        },
+        {
+          "name": "ref-banana-classic.json",
+          "type": "template",
+          "path": "skills/thai-krathong-3d/assets/ref-banana-classic.json"
+        },
+        {
+          "name": "ref-bread-flower.json",
+          "type": "template",
+          "path": "skills/thai-krathong-3d/assets/ref-bread-flower.json"
+        },
+        {
+          "name": "ref-clay-bowl.json",
+          "type": "template",
+          "path": "skills/thai-krathong-3d/assets/ref-clay-bowl.json"
+        },
+        {
+          "name": "ref-diamond-leaf.json",
+          "type": "template",
+          "path": "skills/thai-krathong-3d/assets/ref-diamond-leaf.json"
+        },
+        {
+          "name": "ref-orange-bowl.json",
+          "type": "template",
+          "path": "skills/thai-krathong-3d/assets/ref-orange-bowl.json"
+        },
+        {
+          "name": "ref-pink-lotus.json",
+          "type": "template",
+          "path": "skills/thai-krathong-3d/assets/ref-pink-lotus.json"
+        },
+        {
+          "name": "ref-tiered-leaf.json",
+          "type": "template",
+          "path": "skills/thai-krathong-3d/assets/ref-tiered-leaf.json"
+        },
+        {
+          "name": "ref-white-lotus.json",
+          "type": "template",
+          "path": "skills/thai-krathong-3d/assets/ref-white-lotus.json"
+        },
+        {
+          "name": "reference-catalog.json",
+          "type": "template",
+          "path": "skills/thai-krathong-3d/assets/reference-catalog.json"
+        },
+        {
+          "name": "stylized.json",
+          "type": "template",
+          "path": "skills/thai-krathong-3d/assets/stylized.json"
+        },
+        {
+          "name": "traditional.json",
+          "type": "template",
+          "path": "skills/thai-krathong-3d/assets/traditional.json"
+        },
+        {
+          "name": "anatomy.md",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/references/anatomy.md"
+        },
+        {
+          "name": "craft-and-materials.md",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/references/craft-and-materials.md"
+        },
+        {
+          "name": "examples.md",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/references/examples.md"
+        },
+        {
+          "name": "implementation-verification.json",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/references/implementation-verification.json"
+        },
+        {
+          "name": "material-and-export.md",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/references/material-and-export.md"
+        },
+        {
+          "name": "reference-qa.md",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/references/reference-qa.md"
+        },
+        {
+          "name": "research-evidence.md",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/references/research-evidence.md"
+        },
+        {
+          "name": "screenshot-study.md",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/references/screenshot-study.md"
+        },
+        {
+          "name": "web-integration.md",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/references/web-integration.md"
+        },
+        {
+          "name": "blender_finish.py",
+          "type": "script",
+          "path": "skills/thai-krathong-3d/scripts/blender_finish.py"
+        },
+        {
+          "name": "build_reference.py",
+          "type": "script",
+          "path": "skills/thai-krathong-3d/scripts/build_reference.py"
+        },
+        {
+          "name": "check_reference_model.py",
+          "type": "script",
+          "path": "skills/thai-krathong-3d/scripts/check_reference_model.py"
+        },
+        {
+          "name": "generate_krathong.py",
+          "type": "script",
+          "path": "skills/thai-krathong-3d/scripts/generate_krathong.py"
+        },
+        {
+          "name": "qa_model.py",
+          "type": "script",
+          "path": "skills/thai-krathong-3d/scripts/qa_model.py"
+        },
+        {
+          "name": "reference_finish.py",
+          "type": "script",
+          "path": "skills/thai-krathong-3d/scripts/reference_finish.py"
+        },
+        {
+          "name": "render_preview.py",
+          "type": "script",
+          "path": "skills/thai-krathong-3d/scripts/render_preview.py"
+        },
+        {
+          "name": "smoke_test.py",
+          "type": "script",
+          "path": "skills/thai-krathong-3d/scripts/smoke_test.py"
+        },
+        {
+          "name": "SKILL.md",
+          "type": "skill",
+          "path": "skills/thai-krathong-3d/SKILL.md"
+        },
+        {
+          "name": "mesh_uv_qa.py",
+          "type": "script",
+          "path": "skills/thai-krathong-3d/scripts/mesh_uv_qa.py"
+        },
+        {
+          "name": "bake_web_pbr.py",
+          "type": "script",
+          "path": "skills/thai-krathong-3d/scripts/bake_web_pbr.py"
+        },
+        {
+          "name": "mesh-uv-web-pbr.md",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/references/mesh-uv-web-pbr.md"
+        },
+        {
+          "name": "test_mesh_uv_blender.py",
+          "type": "test",
+          "path": "skills/thai-krathong-3d/tests/test_mesh_uv_blender.py"
+        },
+        {
+          "name": "test_web_pbr_blender.py",
+          "type": "test",
+          "path": "skills/thai-krathong-3d/tests/test_web_pbr_blender.py"
+        },
+        {
+          "name": "web-pbr-verification.json",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/references/web-pbr-verification.json"
+        },
+        {
+          "name": "index.html",
+          "type": "example",
+          "path": "skills/thai-krathong-3d/examples/web-pbr-showcase/index.html"
+        },
+        {
+          "name": "overview.html",
+          "type": "example",
+          "path": "skills/thai-krathong-3d/examples/web-pbr-showcase/overview.html"
+        },
+        {
+          "name": "README.md",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/examples/web-pbr-showcase/README.md"
+        },
+        {
+          "name": "cases.json",
+          "type": "reference",
+          "path": "skills/thai-krathong-3d/examples/web-pbr-showcase/cases.json"
+        },
+        {
+          "name": "overview.webp",
+          "type": "asset",
+          "path": "skills/thai-krathong-3d/examples/web-pbr-showcase/overview.webp"
+        }
+      ],
+      "examples": [
+        {
+          "title": "กระทง 3 แบบ · ภาพเรนเดอร์และไฟล์ GLB",
+          "description": "ใบตอง ดอกบัว และดินเผา พร้อม prompt, มุมภาพ 3 มุม, baked PBR และผลตรวจจาก Blender จริง",
+          "htmlPath": "skills/thai-krathong-3d/examples/web-pbr-showcase/index.html",
+          "markdownPath": "skills/thai-krathong-3d/examples/web-pbr-showcase/README.md"
+        },
+        {
+          "title": "ภาพรวม Thai Krathong 3D",
+          "description": "Overview จากโมเดลที่ตรวจแล้ว: Mesh/UV QA → Bake PBR → GLB",
+          "htmlPath": "skills/thai-krathong-3d/examples/web-pbr-showcase/overview.html"
+        },
+        {
+          "title": "ตัวอย่าง brief และ presets กระทงไทย",
+          "description": "แนวทางสร้างกระทงจากข้อความและภาพอ้างอิง",
+          "markdownPath": "skills/thai-krathong-3d/references/examples.md"
+        }
+      ],
+      "highlights": [
+        "R3.1 รองรับรูปทรงกระทง 8 ตระกูลและ presets สำหรับภาพอ้างอิง",
+        "ตรวจรูปทรงก่อนเพิ่มรายละเอียดวัสดุและแสง",
+        "ตรวจ GLB round-trip และแยกผลเทคนิคจาก visual review",
+        "เก็บ workflow low-poly เดิมสำหรับงานที่ต้องการโมเดลเรียบง่าย",
+        "Mesh/UV QA ตรวจ topology, overlap, stretch, texel density และระยะห่าง UV islands",
+        "Bake BaseColor, Normal, Roughness, Metallic, AO และ packed ORM พร้อม strict GLB QA"
+      ],
+      "overviewImage": "assets/skill-overviews/thai-krathong-3d.webp",
+      "workflow": {
+        "sourcePath": "assets/skill-workflows/thai-krathong-3d.workflow.json",
+        "htmlPath": "assets/skill-workflows/thai-krathong-3d.html",
+        "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+        "steps": [
+          {
+            "id": "brief",
+            "title": "Reference intake",
+            "subtitle": "อ่านภาพและ Brief",
+            "description": "เลือก reference หลัก บันทึก family, silhouette, layers, material cues, accessories, camera และสิ่งที่อนุมานใน reference_analysis.json",
+            "kind": "external",
+            "line": 49,
+            "endLine": 74
+          },
+          {
+            "id": "family",
+            "title": "Structure family",
+            "subtitle": "เลือกโครงสร้างก่อนสี",
+            "description": "เลือก folded banana-leaf, lotus, tiered, diamond, bread, clay หรือ legacy simple baseline ตามลักษณะรูปทรงจริง",
+            "kind": "backend",
+            "line": 55,
+            "endLine": 70
+          },
+          {
+            "id": "shape",
+            "title": "Shape-first build",
+            "subtitle": "ปั้นและตรวจทีละส่วน",
+            "description": "สร้าง whole form → folds/petals → assembly → materials/presentation; ใช้ Blender สำหรับงานภาพอ้างอิงและปรับเฉพาะส่วนที่ผิด",
+            "kind": "security",
+            "line": 83,
+            "endLine": 96
+          },
+          {
+            "id": "mesh",
+            "title": "Mesh & UV QA",
+            "subtitle": "ตรวจ Geometry / UV",
+            "description": "ตรวจ mesh, transforms, UV overlap, padding, stretch; รักษา editable source และแยก technical QA จาก visual acceptance",
+            "kind": "security",
+            "line": 15,
+            "endLine": 37
+          },
+          {
+            "id": "bake",
+            "title": "Web PBR bake",
+            "subtitle": "Bake PBR เมื่อจำเป็น",
+            "description": "สำหรับ textured web/game release สร้าง BakeUV atlas, BaseColor/Normal/Roughness/Metallic/AO และ packed ORM แล้ว export GLB",
+            "kind": "backend",
+            "line": 15,
+            "endLine": 24
+          },
+          {
+            "id": "deliver",
+            "title": "Reimport & deliver",
+            "subtitle": "ตรวจ GLB และส่งมอบ",
+            "description": "เปิด GLB ใน clean scene ตรวจ front/top/three-quarter, texture และ geometry; ส่ง GLB, preview, report, BLEND เมื่อมีจริง พร้อมข้อจำกัด",
+            "kind": "frontend",
+            "line": 33,
+            "endLine": 37
+          }
+        ],
+        "branches": [
+          {
+            "from": "shape",
+            "id": "shape-fix",
+            "title": "Fix mismatch",
+            "subtitle": "ย้อนแก้ส่วนที่ผิด",
+            "description": "แก้ footprint, leaf folds, petals, layers หรือ camera ที่ผิดก่อนเพิ่มรายละเอียด; บันทึกภาพเทียบและตรวจซ้ำ",
+            "condition": "รูปทรงไม่ผ่าน",
+            "returnTo": "shape",
+            "line": 87,
+            "endLine": 98
+          },
+          {
+            "from": "mesh",
+            "id": "mesh-fix",
+            "title": "Repair mesh / UV",
+            "subtitle": "แก้ Defect จริง",
+            "description": "แก้ degenerate/nonmanifold geometry, UV overlap/padding/stretch บน working copy; ไม่ waive gate หรือทับ source",
+            "condition": "QA ไม่ผ่าน",
+            "returnTo": "mesh",
+            "line": 26,
+            "endLine": 37
+          },
+          {
+            "from": "bake",
+            "id": "preview-only",
+            "title": "Preview route",
+            "subtitle": "งานที่ไม่ต้อง bake",
+            "description": "baseline/source preview ใช้เส้นทาง export ปกติ ไม่อ้าง baked PBR; ส่งเฉพาะ artifact ที่มีจริง",
+            "condition": "ไม่ใช่ textured release",
+            "returnTo": "deliver",
+            "line": 119,
+            "endLine": 124
+          }
+        ],
+        "notes": [
+          "เส้นทางหลักสำหรับงาน textured web/game; legacy low-poly เป็นเส้นทางง่ายแยกต่างหาก",
+          "ผลเทคนิคผ่านไม่เท่ากับผ่านความเหมือน ต้องมี visual review จริง"
+        ]
+      }
+    },
+    {
+      "id": "privacy-first-database-documentation-builder",
+      "name": "Privacy-First Database Documentation Builder",
+      "nameTh": "สร้างชุดเอกสารฐานข้อมูลแบบ Privacy-First",
+      "version": "2.0.0",
+      "summary": "สร้าง Data Catalog, Data Dictionary, ERD และเอกสารสำหรับ AI Agent จาก Schema Metadata ที่ผ่านการรับรองเท่านั้น",
+      "description": "สร้างชุดเอกสารฐานข้อมูล PDF + Markdown และ Mermaid จาก DBA/Data Owner-approved schema metadata ผ่าน Strict Input Contract v2.0, Privacy Engine แบบ Fail-Closed และ Release Quality Gate รองรับ 9 โหมด รวม Data Lineage, Classification, Consumer Guide และ Schema Diff โดยห้ามอ่านข้อมูลส่วนบุคคลจริง เชื่อมต่อฐานข้อมูล หรืออ่าน sample records ทุกกรณี",
+      "tags": [
+        "Documentation",
+        "Database",
+        "Data Catalog",
+        "Data Dictionary",
+        "ERD",
+        "Privacy",
+        "Data Governance",
+        "AI Agent",
+        "PDF",
+        "Markdown",
+        "Multi-Agent"
+      ],
+      "triggers": [
+        "สร้าง Data Dictionary",
+        "สร้าง Data Catalog",
+        "พจนานุกรมข้อมูล",
+        "สร้างเอกสารฐานข้อมูล",
+        "ER Diagram",
+        "ERD",
+        "data classification",
+        "data lineage",
+        "schema diff",
+        "database consumer guide",
+        "database documentation",
+        "เอกสารสำหรับ AI Agent"
+      ],
+      "highlights": [
+        "Metadata-only, Offline-first และ Fail-Closed; Unknown มีผลเป็น Restricted",
+        "สร้าง Data Dictionary ภาษาไทย PDF A4 Landscape และ Markdown",
+        "รองรับ 9 execution modes พร้อม Strict Input Contract v2.0",
+        "ตรวจ PK, UK และ FK แบบ composite; ไม่เดาความสัมพันธ์หรือ lineage",
+        "สคริปต์สร้างเอกสารและ regression tests ด้วย synthetic metadata"
+      ],
+      "category": "Document",
+      "status": "Ready",
+      "phase": "Phase 1",
+      "author": "Personal Library",
+      "supportedAgents": [
+        "antigravity",
+        "claude-code",
+        "codex"
+      ],
+      "agentCompatibility": {
+        "antigravity": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "claudeCode": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "codex": {
+          "supported": true,
+          "version": ">=1.0.0"
+        }
+      },
+      "path": "skills/privacy-first-database-documentation-builder",
+      "entryFile": "skills/privacy-first-database-documentation-builder/SKILL.md",
+      "assets": [
+        {
+          "name": "SKILL.md",
+          "type": "skill",
+          "path": "skills/privacy-first-database-documentation-builder/SKILL.md"
+        },
+        {
+          "name": "openai.yaml",
+          "type": "asset",
+          "path": "skills/privacy-first-database-documentation-builder/agents/openai.yaml"
+        },
+        {
+          "name": "document-outline.md",
+          "type": "template",
+          "path": "skills/privacy-first-database-documentation-builder/assets/document-outline.md"
+        },
+        {
+          "name": "intake-template.md",
+          "type": "template",
+          "path": "skills/privacy-first-database-documentation-builder/assets/intake-template.md"
+        },
+        {
+          "name": "metadata-template.json",
+          "type": "template",
+          "path": "skills/privacy-first-database-documentation-builder/assets/metadata-template.json"
+        },
+        {
+          "name": "database-model.md",
+          "type": "reference",
+          "path": "skills/privacy-first-database-documentation-builder/references/database-model.md"
+        },
+        {
+          "name": "input-contract.md",
+          "type": "reference",
+          "path": "skills/privacy-first-database-documentation-builder/references/input-contract.md"
+        },
+        {
+          "name": "metadata-acquisition.md",
+          "type": "reference",
+          "path": "skills/privacy-first-database-documentation-builder/references/metadata-acquisition.md"
+        },
+        {
+          "name": "privacy-boundary.md",
+          "type": "reference",
+          "path": "skills/privacy-first-database-documentation-builder/references/privacy-boundary.md"
+        },
+        {
+          "name": "publishing.md",
+          "type": "reference",
+          "path": "skills/privacy-first-database-documentation-builder/references/publishing.md"
+        },
+        {
+          "name": "usage.md",
+          "type": "reference",
+          "path": "skills/privacy-first-database-documentation-builder/references/usage.md"
+        },
+        {
+          "name": "build_dictionary.py",
+          "type": "script",
+          "path": "skills/privacy-first-database-documentation-builder/scripts/build_dictionary.py"
+        },
+        {
+          "name": "release_check.py",
+          "type": "script",
+          "path": "skills/privacy-first-database-documentation-builder/scripts/release_check.py"
+        },
+        {
+          "name": "test_dictionary.py",
+          "type": "script",
+          "path": "skills/privacy-first-database-documentation-builder/scripts/test_dictionary.py"
+        },
+        {
+          "name": "validate_metadata.py",
+          "type": "script",
+          "path": "skills/privacy-first-database-documentation-builder/scripts/validate_metadata.py"
+        },
+        {
+          "name": "Example Showcase (HTML)",
+          "type": "example",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/index.html"
+        },
+        {
+          "name": "Overview (SVG)",
+          "type": "asset",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/overview.svg"
+        },
+        {
+          "name": "Example guide",
+          "type": "example",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/README.md"
+        },
+        {
+          "name": "data-catalog.md",
+          "type": "example",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/data-catalog.md"
+        },
+        {
+          "name": "data-dictionary.md",
+          "type": "example",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/data-dictionary.md"
+        },
+        {
+          "name": "er-diagram.md",
+          "type": "example",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/er-diagram.md"
+        },
+        {
+          "name": "data-classification.md",
+          "type": "example",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/data-classification.md"
+        },
+        {
+          "name": "data-lineage.md",
+          "type": "example",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/data-lineage.md"
+        },
+        {
+          "name": "database-consumer-guide.md",
+          "type": "example",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/database-consumer-guide.md"
+        },
+        {
+          "name": "ai-agent-guide.md",
+          "type": "example",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/ai-agent-guide.md"
+        },
+        {
+          "name": "er-diagram.mmd",
+          "type": "example",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/er-diagram.mmd"
+        },
+        {
+          "name": "llms.txt",
+          "type": "example",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/llms.txt"
+        },
+        {
+          "name": "release-manifest.md",
+          "type": "example",
+          "path": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/release-manifest.md"
+        }
+      ],
+      "examples": [
+        {
+          "title": "Synthetic Database Documentation",
+          "description": "ตัวอย่างผลลัพธ์จากการรัน Skill จริง: 2 ตาราง 5 คอลัมน์ พร้อม Data Catalog, Dictionary, ERD, Classification, Lineage และคู่มือสำหรับผู้ใช้/AI",
+          "htmlPath": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/index.html",
+          "markdownPath": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/data-dictionary.md",
+          "pdfPath": "skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/data-dictionary.pdf"
+        }
+      ],
+      "overviewImage": "assets/skill-overviews/privacy-first-database-documentation-builder.svg",
+      "workflow": {
+        "sourcePath": "assets/skill-workflows/privacy-first-database-documentation-builder.workflow.json",
+        "htmlPath": "assets/skill-workflows/privacy-first-database-documentation-builder.html",
+        "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+        "steps": [
+          {
+            "id": "scope",
+            "title": "Scope & mode",
+            "subtitle": "ระบุระบบและโหมด",
+            "description": "ระบุ engine, schema revision, scope, audience และเลือก full/dictionary/catalog/erd/privacy/consumer/ai/lineage/diff ตามคำขอ",
+            "kind": "external",
+            "line": 19,
+            "endLine": 37
+          },
+          {
+            "id": "approval",
+            "title": "Owner approval",
+            "subtitle": "อนุมัติก่อนอ่าน",
+            "description": "รับเฉพาะ artifact schema-only ที่ DBA/Data Owner ตรวจและอนุมัติขอบเขตกับผู้รับก่อน Agent อ่าน ห้ามต่อ DB และอ่าน records",
+            "kind": "security",
+            "line": 15,
+            "endLine": 17
+          },
+          {
+            "id": "validate",
+            "title": "Strict validation",
+            "subtitle": "ตรวจ Metadata v2",
+            "description": "รัน validate_metadata.py กับ input ที่ผ่านอนุมัติเท่านั้น ตรวจคีย์/ความสัมพันธ์/classification; diff ต้องมีสอง snapshot อนุมัติแยกกัน",
+            "kind": "security",
+            "line": 37,
+            "endLine": 38
+          },
+          {
+            "id": "generate",
+            "title": "Generate docs",
+            "subtitle": "สร้างตามโหมด",
+            "description": "สร้าง Markdown/PDF, ERD, classification, lineage หรือคู่มือ Agent จาก metadata ที่ผ่านการรับรอง; Unknown → Restricted",
+            "kind": "backend",
+            "line": 39,
+            "endLine": 39
+          },
+          {
+            "id": "review",
+            "title": "Review & lint",
+            "subtitle": "Privacy / PDF QA",
+            "description": "ตรวจ coverage, keys, FK, classification และความตรงกันของ PDF/Markdown; release_check.py ใช้เฉพาะ staging และยังต้องตรวจทานด้วยคน",
+            "kind": "security",
+            "line": 40,
+            "endLine": 41
+          },
+          {
+            "id": "release",
+            "title": "Safe release",
+            "subtitle": "เผยแพร่เฉพาะที่ผ่าน",
+            "description": "ส่งเฉพาะเอกสารที่อนุมัติ พร้อม release-manifest, scope, gap, QA และสถานะ review; ไม่เผยแพร่ raw source",
+            "kind": "frontend",
+            "line": 41,
+            "endLine": 45
+          }
+        ],
+        "branches": [
+          {
+            "from": "approval",
+            "id": "template",
+            "title": "Template only",
+            "subtitle": "ไม่อ่านแหล่งข้อมูล",
+            "description": "หากไม่มี independent approval ให้หยุด acquisition และส่ง blank/synthetic template ที่ติดป้ายเท่านั้น",
+            "condition": "ไม่อนุมัติ",
+            "returnTo": null,
+            "line": 37,
+            "endLine": 37
+          },
+          {
+            "from": "validate",
+            "id": "invalid",
+            "title": "Reject input",
+            "subtitle": "ขอ Metadata ที่แก้แล้ว",
+            "description": "Validation ไม่ผ่าน ให้ขอ artifact ที่ owner แก้และรับรองใหม่; ไม่ sanitize ข้อมูลผสมหลังอ่าน",
+            "condition": "ไม่ผ่าน",
+            "returnTo": null,
+            "line": 38,
+            "endLine": 38
+          },
+          {
+            "from": "review",
+            "id": "withhold",
+            "title": "Withhold output",
+            "subtitle": "ระงับเอกสาร",
+            "description": "หากพบ privacy blocker หรือยังไม่อนุมัติการเปิดเผย ให้ระงับไฟล์ที่เกี่ยวข้อง แก้และตรวจซ้ำ",
+            "condition": "มี Blocker",
+            "returnTo": null,
+            "line": 40,
+            "endLine": 41
+          }
+        ],
+        "notes": [
+          "ห้ามอ่านข้อมูลส่วนบุคคลจริงแม้ชั่วคราว ไม่อ่าน live DB, raw dumps, defaults, comments หรือ sample rows",
+          "เอกสาร metadata ไม่ใช่สิทธิ์เข้าถึงข้อมูลจริง"
+        ]
+      }
+    },
+    {
+      "id": "api-documentation-builder",
+      "name": "API Documentation Builder",
+      "nameTh": "สร้างเอกสารและคู่มือการใช้งาน API",
+      "version": "1.0.0",
+      "summary": "สร้าง API Catalog, API Data Dictionary, OpenAPI, Consumer Guide และ AI Agent/MCP Integration Guide จาก API Contract ที่ผ่านการคัดกรอง",
+      "description": "จัดทำ API Documentation Suite สำหรับนักพัฒนา ผู้ใช้ API และ AI Agent ในรูปแบบ PDF, Markdown และ OpenAPI YAML/JSON จาก owner-reviewed contract หรือ route/schema metadata ที่ปลอดภัยเท่านั้น รองรับการตรวจสอบ OpenAPI แบบ Offline และการจัดทำ tool manifest เพื่อทบทวนก่อนใช้งานจริง ห้ามเรียก endpoint จริง อ่าน payload, credentials หรือข้อมูลส่วนบุคคลจริง",
+      "tags": [
+        "Documentation",
+        "API",
+        "REST",
+        "OpenAPI",
+        "Swagger",
+        "User Manual",
+        "Privacy",
+        "MCP",
+        "AI Agent",
+        "PDF",
+        "Markdown",
+        "Multi-Agent"
+      ],
+      "triggers": [
+        "สร้างคู่มือ API",
+        "API User Manual",
+        "API documentation",
+        "API catalog",
+        "API data dictionary",
+        "OpenAPI",
+        "Swagger",
+        "API consumer guide",
+        "API governance",
+        "MCP integration",
+        "AI Agent integration"
+      ],
+      "highlights": [
+        "สร้างเอกสาร API ครบ 6 หมวดสำหรับนักพัฒนาและ AI Agent",
+        "OpenAPI 3.x พร้อม offline structural validation",
+        "Contract-only และ Privacy by Design ห้ามเรียก endpoint จริง",
+        "กำหนด API scope, classification, auth และข้อจำกัดตามหลักฐาน",
+        "รองรับ MCP tool schema แบบ deny-by-default และ synthetic templates"
+      ],
+      "category": "Document",
+      "status": "Ready",
+      "phase": "Phase 1",
+      "author": "Personal Library",
+      "supportedAgents": [
+        "antigravity",
+        "claude-code",
+        "codex"
+      ],
+      "agentCompatibility": {
+        "antigravity": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "claudeCode": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "codex": {
+          "supported": true,
+          "version": ">=1.0.0"
+        }
+      },
+      "path": "skills/api-documentation-builder",
+      "entryFile": "skills/api-documentation-builder/SKILL.md",
+      "assets": [
+        {
+          "name": "SKILL.md",
+          "type": "skill",
+          "path": "skills/api-documentation-builder/SKILL.md"
+        },
+        {
+          "name": "openai.yaml",
+          "type": "asset",
+          "path": "skills/api-documentation-builder/agents/openai.yaml"
+        },
+        {
+          "name": "document-outline.md",
+          "type": "template",
+          "path": "skills/api-documentation-builder/assets/document-outline.md"
+        },
+        {
+          "name": "intake-template.md",
+          "type": "template",
+          "path": "skills/api-documentation-builder/assets/intake-template.md"
+        },
+        {
+          "name": "openapi-template.yaml",
+          "type": "template",
+          "path": "skills/api-documentation-builder/assets/openapi-template.yaml"
+        },
+        {
+          "name": "tools-template.json",
+          "type": "template",
+          "path": "skills/api-documentation-builder/assets/tools-template.json"
+        },
+        {
+          "name": "contract-acquisition.md",
+          "type": "reference",
+          "path": "skills/api-documentation-builder/references/contract-acquisition.md"
+        },
+        {
+          "name": "openapi-and-agent.md",
+          "type": "reference",
+          "path": "skills/api-documentation-builder/references/openapi-and-agent.md"
+        },
+        {
+          "name": "privacy-boundary.md",
+          "type": "reference",
+          "path": "skills/api-documentation-builder/references/privacy-boundary.md"
+        },
+        {
+          "name": "publishing.md",
+          "type": "reference",
+          "path": "skills/api-documentation-builder/references/publishing.md"
+        },
+        {
+          "name": "release_check.py",
+          "type": "script",
+          "path": "skills/api-documentation-builder/scripts/release_check.py"
+        },
+        {
+          "name": "validate_openapi.py",
+          "type": "script",
+          "path": "skills/api-documentation-builder/scripts/validate_openapi.py"
+        },
+        {
+          "name": "Example Showcase (HTML)",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/index.html"
+        },
+        {
+          "name": "Overview (SVG)",
+          "type": "asset",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/overview.svg"
+        },
+        {
+          "name": "Example guide",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/README.md"
+        },
+        {
+          "name": "api-catalog.md",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/output/api-catalog.md"
+        },
+        {
+          "name": "api-data-dictionary.md",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/output/api-data-dictionary.md"
+        },
+        {
+          "name": "api-reference.md",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/output/api-reference.md"
+        },
+        {
+          "name": "api-consumer-guide.md",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/output/api-consumer-guide.md"
+        },
+        {
+          "name": "api-governance.md",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/output/api-governance.md"
+        },
+        {
+          "name": "ai-agent-integration-guide.md",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/output/ai-agent-integration-guide.md"
+        },
+        {
+          "name": "openapi.yaml",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/output/openapi.yaml"
+        },
+        {
+          "name": "tools.json",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/output/tools.json"
+        },
+        {
+          "name": "AGENTS.md",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/output/AGENTS.md"
+        },
+        {
+          "name": "llms.txt",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/output/llms.txt"
+        },
+        {
+          "name": "release-manifest.md",
+          "type": "example",
+          "path": "skills/api-documentation-builder/examples/synthetic-demo/output/release-manifest.md"
+        }
+      ],
+      "examples": [
+        {
+          "title": "Synthetic Department Directory API",
+          "description": "ตัวอย่าง API Documentation จาก OpenAPI Contract สมมุติ 2 GET operations พร้อม API Reference, Consumer Guide, Data Dictionary, Governance และคู่มือ AI Agent/MCP (0 approved tools)",
+          "htmlPath": "skills/api-documentation-builder/examples/synthetic-demo/index.html",
+          "markdownPath": "skills/api-documentation-builder/examples/synthetic-demo/output/api-consumer-guide.md",
+          "pdfPath": "skills/api-documentation-builder/examples/synthetic-demo/output/api-consumer-guide.pdf"
+        }
+      ],
+      "overviewImage": "assets/skill-overviews/api-documentation-builder.svg",
+      "workflow": {
+        "sourcePath": "assets/skill-workflows/api-documentation-builder.workflow.json",
+        "htmlPath": "assets/skill-workflows/api-documentation-builder.html",
+        "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+        "steps": [
+          {
+            "id": "scope",
+            "title": "Scope",
+            "subtitle": "กำหนด API และผู้รับ",
+            "description": "ระบุ API style, domain, audience, approved operation, version และ deliverables จากหลักฐาน",
+            "kind": "external",
+            "line": 21,
+            "endLine": 21
+          },
+          {
+            "id": "acquire",
+            "title": "Contract approval",
+            "subtitle": "รับ Contract ที่คัดกรอง",
+            "description": "รับเฉพาะ owner-reviewed static contract, sanitized route/DTO/schema; ไม่เรียก endpoint จริง ไม่เปิด logs, payloads หรือ credentials",
+            "kind": "security",
+            "line": 15,
+            "endLine": 22
+          },
+          {
+            "id": "normalize",
+            "title": "Normalize OpenAPI",
+            "subtitle": "สร้างสัญญากลาง",
+            "description": "เก็บ operation ID, method/path, params, request/response, errors, security และ class ตามหลักฐาน; ค่าไม่ทราบต้องระบุ Unknown",
+            "kind": "backend",
+            "line": 23,
+            "endLine": 23
+          },
+          {
+            "id": "author",
+            "title": "Author docs",
+            "subtitle": "เอกสาร 6 หมวด",
+            "description": "สร้าง Catalog, Dictionary, Reference, Consumer Guide, Governance และ AI Integration Guide; ใช้ placeholder หรือไม่ใส่ตัวอย่าง restricted",
+            "kind": "backend",
+            "line": 24,
+            "endLine": 24
+          },
+          {
+            "id": "tools",
+            "title": "Agent allowlist",
+            "subtitle": "Draft Tools / MCP",
+            "description": "สร้าง tools.json สำหรับ operation ที่ได้รับอนุมัติและ schema ครบเท่านั้น; default-deny, ไม่เปิดใช้งานจริง, llms.txt และ AGENTS.md",
+            "kind": "security",
+            "line": 25,
+            "endLine": 25
+          },
+          {
+            "id": "release",
+            "title": "Validate & publish",
+            "subtitle": "ตรวจและส่งมอบ",
+            "description": "ตรวจ OpenAPI แบบ offline, coverage, examples, security, privacy lint, PDF QA; ส่งเฉพาะ artifact ปลอดภัยและระบุ gaps",
+            "kind": "frontend",
+            "line": 26,
+            "endLine": 26
+          }
+        ],
+        "branches": [
+          {
+            "from": "acquire",
+            "id": "template",
+            "title": "Template only",
+            "subtitle": "ไม่อ่านหรือเรียกจริง",
+            "description": "หากไม่มี safe source ให้ใช้ intake-template และ contract สมมุติที่ติดป้าย ไม่สร้าง endpoint จริงขึ้นเอง",
+            "condition": "ไม่มี Safe source",
+            "returnTo": null,
+            "line": 21,
+            "endLine": 22
+          },
+          {
+            "from": "tools",
+            "id": "empty",
+            "title": "Empty tool list",
+            "subtitle": "0 approved tools",
+            "description": "ถ้าไม่มี operation ที่ผ่านการอนุมัติ ให้ tools.json เป็นรายการว่างและอธิบายข้อจำกัด",
+            "condition": "ไม่มี Approval",
+            "returnTo": "release",
+            "line": 25,
+            "endLine": 25
+          },
+          {
+            "from": "release",
+            "id": "hold",
+            "title": "Withhold release",
+            "subtitle": "ระงับผลลัพธ์ไม่ผ่าน",
+            "description": "ห้ามเผยแพร่ contract ไม่ถูกต้อง หรือ tool ที่ชวนเข้าใจผิดว่าใช้จริงได้; ระบุ artifact ที่ระงับ",
+            "condition": "Validation fail",
+            "returnTo": null,
+            "line": 26,
+            "endLine": 26
+          }
+        ],
+        "notes": [
+          "Contract-only: no live calls, real data, tokens or payloads",
+          "Agent tool manifest เป็น draft ไม่ใช่ MCP server และไม่ให้สิทธิ์เรียก API"
+        ]
+      }
+    }
+  ]
+};
     let appData = EMBEDDED_DATA;
     let currentView = 'bento';
     let currentCategory = 'all';
@@ -3779,6 +3791,9 @@
       } catch (e) {
         console.log('Using embedded fallback data:', e);
       }
+      await SkillReviews.init();
+      await SkillInsights.init(appData.skills, document.getElementById("skillInsightsDashboard"));
+      document.getElementById("skillSort").addEventListener("change", renderSkills);
       renderCategoryFilters();
       renderAgentFilters();
       renderStats();
@@ -3848,7 +3863,7 @@
     }
 
     function renderSkills() {
-      const items = getFilteredSkills();
+      const items = SkillReviews.sort(getFilteredSkills(), document.getElementById("skillSort").value);
       const container = document.getElementById('viewContainer');
 
       if (items.length === 0) {
@@ -3949,6 +3964,7 @@
                     <div class="bento-card-header">
                       <h3 class="bento-card-title">${skill.nameTh || skill.name}</h3>
                       <div class="bento-card-sub">${skill.name} • <span class="version-tag">v${skill.version}</span></div>
+                      ${SkillReviews.badge(skill)}
                     </div>
                     <p class="bento-card-desc">${skill.summary || skill.description}</p>
                     ${renderAgentBadgesHtml(skill)}
@@ -3984,6 +4000,7 @@
               <div class="bento-card-header">
                 <h3 class="bento-card-title">${skill.nameTh || skill.name}</h3>
                 <div class="bento-card-sub">${skill.name} • <span class="version-tag">v${skill.version}</span></div>
+                      ${SkillReviews.badge(skill)}
               </div>
               <p class="bento-card-desc">${skill.summary || skill.description}</p>
               ${renderAgentBadgesHtml(skill)}
@@ -4023,6 +4040,7 @@
               </div>
               <h3 class="card-title">${skill.nameTh || skill.name}</h3>
               <div class="card-sub">${skill.name} • v${skill.version}</div>
+              ${SkillReviews.badge(skill)}
               <p class="card-desc">${skill.summary || skill.description}</p>
               ${renderAgentBadgesHtml(skill)}
               <div class="card-tags">
@@ -4056,6 +4074,7 @@
                   <span class="list-title">${skill.nameTh || skill.name}</span>
                   <span class="version-tag">v${skill.version}</span>
                 </div>
+                ${SkillReviews.badge(skill)}
                 <div class="list-desc">${skill.summary || skill.description}</div>
                 <div style="margin-top:6px;">${renderAgentBadgesHtml(skill)}</div>
               </div>
@@ -4080,6 +4099,7 @@
                 <th>หมวดหมู่</th>
                 <th>เฟส / เวอร์ชัน</th>
                 <th>AI Agent ที่รองรับ</th>
+                <th>คะแนน / รีวิว</th>
                 <th>คำอธิบายย่อ</th>
                 <th style="text-align: right;">การจัดการ</th>
               </tr>
@@ -4100,6 +4120,7 @@
                   <td>
                     ${renderAgentBadgesHtml(skill)}
                   </td>
+                  <td>${SkillReviews.badge(skill)}</td>
                   <td style="max-width: 280px;">${skill.summary || skill.description}</td>
                   <td style="text-align: right;">
                     <button class="btn-detail" style="padding:4px 10px; font-size:0.8rem;" onclick="openDetailModal('${skill.id}')">
@@ -4307,6 +4328,8 @@
       document.getElementById('modalTitle').textContent = skill.nameTh || skill.name;
       document.getElementById('modalSub').textContent = `${skill.name} • v${skill.version}`;
       document.getElementById('modalDescription').textContent = skill.description;
+      SkillReviews.render(skill, document.getElementById("modalReviews"));
+      SkillInsights.render(skill, document.getElementById("modalInsights"));
       renderSkillWorkflow(skill);
       document.getElementById('modalDownload').innerHTML = renderDownloadLink(skill);
 

@@ -280,3 +280,10 @@ compatibility:
 ---
 
 <p align="center">Made with ❤️ for AI Agent Power Users</p>
+
+
+## Community Ratings & Reviews
+
+The catalog supports versioned community reviews via public GitHub Issues and approved ratings generated at Pages build time. See [moderator setup and review documentation](docs/skill-reviews.md).
+
+Phase 2 adds helpful reactions, approved GitHub attachments, comparison, quality analytics, static repository benchmarks and opt-in AI review summaries. See [the review documentation](docs/skill-reviews.md#community-edition--phase-2).

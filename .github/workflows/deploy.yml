@@ -4,6 +4,10 @@ on:
   push:
     branches: ["main"]
   workflow_dispatch:
+  issues:
+    types: [labeled, unlabeled, edited, deleted, transferred]
+  schedule:
+    - cron: "17 2 * * *"
 
 permissions:
   contents: read
@@ -14,9 +18,11 @@ concurrency:
 
 jobs:
   build:
+    if: github.event_name != 'issues' || contains(github.event.issue.labels.*.name, 'skill-review-approved') || github.event.label.name == 'skill-review-approved'
     permissions:
       contents: read
       actions: read
+      issues: read
       pages: read
     runs-on: ubuntu-latest
     steps:
@@ -47,6 +53,29 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
+
+      - name: Test skill review validation
+        run: |
+          node --check assets/js/skill-reviews.js
+          node --check assets/js/skill-insights.js
+          node --test scripts/skill-ratings.test.mjs scripts/skill-insights.test.mjs
+
+      - name: Build approved skill ratings
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/build-skill-ratings.mjs
+
+      - name: Install benchmark dependencies
+        run: python -m pip install -r scripts/skill-benchmark-requirements.txt
+      - name: Run allowlisted skill tool benchmarks
+        run: python scripts/run-skill-tool-benchmarks.py
+
+      - name: Build benchmark and review analytics
+        env:
+          SKILL_REVIEW_AI_ENABLED: ${{ vars.SKILL_REVIEW_AI_ENABLED }}
+          SKILL_REVIEW_AI_MODEL: ${{ vars.SKILL_REVIEW_AI_MODEL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: node scripts/build-skill-insights.mjs
 
       - name: Validate catalog workflow sources
         run: node scripts/build-skill-workflows.mjs --check
