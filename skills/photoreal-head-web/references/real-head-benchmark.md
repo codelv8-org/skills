@@ -1,4 +1,4 @@
-# Real head benchmark protocol (v3.1)
+# Real head benchmark protocol (v3.1.1)
 
 Use separate evidence classes. Do not call rendered views photographs or treat real geometry as a measured human scan. Do not use the same image to fit and evaluate appearance.
 
@@ -25,4 +25,8 @@ Use Y-up neutral head with known +Z or -Z front, exact UV0 and embedded source B
 
 ## Recorded v3.1 development case
 
-Existing authored head asset derived from CC0 MakeHuman base, 33,940 skin triangles, opaque eye/hair occluders, transparent eyebrow decals excluded. B1 only. 1024 atlas, 768px views; 8 training views vs 1 front baseline; 5 held-out views. UV exact QA found 92 opposite-winding triangles, 0 overlap pairs, 0 degenerate, 0 out-of-bounds; status BLOCKED. Benchmark run is diagnostic; not a fixed or approved model. The public skill contains no source photo, mesh, texture or personally identifying benchmark output. See locally produced benchmark report for measured results. B2/B3/B4 not performed in this development run.
+Existing Ban5 head project mesh derived from CC0 MakeHuman base, 33,940 skin triangles, opaque eye/hair occluders, transparent eyebrow decals excluded. B1 only. 1024 atlas, 768px views; 8 training views vs 1 front baseline; 5 held-out views. UV exact QA found 92 opposite-winding triangles, 0 overlap pairs, 0 degenerate, 0 out-of-bounds; status BLOCKED. Benchmark run is diagnostic; not a fixed or approved model. The public skill contains no source photo, mesh, texture or personally identifying benchmark output. See locally produced benchmark report for measured results. B2/B3/B4 not performed in this development run.
+
+## B1 robustness regression (v3.1.1)
+
+Run `python scripts/benchmark_projection_robustness.py head.glb --skin-material "Skin PBR" --out private/stress --size 1024 --view-size 768`. Use the fixed rendered test protocol and a single preset +45-degree view tint; compare clean mean/robust, contaminated mean/robust and predefined reviewed quarantine on the same common-support held-out pixels. Read [robust-texture-fusion.md](robust-texture-fusion.md) for measured example and limits. Do not call this independent real-photo validation.

@@ -11,6 +11,7 @@ from PIL import Image
 from numba import njit
 from scipy.ndimage import distance_transform_edt
 from render_uv_layout_glb import read_asset, accessor_data
+from robust_texture_blend import robust_blend
 
 
 def sha(path): return hashlib.sha256(Path(path).read_bytes()).hexdigest()
@@ -181,12 +182,21 @@ def project(manifest_path,out,size=1024):
     if not m.get('views') or len(m['views'])>256: raise ValueError('Expected 1..256 projection views')
     exposure=m.get('exposure_match','off')
     if exposure not in ('off','overlap_scalar'): raise ValueError('Unsupported exposure matching mode')
+    blend=m.get('blend_mode','weighted_mean')
+    if blend not in ('weighted_mean','robust_consensus'): raise ValueError('Unsupported blend mode')
+    threshold=float(m.get('consensus_threshold_srgb',.06))
+    if not .01<=threshold<=.25: raise ValueError('Consensus threshold outside .01.. .25')
+    # Bound sparse sample storage (20 bytes/record) plus temporary chunk arrays.
+    max_records=5_000_000; record_count=0; records=[]; image_hashes=set()
     seen=set()
     for view in m['views']:
         name=view['id'];
         if not isinstance(name,str) or not name or name in seen: raise ValueError('Unique view IDs required')
         seen.add(name)
         if view.get('role','train')!='train': raise ValueError('Holdout views must not enter projection manifest')
+        ih=sha(base/view['image'])
+        if ih in image_hashes: raise ValueError('Duplicate training image; independent views required')
+        image_hashes.add(ih)
         K,R,t,im,mask,fit=camera(view,base); h,w=mask.shape; sid,depth,_,_=screen(tri,K,R,t,w,h); skin_screen=np.zeros_like(mask); fg=sid>=0; skin_screen[fg]=target[sid[fg]]; mask=mask&skin_screen
         xy,z=project_points(points,K,R,t); center=-R.T@t; cos=np.sum(normals*normalize(center-points),axis=1)
         xx=np.clip(np.rint(xy[:,0]).astype(int),0,w-1); yy=np.clip(np.rint(xy[:,1]).astype(int),0,h-1)
@@ -209,8 +219,28 @@ def project(manifest_path,out,size=1024):
             if match_count>=128: scalar=float(np.clip(np.exp(np.median(np.log(old[good]/new[good]))),.67,1.5))
             color=np.clip(color*scalar,0,1)
         accum[ii]+=color*q[:,None]; weight[ii]+=q; counts[ii]+=1
-        sources.append({'id':name,'covered_texels':int(len(ii)),'image_sha256':sha(base/view['image']),'mask_sha256':sha(base/view['mask']),'pose':fit,'linear_gain':gain.tolist(),'overlap_exposure_gain':scalar,'exposure_overlap_samples':match_count})
+        if blend=='robust_consensus':
+            record_count+=len(ii)
+            if record_count>max_records: raise ValueError('Robust consensus sample budget exceeded; reduce atlas size or independent views')
+            records.append((ii.astype(np.int32),color.astype(np.float32),q.astype(np.float32)))
+        sources.append({'id':name,'covered_texels':int(len(ii)),'image_sha256':ih,'mask_sha256':sha(base/view['mask']),'pose':fit,'linear_gain':gain.tolist(),'overlap_exposure_gain':scalar,'exposure_overlap_samples':match_count})
     covered=weight>1e-10; color=np.zeros((n,3));color[covered]=accum[covered]/weight[covered,None]
+    consensus_report=None
+    if blend=='robust_consensus':
+        color,rejected,ambiguous,disagreement,eligible_per_view,rejected_per_view=robust_blend(records,accum,weight,counts,threshold)
+        # Unknown and ambiguous remain distinguishable; ambiguous pixels are draft only.
+        def save_metric(values,name):
+            arr=np.zeros((size,size),float); arr[valid]=values; Image.fromarray(image8(arr),'L').save(out/name)
+        save_metric(ambiguous,'ambiguous_mask.png')
+        save_metric(disagreement,'view_disagreement.png')
+        save_metric(rejected>0,'outlier_rejected_mask.png')
+        save_metric(counts==1,'single_view_mask.png')
+        consensus_report={'threshold_srgb':threshold,'sample_records':record_count,'rejected_samples':int(rejected.sum()),'outlier_rejected_texels':int((rejected>0).sum()),'ambiguous_texels':int(ambiguous.sum()),'single_view_texels':int((counts==1).sum()),'review_required':bool(ambiguous.any()),'ambiguous_mask_sha256':sha(out/'ambiguous_mask.png')}
+        for v,e,rj in zip(sources,eligible_per_view,rejected_per_view):
+            ratio=float(rj/e) if e else None
+            v.update(consensus_eligible_texels=int(e),consensus_rejected_texels=int(rj),consensus_rejected_fraction=ratio,inspect_view=bool(e>=512 and ratio>=.30))
+        consensus_report['inspect_views']=[v['id'] for v in sources if v['inspect_view']]
+        consensus_report['review_required']|=bool(consensus_report['inspect_views'])
     rgb=np.zeros((size,size,3),float); rgb[valid]=linear_to_srgb(color); alpha=np.zeros((size,size));alpha[valid]=covered
     # Do not inpaint holes inside atlas. Padding outside UV shells only, retained separately.
     rgba=np.dstack((rgb,alpha));Image.fromarray(image8(rgba),'RGBA').save(out/'projected_rgba.png')
@@ -218,7 +248,7 @@ def project(manifest_path,out,size=1024):
     Image.fromarray(image8(valid.astype(float)),'L').save(out/'atlas_mask.png')
     c=np.zeros_like(alpha);c[valid]=np.minimum(counts/ max(1,len(m['views'])),1);Image.fromarray(image8(c),'L').save(out/'view_support.png')
     missing=valid&(cov==0); im=np.zeros((size,size,3),np.uint8);im[valid]=[34,139,95];im[missing]=[225,60,65];Image.fromarray(im).save(out/'coverage_heatmap.png')
-    coverage=float(covered.mean()); report={'status':'DRAFT_PROJECTION' if diagnostic or coverage<1 or overlaps else 'COMPLETE_NUMERIC_COVERAGE_ONLY','diagnostic_mode':diagnostic,'source_kind':m.get('source_kind','unspecified'),'mesh_sha256':sha(mesh),'manifest_sha256':sha(manifest_path),'size':size,'skin_material':m['skin_material'],'skin_triangles':int(len(skin)),'scene_opaque_triangles':len(tri),'skipped_occluders':skipped,'atlas_texels':n,'observed_texels':int(covered.sum()),'coverage':coverage,'unobserved_texels':int((~covered).sum()),'sampled_overlap_pixels':overlaps,'view_count':len(sources),'exposure_match':exposure,'views':sources,'projected_sha256':sha(out/'projected_rgba.png'),'elapsed_seconds':round(time.monotonic()-start,3),'warning':'Observed color only; not measured albedo. No true de-lighting, no inpainting, not photoreal or release QA. Exact UV overlap requires v3 validator.'}
+    coverage=float(covered.mean()); report={'status':'DRAFT_PROJECTION' if diagnostic or coverage<1 or overlaps or (consensus_report and consensus_report['review_required']) else 'COMPLETE_NUMERIC_COVERAGE_ONLY','diagnostic_mode':diagnostic,'source_kind':m.get('source_kind','unspecified'),'mesh_sha256':sha(mesh),'manifest_sha256':sha(manifest_path),'size':size,'skin_material':m['skin_material'],'skin_triangles':int(len(skin)),'scene_opaque_triangles':len(tri),'skipped_occluders':skipped,'atlas_texels':n,'observed_texels':int(covered.sum()),'coverage':coverage,'unobserved_texels':int((~covered).sum()),'sampled_overlap_pixels':overlaps,'view_count':len(sources),'exposure_match':exposure,'blend_mode':blend,'consensus':consensus_report,'views':sources,'projected_sha256':sha(out/'projected_rgba.png'),'elapsed_seconds':round(time.monotonic()-start,3),'warning':'Observed color only; not measured albedo. No true de-lighting, no inpainting, not photoreal or release QA. Exact UV overlap requires v3 validator.'}
     (out/'projection_report.json').write_text(json.dumps(report,indent=2)+'\n');return report
 
 
