@@ -2563,12 +2563,12 @@
       "name": "Photoreal Head for Web",
       "nameTh": "โมเดลศีรษะสมจริงสำหรับเว็บ",
       "category": "UIUX",
-      "version": "3.0.0",
+      "version": "3.1.1",
       "status": "Ready",
       "phase": "Phase 1",
       "author": "Personal Library",
-      "summary": "สร้างและแก้โมเดลศีรษะ 3D สมจริงด้วย Blender ตรวจสัดส่วนใบหน้าก่อนทำ UV และ PBR พร้อมส่งออก GLB สำหรับ Three.js",
-      "description": "สร้างหรือปรับโมเดลศีรษะมนุษย์โดยตรวจ cranial silhouette, ตา จมูก หู ปาก และขากรรไกรก่อนทำ texture ใช้ facial landmarks และ photo-fit ประกอบการตรวจ รองรับ UV0, PBR, eyebrow decals และ GLB พร้อม release gates ที่แยกผลตรวจอัตโนมัติจากการยอมรับภาพจริง",
+      "summary": "สร้างและซ่อมโมเดลศีรษะ 3D ด้วย Anatomy-first, UV QA, Automatic Multi-view Texture Projection และ Robust Fusion พร้อม Benchmark สำหรับเว็บ",
+      "description": "ตรวจ cranial silhouette, facial landmarks และ clay ก่อน texture; ตรวจ UV0 overlap, winding, stretch และ texel density; ฉายภาพหลายมุมด้วย camera calibration และ visibility/depth, ใช้ Robust Consensus ลดสีผิดปกติและระบุ ambiguity; เปรียบเทียบ coverage กับ holdout error แยกจากความสมจริงจริง พร้อม regional skin PBR และ release gates สำหรับ Blender / Three.js",
       "tags": [
         "3D",
         "Photoreal",
@@ -2576,7 +2576,11 @@
         "Blender",
         "GLB",
         "Three.js",
-        "Multi-Agent"
+        "Multi-Agent",
+        "UV QA",
+        "Texture Projection",
+        "Robust Fusion",
+        "Benchmark"
       ],
       "supportedAgents": [
         "antigravity",
@@ -2605,7 +2609,12 @@
         "facial anatomy QA",
         "photo-fit landmarks",
         "eyebrow tattoo texture",
-        "Blender GLB export"
+        "Blender GLB export",
+        "แก้ UV และ Texture ผิวหน้า",
+        "automatic texture projection",
+        "robust multi-view fusion",
+        "real head benchmark",
+        "UV overlap validation"
       ],
       "path": "skills/photoreal-head-web",
       "entryFile": "skills/photoreal-head-web/SKILL.md",
@@ -2654,12 +2663,72 @@
           "name": "HeadViewer.tsx",
           "type": "template",
           "path": "skills/photoreal-head-web/assets/web/HeadViewer.tsx"
+        },
+        {
+          "name": "validate_head_surface.py",
+          "type": "script",
+          "path": "skills/photoreal-head-web/scripts/validate_head_surface.py"
+        },
+        {
+          "name": "project_face_texture.py",
+          "type": "script",
+          "path": "skills/photoreal-head-web/scripts/project_face_texture.py"
+        },
+        {
+          "name": "robust_texture_blend.py",
+          "type": "script",
+          "path": "skills/photoreal-head-web/scripts/robust_texture_blend.py"
+        },
+        {
+          "name": "benchmark_head_projection.py",
+          "type": "script",
+          "path": "skills/photoreal-head-web/scripts/benchmark_head_projection.py"
+        },
+        {
+          "name": "benchmark_projection_robustness.py",
+          "type": "script",
+          "path": "skills/photoreal-head-web/scripts/benchmark_projection_robustness.py"
+        },
+        {
+          "name": "evaluate_photo_holdout.py",
+          "type": "script",
+          "path": "skills/photoreal-head-web/scripts/evaluate_photo_holdout.py"
+        },
+        {
+          "name": "compose_skin_atlas.py",
+          "type": "script",
+          "path": "skills/photoreal-head-web/scripts/compose_skin_atlas.py"
+        },
+        {
+          "name": "regionalize_skin.py",
+          "type": "script",
+          "path": "skills/photoreal-head-web/scripts/regionalize_skin.py"
+        },
+        {
+          "name": "projection_manifest.json",
+          "type": "template",
+          "path": "skills/photoreal-head-web/assets/templates/projection_manifest.json"
+        },
+        {
+          "name": "surface_manifest.json",
+          "type": "template",
+          "path": "skills/photoreal-head-web/assets/templates/surface_manifest.json"
+        },
+        {
+          "name": "robust-texture-fusion.md",
+          "type": "reference",
+          "path": "skills/photoreal-head-web/references/robust-texture-fusion.md"
+        },
+        {
+          "name": "real-head-benchmark.md",
+          "type": "reference",
+          "path": "skills/photoreal-head-web/references/real-head-benchmark.md"
         }
       ],
       "examples": [
         {
-          "title": "ตรวจโมเดลศีรษะจริง: Clay, พื้นผิว และ Wireframe",
-          "description": "ตัวอย่างใช้โมเดลสแกน CC BY 3.0 ตรวจรูปทรงหลายมุม พร้อม GLB, UV layout และรายงานโครงสร้าง แยกข้อจำกัด landmark/photo-fit ชัดเจน",
+          "title": "Projection & Benchmark Lab v3.1.1 — สแกนศีรษะจริง",
+          "description": "เปรียบเทียบ Front-only, Multi-view, Weighted Mean และ Robust Consensus บนสแกน CC BY 3.0 พร้อม Coverage, Ambiguity, UV heatmaps และ Holdout MAE; B1 rendered-asset diagnostic ไม่ใช่ผลจากภาพถ่ายบุคคลจริงหรือ final release",
           "htmlPath": "assets/examples/photoreal-head/preview.html",
           "markdownPath": "assets/examples/photoreal-head/README.md"
         },
@@ -2670,70 +2739,89 @@
         }
       ],
       "highlights": [
-        "ตรวจ anatomy และภาพ clay หลายมุมก่อน UV และ texture",
-        "ตรวจ facial landmarks และเทียบภาพอ้างอิงด้วย photo-fit",
-        "ส่งออก GLB พร้อมหลักฐานและ release gates",
-        "มี React Three Fiber viewer สำหรับตรวจโมเดลบนเว็บ"
+        "Anatomy-first, measured landmarks และ independent QA",
+        "UV overlap, winding, anisotropy, density และ texture registration",
+        "Calibrated multi-view projection + robust consensus / ambiguity diagnostics",
+        "B1 stress benchmark, common-support holdout และ regional skin PBR",
+        "Candidate-bound release gates + interactive Three.js viewer"
       ],
-      "overviewImage": "assets/skill-overviews/photoreal-head-web.webp",
+      "overviewImage": "assets/skill-overviews/photoreal-head-web-v311.svg",
       "workflow": {
         "sourcePath": "assets/skill-workflows/photoreal-head-web.workflow.json",
         "htmlPath": "assets/skill-workflows/photoreal-head-web.html",
-        "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+        "revision": "4a47bd83c0cc183392b3b0d4839bfe8fe13b9a2e",
         "steps": [
           {
             "id": "intake",
             "title": "G0 · Intake",
-            "subtitle": "Ref / สิทธิ์ / Blender",
-            "description": "ตรวจสิทธิ์และความพร้อมของ Blender, reference หลายมุมและกล้อง; ไม่สร้าง model ปลอมหากเครื่องมือไม่พร้อม",
+            "subtitle": "Reference / สิทธิ์",
+            "description": "ตรวจสิทธิ์ แหล่งที่มา ความพร้อมของ Blender และความน่าเชื่อถือของภาพหลายมุม",
             "kind": "external",
-            "line": 44,
-            "endLine": 48
+            "line": 46,
+            "endLine": 50
           },
           {
             "id": "primary",
             "title": "G1 · Anatomy",
             "subtitle": "โครงกะโหลกและมวล",
-            "description": "เริ่มจาก base topology ที่เชื่อถือได้ ปั้น cranial vault, maxilla, mandible และ silhouette; ตรวจ flat gray หลายมุม",
+            "description": "เริ่มจาก topology หรือ scan ที่เชื่อถือได้ ตรวจ cranial vault และ silhouette ด้วย clay หลายมุม",
             "kind": "backend",
-            "line": 50,
-            "endLine": 54
+            "line": 52,
+            "endLine": 56
           },
           {
             "id": "detail",
             "title": "G2 · Face forms",
             "subtitle": "ตา จมูก หู ปาก",
-            "description": "ปั้นโครงสร้างจริงของ orbital rim, nose cartilage, ears, cheeks/lips/jaw โดยยังไม่ใช้ texture",
+            "description": "ตรวจปริมาตรและตำแหน่งของตา จมูก หู แก้ม ปาก และกรามโดยยังไม่ใช้ texture",
             "kind": "backend",
-            "line": 56,
-            "endLine": 63
+            "line": 58,
+            "endLine": 65
           },
           {
             "id": "landmarks",
             "title": "G3 · Landmarks",
             "subtitle": "วัดและเทียบภาพ",
-            "description": "วัด normalized landmarks, ตรวจ clay และ photo-fit; แก้ camera mismatch ก่อนบิด geometry; หยุดหาก BLOCKED",
+            "description": "วัด landmarks และ photo-fit ตรวจความคลาดเคลื่อนของกล้องก่อนเปลี่ยน geometry; anatomy BLOCKED ต้องแก้ก่อน",
             "kind": "security",
-            "line": 65,
-            "endLine": 71
+            "line": 67,
+            "endLine": 73
           },
           {
-            "id": "texture",
-            "title": "G4 · UV / PBR",
-            "subtitle": "Retopo และ Texture",
-            "description": "จัด face loops/UV0, bake normal, roughness และ eyebrow layers แยก; ห้ามใช้ texture ปกปิด anatomy ที่ผิด",
+            "id": "uv",
+            "title": "G4 · UV QA",
+            "subtitle": "Lock UV0 / distortion",
+            "description": "ตรวจ seam, overlap, winding, degenerate, anisotropy และ texel density ก่อนฉาย texture",
+            "kind": "security",
+            "line": 75,
+            "endLine": 78
+          },
+          {
+            "id": "projection",
+            "title": "G5 · Projection Lab",
+            "subtitle": "Register / fuse / benchmark",
+            "description": "ฉายจากกล้องที่ calibrated ด้วย visibility และ depth; robust consensus ตัด outlier เมื่อมีเสียงข้างมาก ตรวจ ambiguity แล้วเปรียบเทียบ held-out coverage และ error",
             "kind": "backend",
-            "line": 73,
-            "endLine": 80
+            "line": 80,
+            "endLine": 88
+          },
+          {
+            "id": "material",
+            "title": "G6 · Skin PBR",
+            "subtitle": "Regional skin / brow",
+            "description": "สร้าง regional albedo, micro-normal, roughness แยก eyebrow layers และเก็บ missing/inferred areas",
+            "kind": "backend",
+            "line": 90,
+            "endLine": 93
           },
           {
             "id": "release",
-            "title": "G5 · GLB / QA",
-            "subtitle": "Export + Browser",
-            "description": "ตรวจ GLB/UV/ภาพจริงบนมือถือและ desktop พร้อมหลักฐานกายวิภาคก่อน final release; ไม่อ้าง browser หรือ likeness ถ้าไม่ได้ทดสอบ",
+            "title": "G7–G8 · QA / Release",
+            "subtitle": "Multi-light / browser",
+            "description": "ตรวจ albedo, normal, 3 สภาพแสงและ browser; promote เฉพาะ candidate ตรงหลักฐานที่ผ่านทุก gate",
             "kind": "frontend",
-            "line": 82,
-            "endLine": 87
+            "line": 95,
+            "endLine": 98
           }
         ],
         "branches": [
@@ -2742,27 +2830,39 @@
             "id": "no-runtime",
             "title": "No 3D runtime",
             "subtitle": "ส่งคำแนะนำแทน",
-            "description": "ถ้าไม่มีเครื่องมือ 3D ให้ส่งสคริปต์/วิธีทำ และระบุว่าการสร้างโมเดลยังไม่ได้ดำเนินการ",
+            "description": "ถ้าไม่มีเครื่องมือ 3D ให้ส่งสคริปต์/วิธีทำ ระบุว่าไม่ได้สร้างโมเดล",
             "condition": "เครื่องมือไม่พร้อม",
             "returnTo": null,
-            "line": 44,
-            "endLine": 48
+            "line": 46,
+            "endLine": 50
           },
           {
             "from": "landmarks",
             "id": "anatomy-fix",
             "title": "Anatomy repair",
-            "subtitle": "แก้โครงก่อน Texture",
-            "description": "แก้ clay, landmarks หรือการจัดกล้องที่ผิด; ห้ามผ่านไป UV/texture เมื่อ anatomy ยัง BLOCKED",
-            "condition": "Gate ไม่ผ่าน",
+            "subtitle": "แก้ geometry ก่อน UV",
+            "description": "แก้ clay, landmark หรือ camera mismatch ก่อนเข้าสู่ UV",
+            "condition": "Anatomy BLOCKED",
             "returnTo": "primary",
-            "line": 65,
-            "endLine": 71
+            "line": 67,
+            "endLine": 73
+          },
+          {
+            "from": "projection",
+            "id": "view-review",
+            "title": "Review ambiguity",
+            "subtitle": "ตรวจภาพที่ขัดแย้ง",
+            "description": "ตรวจ calibration, masks, exposure จาก training evidence; แก้ภาพหรือ quarantine ก่อนฉายใหม่ ห้ามใช้ holdout เลือกภาพ",
+            "condition": "Ambiguous / outlier",
+            "returnTo": "projection",
+            "line": 84,
+            "endLine": 88
           }
         ],
         "notes": [
-          "Anatomy-first: Texture ปิดตลอด G1–G3",
-          "ภาพเดียวไม่พอสำหรับยืนยันรูปทรง 3D หรือความเหมือนเฉพาะบุคคล"
+          "Anatomy-first: Texture ปิดตลอด G1–G3; ตรวจ UV จริงที่ G4",
+          "G5: calibrated multi-view + robust consensus; ภาพสองมุมที่ขัดแย้งกันต้องทบทวน",
+          "B1 rendered-asset benchmark ไม่เท่ากับ real-photo likeness หรือ final release"
         ]
       }
     },

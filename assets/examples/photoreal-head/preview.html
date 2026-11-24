@@ -3,22 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Photoreal head · ตัวอย่างตรวจโมเดลสำหรับเว็บ</title>
-  <meta name="description" content="ตัวอย่างใช้งาน photoreal-head-web ตรวจโมเดลสแกนศีรษะจริงด้วย clay, พื้นผิวและ wireframe พร้อมผลตรวจ GLB และแหล่งที่มา">
+  <title>Photoreal Head v3.1.1 · Projection &amp; Benchmark Lab</title>
+  <meta name="description" content="Projection &amp; Benchmark Lab v3.1.1: สแกนศีรษะ, UV QA, multi-view projection, robust fusion, holdout coverage และ color error">
   <link rel="stylesheet" href="example.css">
+  <link rel="stylesheet" href="projection-lab.css?v=3.1.1">
   <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
-  <script type="module" src="viewer.js"></script>
+  <script type="module" src="viewer.js?v=3.1.1"></script>
 </head>
 <body>
   <header class="topbar">
     <a class="back" href="../../../index.html">กลับไปคลัง Skill</a>
-    <span>Photoreal head for web <span class="muted">/ Anatomy first</span></span>
-    <a class="button secondary" href="model/head.glb" download>ดาวน์โหลด GLB</a>
+    <span>Photoreal head for web <span class="muted">/ v3.1.1 · Projection Lab</span></span>
+    <a class="button secondary" href="model/head.glb" download>ดาวน์โหลด GLB ต้นฉบับ</a>
   </header>
   <main>
     <div class="intro">
-      <div><p class="kicker">ตัวอย่างการใช้ Skill</p><h1>ตรวจรูปทรง ก่อนมองผิว</h1></div>
-      <p class="lead">โมเดลเดียวกันในสามมุมมองการทำงาน ตั้งแต่ clay ตรวจปริมาตรใบหน้า ไปจนถึงพื้นผิวและโครงสร้าง mesh ที่หมุนตรวจได้จริง</p>
+      <div><p class="kicker">Photoreal Head · v3.1.1</p><h1>Projection &amp; Benchmark Lab</h1></div>
+      <p class="lead">สแกนศีรษะที่มีสิทธิ์เผยแพร่เป็น Baseline เปรียบเทียบ Texture จากกล้องจำลองมุมเดียว หลายมุม และ Robust Fusion ด้วย UV เดียวกัน พร้อมตรวจ Coverage, Ambiguity และผล Holdout</p>
     </div>
     <section class="workspace" aria-label="พื้นที่ตรวจโมเดลศีรษะ">
       <div class="stage">
@@ -34,22 +35,39 @@
         </div>
       </div>
       <aside class="inspector" aria-label="การแสดงผลและผลตรวจ">
-        <div class="inspector-head"><h2>ดูให้ครบ ก่อนส่งออก</h2><p>แยกรูปทรง พื้นผิว และความพร้อมของไฟล์</p></div>
+        <div class="inspector-head"><h2>3D Surface Inspector</h2><p>Baseline สแกน และ Projection Diagnostic</p></div>
         <fieldset><legend>การแสดงผล</legend><div class="segmented" role="group" aria-label="วัสดุของโมเดล">
           <button type="button" data-mode="skin" aria-pressed="true">พื้นผิว</button>
           <button type="button" data-mode="clay" aria-pressed="false">Clay</button>
           <button type="button" data-mode="wire" aria-pressed="false">Wireframe</button>
         </div></fieldset>
+        <fieldset class="lab-selector"><legend>Projection &amp; Benchmark v3.1.1</legend><label for="projection-mode">เลือก Texture เพื่อเทียบบนหัว 3D เดียวกัน</label><select id="projection-mode" disabled><option value="">Baseline · พื้นผิวสแกน</option></select><p>โหมด Projection เป็น unlit diagnostic; สีเทาคือพื้นที่ไม่มีข้อมูล ไม่ใช่ผิวที่สร้างขึ้นใหม่</p></fieldset>
         <div class="actions"><button type="button" id="rotate" aria-pressed="false">หมุนอัตโนมัติ</button><button type="button" id="reset">คืนมุมกล้อง</button></div>
         <p class="hint">เมาส์หรือสัมผัส: ลากเพื่อหมุน · เลื่อนเพื่อซูม<br>คีย์บอร์ดเมื่อโฟกัสโมเดล: ลูกศร / + / − / Home</p>
         <dl class="metrics"><div><dt>สามเหลี่ยม</dt><dd id="triangles">กำลังตรวจ…</dd></div><div><dt>ขนาด GLB</dt><dd id="size">กำลังตรวจ…</dd></div><div><dt>UV0</dt><dd id="uv">กำลังตรวจ…</dd></div><div><dt>แผนที่พื้นผิว</dt><dd>Color + Normal</dd></div></dl>
-        <div class="qa-summary"><h3>สถานะตัวอย่าง</h3><ul><li><span class="pass">ผ่าน</span> <span id="structure">กำลังอ่านผลตรวจโครงสร้าง GLB</span></li><li><span class="review">ต้องทบทวน</span> Landmark และ photo-fit</li></ul><p>ไฟล์ผ่านการตรวจโครงสร้าง ไม่ใช่การรับรอง anatomy หรือความเหมือนบุคคล</p></div>
+        <div class="qa-summary"><h3>สถานะ Baseline</h3><ul><li><span class="pass">ผ่าน</span> <span id="structure">กำลังอ่านผลตรวจโครงสร้าง GLB</span></li><li><span class="review">ต้องทบทวน</span> Landmark และ photo-fit</li></ul><p>ไฟล์ผ่านการตรวจโครงสร้าง ไม่ใช่การรับรอง anatomy หรือความเหมือนบุคคล</p></div>
         <a class="text-link" href="reports/glb_qa.json">เปิดรายงาน GLB</a>
       </aside>
     </section>
 
+    <section class="projection-lab" aria-labelledby="lab-title">
+      <div class="lab-header"><div><p class="kicker">B1 · Rendered-asset benchmark</p><h2 id="lab-title">เปรียบเทียบผล Texture Projection</h2><p class="lead">สร้างภาพกล้องที่ทราบค่าจากสแกนเดียวกัน ทดสอบฉาย Texture กลับเข้า UV และจำลองสีเพี้ยนหนึ่งภาพในชุด Training โดยแยกมุม Holdout ออกจากชุดฉายภาพ</p></div><span class="lab-pill" id="lab-version">v3.1.1</span></div>
+      <p id="lab-status" class="lab-status" role="status" aria-live="polite">กำลังอ่านผล Benchmark ของ build นี้…</p>
+      <div class="lab-grid">
+        <div class="lab-metric"><span>Front-only UV Coverage</span><strong id="lab-front">—</strong></div>
+        <div class="lab-metric"><span>8-view UV Coverage</span><strong id="lab-multi">—</strong></div>
+        <div class="lab-metric"><span>Robust Color MAE (0–255)</span><strong id="lab-robust">—</strong></div>
+        <div class="lab-metric"><span>Ambiguous texels</span><strong id="lab-ambiguous">—</strong></div>
+      </div>
+      <table class="lab-table"><thead><tr><th scope="col">Stress test · same holdout pixels</th><th scope="col">Color MAE ↓</th></tr></thead><tbody><tr><td>Weighted Mean · ภาพสีเพี้ยน</td><td id="lab-mean">—</td></tr><tr><td>Robust Consensus · ภาพสีเพี้ยน</td><td data-robust-copy>—</td></tr><tr><td>Reviewed Quarantine · ตัดภาพที่ตรวจพบ</td><td id="lab-quarantine">—</td></tr></tbody></table>
+      <img class="lab-comparison" id="lab-comparison" hidden width="1280" height="688" alt="ผลเปรียบเทียบ holdout จาก Reference, Weighted Mean, Robust Consensus และ Reviewed Quarantine">
+      <div class="lab-meta"><div>UV numeric gate: <strong id="lab-uv">NOT RUN</strong></div><div>Flagged training views: <strong id="lab-flagged">—</strong></div><div>Held-out angles: <strong id="lab-angles">—</strong></div><div>Skin material release: <strong>NOT CERTIFIED</strong></div></div>
+      <div class="lab-links"><a href="reports/projection_lab.json">Generated lab manifest</a><span id="lab-links" hidden><a href="projection-lab/stress_report.json">Stress report</a> · <a href="projection-lab/roundtrip_report.json">Roundtrip report</a> · <a href="projection-lab/uv_report.json">UV report</a></span></div>
+      <p class="lab-disclaimer">Coverage วัดเฉพาะ texels ของ skin atlas; MAE ยิ่งต่ำยิ่งดีและไม่ใช่คะแนนความสมจริง ภาพทั้งหมดเป็น unlit renders ของ Asset ที่มีอยู่ ไม่ใช่ภาพถ่ายอิสระ ไม่ได้กู้ intrinsic albedo หรือรับรอง likeness, PBR หรือ final release เมื่อ Benchmark ไม่สำเร็จ จะไม่แสดงตัวเลขหรือ Texture เก่าแทน</p>
+    </section>
+
     <section class="evidence" aria-labelledby="evidence-title">
-      <div class="section-heading"><div><p class="kicker">ภาพจาก Blender</p><h2 id="evidence-title">รูปทรงเดียวกัน หลายมุม</h2></div><p>ภาพ clay จาก mesh จริง ปิด color และ normal map เพื่อให้เห็นปริมาตรของใบหน้า</p></div>
+      <div class="section-heading"><div><p class="kicker">Baseline · ภาพจาก Blender</p><h2 id="evidence-title">รูปทรงเดียวกัน หลายมุม</h2></div><p>ภาพ clay จาก mesh จริง ปิด color และ normal map เพื่อให้เห็นปริมาตรของใบหน้า</p></div>
       <div class="gallery">
         <figure><img src="renders/clay_front.webp" alt="โมเดลศีรษะวัสดุ clay มองตรง เห็นความกว้างใบหน้าและแนวขากรรไกร" width="800" height="900" loading="lazy"><figcaption>ด้านหน้า <span>แนวกึ่งกลางและความกว้างใบหน้า</span></figcaption></figure>
         <figure><img src="renders/clay_threequarter.webp" alt="โมเดลศีรษะวัสดุ clay มุมเฉียง เห็นสันจมูก โหนกแก้ม และเบ้าตา" width="800" height="900" loading="lazy"><figcaption>มุมเฉียง <span>ปริมาตรแก้ม เบ้าตา และปลายจมูก</span></figcaption></figure>
@@ -62,6 +80,6 @@
       <div class="limits"><h3>ขอบเขตและที่มา</h3><p>ใช้ <strong>Infinite, 3D Head Scan by Lee Perry-Smith</strong> ภายใต้ CC BY 3.0 จากชุดตัวอย่าง Three.js r180 นำมาจัดวัสดุ สร้างภาพตรวจ และส่งออกสำหรับเว็บ ไม่ได้ปั้นศีรษะนี้ใหม่จาก prompt</p><p>ตัวอย่างเป็นสแกนที่หลับตา ไม่มี rig, ลูกตาแยกชิ้น หรือทรงคิ้วสลับได้ ความสูงประมาณ 0.205 เมตรเป็นการปรับสเกลเพื่อสาธิต ไม่ใช่ขนาดร่างกายที่วัดจริง ตัดส่วนไหล่ออกและเปิดขอบคอด้านล่างไว้ จึงไม่ใช่โมเดลปิดสำหรับพิมพ์ 3D และไม่มีข้อมูล landmark อิสระสำหรับรับรองสัดส่วน</p><div class="source-links"><a href="LICENSE-head.txt">License โมเดล</a><a href="reports/provenance.json">แหล่งที่มาและการปรับแก้</a><a href="reports/build.json">รายละเอียดการสร้างตัวอย่าง</a><a href="https://github.com/mrdoob/three.js/tree/r180/examples/models/gltf/LeePerrySmith" target="_blank" rel="noopener noreferrer">แหล่งต้นฉบับ</a></div></div>
     </section>
   </main>
-  <footer>ตัวอย่าง local ของ photoreal-head-web v2.0.0 · Blender + Three.js · <a href="../../../skills/photoreal-head-web/SKILL.md">อ่าน Skill</a></footer>
+  <footer>photoreal-head-web v3.1.1 · Projection &amp; Benchmark Lab · Blender + Three.js · <a href="../../../skills/photoreal-head-web/SKILL.md">อ่าน Skill</a></footer>
 </body>
 </html>

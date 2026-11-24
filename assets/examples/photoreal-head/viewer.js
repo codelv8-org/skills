@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from './vendor/OrbitControls.js';
 import { GLTFLoader } from './vendor/GLTFLoader.js';
+import { createProjectionLab } from './projection-lab.js?v=3.1.1';
 
 const canvas = document.querySelector('#viewer');
 const stage = canvas.parentElement;
@@ -18,6 +19,21 @@ let modelSize;
 const labels = {skin: 'พื้นผิวสแกน', clay: 'Clay · ปิดแผนที่พื้นผิว', wire: 'Wireframe · โครงสร้างสามเหลี่ยม'};
 const clay = new THREE.MeshStandardMaterial({ color: 0xa6b0b8, roughness: .8, metalness: 0 });
 const wire = new THREE.MeshBasicMaterial({ color: 0x9be2ce, wireframe: true });
+const setLabel = label => { document.querySelector('#mode-label').textContent = label; status.textContent = label; };
+function setStandardMode(mode) {
+  originals.forEach((original, mesh) => { mesh.material = mode === 'skin' ? original : mode === 'clay' ? clay : wire; });
+  modeButtons.forEach(other => other.setAttribute('aria-pressed', String(other.dataset.mode === mode)));
+  setLabel(labels[mode]); render();
+}
+const lab = createProjectionLab({
+  setLabel,
+  restore: () => setStandardMode('skin'),
+  apply: (material, label) => {
+    originals.forEach((original, mesh) => { mesh.material = material; });
+    modeButtons.forEach(other => other.setAttribute('aria-pressed', 'false'));
+    setLabel(label); render();
+  }
+});
 
 function setAvailable(available) { allControls.forEach(button => { button.disabled = !available; }); }
 function fail(error) {
@@ -25,6 +41,7 @@ function fail(error) {
   document.querySelector('#error').hidden = false;
   status.textContent = 'ใช้ภาพจาก Blender ด้านล่างแทนการแสดงผล 3D ได้';
   setAvailable(false);
+  document.querySelector('#projection-mode').disabled = true;
 }
 function render() { if (renderer && model) renderer.render(scene, camera); }
 function stopRotation() { controls.autoRotate = false; rotateButton.setAttribute('aria-pressed', 'false'); }
@@ -78,7 +95,7 @@ try {
     modelSize = box.getSize(new THREE.Vector3());
     fitCamera();
     model.traverse(object => { if (object.isMesh) originals.set(object, object.material); });
-    scene.add(model); setView('threequarter'); setAvailable(true);
+    scene.add(model); setView('threequarter'); setAvailable(true); lab.ready();
     status.textContent = 'โหลดแล้ว · ลากหมุนหรือใช้ปุ่มมุมกล้องเพื่อดูรูปทรง';
   }, undefined, fail);
   let lastTime;
@@ -106,12 +123,7 @@ try {
   });
 } catch (error) { fail(error); }
 
-modeButtons.forEach(button => button.addEventListener('click', () => {
-  originals.forEach((original, mesh) => { mesh.material = button.dataset.mode === 'skin' ? original : button.dataset.mode === 'clay' ? clay : wire; });
-  modeButtons.forEach(other => other.setAttribute('aria-pressed', String(other === button)));
-  document.querySelector('#mode-label').textContent = labels[button.dataset.mode];
-  status.textContent = labels[button.dataset.mode]; render();
-}));
+modeButtons.forEach(button => button.addEventListener('click', () => { lab.reset(); setStandardMode(button.dataset.mode); }));
 viewButtons.forEach(button => button.addEventListener('click', () => setView(button.dataset.view)));
 document.querySelector('#reset').addEventListener('click', () => setView('threequarter'));
 rotateButton.addEventListener('click', () => {
@@ -134,3 +146,6 @@ Promise.all([fetch('reports/glb_qa.json'), fetch('reports/build.json')]).then(as
   document.querySelector('#structure').textContent = 'อ่านรายงานไม่ได้';
   document.querySelector('.qa-summary .pass').textContent = 'ไม่ยืนยัน';
 });
+
+const robustMetric = document.getElementById('lab-robust');
+new MutationObserver(() => { document.querySelector('[data-robust-copy]').textContent = robustMetric.textContent; }).observe(robustMetric,{childList:true,characterData:true,subtree:true});
