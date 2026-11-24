@@ -336,6 +336,28 @@
       justify-content: center;
       font-size: 1.1rem;
     }
+    /* Shared AI agent brand assets */
+    .agent-logo {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+      object-fit: contain;
+      vertical-align: middle;
+    }
+    .agent-matrix-icon { flex-shrink: 0; }
+    .agent-matrix-icon .agent-logo { width: 22px; height: 22px; }
+    .agent-badge .agent-logo { width: 14px; height: 14px; }
+    #agentFilterContainer .filter-pill { display: inline-flex; align-items: center; gap: 5px; }
+    [data-theme="dark"] .agent-logo-openai { filter: invert(1); }
+    #agentFilterContainer .filter-pill.active .agent-logo,
+    #modalAgentTabs .tab-btn.active .agent-logo {
+      background: #fff;
+      border-radius: 4px;
+      padding: 2px;
+      filter: none;
+    }
+
     .agent-antigravity-bg { background: rgba(59, 130, 246, 0.12); }
     .agent-claude-bg { background: rgba(249, 115, 22, 0.12); }
     .agent-codex-bg { background: rgba(16, 185, 129, 0.12); }
@@ -1356,7 +1378,7 @@
         <div class="agent-matrix-list">
           <div class="agent-matrix-item">
             <div class="agent-matrix-left">
-              <div class="agent-matrix-icon agent-antigravity-bg">🔮</div>
+              <div class="agent-matrix-icon agent-antigravity-bg"><img class="agent-logo" src="assets/agent-logos/antigravity-color.svg" alt="" width="18" height="18"></div>
               <div class="agent-matrix-info">
                 <strong>Google Antigravity</strong>
                 <span>~/.gemini/config/skills/ &bull; .agent/skills/</span>
@@ -1366,7 +1388,7 @@
           </div>
           <div class="agent-matrix-item">
             <div class="agent-matrix-left">
-              <div class="agent-matrix-icon agent-claude-bg">🟧</div>
+              <div class="agent-matrix-icon agent-claude-bg"><img class="agent-logo" src="assets/agent-logos/claude-color.svg" alt="" width="18" height="18"></div>
               <div class="agent-matrix-info">
                 <strong>Anthropic Claude Code</strong>
                 <span>~/.claude/skills/ &bull; CLAUDE.md</span>
@@ -1376,7 +1398,7 @@
           </div>
           <div class="agent-matrix-item">
             <div class="agent-matrix-left">
-              <div class="agent-matrix-icon agent-codex-bg">🟩</div>
+              <div class="agent-matrix-icon agent-codex-bg"><img class="agent-logo agent-logo-openai" src="assets/agent-logos/openai.svg" alt="" width="18" height="18"></div>
               <div class="agent-matrix-info">
                 <strong>OpenAI Codex</strong>
                 <span>~/.codex/skills/ &bull; AGENTS.md</span>
@@ -1474,9 +1496,9 @@
       <div class="filter-pills" id="agentFilterContainer" style="margin-top: 10px;">
         <span class="filter-label">AI Agent:</span>
         <button class="filter-pill active" data-agent="all">🤖 ทุก Agent</button>
-        <button class="filter-pill" data-agent="antigravity">🔮 Antigravity</button>
-        <button class="filter-pill" data-agent="claude-code">🟧 Claude Code</button>
-        <button class="filter-pill" data-agent="codex">🟩 Codex</button>
+        <button class="filter-pill" data-agent="antigravity"><img class="agent-logo" src="assets/agent-logos/antigravity-color.svg" alt="" width="18" height="18"> Antigravity</button>
+        <button class="filter-pill" data-agent="claude-code"><img class="agent-logo" src="assets/agent-logos/claude-color.svg" alt="" width="18" height="18"> Claude Code</button>
+        <button class="filter-pill" data-agent="codex"><img class="agent-logo agent-logo-openai" src="assets/agent-logos/openai.svg" alt="" width="18" height="18"> Codex</button>
       </div>
     </section>
 
@@ -1554,9 +1576,9 @@
 
           <div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:6px;">1. เลือก AI Agent เป้าหมาย:</div>
           <div class="tabs-nav" id="modalAgentTabs">
-            <button class="tab-btn active" data-modal-agent="antigravity">🔮 Google Antigravity</button>
-            <button class="tab-btn" data-modal-agent="claudeCode">🟧 Anthropic Claude Code</button>
-            <button class="tab-btn" data-modal-agent="codex">🟩 OpenAI Codex</button>
+            <button class="tab-btn active" data-modal-agent="antigravity"><img class="agent-logo" src="assets/agent-logos/antigravity-color.svg" alt="" width="18" height="18"> Google Antigravity</button>
+            <button class="tab-btn" data-modal-agent="claudeCode"><img class="agent-logo" src="assets/agent-logos/claude-color.svg" alt="" width="18" height="18"> Anthropic Claude Code</button>
+            <button class="tab-btn" data-modal-agent="codex"><img class="agent-logo agent-logo-openai" src="assets/agent-logos/openai.svg" alt="" width="18" height="18"> OpenAI Codex</button>
           </div>
 
           <div style="font-size:0.8rem; color:var(--text-muted); margin-top:10px; margin-bottom:6px;">2. เลือกระบบปฏิบัติการหรือขอบเขต (OS / Scope):</div>
@@ -1625,17 +1647,17 @@
     {
       "id": "antigravity",
       "name": "Google Antigravity",
-      "icon": "🔮"
+      "icon": "assets/agent-logos/antigravity-color.svg"
     },
     {
       "id": "claude-code",
       "name": "Anthropic Claude Code",
-      "icon": "🟧"
+      "icon": "assets/agent-logos/claude-color.svg"
     },
     {
       "id": "codex",
       "name": "OpenAI Codex",
-      "icon": "🟩"
+      "icon": "assets/agent-logos/openai.svg"
     }
   ],
   "skills": [
@@ -3892,13 +3914,13 @@
       const agents = skill.supportedAgents || ['antigravity', 'claude-code', 'codex'];
       let html = '<div class="agent-badges">';
       if (agents.includes('antigravity')) {
-        html += '<span class="agent-badge agent-antigravity" title="Google Antigravity">🔮 Antigravity</span>';
+        html += '<span class="agent-badge agent-antigravity" title="Google Antigravity"><img class="agent-logo" src="assets/agent-logos/antigravity-color.svg" alt="" width="18" height="18"> Antigravity</span>';
       }
       if (agents.includes('claude-code')) {
-        html += '<span class="agent-badge agent-claude" title="Anthropic Claude Code">🟧 Claude</span>';
+        html += '<span class="agent-badge agent-claude" title="Anthropic Claude Code"><img class="agent-logo" src="assets/agent-logos/claude-color.svg" alt="" width="18" height="18"> Claude</span>';
       }
       if (agents.includes('codex')) {
-        html += '<span class="agent-badge agent-codex" title="OpenAI Codex">🟩 Codex</span>';
+        html += '<span class="agent-badge agent-codex" title="OpenAI Codex"><img class="agent-logo agent-logo-openai" src="assets/agent-logos/openai.svg" alt="" width="18" height="18"> Codex</span>';
       }
       html += '</div>';
       return html;

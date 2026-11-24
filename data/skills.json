@@ -35,19 +35,19 @@
     {
       "id": "antigravity",
       "name": "Google Antigravity",
-      "icon": "🔮",
+      "icon": "assets/agent-logos/antigravity-color.svg",
       "badgeColor": "#3b82f6"
     },
     {
       "id": "claude-code",
       "name": "Anthropic Claude Code",
-      "icon": "🟧",
+      "icon": "assets/agent-logos/claude-color.svg",
       "badgeColor": "#f97316"
     },
     {
       "id": "codex",
       "name": "OpenAI Codex",
-      "icon": "🟩",
+      "icon": "assets/agent-logos/openai.svg",
       "badgeColor": "#10b981"
     }
   ],
