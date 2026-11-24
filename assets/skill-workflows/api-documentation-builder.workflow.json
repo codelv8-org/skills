@@ -64,7 +64,7 @@
       "sublabel": "กำหนด API และผู้รับ",
       "explanation": "ระบุ API style, domain, audience, approved operation, version และ deliverables จากหลักฐาน",
       "icon": "start",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/api-documentation-builder/SKILL.md",
@@ -83,7 +83,7 @@
       "sublabel": "รับ Contract ที่คัดกรอง",
       "explanation": "รับเฉพาะ owner-reviewed static contract, sanitized route/DTO/schema; ไม่เรียก endpoint จริง ไม่เปิด logs, payloads หรือ credentials",
       "icon": "decision",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/api-documentation-builder/SKILL.md",
@@ -101,7 +101,7 @@
       "label": "Normalize OpenAPI",
       "sublabel": "สร้างสัญญากลาง",
       "explanation": "เก็บ operation ID, method/path, params, request/response, errors, security และ class ตามหลักฐาน; ค่าไม่ทราบต้องระบุ Unknown",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/api-documentation-builder/SKILL.md",
@@ -119,7 +119,7 @@
       "label": "Author docs",
       "sublabel": "เอกสาร 6 หมวด",
       "explanation": "สร้าง Catalog, Dictionary, Reference, Consumer Guide, Governance และ AI Integration Guide; ใช้ placeholder หรือไม่ใส่ตัวอย่าง restricted",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/api-documentation-builder/SKILL.md",
@@ -138,7 +138,7 @@
       "sublabel": "Draft Tools / MCP",
       "explanation": "สร้าง tools.json สำหรับ operation ที่ได้รับอนุมัติและ schema ครบเท่านั้น; default-deny, ไม่เปิดใช้งานจริง, llms.txt และ AGENTS.md",
       "icon": "decision",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/api-documentation-builder/SKILL.md",
@@ -157,7 +157,7 @@
       "sublabel": "ตรวจและส่งมอบ",
       "explanation": "ตรวจ OpenAPI แบบ offline, coverage, examples, security, privacy lint, PDF QA; ส่งเฉพาะ artifact ปลอดภัยและระบุ gaps",
       "icon": "success",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/api-documentation-builder/SKILL.md",
@@ -176,7 +176,7 @@
       "sublabel": "ไม่อ่านหรือเรียกจริง",
       "explanation": "หากไม่มี safe source ให้ใช้ intake-template และ contract สมมุติที่ติดป้าย ไม่สร้าง endpoint จริงขึ้นเอง",
       "icon": "stop",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/api-documentation-builder/SKILL.md",
@@ -195,7 +195,7 @@
       "sublabel": "0 approved tools",
       "explanation": "ถ้าไม่มี operation ที่ผ่านการอนุมัติ ให้ tools.json เป็นรายการว่างและอธิบายข้อจำกัด",
       "icon": "decision",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/api-documentation-builder/SKILL.md",
@@ -214,7 +214,7 @@
       "sublabel": "ระงับผลลัพธ์ไม่ผ่าน",
       "explanation": "ห้ามเผยแพร่ contract ไม่ถูกต้อง หรือ tool ที่ชวนเข้าใจผิดว่าใช้จริงได้; ระบุ artifact ที่ระงับ",
       "icon": "stop",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/api-documentation-builder/SKILL.md",
@@ -282,7 +282,8 @@
       "from": "empty",
       "to": "release",
       "variant": "dashed",
-      "role": "return"
+      "role": "return",
+      "toSide": "bottom"
     },
     {
       "id": "branch-3",

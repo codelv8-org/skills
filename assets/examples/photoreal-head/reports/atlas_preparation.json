@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "status": "PASS_UV_ONLY",
+  "source_sha256": "9dd65d33d43987479e0f66775282803c56941cb7ea93dfe1cf0ef84250a17ed6",
+  "output_sha256": "8a94fd4212b7dd16f2e8080cbd0a117faec41d34f51c004d8d5d7c0b66888d06",
+  "source_asset": "model/head.glb",
+  "output_asset": "model/projection-head.glb",
+  "source_license": "Lee Perry-Smith / Infinite Realities, CC BY 3.0; LICENSE-head.txt",
+  "scope": "Separate unlit B1 diagnostic model with corrected source-image V registration and a new non-overlapping atlas. Source anatomy is unchanged; not a production head release. Baseline head.glb remains unchanged, including its legacy texture-registration defect.",
+  "geometry": {
+    "triangles": 16429,
+    "vertices": 11117,
+    "positions_identical_per_triangle": true,
+    "normals_identical_per_triangle": true,
+    "triangle_order_identical": true,
+    "removed_triangles": 0,
+    "normal_map": "Omitted intentionally from unlit diagnostic; retained on original baseline."
+  },
+  "atlas": {
+    "parameterizer": "xatlas==0.0.11",
+    "parameterization_input_scale": 1000.0,
+    "chart_options": {
+      "fix_winding": true
+    },
+    "initial_charts": 209,
+    "final_charts": 210,
+    "reflected_charts": 112,
+    "detached_overlap_triangles": [
+      10668
+    ],
+    "packing": "deterministic MaxRects, no rotation",
+    "padding_texels_per_chart": 4,
+    "uv_winding": "ccw",
+    "uv_metrics": {
+      "triangles": 16429,
+      "degenerate": 0,
+      "out_of_bounds": 0,
+      "wrong_winding": 0,
+      "overlap_pairs_found": 0,
+      "overlap_examples": [],
+      "overlap_scan_capped": false,
+      "anisotropy_p95": 1.081987192318511,
+      "relative_density_ratio_p95": 1.1031007138764746,
+      "median_uv_units_per_local_meter": 2.3342901097650635
+    }
+  },
+  "color_transfer": {
+    "method": "per-triangle barycentric UV transfer, bilinear source sampling in linear RGB",
+    "source_coordinate_correction": "Sample source image at (u, 1-v). The legacy baseline GLB stores bottom-origin V against an upright image; nose/scalp/eyes are vertically misplaced with glTF top-origin sampling. The original GLB remains unchanged.",
+    "texture_size": [
+      2048,
+      2048
+    ],
+    "occupied_texels": 2287570,
+    "sampled_overlap_pixels": 0,
+    "gutter": "nearest observed edge dilation only; no inferred skin filling"
+  },
+  "transfer_quality": {
+    "scope": "Corrected-source-orientation versus transferred unlit rendered color only. Source reference uses (u, 1-v); this is not a claim that the original baseline displayed correct colors, and is not independent photographic holdout.",
+    "view_size": 512,
+    "views": {
+      "-140": {
+        "coverage": 1.0,
+        "mae_srgb_255": 0.2859836998867237,
+        "psnr_srgb_db": 55.4326080342891,
+        "pixels": 66362,
+        "eligible_pixels": 66362
+      },
+      "-90": {
+        "coverage": 1.0,
+        "mae_srgb_255": 0.28425867813053446,
+        "psnr_srgb_db": 54.22733297605329,
+        "pixels": 71279,
+        "eligible_pixels": 71279
+      },
+      "-65": {
+        "coverage": 1.0,
+        "mae_srgb_255": 0.2822356956104686,
+        "psnr_srgb_db": 54.02721046372772,
+        "pixels": 68374,
+        "eligible_pixels": 68374
+      },
+      "-45": {
+        "coverage": 1.0,
+        "mae_srgb_255": 0.28569344723701856,
+        "psnr_srgb_db": 53.511480524164774,
+        "pixels": 62837,
+        "eligible_pixels": 62837
+      },
+      "-25": {
+        "coverage": 1.0,
+        "mae_srgb_255": 0.2836548086744296,
+        "psnr_srgb_db": 53.86153391543157,
+        "pixels": 57996,
+        "eligible_pixels": 57996
+      },
+      "0": {
+        "coverage": 1.0,
+        "mae_srgb_255": 0.28727164507355707,
+        "psnr_srgb_db": 53.462230451171074,
+        "pixels": 55519,
+        "eligible_pixels": 55519
+      },
+      "25": {
+        "coverage": 1.0,
+        "mae_srgb_255": 0.29795417029420235,
+        "psnr_srgb_db": 53.12400479868789,
+        "pixels": 59021,
+        "eligible_pixels": 59021
+      },
+      "45": {
+        "coverage": 1.0,
+        "mae_srgb_255": 0.3003309662031574,
+        "psnr_srgb_db": 52.97629718786648,
+        "pixels": 64263,
+        "eligible_pixels": 64263
+      },
+      "65": {
+        "coverage": 1.0,
+        "mae_srgb_255": 0.2963671155739257,
+        "psnr_srgb_db": 53.26256335939496,
+        "pixels": 69436,
+        "eligible_pixels": 69436
+      },
+      "90": {
+        "coverage": 1.0,
+        "mae_srgb_255": 0.29034872342136825,
+        "psnr_srgb_db": 53.789724849986,
+        "pixels": 71553,
+        "eligible_pixels": 71553
+      },
+      "115": {
+        "coverage": 1.0,
+        "mae_srgb_255": 0.28761492089266794,
+        "psnr_srgb_db": 54.338809302052766,
+        "pixels": 69691,
+        "eligible_pixels": 69691
+      },
+      "140": {
+        "coverage": 1.0,
+        "mae_srgb_255": 0.2822458385393732,
+        "psnr_srgb_db": 54.989146642719845,
+        "pixels": 65164,
+        "eligible_pixels": 65164
+      },
+      "180": {
+        "coverage": 1.0,
+        "mae_srgb_255": 0.28337763583932163,
+        "psnr_srgb_db": 55.794935778102214,
+        "pixels": 63300,
+        "eligible_pixels": 63300
+      }
+    },
+    "weighted_mae_srgb_255": 0.2882397987510822,
+    "silhouettes_identical": true,
+    "pixels": 844795
+  },
+  "uv_report": {
+    "candidate_sha256": "8a94fd4212b7dd16f2e8080cbd0a117faec41d34f51c004d8d5d7c0b66888d06",
+    "uv_sha256": "54467eec4c4cf1d49c4a9848efaf363efc13be5e069864b6cac68fd2b63e301c",
+    "skin_material": "B1 scan color - repaired UV atlas",
+    "winding": "ccw",
+    "uv": {
+      "triangles": 16429,
+      "degenerate": 0,
+      "out_of_bounds": 0,
+      "wrong_winding": 0,
+      "overlap_pairs_found": 0,
+      "overlap_examples": [],
+      "overlap_scan_capped": false,
+      "anisotropy_p95": 1.081987192318511,
+      "relative_density_ratio_p95": 1.1031007138764746,
+      "median_uv_units_per_local_meter": 2.3342901097650635
+    },
+    "maps": {},
+    "warnings": [],
+    "errors": [],
+    "scope": "Numeric QA of dedicated skin atlas in local geometry; manual semantic, padding, seam, lighting, color-space and browser review still required.",
+    "status": "PASS_UV_ONLY"
+  }
+}

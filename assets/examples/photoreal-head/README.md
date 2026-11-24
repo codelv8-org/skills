@@ -4,7 +4,7 @@
 
 ## Projection Lab (v3.1.1)
 
-GitHub Pages build สร้างผลใหม่จาก `model/head.glb` ที่มีสิทธิ์เผยแพร่ CC BY 3.0 เท่านั้น ไม่ใช้ภาพถ่ายส่วนตัวหรือ Asset อื่นของผู้ใช้ รัน `scripts/build-photoreal-example.py` ผ่าน Projection Engine จริง สร้าง 9 โหมดและรายงาน `reports/projection_lab.json` พร้อมภาพ Overview ใหม่ที่อ้างอิงผลจาก run เดียวกัน:
+GitHub Pages build สร้างผลใหม่จากสำเนา `model/projection-head.glb` ซึ่งสืบทอดรูปทรงและสีจากสแกน `model/head.glb` ที่มีสิทธิ์เผยแพร่ CC BY 3.0 เท่านั้น รัน `scripts/build-photoreal-example.py` ผ่าน Projection Engine จริง สร้าง 9 โหมดและรายงาน `reports/projection_lab.json` พร้อมภาพ Overview ใหม่ที่อ้างอิงผลจาก run เดียวกัน:
 
 - Front-only, 8-view, weighted mean ที่มี synthetic tint, robust consensus และ reviewed quarantine
 - Coverage, Ambiguity, UV anisotropy, UV density; สีเทาคือพื้นที่ไม่มีข้อมูล
@@ -16,6 +16,24 @@ python scripts/build-photoreal-example.py --strict
 ```
 
 ผลคือ B1 rendered-asset diagnostic แม้ geometry มาจากสแกนจริง ไม่ใช่ benchmark จากภาพถ่ายอิสระหรือ photorealism score ไม่ได้อนุมัติ final GLB หรือสร้าง intrinsic albedo ใหม่ หาก build ไม่สำเร็จ manifest แสดง BLOCKED และ viewer คง Baseline; ไม่เผยแพร่ผลเก่าหรือผลที่แต่งขึ้น ภาพ clay และรายงาน build เดิมด้านล่างเป็นหลักฐาน Baseline เท่านั้น
+
+### เหตุที่ใช้ Atlas แยกสำหรับ Projection
+
+UV ต้นฉบับมีส่วนซ้อนกัน สามเหลี่ยมกลับทิศ และ UV ที่ยุบตัว จึงไม่ผ่าน numeric UV gate แม้เปิด GLB ดูได้ตามปกติ เก็บ `model/head.glb` และ color/normal maps เดิมไว้เป็น Baseline พร้อมแสดงผลตรวจจริงใน `projection-lab/baseline_uv_report.json`.
+
+สำเนา `model/projection-head.glb` เก็บรูปทรงและสามเหลี่ยมทั้งหมดเดิม แต่กาง UV ใหม่และถ่ายเฉพาะสีจากตำแหน่งบนผิวเดิม โดยแก้การกลับด้านแกน V ของภาพต้นฉบับก่อนถ่ายสี การตรวจภาพจริงพบว่าสีปากและตาเดิมอยู่ผิดตำแหน่ง จึงไม่ใช้ความคลาดเคลื่อนเทียบต้นฉบับที่กลับด้านเป็นหลักฐานคุณภาพ ใช้สำหรับ **unlit B1 diagnostic** เท่านั้น ไม่ย้าย tangent normal เดิมไปบน UV ใหม่ และไม่อ้างว่า automatic atlas เป็น anatomical atlas สำหรับ production. วิธีสร้าง hashes และผลเปรียบเทียบสีกับต้นฉบับที่จัดทิศภาพแล้วอยู่ใน `reports/atlas_preparation.json`; สคริปต์ที่สร้างซ้ำได้คือ `scripts/prepare-photoreal-atlas.py` จากราก repository.
+
+ก่อนสร้างผลทุกครั้ง builder ตรวจ hash ของต้นฉบับและสำเนากับ preparation report แล้วบังคับ `PASS_UV_ONLY` ที่ไม่มี overlap, degenerate, wrong winding หรือ out-of-bounds รวมถึงเกณฑ์ distortion/density เดิม การทดสอบล้มจะเก็บ UV report และ heatmaps ไว้ให้ตรวจสาเหตุ ทั้ง PR และ Deploy ใช้ `--strict`.
+
+Viewer ตรวจ SHA-256 ของโมเดลจริงก่อนเปิดโหมด Projection, สลับไปใช้รูปทรงสำเนากับ UV ที่ตรงกับผลทดสอบ และกลับไปยังโมเดล Baseline เมื่อเลือกพื้นผิว / Clay / Wireframe. สำหรับ Baseline SHA ที่ระบุในโค้ดเท่านั้น Viewer ตั้ง `flipY=true` ให้ Color / Normal เพื่อจัดทิศภาพให้ตรงรูปทรง โดยไม่แก้ bytes ของ GLB หรือเปลี่ยน normal scale. เป็นการแก้การแสดงผล ไม่ใช่การรับรอง PBR. สีเทาในผล Projection คือพื้นที่ไม่มีข้อมูลที่สังเกตได้ ไม่ใช่สีผิวที่เติมขึ้น.
+
+สร้าง Atlas ซ้ำจากราก repository (ขั้นตอน authoring; CI ตรวจ artifact ที่ผูก hash แล้ว):
+
+```bash
+python -m pip install xatlas==0.0.11 -r skills/photoreal-head-web/scripts/requirements-projection.txt
+python scripts/prepare-photoreal-atlas.py
+python scripts/build-photoreal-example.py --strict
+```
 
 ## เปิดดู
 

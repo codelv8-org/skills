@@ -8,18 +8,18 @@
   <link rel="stylesheet" href="example.css">
   <link rel="stylesheet" href="projection-lab.css?v=3.1.1">
   <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
-  <script type="module" src="viewer.js?v=3.1.1"></script>
+  <script type="module" src="viewer.js?v=3.1.1-uv2"></script>
 </head>
 <body>
   <header class="topbar">
     <a class="back" href="../../../index.html">กลับไปคลัง Skill</a>
     <span>Photoreal head for web <span class="muted">/ v3.1.1 · Projection Lab</span></span>
-    <a class="button secondary" href="model/head.glb" download>ดาวน์โหลด GLB ต้นฉบับ</a>
+    <a class="button secondary" href="model/head.glb" download>GLB ต้นฉบับก่อนแก้ UV</a>
   </header>
   <main>
     <div class="intro">
       <div><p class="kicker">Photoreal Head · v3.1.1</p><h1>Projection &amp; Benchmark Lab</h1></div>
-      <p class="lead">สแกนศีรษะที่มีสิทธิ์เผยแพร่เป็น Baseline เปรียบเทียบ Texture จากกล้องจำลองมุมเดียว หลายมุม และ Robust Fusion ด้วย UV เดียวกัน พร้อมตรวจ Coverage, Ambiguity และผล Holdout</p>
+      <p class="lead">เปรียบเทียบ Texture จากกล้องจำลองมุมเดียว หลายมุม และ Robust Fusion บนรูปทรงสแกนเดียวกัน ใช้สำเนาที่กาง UV ใหม่สำหรับ Projection พร้อมตรวจ Coverage, Ambiguity และผล Holdout</p>
     </div>
     <section class="workspace" aria-label="พื้นที่ตรวจโมเดลศีรษะ">
       <div class="stage">
@@ -41,11 +41,11 @@
           <button type="button" data-mode="clay" aria-pressed="false">Clay</button>
           <button type="button" data-mode="wire" aria-pressed="false">Wireframe</button>
         </div></fieldset>
-        <fieldset class="lab-selector"><legend>Projection &amp; Benchmark v3.1.1</legend><label for="projection-mode">เลือก Texture เพื่อเทียบบนหัว 3D เดียวกัน</label><select id="projection-mode" disabled><option value="">Baseline · พื้นผิวสแกน</option></select><p>โหมด Projection เป็น unlit diagnostic; สีเทาคือพื้นที่ไม่มีข้อมูล ไม่ใช่ผิวที่สร้างขึ้นใหม่</p></fieldset>
+        <fieldset class="lab-selector"><legend>Projection &amp; Benchmark v3.1.1</legend><label for="projection-mode">เลือก Texture เพื่อเทียบบนรูปทรงหัวเดียวกัน</label><select id="projection-mode" disabled><option value="">Baseline · พื้นผิวสแกน</option></select><p>โหมด Projection ใช้ UV ที่กางใหม่และแสดงสีแบบ unlit; สีเทาคือพื้นที่ไม่มีข้อมูล ปุ่มพื้นผิว / Clay / Wireframe กลับไปใช้โมเดลต้นฉบับ</p></fieldset>
         <div class="actions"><button type="button" id="rotate" aria-pressed="false">หมุนอัตโนมัติ</button><button type="button" id="reset">คืนมุมกล้อง</button></div>
         <p class="hint">เมาส์หรือสัมผัส: ลากเพื่อหมุน · เลื่อนเพื่อซูม<br>คีย์บอร์ดเมื่อโฟกัสโมเดล: ลูกศร / + / − / Home</p>
         <dl class="metrics"><div><dt>สามเหลี่ยม</dt><dd id="triangles">กำลังตรวจ…</dd></div><div><dt>ขนาด GLB</dt><dd id="size">กำลังตรวจ…</dd></div><div><dt>UV0</dt><dd id="uv">กำลังตรวจ…</dd></div><div><dt>แผนที่พื้นผิว</dt><dd>Color + Normal</dd></div></dl>
-        <div class="qa-summary"><h3>สถานะ Baseline</h3><ul><li><span class="pass">ผ่าน</span> <span id="structure">กำลังอ่านผลตรวจโครงสร้าง GLB</span></li><li><span class="review">ต้องทบทวน</span> Landmark และ photo-fit</li></ul><p>ไฟล์ผ่านการตรวจโครงสร้าง ไม่ใช่การรับรอง anatomy หรือความเหมือนบุคคล</p></div>
+        <div class="qa-summary"><h3>สถานะ Baseline</h3><ul><li><span class="pass">ผ่าน</span> <span id="structure">กำลังอ่านผลตรวจโครงสร้าง GLB</span></li><li><span class="review">ต้องทบทวน</span> Landmark และ photo-fit</li></ul><p>Viewer จัดทิศภาพ Color / Normal ของต้นฉบับให้ตรงรูปทรง ส่วนไฟล์ดาวน์โหลดเก็บต้นฉบับไว้ ผลตรวจโครงสร้างไม่ใช่การรับรอง UV, anatomy หรือความเหมือนบุคคล</p></div>
         <a class="text-link" href="reports/glb_qa.json">เปิดรายงาน GLB</a>
       </aside>
     </section>
@@ -61,9 +61,9 @@
       </div>
       <table class="lab-table"><thead><tr><th scope="col">Stress test · same holdout pixels</th><th scope="col">Color MAE ↓</th></tr></thead><tbody><tr><td>Weighted Mean · ภาพสีเพี้ยน</td><td id="lab-mean">—</td></tr><tr><td>Robust Consensus · ภาพสีเพี้ยน</td><td data-robust-copy>—</td></tr><tr><td>Reviewed Quarantine · ตัดภาพที่ตรวจพบ</td><td id="lab-quarantine">—</td></tr></tbody></table>
       <img class="lab-comparison" id="lab-comparison" hidden width="1280" height="688" alt="ผลเปรียบเทียบ holdout จาก Reference, Weighted Mean, Robust Consensus และ Reviewed Quarantine">
-      <div class="lab-meta"><div>UV numeric gate: <strong id="lab-uv">NOT RUN</strong></div><div>Flagged training views: <strong id="lab-flagged">—</strong></div><div>Held-out angles: <strong id="lab-angles">—</strong></div><div>Skin material release: <strong>NOT CERTIFIED</strong></div></div>
-      <div class="lab-links"><a href="reports/projection_lab.json">Generated lab manifest</a><span id="lab-links" hidden><a href="projection-lab/stress_report.json">Stress report</a> · <a href="projection-lab/roundtrip_report.json">Roundtrip report</a> · <a href="projection-lab/uv_report.json">UV report</a></span></div>
-      <p class="lab-disclaimer">Coverage วัดเฉพาะ texels ของ skin atlas; MAE ยิ่งต่ำยิ่งดีและไม่ใช่คะแนนความสมจริง ภาพทั้งหมดเป็น unlit renders ของ Asset ที่มีอยู่ ไม่ใช่ภาพถ่ายอิสระ ไม่ได้กู้ intrinsic albedo หรือรับรอง likeness, PBR หรือ final release เมื่อ Benchmark ไม่สำเร็จ จะไม่แสดงตัวเลขหรือ Texture เก่าแทน</p>
+      <div class="lab-meta"><div>Projection UV numeric gate: <strong id="lab-uv">NOT RUN</strong></div><div>Baseline UV numeric gate: <strong id="lab-baseline-uv">NOT RUN</strong></div><div>Flagged training views: <strong id="lab-flagged">—</strong></div><div>Held-out angles: <strong id="lab-angles">—</strong></div><div>Skin material release: <strong>NOT CERTIFIED</strong></div></div>
+      <div class="lab-links"><a href="reports/projection_lab.json">Generated lab manifest</a><span id="lab-links" hidden><a href="projection-lab/stress_report.json">Stress report</a> · <a href="projection-lab/roundtrip_report.json">Roundtrip report</a> · <a href="projection-lab/uv_report.json">Projection UV</a> · <a href="projection-lab/baseline_uv_report.json">Baseline UV</a> · <a href="reports/atlas_preparation.json">Atlas preparation</a></span></div>
+      <p class="lab-disclaimer">Coverage วัดเฉพาะ texels ของ skin atlas; MAE ยิ่งต่ำยิ่งดีและไม่ใช่คะแนนความสมจริง สีเทาตามรอยต่อ UV แสดงบริเวณที่ข้อมูลไม่พอสำหรับการกรอง Texture ภาพทั้งหมดเป็น unlit renders ของ Asset ที่มีอยู่ ไม่ใช่ภาพถ่ายอิสระ ไม่ได้กู้ intrinsic albedo หรือรับรอง likeness, PBR หรือ final release เมื่อ Benchmark ไม่สำเร็จ จะไม่แสดงตัวเลขหรือ Texture เก่าแทน</p>
     </section>
 
     <section class="evidence" aria-labelledby="evidence-title">

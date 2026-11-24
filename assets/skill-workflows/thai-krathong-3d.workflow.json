@@ -64,7 +64,7 @@
       "sublabel": "อ่านภาพและ Brief",
       "explanation": "เลือก reference หลัก บันทึก family, silhouette, layers, material cues, accessories, camera และสิ่งที่อนุมานใน reference_analysis.json",
       "icon": "start",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/thai-krathong-3d/SKILL.md",
@@ -82,7 +82,7 @@
       "label": "Structure family",
       "sublabel": "เลือกโครงสร้างก่อนสี",
       "explanation": "เลือก folded banana-leaf, lotus, tiered, diamond, bread, clay หรือ legacy simple baseline ตามลักษณะรูปทรงจริง",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/thai-krathong-3d/SKILL.md",
@@ -101,7 +101,7 @@
       "sublabel": "ปั้นและตรวจทีละส่วน",
       "explanation": "สร้าง whole form → folds/petals → assembly → materials/presentation; ใช้ Blender สำหรับงานภาพอ้างอิงและปรับเฉพาะส่วนที่ผิด",
       "icon": "decision",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/thai-krathong-3d/SKILL.md",
@@ -120,7 +120,7 @@
       "sublabel": "ตรวจ Geometry / UV",
       "explanation": "ตรวจ mesh, transforms, UV overlap, padding, stretch; รักษา editable source และแยก technical QA จาก visual acceptance",
       "icon": "decision",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/thai-krathong-3d/SKILL.md",
@@ -138,7 +138,7 @@
       "label": "Web PBR bake",
       "sublabel": "Bake PBR เมื่อจำเป็น",
       "explanation": "สำหรับ textured web/game release สร้าง BakeUV atlas, BaseColor/Normal/Roughness/Metallic/AO และ packed ORM แล้ว export GLB",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/thai-krathong-3d/SKILL.md",
@@ -157,7 +157,7 @@
       "sublabel": "ตรวจ GLB และส่งมอบ",
       "explanation": "เปิด GLB ใน clean scene ตรวจ front/top/three-quarter, texture และ geometry; ส่ง GLB, preview, report, BLEND เมื่อมีจริง พร้อมข้อจำกัด",
       "icon": "success",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/thai-krathong-3d/SKILL.md",
@@ -176,7 +176,7 @@
       "sublabel": "ย้อนแก้ส่วนที่ผิด",
       "explanation": "แก้ footprint, leaf folds, petals, layers หรือ camera ที่ผิดก่อนเพิ่มรายละเอียด; บันทึกภาพเทียบและตรวจซ้ำ",
       "icon": "decision",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/thai-krathong-3d/SKILL.md",
@@ -195,7 +195,7 @@
       "sublabel": "แก้ Defect จริง",
       "explanation": "แก้ degenerate/nonmanifold geometry, UV overlap/padding/stretch บน working copy; ไม่ waive gate หรือทับ source",
       "icon": "decision",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/thai-krathong-3d/SKILL.md",
@@ -214,7 +214,7 @@
       "sublabel": "งานที่ไม่ต้อง bake",
       "explanation": "baseline/source preview ใช้เส้นทาง export ปกติ ไม่อ้าง baked PBR; ส่งเฉพาะ artifact ที่มีจริง",
       "icon": "decision",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/thai-krathong-3d/SKILL.md",

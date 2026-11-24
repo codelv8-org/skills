@@ -38,7 +38,7 @@
   "lanes": [
     {
       "id": "main",
-      "label": "Main workflow"
+      "label": "G0–G8 · Main workflow"
     },
     {
       "id": "exceptions",
@@ -74,12 +74,13 @@
           "label": "SKILL.md"
         }
       ],
-      "icon": "start"
+      "icon": "start",
+      "yOffset": -56
     },
     {
       "id": "primary",
       "lane": "main",
-      "col": 1,
+      "col": 0,
       "type": "backend",
       "label": "G1 · Anatomy",
       "sublabel": "โครงกะโหลกและมวล",
@@ -92,12 +93,13 @@
           "end_line": 56,
           "label": "SKILL.md"
         }
-      ]
+      ],
+      "yOffset": 56
     },
     {
       "id": "detail",
       "lane": "main",
-      "col": 2,
+      "col": 1,
       "type": "backend",
       "label": "G2 · Face forms",
       "sublabel": "ตา จมูก หู ปาก",
@@ -110,12 +112,13 @@
           "end_line": 65,
           "label": "SKILL.md"
         }
-      ]
+      ],
+      "yOffset": -56
     },
     {
       "id": "landmarks",
       "lane": "main",
-      "col": 3,
+      "col": 1,
       "type": "security",
       "label": "G3 · Landmarks",
       "sublabel": "วัดและเทียบภาพ",
@@ -129,12 +132,13 @@
           "label": "SKILL.md"
         }
       ],
-      "icon": "decision"
+      "icon": "decision",
+      "yOffset": 56
     },
     {
       "id": "uv",
       "lane": "main",
-      "col": 4,
+      "col": 2,
       "type": "security",
       "label": "G4 · UV QA",
       "sublabel": "Lock UV0 / distortion",
@@ -148,12 +152,13 @@
           "label": "SKILL.md"
         }
       ],
-      "icon": "decision"
+      "icon": "decision",
+      "yOffset": -56
     },
     {
       "id": "projection",
       "lane": "main",
-      "col": 5,
+      "col": 2,
       "type": "backend",
       "label": "G5 · Projection Lab",
       "sublabel": "Register / fuse / benchmark",
@@ -166,12 +171,13 @@
           "end_line": 88,
           "label": "SKILL.md"
         }
-      ]
+      ],
+      "yOffset": 56
     },
     {
       "id": "material",
       "lane": "main",
-      "col": 6,
+      "col": 3,
       "type": "backend",
       "label": "G6 · Skin PBR",
       "sublabel": "Regional skin / brow",
@@ -184,12 +190,13 @@
           "end_line": 93,
           "label": "SKILL.md"
         }
-      ]
+      ],
+      "yOffset": -56
     },
     {
       "id": "release",
       "lane": "main",
-      "col": 7,
+      "col": 3,
       "type": "frontend",
       "label": "G7–G8 · QA / Release",
       "sublabel": "Multi-light / browser",
@@ -203,7 +210,8 @@
           "label": "SKILL.md"
         }
       ],
-      "icon": "success"
+      "icon": "success",
+      "yOffset": 56
     },
     {
       "id": "no-runtime",
@@ -227,7 +235,7 @@
     {
       "id": "anatomy-fix",
       "lane": "exceptions",
-      "col": 3,
+      "col": 1,
       "type": "security",
       "label": "Anatomy repair",
       "sublabel": "แก้ geometry ก่อน UV",
@@ -246,7 +254,7 @@
     {
       "id": "view-review",
       "lane": "exceptions",
-      "col": 5,
+      "col": 2,
       "type": "security",
       "label": "Review ambiguity",
       "sublabel": "ตรวจภาพที่ขัดแย้ง",

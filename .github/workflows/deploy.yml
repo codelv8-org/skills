@@ -27,16 +27,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
           persist-credentials: false
 
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Set up Python for documentation examples
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -50,7 +50,7 @@ jobs:
         run: python scripts/build-documentation-examples.py
 
       - name: Set up Node.js for Archify
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: "22"
 
@@ -75,7 +75,8 @@ jobs:
         run: |
           node --check assets/examples/photoreal-head/projection-lab.js
           node --check assets/examples/photoreal-head/viewer.js
-          python scripts/build-photoreal-example.py
+          python scripts/test-photoreal-example.py
+          python scripts/build-photoreal-example.py --strict
 
       - name: Build benchmark and review analytics
         env:
@@ -97,8 +98,31 @@ jobs:
       - name: Build skill ZIP files
         run: python3 scripts/build-skill-zips.py
 
+      - name: Install browser test library
+        run: npm install --no-save --package-lock=false --ignore-scripts playwright-core@1.56.1
+
+      - name: Test generated Photoreal Head example in headless Chrome
+        env:
+          PHOTOREAL_SMOKE_ARTIFACTS: ${{ runner.temp }}/photoreal-smoke
+        run: node scripts/photoreal-browser-smoke.mjs
+
+      - name: Keep public example QA evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: public-head-pages-evidence
+          retention-days: 7
+          if-no-files-found: ignore
+          path: |
+            assets/examples/photoreal-head/reports/projection_lab.json
+            assets/examples/photoreal-head/projection-lab/
+            ${{ runner.temp }}/photoreal-smoke/
+
+      - name: Remove browser test dependencies from Pages artifact
+        run: rm -rf node_modules
+
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: '.'
 
@@ -116,4 +140,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
