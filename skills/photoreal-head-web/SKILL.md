@@ -1,9 +1,9 @@
 ---
 name: photoreal-head-web
-description: Build or repair anatomically credible photoreal human heads for Blender and Three.js with facial anatomy, craniofacial landmarks, camera matching, retopology, anatomical UV atlas, skin texture registration, multiview projection, regional skin maps, PBR shading, GLB and browser QA. Use for realistic head-only models, portrait reconstruction, misplaced facial textures, plastic/waxy skin, UV distortion, eyebrow tattoo catalogs, or repairing an existing head GLB. รองรับภาษาไทย สร้างหัวคนสมจริง กาง UV ให้ตรงตำแหน่งผิว แก้ Texture/Material ผิวพลาสติก และสลับลายคิ้ว. Requires measured clay anatomy before texturing and independent UV, skin and exact-candidate release evidence.
+description: Build or repair anatomically credible photoreal human heads for Blender and Three.js with facial anatomy, craniofacial landmarks, camera matching, retopology, anatomical UV atlas, skin texture registration, automatic calibrated multiview photo projection, robust color consensus, real-head benchmark, regional skin maps, PBR shading, GLB and browser QA. Use for realistic head-only models, portrait reconstruction, misplaced facial textures, plastic/waxy skin, UV distortion, eyebrow tattoo catalogs, or repairing an existing head GLB. รองรับภาษาไทย สร้างหัวคนสมจริง กาง UV ให้ตรงตำแหน่งผิว แก้ Texture/Material ผิวพลาสติก และสลับลายคิ้ว. Requires measured clay anatomy before texturing and independent UV, skin and exact-candidate release evidence.
 category: UIUX
-tags: [3d, photoreal, anatomy, uv, pbr, skin, blender, glb, three-js, multi-agent]
-version: 3.0.0
+tags: [3d, photoreal, anatomy, uv, pbr, skin, projection, benchmark, blender, glb, three-js, multi-agent]
+version: 3.1.1
 agents:
   - antigravity
   - claude-code
@@ -14,7 +14,7 @@ compatibility:
   codex: ">=1.0.0"
 ---
 
-# Photoreal Head for Web - Anatomical UV & Digital Skin Edition (3.0.0)
+# Photoreal Head for Web - Real Head Benchmark & Robust Multi-view Texture Fusion (3.1.1)
 
 Act as **craniofacial anatomy-informed sculptor, facial anthropometry analyst, Blender character artist, texture artist, technical QA reviewer, and WebGL/Three.js technical artist**. Create a real editable 3D head when Blender or 3D tools are available; never substitute a nice-looking 2D render for the required mesh, UVs, textured GLB, or browser demo. Focus on **human morphological credibility** before high-frequency realism. A face with lovely skin but poorly placed ears, nose, eyes, jaw, or cranial volume is not photoreal.
 
@@ -81,6 +81,12 @@ Default when unspecified: realistic **neutral-expression adult generic human**, 
 
 - Independently annotate facial surface anchors in final GLB triangles and texture features on the actual atlas. Use `assets/templates/surface_manifest.json`; assign barycentric anchors to brow inner/arch/outer, eyes, nose, lips, ears and hairline; annotate image features separately. Do not manufacture a pass by copying UVs. Choose one canonical atlas ID and preserve its hash; report inferred/occluded regions. Camera-fit multiview photos, project only visible surfaces, de-light, match color and feather seams; otherwise use authorized scans/manual texture painting. Never stretch a frontal photo around the skull. Single-photo reconstruction remains approximate.
 
+**Automatic projection (v3.1):** If authorized photos and aligned static GLB exist, read [references/automatic-texture-projection.md](references/automatic-texture-projection.md) and execute `scripts/project_face_texture.py` using actual camera intrinsics and world-to-camera transforms or independently validated PnP anchors. Use `assets/templates/projection_manifest.json`, verified v3 UV report, per-view reviewed masks and pose overlays. Never treat an uncalibrated photo as registered. Preserve alpha/observed and inferred masks. Optional `scripts/compose_skin_atlas.py` requires explicitly authorized compatible fallback for missing skin. No automatic delighting or fabricated albedo; only controlled capture/artist review can validate final base color. Keep source photos local.
+
+**Robust fusion (v3.1.1):** For 3+ genuinely distinct calibrated views set `blend_mode:robust_consensus` (template default). Keep geometry-based weights; reject an inconsistent color only when a coherent strict majority exists. Inspect `ambiguous_mask.png`, `view_disagreement.png`, `single_view_mask.png`, `outlier_rejected_mask.png` and per-view rejection evidence. Two discordant observations are ambiguous, not evidence to choose a winner. Review flagged views against calibration, masks, exposure and lighting; recapture, correct or explicitly quarantine an input based on TRAINING evidence only. Rerun on the same locked mesh and compare coverage AND common-support holdout error. Never tune using holdout. A draft composition with unresolved conflicts requires an explicit review note; do not release unresolved conflicting skin. No intrinsic albedo estimation. See [references/robust-texture-fusion.md](references/robust-texture-fusion.md).
+
+**Benchmark:** Read [references/real-head-benchmark.md](references/real-head-benchmark.md). Run `scripts/benchmark_head_projection.py` on an actual textured GLB for rendered-asset round-trip, then `scripts/evaluate_photo_holdout.py` on independent calibrated held-out real photos when available. Compare front-only baseline and multi-view on both coverage and common-support errors. Save evidence and flag B1/B2/B3/B4 explicitly; numerical projection success is not realism, likeness or release. If no real photos/scan, mark that benchmark NOT RUN. Diagnostic projection of a blocked mesh does not permit promotion.
+
 ### G6 - Regional skin texture and material
 
 - Read [references/digital-skin-materials.md](references/digital-skin-materials.md). Author pigment/albedo separate from lighting; use macro/meso/micro detail from real sculpt or licensed maps. Use `assets/templates/skin_regions.json` and `scripts/regionalize_skin.py` with polygons annotated on the actual atlas to modulate supporting micro-normal/roughness. Do not use generic pore texture as finished face or substitute it for real albedo. Correct color spaces, MikkTSpace tangent bake, glTF G=roughness/B=metallic, effective skin metallic=0, and physically scaled subtle detail. Bake procedural nodes to images. Keep SSS offline or explicitly implement/test approximation with fallback; transmission is not SSS.
@@ -104,6 +110,15 @@ blender -b source/head.blend --python scripts/blender_unwrap_head.py -- --object
 # Draft export may have no maps; validate UV before baking (winding must be verified):
 blender -b source/head_uv.blend --python scripts/blender_export_head.py -- --output export/head.draft.glb
 python scripts/validate_head_surface.py export/head.draft.glb --skin-material Skin --winding cw --uv-only --report-dir reports/uv
+# Optional automatic registered photo projection (fill manifest with actual calibration/rights first):
+python -m pip install -r scripts/requirements-projection.txt
+python scripts/project_face_texture.py inputs/projection.json --out reports/projection --size 1024
+# Compare independent held-out photos with front-only and multi-view projections:
+python scripts/evaluate_photo_holdout.py inputs/holdout.json --projection reports/front_only --projection reports/projection --out reports/holdout
+# If a textured head GLB is available, benchmark separately (render-based, not real photographs):
+python scripts/benchmark_head_projection.py export/head.draft.glb --skin-material Skin --out reports/benchmark --size 1024 --view-size 768
+# Optional fixed rendered-asset stress test for fusion quality:
+python scripts/benchmark_projection_robustness.py export/head.draft.glb --skin-material Skin --out reports/robustness --size 1024 --view-size 768
 # After baking actual maps and completing clay review:
 blender -b source/head_uv.blend --python scripts/blender_export_head.py -- \
   --collection HEAD_WEB --output export/head.candidate.glb --report reports/export_qa.json --release --anatomy-report reports/anatomy_qa.json --manual-anatomy-reviewed
@@ -132,6 +147,11 @@ head-project/
   previews/pbr_front.png
   previews/{checker_front,checker_profile,checker_threequarter,albedo_unlit,normal_closeup,light_soft,light_side,light_rim,browser_front,browser_profile,browser_brow_switch}.png
   reports/surface/{surface_qa.json,uv_anisotropy.png,uv_density.png}
+  reports/projection/{projection_report.json,observed_mask.png,coverage_heatmap.png,projected_rgba.png}
+  reports/projection/{ambiguous_mask,view_disagreement,single_view_mask,outlier_rejected_mask}.png
+  reports/robustness/stress_report.json  # rendered B1 stress only
+  reports/holdout/photo_holdout_report.json  # only for actual withheld views
+  reports/benchmark/benchmark_report.json   # label rendered asset vs real capture
   reports/surface_manifest.json
   reports/{landmarks_3d,anatomy_qa,glb_qa}.json
   reports/photo_fit_*.json       # only with annotated photo evidence

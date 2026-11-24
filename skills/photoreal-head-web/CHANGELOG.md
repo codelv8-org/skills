@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.1.1 - Robust Multi-view Texture Fusion (2026-11-24)
+
+- Add bounded-memory strict-majority color fusion in sRGB disagreement space, retaining linear-light blending; flag single-view and ambiguous texels, and suspicious source views. Reject duplicate image bytes.
+- Require a reviewed ambiguity note for draft composition when conflicts remain; retain hash-bound ambiguity evidence.
+- Add B1 deterministic tinted-input stress benchmark and paired holdout evaluation, without changing geometry, UVs or privacy gates. Ban5 B1: common-support MAE 6.0466 to 0.8807; after training-only reviewed quarantine 0.2616. 42 local tests passed; B2/B3/B4 not run.
+
+## 3.1.0 - Real Head Benchmark & Automatic Texture Projection (2026-11-24)
+
+- Add calibrated CPU UV projection with perspective-correct rasterization, depth/mask visibility, angle-weighted linear-light blending, optional overlap exposure matching, PnP RANSAC and independent reprojection validation. Preserve unknown texels and require authorized fallback for composition.
+- Add existing-head rendered-view benchmark and independent calibrated holdout evaluator with coverage, same-support error, and duplicate/hash guards. No real-photo or measured-reflectance claim.
+- Accelerate exact UV overlap candidate filtering; preserve triangle intersection and release gates. Ban5 legacy asset diagnostic: 92 wrong-winding triangles, 0 overlaps.
+- Add documentation, manifest templates and regression tests. No source scans or photos bundled.
+
 ## 3.0.0 - Anatomical UV & Digital Skin Edition (2026-11-24)
 
 - Preserve anatomy, photo-fit, original GLB tools and viewer. Add explicit canonical atlas/semantic anchors, multiview projection, skin optics and regional material workflows.
