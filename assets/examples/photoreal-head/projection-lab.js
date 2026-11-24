@@ -67,6 +67,8 @@ export function createProjectionLab({apply,restore,setLabel,prepare}){
     $('lab-angles').textContent=(r.holdoutAngles||[]).map(a=>`${a}°`).join(', ');
     if(r.comparison==='projection-lab/comparison.jpg'){$('lab-comparison').src=r.comparison;$('lab-comparison').hidden=false;}
     $('lab-links').hidden=false;
+    // The generated report is usable even when this browser cannot start WebGL.
+    state.textContent='B1 diagnostic complete · rendered scan report · not real-photo QA';
     prepareAsset();
   };
   // Read current generated report, not stale hard-coded metrics. Fail closed on missing version.
