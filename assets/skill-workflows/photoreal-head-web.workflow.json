@@ -3,7 +3,7 @@
   "diagram_type": "workflow",
   "meta": {
     "title": "Photoreal Head for Web · Workflow",
-    "subtitle": "v2.0.0 / documented procedure",
+    "subtitle": "v3.1.1 / Anatomy, UV & Robust Projection",
     "output": "assets/skill-workflows/photoreal-head-web.html",
     "visual_preset": "signal-flow",
     "quality_profile": "showcase",
@@ -11,7 +11,7 @@
     "feedback_links": false,
     "repository": {
       "url": "https://github.com/codelv8-org/skills",
-      "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+      "revision": "4a47bd83c0cc183392b3b0d4839bfe8fe13b9a2e",
       "provider": "github"
     },
     "legend": {
@@ -51,7 +51,9 @@
     "primary",
     "detail",
     "landmarks",
-    "texture",
+    "uv",
+    "projection",
+    "material",
     "release"
   ],
   "nodes": [
@@ -61,18 +63,18 @@
       "col": 0,
       "type": "external",
       "label": "G0 · Intake",
-      "sublabel": "Ref / สิทธิ์ / Blender",
-      "explanation": "ตรวจสิทธิ์และความพร้อมของ Blender, reference หลายมุมและกล้อง; ไม่สร้าง model ปลอมหากเครื่องมือไม่พร้อม",
-      "icon": "start",
+      "sublabel": "Reference / สิทธิ์",
+      "explanation": "ตรวจสิทธิ์ แหล่งที่มา ความพร้อมของ Blender และความน่าเชื่อถือของภาพหลายมุม",
       "width": 176,
       "sources": [
         {
           "path": "skills/photoreal-head-web/SKILL.md",
-          "line": 44,
-          "end_line": 48,
+          "line": 46,
+          "end_line": 50,
           "label": "SKILL.md"
         }
-      ]
+      ],
+      "icon": "start"
     },
     {
       "id": "primary",
@@ -81,13 +83,13 @@
       "type": "backend",
       "label": "G1 · Anatomy",
       "sublabel": "โครงกะโหลกและมวล",
-      "explanation": "เริ่มจาก base topology ที่เชื่อถือได้ ปั้น cranial vault, maxilla, mandible และ silhouette; ตรวจ flat gray หลายมุม",
+      "explanation": "เริ่มจาก topology หรือ scan ที่เชื่อถือได้ ตรวจ cranial vault และ silhouette ด้วย clay หลายมุม",
       "width": 176,
       "sources": [
         {
           "path": "skills/photoreal-head-web/SKILL.md",
-          "line": 50,
-          "end_line": 54,
+          "line": 52,
+          "end_line": 56,
           "label": "SKILL.md"
         }
       ]
@@ -99,13 +101,13 @@
       "type": "backend",
       "label": "G2 · Face forms",
       "sublabel": "ตา จมูก หู ปาก",
-      "explanation": "ปั้นโครงสร้างจริงของ orbital rim, nose cartilage, ears, cheeks/lips/jaw โดยยังไม่ใช้ texture",
+      "explanation": "ตรวจปริมาตรและตำแหน่งของตา จมูก หู แก้ม ปาก และกรามโดยยังไม่ใช้ texture",
       "width": 176,
       "sources": [
         {
           "path": "skills/photoreal-head-web/SKILL.md",
-          "line": 56,
-          "end_line": 63,
+          "line": 58,
+          "end_line": 65,
           "label": "SKILL.md"
         }
       ]
@@ -117,32 +119,69 @@
       "type": "security",
       "label": "G3 · Landmarks",
       "sublabel": "วัดและเทียบภาพ",
-      "explanation": "วัด normalized landmarks, ตรวจ clay และ photo-fit; แก้ camera mismatch ก่อนบิด geometry; หยุดหาก BLOCKED",
-      "icon": "decision",
+      "explanation": "วัด landmarks และ photo-fit ตรวจความคลาดเคลื่อนของกล้องก่อนเปลี่ยน geometry; anatomy BLOCKED ต้องแก้ก่อน",
       "width": 176,
       "sources": [
         {
           "path": "skills/photoreal-head-web/SKILL.md",
-          "line": 65,
-          "end_line": 71,
+          "line": 67,
+          "end_line": 73,
+          "label": "SKILL.md"
+        }
+      ],
+      "icon": "decision"
+    },
+    {
+      "id": "uv",
+      "lane": "main",
+      "col": 4,
+      "type": "security",
+      "label": "G4 · UV QA",
+      "sublabel": "Lock UV0 / distortion",
+      "explanation": "ตรวจ seam, overlap, winding, degenerate, anisotropy และ texel density ก่อนฉาย texture",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/photoreal-head-web/SKILL.md",
+          "line": 75,
+          "end_line": 78,
+          "label": "SKILL.md"
+        }
+      ],
+      "icon": "decision"
+    },
+    {
+      "id": "projection",
+      "lane": "main",
+      "col": 5,
+      "type": "backend",
+      "label": "G5 · Projection Lab",
+      "sublabel": "Register / fuse / benchmark",
+      "explanation": "ฉายจากกล้องที่ calibrated ด้วย visibility และ depth; robust consensus ตัด outlier เมื่อมีเสียงข้างมาก ตรวจ ambiguity แล้วเปรียบเทียบ held-out coverage และ error",
+      "width": 176,
+      "sources": [
+        {
+          "path": "skills/photoreal-head-web/SKILL.md",
+          "line": 80,
+          "end_line": 88,
           "label": "SKILL.md"
         }
       ]
     },
     {
-      "id": "texture",
+      "id": "material",
       "lane": "main",
-      "col": 4,
+      "col": 6,
       "type": "backend",
-      "label": "G4 · UV / PBR",
-      "sublabel": "Retopo และ Texture",
-      "explanation": "จัด face loops/UV0, bake normal, roughness และ eyebrow layers แยก; ห้ามใช้ texture ปกปิด anatomy ที่ผิด",
+      "label": "G6 · Skin PBR",
+      "sublabel": "Regional skin / brow",
+      "explanation": "สร้าง regional albedo, micro-normal, roughness แยก eyebrow layers และเก็บ missing/inferred areas",
       "width": 176,
       "sources": [
         {
           "path": "skills/photoreal-head-web/SKILL.md",
-          "line": 73,
-          "end_line": 80,
+          "line": 90,
+          "end_line": 93,
           "label": "SKILL.md"
         }
       ]
@@ -150,21 +189,21 @@
     {
       "id": "release",
       "lane": "main",
-      "col": 5,
+      "col": 7,
       "type": "frontend",
-      "label": "G5 · GLB / QA",
-      "sublabel": "Export + Browser",
-      "explanation": "ตรวจ GLB/UV/ภาพจริงบนมือถือและ desktop พร้อมหลักฐานกายวิภาคก่อน final release; ไม่อ้าง browser หรือ likeness ถ้าไม่ได้ทดสอบ",
-      "icon": "success",
+      "label": "G7–G8 · QA / Release",
+      "sublabel": "Multi-light / browser",
+      "explanation": "ตรวจ albedo, normal, 3 สภาพแสงและ browser; promote เฉพาะ candidate ตรงหลักฐานที่ผ่านทุก gate",
       "width": 176,
       "sources": [
         {
           "path": "skills/photoreal-head-web/SKILL.md",
-          "line": 82,
-          "end_line": 87,
+          "line": 95,
+          "end_line": 98,
           "label": "SKILL.md"
         }
-      ]
+      ],
+      "icon": "success"
     },
     {
       "id": "no-runtime",
@@ -173,14 +212,14 @@
       "type": "security",
       "label": "No 3D runtime",
       "sublabel": "ส่งคำแนะนำแทน",
-      "explanation": "ถ้าไม่มีเครื่องมือ 3D ให้ส่งสคริปต์/วิธีทำ และระบุว่าการสร้างโมเดลยังไม่ได้ดำเนินการ",
-      "icon": "stop",
+      "explanation": "ถ้าไม่มีเครื่องมือ 3D ให้ส่งสคริปต์/วิธีทำ ระบุว่าไม่ได้สร้างโมเดล",
       "width": 176,
+      "icon": "stop",
       "sources": [
         {
           "path": "skills/photoreal-head-web/SKILL.md",
-          "line": 44,
-          "end_line": 48,
+          "line": 46,
+          "end_line": 50,
           "label": "SKILL.md"
         }
       ]
@@ -191,15 +230,34 @@
       "col": 3,
       "type": "security",
       "label": "Anatomy repair",
-      "sublabel": "แก้โครงก่อน Texture",
-      "explanation": "แก้ clay, landmarks หรือการจัดกล้องที่ผิด; ห้ามผ่านไป UV/texture เมื่อ anatomy ยัง BLOCKED",
-      "icon": "decision",
+      "sublabel": "แก้ geometry ก่อน UV",
+      "explanation": "แก้ clay, landmark หรือ camera mismatch ก่อนเข้าสู่ UV",
       "width": 176,
+      "icon": "decision",
       "sources": [
         {
           "path": "skills/photoreal-head-web/SKILL.md",
-          "line": 65,
-          "end_line": 71,
+          "line": 67,
+          "end_line": 73,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "view-review",
+      "lane": "exceptions",
+      "col": 5,
+      "type": "security",
+      "label": "Review ambiguity",
+      "sublabel": "ตรวจภาพที่ขัดแย้ง",
+      "explanation": "ตรวจ calibration, masks, exposure จาก training evidence; แก้ภาพหรือ quarantine ก่อนฉายใหม่ ห้ามใช้ holdout เลือกภาพ",
+      "width": 176,
+      "icon": "decision",
+      "sources": [
+        {
+          "path": "skills/photoreal-head-web/SKILL.md",
+          "line": 84,
+          "end_line": 88,
           "label": "SKILL.md"
         }
       ]
@@ -230,13 +288,27 @@
     {
       "id": "main-4",
       "from": "landmarks",
-      "to": "texture",
+      "to": "uv",
       "variant": "emphasis",
       "role": "main"
     },
     {
       "id": "main-5",
-      "from": "texture",
+      "from": "uv",
+      "to": "projection",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-6",
+      "from": "projection",
+      "to": "material",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-7",
+      "from": "material",
       "to": "release",
       "variant": "emphasis",
       "role": "main"
@@ -253,7 +325,7 @@
       "id": "branch-2",
       "from": "landmarks",
       "to": "anatomy-fix",
-      "label": "Gate ไม่ผ่าน",
+      "label": "Anatomy BLOCKED",
       "variant": "security",
       "role": "branch"
     },
@@ -263,6 +335,21 @@
       "to": "primary",
       "variant": "dashed",
       "role": "return"
+    },
+    {
+      "id": "branch-3",
+      "from": "projection",
+      "to": "view-review",
+      "label": "Ambiguous / outlier",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "return-3",
+      "from": "view-review",
+      "to": "projection",
+      "variant": "dashed",
+      "role": "return"
     }
   ],
   "cards": [
@@ -270,8 +357,9 @@
       "dot": "cyan",
       "title": "Workflow notes",
       "items": [
-        "Anatomy-first: Texture ปิดตลอด G1–G3",
-        "ภาพเดียวไม่พอสำหรับยืนยันรูปทรง 3D หรือความเหมือนเฉพาะบุคคล"
+        "Anatomy-first: Texture ปิดตลอด G1–G3; ตรวจ UV จริงที่ G4",
+        "G5: calibrated multi-view + robust consensus; ภาพสองมุมที่ขัดแย้งกันต้องทบทวน",
+        "B1 rendered-asset benchmark ไม่เท่ากับ real-photo likeness หรือ final release"
       ]
     }
   ]

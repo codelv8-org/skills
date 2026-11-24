@@ -66,9 +66,16 @@ jobs:
         run: node scripts/build-skill-ratings.mjs
 
       - name: Install benchmark dependencies
-        run: python -m pip install -r scripts/skill-benchmark-requirements.txt
+        run: |
+          python -m pip install -r scripts/skill-benchmark-requirements.txt -r skills/photoreal-head-web/scripts/requirements-projection.txt
       - name: Run allowlisted skill tool benchmarks
         run: python scripts/run-skill-tool-benchmarks.py
+
+      - name: Build Photoreal Head projection example and overview
+        run: |
+          node --check assets/examples/photoreal-head/projection-lab.js
+          node --check assets/examples/photoreal-head/viewer.js
+          python scripts/build-photoreal-example.py
 
       - name: Build benchmark and review analytics
         env:

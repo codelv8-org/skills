@@ -1,6 +1,21 @@
-# ตัวอย่าง Photoreal head for web
+# Photoreal Head — Projection & Benchmark Lab v3.1.1
 
-ตัวอย่างเส้นทาง **Existing model → Clay review → Web material → GLB inspection → Browser** ของ `photoreal-head-web v2.0.0`
+ตัวอย่างเส้นทาง **Existing scan → Clay / UV QA → Calibrated projection → Robust fusion → Holdout benchmark → Browser** ของ `photoreal-head-web v3.1.1` โดยเก็บไฟล์ GLB สแกนรุ่นเดิมเป็น Baseline ไม่อ้างว่าเป็นโมเดลที่ปั้นขึ้นใหม่
+
+## Projection Lab (v3.1.1)
+
+GitHub Pages build สร้างผลใหม่จาก `model/head.glb` ที่มีสิทธิ์เผยแพร่ CC BY 3.0 เท่านั้น ไม่ใช้ภาพถ่ายส่วนตัวหรือ Asset อื่นของผู้ใช้ รัน `scripts/build-photoreal-example.py` ผ่าน Projection Engine จริง สร้าง 9 โหมดและรายงาน `reports/projection_lab.json` พร้อมภาพ Overview ใหม่ที่อ้างอิงผลจาก run เดียวกัน:
+
+- Front-only, 8-view, weighted mean ที่มี synthetic tint, robust consensus และ reviewed quarantine
+- Coverage, Ambiguity, UV anisotropy, UV density; สีเทาคือพื้นที่ไม่มีข้อมูล
+- ตัวเลข common-support MAE และ Coverage จาก holdout แยกจาก training
+
+```bash
+python -m pip install -r skills/photoreal-head-web/scripts/requirements-projection.txt
+python scripts/build-photoreal-example.py --strict
+```
+
+ผลคือ B1 rendered-asset diagnostic แม้ geometry มาจากสแกนจริง ไม่ใช่ benchmark จากภาพถ่ายอิสระหรือ photorealism score ไม่ได้อนุมัติ final GLB หรือสร้าง intrinsic albedo ใหม่ หาก build ไม่สำเร็จ manifest แสดง BLOCKED และ viewer คง Baseline; ไม่เผยแพร่ผลเก่าหรือผลที่แต่งขึ้น ภาพ clay และรายงาน build เดิมด้านล่างเป็นหลักฐาน Baseline เท่านั้น
 
 ## เปิดดู
 

@@ -14,7 +14,7 @@ ROOT=Path(__file__).resolve().parents[1]
 SUITES={
     "webapp-quotation-builder": ["scripts/test_pricing.py"],
     "privacy-first-database-documentation-builder": ["scripts/test_dictionary.py"],
-    "photoreal-head-web": ["tests/test_anatomy_tools.py","tests/test_surface_tools.py"],
+    "photoreal-head-web": ["tests/test_anatomy_tools.py","tests/test_surface_tools.py","tests/test_projection_tools.py","tests/test_robust_blend.py"],
     "lowpoly-character-web": ["tests/test_reference_and_budget.py","tests/test_skill_tools.py"],
     "thai-krathong-3d": ["scripts/smoke_test.py"],
 }
