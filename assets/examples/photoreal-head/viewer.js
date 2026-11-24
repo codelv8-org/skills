@@ -113,7 +113,7 @@ try {
     const { width, height } = stage.getBoundingClientRect();
     camera.aspect = width / height; camera.updateProjectionMatrix(); renderer.setSize(width, height, false); fitCamera(); controls.update(); render();
   }).observe(stage);
-  loadModel('model/head.glb').then(({gltf,hash}) => {
+  loadModel('model/head.glb').then(async ({gltf,hash}) => {
     baselineHash=hash;
     model = gltf.scene;
     const box = new THREE.Box3().setFromObject(model);
@@ -122,15 +122,22 @@ try {
     model.position.sub(center);
     modelSize = box.getSize(new THREE.Vector3());
     fitCamera();
+    const legacyTextures=new Set();
     model.traverse(object => {
       if (!object.isMesh)return;
       if(hash===LEGACY_V_UP_SCAN){
         for(const map of [object.material.map,object.material.normalMap]){
-          if(map){map.flipY=true;map.needsUpdate=true;}
+          if(map)legacyTextures.add(map);
         }
       }
       originals.set(object,object.material);
     });
+    // GLTFLoader uses ImageBitmap, for which Texture.flipY is ignored. Flip
+    // actual bitmap pixels before upload so the UV/tangent basis stays intact.
+    await Promise.all([...legacyTextures].map(async map=>{
+      map.image=await createImageBitmap(map.image,{imageOrientation:'flipY'});
+      map.flipY=false;map.needsUpdate=true;
+    }));
     scene.add(model); setView('threequarter'); setAvailable(true); lab.ready();
     status.textContent = 'โหลดแล้ว · ลากหมุนหรือใช้ปุ่มมุมกล้องเพื่อดูรูปทรง';
   }).catch(fail);

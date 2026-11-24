@@ -25,7 +25,7 @@ UV ต้นฉบับมีส่วนซ้อนกัน สามเห�
 
 ก่อนสร้างผลทุกครั้ง builder ตรวจ hash ของต้นฉบับและสำเนากับ preparation report แล้วบังคับ `PASS_UV_ONLY` ที่ไม่มี overlap, degenerate, wrong winding หรือ out-of-bounds รวมถึงเกณฑ์ distortion/density เดิม การทดสอบล้มจะเก็บ UV report และ heatmaps ไว้ให้ตรวจสาเหตุ ทั้ง PR และ Deploy ใช้ `--strict`.
 
-Viewer ตรวจ SHA-256 ของโมเดลจริงก่อนเปิดโหมด Projection, สลับไปใช้รูปทรงสำเนากับ UV ที่ตรงกับผลทดสอบ และกลับไปยังโมเดล Baseline เมื่อเลือกพื้นผิว / Clay / Wireframe. สำหรับ Baseline SHA ที่ระบุในโค้ดเท่านั้น Viewer ตั้ง `flipY=true` ให้ Color / Normal เพื่อจัดทิศภาพให้ตรงรูปทรง โดยไม่แก้ bytes ของ GLB หรือเปลี่ยน normal scale. เป็นการแก้การแสดงผล ไม่ใช่การรับรอง PBR. สีเทาในผล Projection คือพื้นที่ไม่มีข้อมูลที่สังเกตได้ ไม่ใช่สีผิวที่เติมขึ้น.
+Viewer ตรวจ SHA-256 ของโมเดลจริงก่อนเปิดโหมด Projection, สลับไปใช้รูปทรงสำเนากับ UV ที่ตรงกับผลทดสอบ และกลับไปยังโมเดล Baseline เมื่อเลือกพื้นผิว / Clay / Wireframe. สำหรับ Baseline SHA ที่ระบุในโค้ดเท่านั้น Viewer กลับภาพ Color / Normal ด้วย `createImageBitmap(..., {imageOrientation: 'flipY'})` ก่อนอัปโหลด เนื่องจาก `Texture.flipY` ไม่มีผลกับ ImageBitmap โดยไม่แก้ bytes ของ GLB หรือเปลี่ยน normal scale. เป็นการแก้การแสดงผล ไม่ใช่การรับรอง PBR. สีเทาในผล Projection คือพื้นที่ไม่มีข้อมูลที่สังเกตได้ ไม่ใช่สีผิวที่เติมขึ้น.
 
 สร้าง Atlas ซ้ำจากราก repository (ขั้นตอน authoring; CI ตรวจ artifact ที่ผูก hash แล้ว):
 
