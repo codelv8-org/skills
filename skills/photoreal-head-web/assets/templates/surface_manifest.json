@@ -1,0 +1,231 @@
+{
+  "atlas_id": "",
+  "candidate_sha256": "",
+  "uv_sha256": "",
+  "skin_material": "Skin",
+  "winding": "",
+  "source_license": "",
+  "texture_provenance": "",
+  "inferred_regions": "",
+  "reviewer": "",
+  "semantic_alignment_reviewed": false,
+  "seam_padding_reviewed": false,
+  "color_normal_reviewed": false,
+  "landmarks": {
+    "brow_inner_l": {
+      "mesh": null,
+      "primitive": null,
+      "triangle": null,
+      "barycentric": null,
+      "texture_uv": null
+    },
+    "brow_arch_l": {
+      "mesh": null,
+      "primitive": null,
+      "triangle": null,
+      "barycentric": null,
+      "texture_uv": null
+    },
+    "brow_outer_l": {
+      "mesh": null,
+      "primitive": null,
+      "triangle": null,
+      "barycentric": null,
+      "texture_uv": null
+    },
+    "brow_inner_r": {
+      "mesh": null,
+      "primitive": null,
+      "triangle": null,
+      "barycentric": null,
+      "texture_uv": null
+    },
+    "brow_arch_r": {
+      "mesh": null,
+      "primitive": null,
+      "triangle": null,
+      "barycentric": null,
+      "texture_uv": null
+    },
+    "brow_outer_r": {
+      "mesh": null,
+      "primitive": null,
+      "triangle": null,
+      "barycentric": null,
+      "texture_uv": null
+    },
+    "en_l": {
+      "mesh": null,
+      "primitive": null,
+      "triangle": null,
+      "barycentric": null,
+      "texture_uv": null
+    },
+    "en_r": {
+      "mesh": null,
+      "primitive": null,
+      "triangle": null,
+      "barycentric": null,
+      "texture_uv": null
+    },
+    "ex_l": {
+      "mesh": null,
+      "primitive": null,
+      "triangle": null,
+      "barycentric": null,
+      "texture_uv": null
+    },
+    "ex_r": {
+      "mesh": null,
+      "primitive": null,
+      "triangle": null,
+      "barycentric": null,
+      "texture_uv": null
+    },
+    "prn": {
+      "mesh": null,
+      "primitive": null,
+      "triangle": null,
+      "barycentric": null,
+      "texture_uv": null
+    },
+    "al_l": {
+      "mesh": null,
+      "primitive": null,
+      "triangle": null,
+      "barycentric": null,
+      "texture_uv": null
+    },
+    "al_r": {
+      "mesh": null,
+      "primitive": null,
+      "triangle": null,
+      "barycentric": null,
+      "texture_uv": null
+    },
+    "sn": {
+      "mesh": null,
+      "primitive": null,
+      "triangle": null,
+      "barycentric": null,
+      "texture_uv": null
+    },
+    "ch_l": {
+      "mesh": null,
+      "primitive": null,
+      "triangle": null,
+      "barycentric": null,
+      "texture_uv": null
+    },
+    "ch_r": {
+      "mesh": null,
+      "primitive": null,
+      "triangle": null,
+      "barycentric": null,
+      "texture_uv": null
+    },
+    "cupid_l": {
+      "mesh": null,
+      "primitive": null,
+      "triangle": null,
+      "barycentric": null,
+      "texture_uv": null
+    },
+    "cupid_r": {
+      "mesh": null,
+      "primitive": null,
+      "triangle": null,
+      "barycentric": null,
+      "texture_uv": null
+    },
+    "ear_l": {
+      "mesh": null,
+      "primitive": null,
+      "triangle": null,
+      "barycentric": null,
+      "texture_uv": null
+    },
+    "ear_r": {
+      "mesh": null,
+      "primitive": null,
+      "triangle": null,
+      "barycentric": null,
+      "texture_uv": null
+    },
+    "hairline": {
+      "mesh": null,
+      "primitive": null,
+      "triangle": null,
+      "barycentric": null,
+      "texture_uv": null
+    }
+  },
+  "reviews": {
+    "checker_front": {
+      "file": "",
+      "sha256": "",
+      "reviewed": false,
+      "notes": ""
+    },
+    "checker_profile": {
+      "file": "",
+      "sha256": "",
+      "reviewed": false,
+      "notes": ""
+    },
+    "checker_threequarter": {
+      "file": "",
+      "sha256": "",
+      "reviewed": false,
+      "notes": ""
+    },
+    "albedo_unlit": {
+      "file": "",
+      "sha256": "",
+      "reviewed": false,
+      "notes": ""
+    },
+    "normal_closeup": {
+      "file": "",
+      "sha256": "",
+      "reviewed": false,
+      "notes": ""
+    },
+    "light_soft": {
+      "file": "",
+      "sha256": "",
+      "reviewed": false,
+      "notes": ""
+    },
+    "light_side": {
+      "file": "",
+      "sha256": "",
+      "reviewed": false,
+      "notes": ""
+    },
+    "light_rim": {
+      "file": "",
+      "sha256": "",
+      "reviewed": false,
+      "notes": ""
+    },
+    "browser_front": {
+      "file": "",
+      "sha256": "",
+      "reviewed": false,
+      "notes": ""
+    },
+    "browser_profile": {
+      "file": "",
+      "sha256": "",
+      "reviewed": false,
+      "notes": ""
+    },
+    "browser_brow_switch": {
+      "file": "",
+      "sha256": "",
+      "reviewed": false,
+      "notes": ""
+    }
+  }
+}

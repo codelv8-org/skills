@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.0.0 - Anatomical UV & Digital Skin Edition (2026-11-24)
+
+- Preserve anatomy, photo-fit, original GLB tools and viewer. Add explicit canonical atlas/semantic anchors, multiview projection, skin optics and regional material workflows.
+- Validate actual GLB UV0 with triangle overlap clipping, winding, degeneracy, bounds, Jacobian anisotropy and relative density heatmaps; inspect embedded skin map channels and numeric landmark registration.
+- Add region-mask and supporting microdetail tool driven by actual annotated UV polygons, blank contracts and synthetic regression tests.
+- Require anatomy-gated candidate export plus matching candidate/UV hashes, independent landmarks, manual three-light/browser evidence and exact-byte promotion. No automatic claim of realism.
+- Blender runtime and real-head visual benchmark remain environment-dependent.
+
 ## 2.0 - Anatomy First / Measurement-Driven Edition (2026-11-19)
 
 - Preserve the original Blender UV, PBR microdetail, GLB inspector, UV layout and React Three Fiber viewer tools.
