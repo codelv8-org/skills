@@ -1,0 +1,25 @@
+{
+  "contract_version": "2.0",
+  "system_label": "synthetic_demo",
+  "engine": "mariadb",
+  "schema_revision": "v1",
+  "scope_id": "demo_scope",
+  "status": "template",
+  "approval": {"role": "Synthetic", "reviewed": true, "metadata_only": true, "audience": "internal"},
+  "sources": ["SRC_DEMO"],
+  "objects": [
+    {"schema": "demo", "name": "department", "kind": "table", "source_id": "SRC_DEMO", "classification": "Internal",
+     "columns": [
+       {"name": "code", "ordinal": 1, "type": "varchar", "length": 20, "precision": null, "scale": null, "nullable": false, "source_id": "SRC_DEMO", "classification": "Internal"},
+       {"name": "label", "ordinal": 2, "type": "varchar", "length": 80, "precision": null, "scale": null, "nullable": true, "source_id": "SRC_DEMO", "classification": "Internal"}
+     ], "keys": [{"name": "pk_department", "kind": "primary", "columns": ["code"], "source_id": "SRC_DEMO"}], "foreign_keys": []},
+    {"schema": "demo", "name": "service", "kind": "table", "source_id": "SRC_DEMO", "classification": "Internal",
+     "columns": [
+       {"name": "service_id", "ordinal": 1, "type": "integer", "length": null, "precision": 10, "scale": 0, "nullable": false, "source_id": "SRC_DEMO", "classification": "Internal"},
+       {"name": "department_code", "ordinal": 2, "type": "varchar", "length": 20, "precision": null, "scale": null, "nullable": false, "source_id": "SRC_DEMO", "classification": "Internal"},
+       {"name": "patient_id", "ordinal": 3, "type": "varchar", "length": 24, "precision": null, "scale": null, "nullable": null, "source_id": "SRC_DEMO", "classification": "Unknown"}
+     ], "keys": [{"name": "pk_service", "kind": "primary", "columns": ["service_id"], "source_id": "SRC_DEMO"}], "foreign_keys": [{"name": "fk_department", "columns": ["department_code"], "target_schema": "demo", "target_name": "department", "target_columns": ["code"], "source_id": "SRC_DEMO"}]}
+  ],
+  "definitions": [{"schema": "demo", "object": "department", "column": null, "definition": "โครงสร้างสมมุติสำหรับหน่วยงาน", "grain": "หนึ่งรายการต่อรหัสหน่วยงาน", "format": null, "unit": null, "owner_role": "Data Steward", "source_id": "SRC_DEMO", "status": "verified"}, {"schema": "demo", "object": "department", "column": "code", "definition": "รหัสหน่วยงานในโครงสร้างสมมุติ", "grain": null, "format": null, "unit": null, "owner_role": null, "source_id": "SRC_DEMO", "status": "verified"}],
+  "lineage": []
+}

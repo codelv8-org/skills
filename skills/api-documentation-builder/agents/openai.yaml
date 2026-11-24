@@ -1,0 +1,4 @@
+interface:
+  display_name: "API Documentation Builder"
+  short_description: "สร้าง API Manual, OpenAPI และ Agent Guide แบบ Contract-only"
+  default_prompt: "สร้าง API Documentation Suite จาก API contract ที่ผ่านการคัดกรอง โดยไม่เรียก endpoint จริงหรืออ่านข้อมูลส่วนบุคคล"

@@ -1517,16 +1517,53 @@
     // Embedded initial data for 100% offline & file:// protocol reliability
     const EMBEDDED_DATA = {
       "categories": [
-        { "id": "Document", "name": "Documentation & Manuals", "nameTh": "หมวดหมู่เอกสารและคู่มือ", "icon": "📄" },
-        { "id": "UIUX", "name": "UI/UX & Design", "nameTh": "การออกแบบและส่วนต่อประสาน", "icon": "🎨" },
-        { "id": "Architecture", "name": "Architecture & Engineering", "nameTh": "สถาปัตยกรรมและวิศวกรรมซอฟต์แวร์", "icon": "🏛️" },
-        { "id": "Optimization", "name": "Performance & Optimization", "nameTh": "การปรับแต่งประสิทธิภาพและ Token", "icon": "⚡" },
-        { "id": "Tools", "name": "Developer Tools & Utilities", "nameTh": "เครื่องมือและยูทิลิตี้สำหรับนักพัฒนา", "icon": "🛠️" }
+        {
+          "id": "Document",
+          "name": "Documentation & Manuals",
+          "nameTh": "หมวดหมู่เอกสารและคู่มือ",
+          "icon": "📄"
+        },
+        {
+          "id": "UIUX",
+          "name": "UI/UX & Design",
+          "nameTh": "การออกแบบและส่วนต่อประสาน",
+          "icon": "🎨"
+        },
+        {
+          "id": "Architecture",
+          "name": "Architecture & Engineering",
+          "nameTh": "สถาปัตยกรรมและวิศวกรรมซอฟต์แวร์",
+          "icon": "🏛️"
+        },
+        {
+          "id": "Optimization",
+          "name": "Performance & Optimization",
+          "nameTh": "การปรับแต่งประสิทธิภาพและ Token",
+          "icon": "⚡"
+        },
+        {
+          "id": "Tools",
+          "name": "Developer Tools & Utilities",
+          "nameTh": "เครื่องมือและยูทิลิตี้สำหรับนักพัฒนา",
+          "icon": "🛠️"
+        }
       ],
       "agents": [
-        { "id": "antigravity", "name": "Google Antigravity", "icon": "🔮" },
-        { "id": "claude-code", "name": "Anthropic Claude Code", "icon": "🟧" },
-        { "id": "codex", "name": "OpenAI Codex", "icon": "🟩" }
+        {
+          "id": "antigravity",
+          "name": "Google Antigravity",
+          "icon": "🔮"
+        },
+        {
+          "id": "claude-code",
+          "name": "Anthropic Claude Code",
+          "icon": "🟧"
+        },
+        {
+          "id": "codex",
+          "name": "OpenAI Codex",
+          "icon": "🟩"
+        }
       ],
       "skills": [
         {
@@ -1541,8 +1578,20 @@
           "author": "Personal Library",
           "summary": "สร้างคู่มือการใช้งานระบบ Web Application ครอบคลุมทั้ง Interactive HTML (พร้อม Sidebar, Search, Print-to-PDF) และ Markdown รองรับ Antigravity, Claude Code, Codex",
           "description": "Skill สำหรับสร้างคู่มือการใช้งานระบบ Web Application อย่างมืออาชีพ ครอบคลุมโครงสร้าง 10 เสาหลัก (10-Pillar Framework) ตั้งแต่ภาพรวมระบบ, สิทธิ์การเข้าถึง, ฟังก์ชันแบบ Step-by-Step, ตารางข้อมูลแบบฟอร์ม, FAQ และ Support พร้อมส่งมอบในรูปแบบ Interactive HTML หรือ Markdown ออกแบบตามมาตรฐาน Phase 1 รองรับ AI Coding Agents ชั้นนำ (Codex, Claude Code, Antigravity)",
-          "tags": ["Document", "User Manual", "Web App", "Documentation", "HTML", "Markdown", "Multi-Agent"],
-          "supportedAgents": ["antigravity", "claude-code", "codex"],
+          "tags": [
+            "Document",
+            "User Manual",
+            "Web App",
+            "Documentation",
+            "HTML",
+            "Markdown",
+            "Multi-Agent"
+          ],
+          "supportedAgents": [
+            "antigravity",
+            "claude-code",
+            "codex"
+          ],
           "triggers": [
             "คู่มือการใช้งาน",
             "สร้างคู่มือ",
@@ -1556,10 +1605,26 @@
           "path": "skills/webapp-user-manual",
           "entryFile": "skills/webapp-user-manual/SKILL.md",
           "assets": [
-            { "name": "SKILL.md", "type": "skill", "path": "skills/webapp-user-manual/SKILL.md" },
-            { "name": "manual-template.html", "type": "template", "path": "skills/webapp-user-manual/templates/manual-template.html" },
-            { "name": "manual-template.md", "type": "template", "path": "skills/webapp-user-manual/templates/manual-template.md" },
-            { "name": "style-guide.md", "type": "reference", "path": "skills/webapp-user-manual/references/style-guide.md" }
+            {
+              "name": "SKILL.md",
+              "type": "skill",
+              "path": "skills/webapp-user-manual/SKILL.md"
+            },
+            {
+              "name": "manual-template.html",
+              "type": "template",
+              "path": "skills/webapp-user-manual/templates/manual-template.html"
+            },
+            {
+              "name": "manual-template.md",
+              "type": "template",
+              "path": "skills/webapp-user-manual/templates/manual-template.md"
+            },
+            {
+              "name": "style-guide.md",
+              "type": "reference",
+              "path": "skills/webapp-user-manual/references/style-guide.md"
+            }
           ],
           "examples": [
             {
@@ -1608,8 +1673,21 @@
           "author": "Personal Library",
           "summary": "สร้างคู่มือการใช้งานระบบ Web Application ฉบับสิ่งพิมพ์ A4 ระดับส่งมอบงานโครงการ ด้วย CSS Paged Media (@page) รองรับ Antigravity, Claude Code, Codex",
           "description": "Skill สำหรับจัดทำคู่มือการใช้งานระบบ Web Application เกรดสิ่งพิมพ์และเอกสารส่งมอบงานโครงการ (Publication-Grade Deliverables) กำหนดขนาด A4 พร้อมหน้าปกทางการ, แผ่นควบคุมเอกสารและการลงนามตรวจรับ (Sign-off Matrix), สารบัญระบุหน้า, หัว/ท้ายกระดาษอัตโนมัติ และการคุม Page Break อย่างแม่นยำ พร้อมสคริปต์ PowerShell (Windows) และ Bash (macOS/Linux) สำหรับแปลงเป็น PDF ด้วย Headless Edge/Chrome",
-          "tags": ["Document", "PDF", "Print-Ready", "CSS-Paged-Media", "A4", "Deliverable", "User-Manual", "Multi-Agent"],
-          "supportedAgents": ["antigravity", "claude-code", "codex"],
+          "tags": [
+            "Document",
+            "PDF",
+            "Print-Ready",
+            "CSS-Paged-Media",
+            "A4",
+            "Deliverable",
+            "User-Manual",
+            "Multi-Agent"
+          ],
+          "supportedAgents": [
+            "antigravity",
+            "claude-code",
+            "codex"
+          ],
           "triggers": [
             "คู่มือ PDF",
             "สร้างคู่มือ PDF",
@@ -1623,11 +1701,31 @@
           "path": "skills/webapp-user-manual-pdf",
           "entryFile": "skills/webapp-user-manual-pdf/SKILL.md",
           "assets": [
-            { "name": "SKILL.md", "type": "skill", "path": "skills/webapp-user-manual-pdf/SKILL.md" },
-            { "name": "pdf-manual-template.html", "type": "template", "path": "skills/webapp-user-manual-pdf/templates/pdf-manual-template.html" },
-            { "name": "export-pdf.ps1", "type": "script", "path": "skills/webapp-user-manual-pdf/scripts/export-pdf.ps1" },
-            { "name": "export-pdf.sh", "type": "script", "path": "skills/webapp-user-manual-pdf/scripts/export-pdf.sh" },
-            { "name": "pdf-styling-guide.md", "type": "reference", "path": "skills/webapp-user-manual-pdf/references/pdf-styling-guide.md" }
+            {
+              "name": "SKILL.md",
+              "type": "skill",
+              "path": "skills/webapp-user-manual-pdf/SKILL.md"
+            },
+            {
+              "name": "pdf-manual-template.html",
+              "type": "template",
+              "path": "skills/webapp-user-manual-pdf/templates/pdf-manual-template.html"
+            },
+            {
+              "name": "export-pdf.ps1",
+              "type": "script",
+              "path": "skills/webapp-user-manual-pdf/scripts/export-pdf.ps1"
+            },
+            {
+              "name": "export-pdf.sh",
+              "type": "script",
+              "path": "skills/webapp-user-manual-pdf/scripts/export-pdf.sh"
+            },
+            {
+              "name": "pdf-styling-guide.md",
+              "type": "reference",
+              "path": "skills/webapp-user-manual-pdf/references/pdf-styling-guide.md"
+            }
           ],
           "examples": [
             {
@@ -2383,6 +2481,281 @@
             "Bake BaseColor, Normal, Roughness, Metallic, AO และ packed ORM พร้อม strict GLB QA"
           ],
           "overviewImage": "assets/skill-overviews/thai-krathong-3d.webp"
+        },
+        {
+          "id": "privacy-first-database-documentation-builder",
+          "name": "Privacy-First Database Documentation Builder",
+          "nameTh": "สร้างชุดเอกสารฐานข้อมูลแบบ Privacy-First",
+          "version": "2.0.0",
+          "summary": "สร้าง Data Catalog, Data Dictionary, ERD และเอกสารสำหรับ AI Agent จาก Schema Metadata ที่ผ่านการรับรองเท่านั้น",
+          "description": "สร้างชุดเอกสารฐานข้อมูล PDF + Markdown และ Mermaid จาก DBA/Data Owner-approved schema metadata ผ่าน Strict Input Contract v2.0, Privacy Engine แบบ Fail-Closed และ Release Quality Gate รองรับ 9 โหมด รวม Data Lineage, Classification, Consumer Guide และ Schema Diff โดยห้ามอ่านข้อมูลส่วนบุคคลจริง เชื่อมต่อฐานข้อมูล หรืออ่าน sample records ทุกกรณี",
+          "tags": [
+            "Documentation",
+            "Database",
+            "Data Catalog",
+            "Data Dictionary",
+            "ERD",
+            "Privacy",
+            "Data Governance",
+            "AI Agent",
+            "PDF",
+            "Markdown",
+            "Multi-Agent"
+          ],
+          "triggers": [
+            "สร้าง Data Dictionary",
+            "สร้าง Data Catalog",
+            "พจนานุกรมข้อมูล",
+            "สร้างเอกสารฐานข้อมูล",
+            "ER Diagram",
+            "ERD",
+            "data classification",
+            "data lineage",
+            "schema diff",
+            "database consumer guide",
+            "database documentation",
+            "เอกสารสำหรับ AI Agent"
+          ],
+          "highlights": [
+            "Metadata-only, Offline-first และ Fail-Closed; Unknown มีผลเป็น Restricted",
+            "สร้าง Data Dictionary ภาษาไทย PDF A4 Landscape และ Markdown",
+            "รองรับ 9 execution modes พร้อม Strict Input Contract v2.0",
+            "ตรวจ PK, UK และ FK แบบ composite; ไม่เดาความสัมพันธ์หรือ lineage",
+            "สคริปต์สร้างเอกสารและ regression tests ด้วย synthetic metadata"
+          ],
+          "category": "Document",
+          "status": "Ready",
+          "phase": "Phase 1",
+          "author": "Personal Library",
+          "supportedAgents": [
+            "antigravity",
+            "claude-code",
+            "codex"
+          ],
+          "agentCompatibility": {
+            "antigravity": {
+              "supported": true,
+              "version": ">=1.0.0"
+            },
+            "claudeCode": {
+              "supported": true,
+              "version": ">=1.0.0"
+            },
+            "codex": {
+              "supported": true,
+              "version": ">=1.0.0"
+            }
+          },
+          "path": "skills/privacy-first-database-documentation-builder",
+          "entryFile": "skills/privacy-first-database-documentation-builder/SKILL.md",
+          "assets": [
+            {
+              "name": "SKILL.md",
+              "type": "skill",
+              "path": "skills/privacy-first-database-documentation-builder/SKILL.md"
+            },
+            {
+              "name": "openai.yaml",
+              "type": "asset",
+              "path": "skills/privacy-first-database-documentation-builder/agents/openai.yaml"
+            },
+            {
+              "name": "document-outline.md",
+              "type": "template",
+              "path": "skills/privacy-first-database-documentation-builder/assets/document-outline.md"
+            },
+            {
+              "name": "intake-template.md",
+              "type": "template",
+              "path": "skills/privacy-first-database-documentation-builder/assets/intake-template.md"
+            },
+            {
+              "name": "metadata-template.json",
+              "type": "template",
+              "path": "skills/privacy-first-database-documentation-builder/assets/metadata-template.json"
+            },
+            {
+              "name": "database-model.md",
+              "type": "reference",
+              "path": "skills/privacy-first-database-documentation-builder/references/database-model.md"
+            },
+            {
+              "name": "input-contract.md",
+              "type": "reference",
+              "path": "skills/privacy-first-database-documentation-builder/references/input-contract.md"
+            },
+            {
+              "name": "metadata-acquisition.md",
+              "type": "reference",
+              "path": "skills/privacy-first-database-documentation-builder/references/metadata-acquisition.md"
+            },
+            {
+              "name": "privacy-boundary.md",
+              "type": "reference",
+              "path": "skills/privacy-first-database-documentation-builder/references/privacy-boundary.md"
+            },
+            {
+              "name": "publishing.md",
+              "type": "reference",
+              "path": "skills/privacy-first-database-documentation-builder/references/publishing.md"
+            },
+            {
+              "name": "usage.md",
+              "type": "reference",
+              "path": "skills/privacy-first-database-documentation-builder/references/usage.md"
+            },
+            {
+              "name": "build_dictionary.py",
+              "type": "script",
+              "path": "skills/privacy-first-database-documentation-builder/scripts/build_dictionary.py"
+            },
+            {
+              "name": "release_check.py",
+              "type": "script",
+              "path": "skills/privacy-first-database-documentation-builder/scripts/release_check.py"
+            },
+            {
+              "name": "test_dictionary.py",
+              "type": "script",
+              "path": "skills/privacy-first-database-documentation-builder/scripts/test_dictionary.py"
+            },
+            {
+              "name": "validate_metadata.py",
+              "type": "script",
+              "path": "skills/privacy-first-database-documentation-builder/scripts/validate_metadata.py"
+            }
+          ],
+          "examples": []
+        },
+        {
+          "id": "api-documentation-builder",
+          "name": "API Documentation Builder",
+          "nameTh": "สร้างเอกสารและคู่มือการใช้งาน API",
+          "version": "1.0.0",
+          "summary": "สร้าง API Catalog, API Data Dictionary, OpenAPI, Consumer Guide และ AI Agent/MCP Integration Guide จาก API Contract ที่ผ่านการคัดกรอง",
+          "description": "จัดทำ API Documentation Suite สำหรับนักพัฒนา ผู้ใช้ API และ AI Agent ในรูปแบบ PDF, Markdown และ OpenAPI YAML/JSON จาก owner-reviewed contract หรือ route/schema metadata ที่ปลอดภัยเท่านั้น รองรับการตรวจสอบ OpenAPI แบบ Offline และการจัดทำ tool manifest เพื่อทบทวนก่อนใช้งานจริง ห้ามเรียก endpoint จริง อ่าน payload, credentials หรือข้อมูลส่วนบุคคลจริง",
+          "tags": [
+            "Documentation",
+            "API",
+            "REST",
+            "OpenAPI",
+            "Swagger",
+            "User Manual",
+            "Privacy",
+            "MCP",
+            "AI Agent",
+            "PDF",
+            "Markdown",
+            "Multi-Agent"
+          ],
+          "triggers": [
+            "สร้างคู่มือ API",
+            "API User Manual",
+            "API documentation",
+            "API catalog",
+            "API data dictionary",
+            "OpenAPI",
+            "Swagger",
+            "API consumer guide",
+            "API governance",
+            "MCP integration",
+            "AI Agent integration"
+          ],
+          "highlights": [
+            "สร้างเอกสาร API ครบ 6 หมวดสำหรับนักพัฒนาและ AI Agent",
+            "OpenAPI 3.x พร้อม offline structural validation",
+            "Contract-only และ Privacy by Design ห้ามเรียก endpoint จริง",
+            "กำหนด API scope, classification, auth และข้อจำกัดตามหลักฐาน",
+            "รองรับ MCP tool schema แบบ deny-by-default และ synthetic templates"
+          ],
+          "category": "Document",
+          "status": "Ready",
+          "phase": "Phase 1",
+          "author": "Personal Library",
+          "supportedAgents": [
+            "antigravity",
+            "claude-code",
+            "codex"
+          ],
+          "agentCompatibility": {
+            "antigravity": {
+              "supported": true,
+              "version": ">=1.0.0"
+            },
+            "claudeCode": {
+              "supported": true,
+              "version": ">=1.0.0"
+            },
+            "codex": {
+              "supported": true,
+              "version": ">=1.0.0"
+            }
+          },
+          "path": "skills/api-documentation-builder",
+          "entryFile": "skills/api-documentation-builder/SKILL.md",
+          "assets": [
+            {
+              "name": "SKILL.md",
+              "type": "skill",
+              "path": "skills/api-documentation-builder/SKILL.md"
+            },
+            {
+              "name": "openai.yaml",
+              "type": "asset",
+              "path": "skills/api-documentation-builder/agents/openai.yaml"
+            },
+            {
+              "name": "document-outline.md",
+              "type": "template",
+              "path": "skills/api-documentation-builder/assets/document-outline.md"
+            },
+            {
+              "name": "intake-template.md",
+              "type": "template",
+              "path": "skills/api-documentation-builder/assets/intake-template.md"
+            },
+            {
+              "name": "openapi-template.yaml",
+              "type": "template",
+              "path": "skills/api-documentation-builder/assets/openapi-template.yaml"
+            },
+            {
+              "name": "tools-template.json",
+              "type": "template",
+              "path": "skills/api-documentation-builder/assets/tools-template.json"
+            },
+            {
+              "name": "contract-acquisition.md",
+              "type": "reference",
+              "path": "skills/api-documentation-builder/references/contract-acquisition.md"
+            },
+            {
+              "name": "openapi-and-agent.md",
+              "type": "reference",
+              "path": "skills/api-documentation-builder/references/openapi-and-agent.md"
+            },
+            {
+              "name": "privacy-boundary.md",
+              "type": "reference",
+              "path": "skills/api-documentation-builder/references/privacy-boundary.md"
+            },
+            {
+              "name": "publishing.md",
+              "type": "reference",
+              "path": "skills/api-documentation-builder/references/publishing.md"
+            },
+            {
+              "name": "release_check.py",
+              "type": "script",
+              "path": "skills/api-documentation-builder/scripts/release_check.py"
+            },
+            {
+              "name": "validate_openapi.py",
+              "type": "script",
+              "path": "skills/api-documentation-builder/scripts/validate_openapi.py"
+            }
+          ],
+          "examples": []
         }
       ]
     };

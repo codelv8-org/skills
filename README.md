@@ -76,6 +76,17 @@ skills/
 
 ---
 
+## 📚 Documentation Skills
+
+| Skill | Version | ขอบเขต |
+|---|---|---|
+| [Privacy-First Database Documentation Builder](skills/privacy-first-database-documentation-builder/SKILL.md) | 2.0.0 | Data Catalog, Data Dictionary, ERD, Classification, Lineage, Schema Diff, PDF + Markdown จาก metadata ที่ผ่านการรับรองเท่านั้น |
+| [API Documentation Builder](skills/api-documentation-builder/SKILL.md) | 1.0.0 | API Catalog, Data Dictionary, OpenAPI, Consumer Guide, Governance, AI Agent/MCP Integration จาก contract ที่ผ่านการคัดกรองเท่านั้น |
+
+ทั้งสอง Skill ห้ามอ่านข้อมูลส่วนบุคคลจริงหรือค่าข้อมูลอ่อนไหวจริง ไม่อนุญาตให้เชื่อมต่อฐานข้อมูลหรือเรียก API จริงเพื่อสร้างเอกสาร ใช้เฉพาะ metadata/contract ที่เจ้าของข้อมูลตรวจสอบก่อนส่งมอบ และตัวอย่างสมมุติเท่านั้น
+
+---
+
 ## 🚀 วิธีเปิดใช้งานหน้า Web Catalog
 
 คุณสามารถเปิดดูรายการ Skill ผ่านเบราว์เซอร์ได้ทันทีโดยไม่ต้องติดตั้ง Backend:
