@@ -50,7 +50,7 @@
     const versions=[...new Set([skill.version,...all.map(r=>r.version)])];
     for(const v of versions)option(versionSelect,v,'v'+v+(v===skill.version?' (ปัจจุบัน)':''));
     option(agentSelect,'all','ทุก Agent');for(const [k,name] of Object.entries(agents))option(agentSelect,k,name);
-    option(orderSelect,'recent','ล่าสุด');option(orderSelect,'high','คะแนนสูงสุด');option(orderSelect,'low','คะแนนต่ำสุด');
+    option(orderSelect,'recent','ล่าสุด');option(orderSelect,'helpful','มีประโยชน์มากที่สุด');option(orderSelect,'high','คะแนนสูงสุด');option(orderSelect,'low','คะแนนต่ำสุด');
     controls.append(versionLabel,agentLabel,orderLabel);
     const summary=el('div','sr-summary'),list=el('div','sr-list');
     function draw(){
@@ -65,20 +65,30 @@
       const detail=el('div','sr-dimensions');
       for(const [k,,label] of criteria){const row=el('div','sr-dimension');row.append(el('span','',label),el('strong','',s.dimensions[k].toFixed(1)+' / 5'));detail.append(row);}
       summary.append(score,hist,detail);
-      filtered.sort((a,b)=>orderSelect.value==='high'?b.overall-a.overall:orderSelect.value==='low'?a.overall-b.overall:String(b.approvedAt).localeCompare(String(a.approvedAt)));
+      filtered.sort((a,b)=>orderSelect.value==='helpful'?(b.helpful||0)-(a.helpful||0)||String(b.approvedAt).localeCompare(String(a.approvedAt)):orderSelect.value==='high'?b.overall-a.overall:orderSelect.value==='low'?a.overall-b.overall:String(b.approvedAt).localeCompare(String(a.approvedAt)));
       for(const r of filtered){
         const article=el('article','sr-review');
         const header=el('div','sr-review-head');const author=el('strong','',r.author);
         const link=el('a','', 'GitHub #'+r.issueNumber);link.href=repo+'/issues/'+Number(r.issueNumber);link.target='_blank';link.rel='noopener noreferrer';
         header.append(author,link);article.append(header,el('div','sr-star','★'.repeat(Math.round(r.overall))+'☆'.repeat(5-Math.round(r.overall))+' '+Number(r.overall).toFixed(1)),el('p','sr-muted',(agents[r.agent]||'Other')+' · v'+r.version+' · '+String(r.approvedAt).slice(0,10)));
-        if(r.comment)article.append(el('p','sr-comment',r.comment));list.append(article);
+        if(r.comment)article.append(el('p','sr-comment',r.comment));
+        const images=el('div','sr-images');
+        for(const url of (r.images||[]).slice(0,3)){
+          if(!/^https:\/\/github\.com\/user-attachments\/assets\/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(url))continue;
+          const a=el('a');a.href=url;a.target='_blank';a.rel='noopener noreferrer';
+          const img=el('img');img.src=url;img.alt='ภาพประกอบรีวิวจาก GitHub';img.loading='lazy';img.referrerPolicy='no-referrer';
+          img.addEventListener('error',()=>{a.replaceChildren(el('span','sr-muted','เปิดไฟล์แนบที่ GitHub ↗'));});a.append(img);images.append(a);
+        }
+        if(images.childNodes.length)article.append(images);
+        const vote=el('a','sr-vote','👍 '+(Number.isSafeInteger(r.helpful)?r.helpful:0)+' · มีประโยชน์ (โหวตบน GitHub ↗)');vote.href=link.href;vote.target='_blank';vote.rel='noopener noreferrer';vote.title='เปิด Issue และกด 👍 ด้วยบัญชี GitHub; คะแนนอัปเดตหลังรอบเผยแพร่';
+        article.append(vote);list.append(article);
       }
     }
     for(const c of [versionSelect,agentSelect,orderSelect])c.addEventListener('change',draw);
     const disclosure=el('details','sr-write');const toggle=el('summary','','เขียนรีวิวเวอร์ชัน v'+skill.version);disclosure.append(toggle);
     const form=el('form','sr-form');const notice=el('p','sr-muted','คุณจะไปยัง GitHub เพื่อเข้าสู่ระบบและยืนยันการส่ง Issue สาธารณะ รีวิวจะขึ้นบน Catalog หลังผู้ดูแลอนุมัติเท่านั้น ห้ามใส่ข้อมูลส่วนบุคคล ข้อมูลผู้ป่วย รหัสผ่าน หรือข้อมูลลับ');
     const [aLabel,aSelect]=selectControl('AI Agent ที่ใช้จริง');aSelect.name='agent';aSelect.required=true;option(aSelect,'','เลือก AI Agent');for(const [k,name] of Object.entries(agents))option(aSelect,k,name);
-    form.append(notice,aLabel);
+    form.append(notice,el('p','sr-muted','แนบภาพผลลัพธ์ได้สูงสุด 3 ภาพใน GitHub Issue ก่อนส่ง โดยใช้ไฟล์แนบ GitHub เท่านั้น ห้ามแนบภาพผู้ป่วย ข้อมูลระบุตัวบุคคล หรือข้อมูลลับ'),aLabel);
     const liveScore=el('output','sr-live','ให้คะแนนครบทั้ง 5 ด้านเพื่อคำนวณคะแนนรวม');liveScore.setAttribute('aria-live','polite');
     for(const [key,,label] of criteria){
       const field=el('fieldset','sr-field');field.append(el('legend','',label));const row=el('div','sr-stars');
@@ -94,6 +104,7 @@
     form.addEventListener('submit',e=>{
       e.preventDefault();warning.textContent='';
       const values=new FormData(form);const rows=['<!-- codelv8-skill-review:v1 -->','Skill: '+skill.id,'Version: '+skill.version,'Agent: '+values.get('agent'),...criteria.map(([k,name])=>name+': '+values.get(k)),'---',String(values.get('comment')||'').trim()];
+      // GitHub handles actual authenticated file upload; the static page does not upload files.
       const url=new URL(repo+'/issues/new');url.searchParams.set('title','[Skill Review] '+skill.id+' v'+skill.version);url.searchParams.set('body',rows.join('\n'));
       if(url.href.length>7800){warning.textContent='ความคิดเห็นยาวเกินขนาดลิงก์ GitHub กรุณาลดข้อความแล้วลองใหม่';return;}
       window.location.assign(url.href);

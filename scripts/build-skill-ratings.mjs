@@ -3,19 +3,34 @@ import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 
+export function splitReviewContent(raw) {
+  const images=[];const lines=raw.split('\n');
+  const allowed=/^https:\/\/github\.com\/user-attachments\/assets\/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i;
+  const text=[];
+  for(const line of lines){
+    const v=line.trim();
+    let m=v.match(/^!\[[^\]\r\n]{0,100}\]\((https:\/\/[^\s)]+)\)$/);
+    if(!m && /^<img\s+[^<>]*\/?>$/i.test(v))m=v.match(/\bsrc="(https:\/\/[^"\s]+)"/i);
+    if(m&&allowed.test(m[1])){if(!images.includes(m[1]))images.push(m[1]);continue;}
+    text.push(line);
+  }
+  const comment=text.join('\n').trim();
+  if(images.length>3||comment.length>500||/[\x00-\x08\x0b\x0c\x0e-\x1f]/.test(comment))return null;
+  return {comment,images};
+}
 export function parseReview(issue,knownSkills,approval) {
   if (!issue || issue.pull_request || issue.user?.type!=='User' || !Number.isSafeInteger(issue.user.id) || !Number.isSafeInteger(issue.number) || !approval || !approval.approvedAt) return null;
-  if (typeof issue.body!=='string'||issue.body.length>2000||typeof issue.title!=='string')return null;
+  if (typeof issue.body!=='string'||issue.body.length>4000||typeof issue.title!=='string')return null;
   const body=issue.body.replace(/\r\n/g,'\n');
   const match=body.match(/^<!-- codelv8-skill-review:v1 -->\nSkill: ([a-z0-9]+(?:-[a-z0-9]+)*)\nVersion: (\d{1,4}\.\d{1,4}\.\d{1,4}(?:-[0-9A-Za-z.-]{1,40})?)\nAgent: (codex|claude-code|antigravity|other)\nOutput Quality: ([1-5])\nAccuracy: ([1-5])\nEase of Use: ([1-5])\nEfficiency: ([1-5])\nConsistency: ([1-5])\n---(?:\n([\s\S]*))?$/);
   if(!match)return null;
   const [,skillId,version,agent,quality,accuracy,ease,efficiency,consistency,rawComment='']=match;
   if(!knownSkills.has(skillId)||issue.title.trim()!==`[Skill Review] ${skillId} v${version}`)return null;
-  const comment=rawComment.trim();if(comment.length>500||/[\x00-\x08\x0b\x0c\x0e-\x1f]/.test(comment))return null;
+  const content=splitReviewContent(rawComment);if(!content)return null;
   if(!/^[A-Za-z0-9-]{1,39}$/.test(issue.user.login))return null;
   const ratings={quality:+quality,accuracy:+accuracy,ease:+ease,efficiency:+efficiency,consistency:+consistency};
   const overall=Object.values(ratings).reduce((a,b)=>a+b,0)/5;
-  return {skillId,version,agent,ratings,overall,comment,author:issue.user.login,authorId:issue.user.id,issueNumber:issue.number,approvedAt:approval.approvedAt};
+  return {skillId,version,agent,ratings,overall,...content,helpful:Number.isSafeInteger(issue.reactions?.['+1'])&&issue.reactions['+1']>=0?issue.reactions['+1']:0,author:issue.user.login,authorId:issue.user.id,issueNumber:issue.number,approvedAt:approval.approvedAt};
 }
 export function approvalFor(node) {
   if(!node || !node.labels?.nodes?.some(x=>x?.name==='skill-review-approved'))return null;

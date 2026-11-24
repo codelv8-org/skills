@@ -57,12 +57,20 @@ jobs:
       - name: Test skill review validation
         run: |
           node --check assets/js/skill-reviews.js
-          node --test scripts/skill-ratings.test.mjs
+          node --check assets/js/skill-insights.js
+          node --test scripts/skill-ratings.test.mjs scripts/skill-insights.test.mjs
 
       - name: Build approved skill ratings
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/build-skill-ratings.mjs
+
+      - name: Build benchmark and review analytics
+        env:
+          SKILL_REVIEW_AI_ENABLED: ${{ vars.SKILL_REVIEW_AI_ENABLED }}
+          SKILL_REVIEW_AI_MODEL: ${{ vars.SKILL_REVIEW_AI_MODEL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: node scripts/build-skill-insights.mjs
 
       - name: Validate catalog workflow sources
         run: node scripts/build-skill-workflows.mjs --check
