@@ -1,5 +1,7 @@
 # Web delivery and quality acceptance
 
+> **v3:** Preserve the anatomy and general guidance below. For current mandatory UV, texture, candidate export and final promotion use [surface-release-gates.md](surface-release-gates.md) and [anatomical-uv-and-registration.md](anatomical-uv-and-registration.md); any earlier final export command is legacy.
+
 ## Quality profiles (planning guidance)
 
 | Profile | Triangle target, entire head scene | Texture delivery | Indicative GLB budget |
