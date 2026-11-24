@@ -36,7 +36,7 @@ def overview(path, report, comparison=None):
     path.write_text(head+body+'\n', encoding='utf-8')
 
 
-def build(mesh, output, overview_path, size, view_size, skill=SKILL, material=None, label=SCAN):
+def build(mesh, output, overview_path, size, view_size, skill=SKILL, material=None, label=SCAN, baseline=None, preparation=None):
     sys.path.insert(0, str(skill/'scripts'))
     from project_face_texture import sha
     from render_uv_layout_glb import read_asset
@@ -45,8 +45,17 @@ def build(mesh, output, overview_path, size, view_size, skill=SKILL, material=No
     mesh=mesh.resolve(); output=output.resolve(); target=output/'projection-lab'
     if target.exists(): shutil.rmtree(target)
     target.mkdir(parents=True)
-    r={'schemaVersion':1,'skillVersion':VERSION,'sourceAsset':label,'sourceSha256':sha(mesh),'status':'NOT_RUN','scope':'Rendered asset B1 only. Synthetic color cast on one training view; no independent real photos, measured reflectance, likeness or production release. Unknown surface remains gray.','atlasSize':size,'viewSize':view_size,'modes':[]}
+    baseline=(baseline or mesh).resolve()
+    r={'schemaVersion':1,'skillVersion':VERSION,'sourceAsset':label,'sourceSha256':None,'baselineSha256':None,'status':'NOT_RUN','scope':'Rendered asset B1 only, on a separate reparameterized unlit copy of the licensed scan. Baseline geometry and PBR maps are retained. Synthetic color cast on one training view; no independent real photos, measured reflectance, likeness or production release. Unknown surface remains gray.','atlasSize':size,'viewSize':view_size,'modes':[],'reports':{}}
     try:
+        r['sourceSha256']=sha(mesh);r['baselineSha256']=sha(baseline)
+        if preparation:
+            prepared=json.loads(preparation.read_text())
+            if prepared['source_sha256']!=r['baselineSha256'] or prepared['output_sha256']!=r['sourceSha256']:
+                raise ValueError('Stale atlas preparation: source or derived mesh hash changed')
+            r['atlasPreparation']='reports/atlas_preparation.json'
+        if mesh.parent==output/'model':
+            r['projectionMesh']=f'model/{mesh.name}'
         j,_=read_asset(mesh)
         if material is None:
             candidates=[m['name'] for m in j.get('materials',[]) if m.get('name') and m.get('pbrMetallicRoughness',{}).get('baseColorTexture')]
@@ -59,6 +68,19 @@ def build(mesh, output, overview_path, size, view_size, skill=SKILL, material=No
         uv=validate(mesh,material,winding,report_dir=target,uv_only=True)
         r['uv']={'status':uv['status'],'winding':winding,'windingBasis':'dominant sign, diagnostic only','metrics':uv['uv'],'errors':uv['errors']}
         write_json(target/'uv_report.json',uv)
+        r['reports']['uv']='projection-lab/uv_report.json'
+        if baseline!=mesh:
+            bj,_=read_asset(baseline)
+            bm=[m['name'] for m in bj['materials'] if m.get('pbrMetallicRoughness',{}).get('baseColorTexture')]
+            if len(bm)!=1: raise ValueError('Expected one textured baseline material')
+            _,_,_,_,bu,_,_=load_skin(baseline,bm[0])
+            bd=bu[:,1]-bu[:,0]; be=bu[:,2]-bu[:,0]; bs=bd[:,0]*be[:,1]-bd[:,1]*be[:,0]
+            baseline_uv=validate(baseline,bm[0],'ccw' if (bs>0).sum()>(bs<0).sum() else 'cw',uv_only=True)
+            r['baselineUV']={'status':baseline_uv['status'],'metrics':baseline_uv['uv'],'errors':baseline_uv['errors']}
+            write_json(target/'baseline_uv_report.json',baseline_uv)
+            r['reports']['baselineUV']='projection-lab/baseline_uv_report.json'
+        if uv['status']!='PASS_UV_ONLY' or uv['errors']:
+            raise ValueError('Projection atlas failed exact UV validation: '+', '.join(uv['errors']))
         with tempfile.TemporaryDirectory(prefix='public-head-b1-') as tmp:
             run=Path(tmp)
             result=stress(mesh,material,run,size,view_size,'+z')
@@ -80,13 +102,16 @@ def build(mesh, output, overview_path, size, view_size, skill=SKILL, material=No
             r['coverage']={k:rt['results'][k]['projection_coverage'] for k in ('front_only','multiview')}
             r['stress']={'mae':result['paired_weighted_mae_srgb_255'],'coverage':{k:v['coverage'] for k,v in result['results'].items()},'ambiguity':{k:v['consensus']['ambiguous_texels'] for k,v in result['results'].items() if v.get('consensus')},'flaggedViews':[v['id'] for v in result['results']['tinted_robust']['views'] if v.get('inspect_view')],'corruption':result['corruption']}
             r['holdoutAngles']=rt['heldout_angles']; r['status']='B1_DIAGNOSTIC_COMPLETE'; r['comparison']='projection-lab/comparison.jpg'; r['comparisonSha256']=sha(target/'comparison.jpg')
-            r['reports']={'uv':'projection-lab/uv_report.json','stress':'projection-lab/stress_report.json','roundtrip':'projection-lab/roundtrip_report.json'}
+            r['reports'].update(stress='projection-lab/stress_report.json',roundtrip='projection-lab/roundtrip_report.json')
             overview(overview_path,r,target/'comparison.jpg')
     except Exception as exc:
         print(f'Projection lab blocked: {type(exc).__name__}: {exc}',file=sys.stderr)
-        shutil.rmtree(target);target.mkdir()
-        r.update(status='BLOCKED',reason=f'{type(exc).__name__}: benchmark did not complete; inspect Pages build log',modes=[])
-        for k in ('comparison','comparisonSha256','reports','stress','coverage'): r.pop(k,None)
+        # Retain exact UV reports and heatmaps when a gate fails. Remove only
+        # partial display assets so a failed build cannot expose stale modes.
+        for partial in list(target.glob('*.webp'))+list(target.glob('comparison.jpg')):
+            partial.unlink()
+        r.update(status='BLOCKED',reason=f'{type(exc).__name__}: {exc}',modes=[])
+        for k in ('comparison','comparisonSha256','stress','coverage'): r.pop(k,None)
         overview(overview_path,r)
     write_json(output/'reports/projection_lab.json',r)
     print(f"Photoreal projection lab: {r['status']}")
@@ -95,6 +120,9 @@ def build(mesh, output, overview_path, size, view_size, skill=SKILL, material=No
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--mesh',type=Path,default=ROOT/'assets/examples/photoreal-head/model/head.glb');p.add_argument('--output',type=Path,default=ROOT/'assets/examples/photoreal-head');p.add_argument('--overview',type=Path,default=ROOT/'assets/skill-overviews/photoreal-head-web-v311.svg');p.add_argument('--skill',type=Path,default=SKILL);p.add_argument('--size',type=int,default=512);p.add_argument('--view-size',type=int,default=512);p.add_argument('--material');p.add_argument('--label',default=SCAN);p.add_argument('--strict',action='store_true');a=p.parse_args()
-    r=build(a.mesh,a.output,a.overview,a.size,a.view_size,a.skill,a.material,a.label)
+    p.add_argument('--mesh',type=Path,default=ROOT/'assets/examples/photoreal-head/model/projection-head.glb');p.add_argument('--output',type=Path,default=ROOT/'assets/examples/photoreal-head');p.add_argument('--overview',type=Path,default=ROOT/'assets/skill-overviews/photoreal-head-web-v311.svg');p.add_argument('--skill',type=Path,default=SKILL);p.add_argument('--size',type=int,default=512);p.add_argument('--view-size',type=int,default=512);p.add_argument('--material');p.add_argument('--label',default=SCAN);p.add_argument('--strict',action='store_true');p.add_argument('--baseline',type=Path);p.add_argument('--preparation',type=Path);a=p.parse_args()
+    if a.mesh.resolve()==ROOT/'assets/examples/photoreal-head/model/projection-head.glb':
+        a.baseline=a.baseline or ROOT/'assets/examples/photoreal-head/model/head.glb'
+        a.preparation=a.preparation or ROOT/'assets/examples/photoreal-head/reports/atlas_preparation.json'
+    r=build(a.mesh,a.output,a.overview,a.size,a.view_size,a.skill,a.material,a.label,a.baseline,a.preparation)
     if a.strict and r['status']!='B1_DIAGNOSTIC_COMPLETE':sys.exit(1)

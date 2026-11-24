@@ -64,7 +64,7 @@
       "sublabel": "อ่าน Ref และบริบท",
       "explanation": "อ่านภาพต้นฉบับทุกมุม ตรวจภาพ crop, landmarks, อุปกรณ์และกล้อง แยกสิ่งที่เห็นจริงกับส่วนที่อนุมาน",
       "icon": "start",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/lowpoly-character-web/SKILL.md",
@@ -83,7 +83,7 @@
       "sublabel": "ปั้นทีละส่วน + Gate",
       "explanation": "HEAD → TORSO → ARMS_HANDS → LEGS_FEET → OUTFIT_GEAR → INTEGRATION; แต่ละส่วนต้องเทียบ GLB จริง, mask, landmarks และ independent review ก่อนผ่าน",
       "icon": "decision",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/lowpoly-character-web/SKILL.md",
@@ -101,7 +101,7 @@
       "label": "G2–G3 · Mesh / UV",
       "sublabel": "Topology และวัสดุ",
       "explanation": "ประกอบชิ้นส่วนเป็น topology เหมาะกับการเคลื่อนไหว วาง UV/วัสดุหลังผ่าน shape gates",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/lowpoly-character-web/SKILL.md",
@@ -119,7 +119,7 @@
       "label": "G4 · Rig & poses",
       "sublabel": "Rig เมื่อร้องขอ",
       "explanation": "ตรวจ skeleton, skin weights, deformation และ sampled poses ตามคลิปที่ผู้ใช้ต้องการ; งาน static ไม่บังคับ rig/clip ที่ไม่ได้ขอ",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/lowpoly-character-web/SKILL.md",
@@ -138,7 +138,7 @@
       "sublabel": "LOD / WebGL / Preview",
       "explanation": "เลือก HERO/NPC/CROWD, วัด scene budget และ FPS บนอุปกรณ์จริง พร้อม preview ทุก stage; ไม่อ้าง FPS เมื่อยังไม่ได้ทดสอบ",
       "icon": "decision",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/lowpoly-character-web/SKILL.md",
@@ -157,7 +157,7 @@
       "sublabel": "ส่ง GLB + หลักฐาน",
       "explanation": "ส่ง GLB/LOD, source เมื่อสร้างจริง, previews และรายงาน gate; ห้ามเรียก production-ready หากหลักฐานสำคัญไม่ครบ",
       "icon": "success",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/lowpoly-character-web/SKILL.md",
@@ -176,7 +176,7 @@
       "sublabel": "หยุดก่อนสร้าง",
       "explanation": "หาก crop สูญเสียส่วนสำคัญ มุมผิด หรือยังไม่บันทึก feature ให้หยุดและแก้ reference",
       "icon": "stop",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/lowpoly-character-web/SKILL.md",
@@ -195,7 +195,7 @@
       "sublabel": "แก้เฉพาะส่วน",
       "explanation": "เมื่อ metrics หรือ reviewer ไม่ผ่าน ให้แก้ real geometry ของส่วนเดิมและ render/re-measure ใหม่; ถ้าแก้ไม่ได้ให้ REVIEW_REQUIRED",
       "icon": "decision",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/lowpoly-character-web/SKILL.md",
@@ -214,7 +214,7 @@
       "sublabel": "ไม่รับรอง production",
       "explanation": "หาก gate ด้านศิลป์, deformation หรือ WebGL ยังไม่ผ่าน/ไม่ทดสอบ ให้ระบุ PROTOTYPE/REVIEW_REQUIRED พร้อมข้อแก้ไข",
       "icon": "stop",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/lowpoly-character-web/SKILL.md",

@@ -64,7 +64,7 @@
       "sublabel": "ระบุระบบและโหมด",
       "explanation": "ระบุ engine, schema revision, scope, audience และเลือก full/dictionary/catalog/erd/privacy/consumer/ai/lineage/diff ตามคำขอ",
       "icon": "start",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/privacy-first-database-documentation-builder/SKILL.md",
@@ -83,7 +83,7 @@
       "sublabel": "อนุมัติก่อนอ่าน",
       "explanation": "รับเฉพาะ artifact schema-only ที่ DBA/Data Owner ตรวจและอนุมัติขอบเขตกับผู้รับก่อน Agent อ่าน ห้ามต่อ DB และอ่าน records",
       "icon": "decision",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/privacy-first-database-documentation-builder/SKILL.md",
@@ -102,7 +102,7 @@
       "sublabel": "ตรวจ Metadata v2",
       "explanation": "รัน validate_metadata.py กับ input ที่ผ่านอนุมัติเท่านั้น ตรวจคีย์/ความสัมพันธ์/classification; diff ต้องมีสอง snapshot อนุมัติแยกกัน",
       "icon": "decision",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/privacy-first-database-documentation-builder/SKILL.md",
@@ -120,7 +120,7 @@
       "label": "Generate docs",
       "sublabel": "สร้างตามโหมด",
       "explanation": "สร้าง Markdown/PDF, ERD, classification, lineage หรือคู่มือ Agent จาก metadata ที่ผ่านการรับรอง; Unknown → Restricted",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/privacy-first-database-documentation-builder/SKILL.md",
@@ -139,7 +139,7 @@
       "sublabel": "Privacy / PDF QA",
       "explanation": "ตรวจ coverage, keys, FK, classification และความตรงกันของ PDF/Markdown; release_check.py ใช้เฉพาะ staging และยังต้องตรวจทานด้วยคน",
       "icon": "decision",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/privacy-first-database-documentation-builder/SKILL.md",
@@ -158,7 +158,7 @@
       "sublabel": "เผยแพร่เฉพาะที่ผ่าน",
       "explanation": "ส่งเฉพาะเอกสารที่อนุมัติ พร้อม release-manifest, scope, gap, QA และสถานะ review; ไม่เผยแพร่ raw source",
       "icon": "success",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/privacy-first-database-documentation-builder/SKILL.md",
@@ -177,7 +177,7 @@
       "sublabel": "ไม่อ่านแหล่งข้อมูล",
       "explanation": "หากไม่มี independent approval ให้หยุด acquisition และส่ง blank/synthetic template ที่ติดป้ายเท่านั้น",
       "icon": "stop",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/privacy-first-database-documentation-builder/SKILL.md",
@@ -196,7 +196,7 @@
       "sublabel": "ขอ Metadata ที่แก้แล้ว",
       "explanation": "Validation ไม่ผ่าน ให้ขอ artifact ที่ owner แก้และรับรองใหม่; ไม่ sanitize ข้อมูลผสมหลังอ่าน",
       "icon": "stop",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/privacy-first-database-documentation-builder/SKILL.md",
@@ -215,7 +215,7 @@
       "sublabel": "ระงับเอกสาร",
       "explanation": "หากพบ privacy blocker หรือยังไม่อนุมัติการเปิดเผย ให้ระงับไฟล์ที่เกี่ยวข้อง แก้และตรวจซ้ำ",
       "icon": "stop",
-      "width": 176,
+      "width": 168,
       "sources": [
         {
           "path": "skills/privacy-first-database-documentation-builder/SKILL.md",
