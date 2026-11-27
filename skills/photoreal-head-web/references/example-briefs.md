@@ -1,5 +1,7 @@
 # Ready-to-use Work agent briefs
 
+> **v3:** Preserve the anatomy and general guidance below. For current mandatory UV, texture, candidate export and final promotion use [surface-release-gates.md](surface-release-gates.md) and [anatomical-uv-and-registration.md](anatomical-uv-and-registration.md); any earlier final export command is legacy.
+
 ## Generic realistic head
 
 สร้างโมเดลศีรษะมนุษย์เสมือนจริงสำหรับแสดงบนเว็บไซต์ เฉพาะศีรษะ คอส่วนบน หู และดวงตา สไตล์ photorealistic ไม่ต้องสร้างร่างกาย ใบหน้าเป็นผู้ใหญ่ทั่วไป ไม่อ้างอิงคนจริง เน้น anatomy/skin roughness/normal map สมจริง ต้องมี UV0 ออกแบบเพื่อ texture painting และ bake high-to-low ส่งออก .blend, .glb, UV layout PNG, PBR maps, ภาพหน้า/เฉียง/ด้านข้าง, และรายงาน QA ทดสอบบน Three.js

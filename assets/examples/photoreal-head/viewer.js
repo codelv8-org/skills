@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from './vendor/OrbitControls.js';
 import { GLTFLoader } from './vendor/GLTFLoader.js';
+import { createProjectionLab } from './projection-lab.js?v=3.1.1-uv2';
 
 const canvas = document.querySelector('#viewer');
 const stage = canvas.parentElement;
@@ -11,13 +12,54 @@ const viewButtons = [...document.querySelectorAll('[data-view]')];
 const allControls = [...modeButtons, ...viewButtons, rotateButton, document.querySelector('#reset')];
 const number = new Intl.NumberFormat('th-TH');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-let renderer, controls, camera, scene, model;
+// This retained legacy asset has bottom-origin UVs but upright embedded images.
+// Correct image upload orientation only for its exact bytes; do not apply a
+// blanket flip to future glTF models or alter their tangent-space normal scale.
+const LEGACY_V_UP_SCAN='9dd65d33d43987479e0f66775282803c56941cb7ea93dfe1cf0ef84250a17ed6';
+let renderer, controls, camera, scene, model, projectionModel, baselineHash, modelCenter;
 const originals = new Map();
 let radius = .3;
 let modelSize;
 const labels = {skin: 'พื้นผิวสแกน', clay: 'Clay · ปิดแผนที่พื้นผิว', wire: 'Wireframe · โครงสร้างสามเหลี่ยม'};
 const clay = new THREE.MeshStandardMaterial({ color: 0xa6b0b8, roughness: .8, metalness: 0 });
 const wire = new THREE.MeshBasicMaterial({ color: 0x9be2ce, wireframe: true });
+const setLabel = label => { document.querySelector('#mode-label').textContent = label; status.textContent = label; };
+function setStandardMode(mode) {
+  if(model)model.visible=true;
+  if(projectionModel)projectionModel.visible=false;
+  originals.forEach((original, mesh) => { mesh.material = mode === 'skin' ? original : mode === 'clay' ? clay : wire; });
+  modeButtons.forEach(other => other.setAttribute('aria-pressed', String(other.dataset.mode === mode)));
+  setLabel(labels[mode]); render();
+}
+const lab = createProjectionLab({
+  setLabel,
+  restore: () => setStandardMode('skin'),
+  prepare: async report => {
+    if(report.baselineSha256!==baselineHash)throw new Error('Baseline hash does not match the benchmark');
+    const loaded=await loadModel(report.projectionMesh,report.sourceSha256);
+    projectionModel=loaded.gltf.scene;
+    projectionModel.position.sub(modelCenter);
+    projectionModel.visible=false;
+    scene.add(projectionModel);
+  },
+  apply: (material, label) => {
+    model.visible=false;projectionModel.visible=true;
+    projectionModel.traverse(mesh=>{if(mesh.isMesh)mesh.material=material;});
+    modeButtons.forEach(other => other.setAttribute('aria-pressed', 'false'));
+    setLabel(label); render();
+  }
+});
+
+async function loadModel(url,expectedHash) {
+  const response=await fetch(url);
+  if(!response.ok)throw new Error(`Model request failed: ${response.status}`);
+  const bytes=await response.arrayBuffer();
+  const hash=globalThis.crypto?.subtle
+    ? [...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(n=>n.toString(16).padStart(2,'0')).join('') : null;
+  if(expectedHash&&hash!==expectedHash)throw new Error('Projection mesh hash does not match the benchmark');
+  const gltf=await new GLTFLoader().parseAsync(bytes,new URL('.',window.location.href).href);
+  return {gltf,hash};
+}
 
 function setAvailable(available) { allControls.forEach(button => { button.disabled = !available; }); }
 function fail(error) {
@@ -25,6 +67,7 @@ function fail(error) {
   document.querySelector('#error').hidden = false;
   status.textContent = 'ใช้ภาพจาก Blender ด้านล่างแทนการแสดงผล 3D ได้';
   setAvailable(false);
+  lab.disable();
 }
 function render() { if (renderer && model) renderer.render(scene, camera); }
 function stopRotation() { controls.autoRotate = false; rotateButton.setAttribute('aria-pressed', 'false'); }
@@ -70,17 +113,34 @@ try {
     const { width, height } = stage.getBoundingClientRect();
     camera.aspect = width / height; camera.updateProjectionMatrix(); renderer.setSize(width, height, false); fitCamera(); controls.update(); render();
   }).observe(stage);
-  new GLTFLoader().load('model/head.glb', gltf => {
+  loadModel('model/head.glb').then(async ({gltf,hash}) => {
+    baselineHash=hash;
     model = gltf.scene;
     const box = new THREE.Box3().setFromObject(model);
     const center = box.getCenter(new THREE.Vector3());
+    modelCenter=center.clone();
     model.position.sub(center);
     modelSize = box.getSize(new THREE.Vector3());
     fitCamera();
-    model.traverse(object => { if (object.isMesh) originals.set(object, object.material); });
-    scene.add(model); setView('threequarter'); setAvailable(true);
+    const legacyTextures=new Set();
+    model.traverse(object => {
+      if (!object.isMesh)return;
+      if(hash===LEGACY_V_UP_SCAN){
+        for(const map of [object.material.map,object.material.normalMap]){
+          if(map)legacyTextures.add(map);
+        }
+      }
+      originals.set(object,object.material);
+    });
+    // GLTFLoader uses ImageBitmap, for which Texture.flipY is ignored. Flip
+    // actual bitmap pixels before upload so the UV/tangent basis stays intact.
+    await Promise.all([...legacyTextures].map(async map=>{
+      map.image=await createImageBitmap(map.image,{imageOrientation:'flipY'});
+      map.flipY=false;map.needsUpdate=true;
+    }));
+    scene.add(model); setView('threequarter'); setAvailable(true); lab.ready();
     status.textContent = 'โหลดแล้ว · ลากหมุนหรือใช้ปุ่มมุมกล้องเพื่อดูรูปทรง';
-  }, undefined, fail);
+  }).catch(fail);
   let lastTime;
   renderer.setAnimationLoop(time => {
     const delta = lastTime === undefined ? 0 : Math.min((time - lastTime) / 1000, .05); lastTime = time;
@@ -106,12 +166,7 @@ try {
   });
 } catch (error) { fail(error); }
 
-modeButtons.forEach(button => button.addEventListener('click', () => {
-  originals.forEach((original, mesh) => { mesh.material = button.dataset.mode === 'skin' ? original : button.dataset.mode === 'clay' ? clay : wire; });
-  modeButtons.forEach(other => other.setAttribute('aria-pressed', String(other === button)));
-  document.querySelector('#mode-label').textContent = labels[button.dataset.mode];
-  status.textContent = labels[button.dataset.mode]; render();
-}));
+modeButtons.forEach(button => button.addEventListener('click', () => { lab.reset(); setStandardMode(button.dataset.mode); }));
 viewButtons.forEach(button => button.addEventListener('click', () => setView(button.dataset.view)));
 document.querySelector('#reset').addEventListener('click', () => setView('threequarter'));
 rotateButton.addEventListener('click', () => {
@@ -134,3 +189,6 @@ Promise.all([fetch('reports/glb_qa.json'), fetch('reports/build.json')]).then(as
   document.querySelector('#structure').textContent = 'อ่านรายงานไม่ได้';
   document.querySelector('.qa-summary .pass').textContent = 'ไม่ยืนยัน';
 });
+
+const robustMetric = document.getElementById('lab-robust');
+new MutationObserver(() => { document.querySelector('[data-robust-copy]').textContent = robustMetric.textContent; }).observe(robustMetric,{childList:true,characterData:true,subtree:true});

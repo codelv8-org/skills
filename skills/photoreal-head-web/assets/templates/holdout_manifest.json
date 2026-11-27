@@ -1,0 +1,22 @@
+{
+  "mesh": "../export/head.draft.glb",
+  "mesh_sha256": "REPLACE_WITH_ACTUAL_SHA256",
+  "skin_material": "Skin",
+  "source_kind": "real_photo",
+  "exclude_materials": [],
+  "acknowledge_skipped_occluders": false,
+  "min_skin_mask_iou": 0.8,
+  "views": [
+    {
+      "id": "heldout_oblique",
+      "role": "holdout",
+      "image": "REPLACE_INDEPENDENT_RECTIFIED.png",
+      "mask": "REPLACE_INDEPENDENT_SKIN_MASK.png",
+      "rectified": false,
+      "K": null,
+      "R": null,
+      "t": null,
+      "linear_gain": [1, 1, 1]
+    }
+  ]
+}

@@ -1,0 +1,344 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "AAA Fantasy Character Studio · Workflow",
+    "subtitle": "v1.0.0 / documented procedure",
+    "output": "assets/skill-workflows/aaa-fantasy-character-studio.html",
+    "visual_preset": "signal-flow",
+    "quality_profile": "showcase",
+    "animation": "trace",
+    "feedback_links": false,
+    "repository": {
+      "url": "https://github.com/codelv8-org/skills",
+      "revision": "ccbd6b125b47c0a89f637c7511a2a224ee679340",
+      "provider": "github"
+    },
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "external": {
+          "label": "Input / Intake"
+        },
+        "backend": {
+          "label": "Work"
+        },
+        "security": {
+          "label": "Gate / Alternative"
+        },
+        "frontend": {
+          "label": "Delivery"
+        },
+        "messagebus": {
+          "label": "Export"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "Main workflow"
+    },
+    {
+      "id": "exceptions",
+      "label": "Decision / alternative",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "intake",
+    "anatomy",
+    "outfit",
+    "surface",
+    "runtime",
+    "release"
+  ],
+  "nodes": [
+    {
+      "id": "intake",
+      "lane": "main",
+      "col": 0,
+      "type": "external",
+      "label": "G0–G1 · Design",
+      "sublabel": "Reference / blockout",
+      "explanation": "ตรวจภาพ ทิศทาง สัดส่วน ลิขสิทธิ์ เลือก archetype และอนุมัติ silhouette จาก gray clay",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/aaa-fantasy-character-studio/SKILL.md",
+          "line": 16,
+          "end_line": 20,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "anatomy",
+      "lane": "main",
+      "col": 1,
+      "type": "security",
+      "label": "G2 · Anatomy",
+      "sublabel": "Head / body sculpt",
+      "explanation": "ปั้นทีละส่วน ตรวจศีรษะ ลำตัว แขน มือ ขา และเท้า ก่อนขึ้นชุด",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/aaa-fantasy-character-studio/SKILL.md",
+          "line": 22,
+          "end_line": 23,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "outfit",
+      "lane": "main",
+      "col": 2,
+      "type": "backend",
+      "label": "G3–G4 · Outfit",
+      "sublabel": "Robes / hair / armor",
+      "explanation": "สร้างเสื้อผ้าหลายชั้น ผมยาว เกราะ เครื่องประดับ และทดสอบการซ้อนทับ",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/aaa-fantasy-character-studio/SKILL.md",
+          "line": 25,
+          "end_line": 29,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "surface",
+      "lane": "main",
+      "col": 3,
+      "type": "backend",
+      "label": "G5–G8 · Surface",
+      "sublabel": "Retopo / UV / PBR",
+      "explanation": "ตรวจ topology, UV checker, bake normal/AO และ PBR หลายสภาพแสง",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/aaa-fantasy-character-studio/SKILL.md",
+          "line": 31,
+          "end_line": 41,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "runtime",
+      "lane": "main",
+      "col": 4,
+      "type": "messagebus",
+      "label": "G9–G10 · Runtime",
+      "sublabel": "Rig / export / engine",
+      "explanation": "ตรวจ deformation, clip, FBX/GLB, engine reimport และวัด frame time จริง",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/aaa-fantasy-character-studio/SKILL.md",
+          "line": 43,
+          "end_line": 47,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "release",
+      "lane": "main",
+      "col": 5,
+      "type": "frontend",
+      "label": "G11 · Release",
+      "sublabel": "Exact candidate ZIP",
+      "explanation": "ตรวจโมเดลจริงทุกมุมและ seal 12 gates; ส่งมอบ source/export พร้อมหลักฐาน",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/aaa-fantasy-character-studio/SKILL.md",
+          "line": 49,
+          "end_line": 50,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "ref-repair",
+      "lane": "exceptions",
+      "col": 0,
+      "type": "security",
+      "label": "Resolve reference",
+      "sublabel": "แก้ความขัดแย้ง",
+      "explanation": "แก้ภาพที่ขัดแย้งหรือบันทึกการตีความที่ยอมรับก่อนเริ่ม production",
+      "icon": "decision",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/aaa-fantasy-character-studio/SKILL.md",
+          "line": 16,
+          "end_line": 17,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "shape-repair",
+      "lane": "exceptions",
+      "col": 1,
+      "type": "security",
+      "label": "Fix anatomy",
+      "sublabel": "แก้ geometry ก่อน",
+      "explanation": "แก้สัดส่วนและรูปทรงจาก clay views ไม่ใช้ texture บังความผิดพลาด",
+      "icon": "decision",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/aaa-fantasy-character-studio/SKILL.md",
+          "line": 22,
+          "end_line": 23,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "surface-repair",
+      "lane": "exceptions",
+      "col": 3,
+      "type": "security",
+      "label": "Fix UV / bake",
+      "sublabel": "ตรวจ checker และ seams",
+      "explanation": "แก้ UV ที่ผิดเพี้ยนและ bake artifacts ก่อน author PBR",
+      "icon": "decision",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/aaa-fantasy-character-studio/SKILL.md",
+          "line": 34,
+          "end_line": 38,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "review-required",
+      "lane": "exceptions",
+      "col": 5,
+      "type": "security",
+      "label": "Review required",
+      "sublabel": "ไม่รับรอง AAA",
+      "explanation": "เมื่อขาด actual engine evidence หรือ independent review ให้ระบุสถานะจริง ห้าม production-ready",
+      "icon": "stop",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/aaa-fantasy-character-studio/SKILL.md",
+          "line": 49,
+          "end_line": 50,
+          "label": "SKILL.md"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "main-1",
+      "from": "intake",
+      "to": "anatomy",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-2",
+      "from": "anatomy",
+      "to": "outfit",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-3",
+      "from": "outfit",
+      "to": "surface",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-4",
+      "from": "surface",
+      "to": "runtime",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-5",
+      "from": "runtime",
+      "to": "release",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "branch-1",
+      "from": "intake",
+      "to": "ref-repair",
+      "label": "Ref ขัดแย้ง",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "return-1",
+      "from": "ref-repair",
+      "to": "intake",
+      "variant": "dashed",
+      "role": "return"
+    },
+    {
+      "id": "branch-2",
+      "from": "anatomy",
+      "to": "shape-repair",
+      "label": "Anatomy ไม่ผ่าน",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "return-2",
+      "from": "shape-repair",
+      "to": "anatomy",
+      "variant": "dashed",
+      "role": "return"
+    },
+    {
+      "id": "branch-3",
+      "from": "surface",
+      "to": "surface-repair",
+      "label": "UV/Bake ไม่ผ่าน",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "return-3",
+      "from": "surface-repair",
+      "to": "surface",
+      "variant": "dashed",
+      "role": "return"
+    },
+    {
+      "id": "branch-4",
+      "from": "release",
+      "to": "review-required",
+      "label": "QA ไม่ครบ",
+      "variant": "security",
+      "role": "branch"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Workflow notes",
+      "items": [
+        "Semi-realistic Xianxia / Wuxia: สร้างตัวละคร original ไม่คัดลอก proprietary model",
+        "12 gates และ SHA-256 ตรวจความครบถ้วนของหลักฐาน ไม่ใช่การรับรอง visual fidelity",
+        "ยังไม่มี benchmark โมเดล AAA จริง; ต้องใช้ Blender และ target engine"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "coordinate_space": "gltf_uv_top_left",
+  "atlas_id": "",
+  "uv_sha256": "",
+  "regions": {
+    "forehead": [],
+    "nose": [],
+    "cheek_l": [],
+    "cheek_r": [],
+    "eye_l": [],
+    "eye_r": [],
+    "lips": [],
+    "chin": [],
+    "ear_l": [],
+    "ear_r": [],
+    "scalp": []
+  },
+  "profiles": {}
+}

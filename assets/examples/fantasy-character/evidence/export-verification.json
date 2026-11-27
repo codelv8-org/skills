@@ -1,0 +1,20 @@
+{
+  "status": "PASS_BINARY_DIAGNOSTIC_ONLY",
+  "sha256": "0c573151951c2a87bc975bff3633e7e3bdf020a16c9d81f63c27693cd9c2717e",
+  "bytes": 1717464,
+  "vertices": 28498,
+  "triangles": 56992,
+  "joints": 29,
+  "skinned_nodes": 1,
+  "animation_clips": [
+    "Diagnostic bend - NOT production motion"
+  ],
+  "max_weight_sum_error": 1.1920928955078125e-07,
+  "max_bind_matrix_error": 5.7220459037665705e-08,
+  "normal_length_max_error": 5.960464477539063e-08,
+  "geometry_reimport": "trimesh PASS (does not validate animation or engine behavior)",
+  "uv_present": false,
+  "khronos_validator": "NOT RUN",
+  "threejs_runtime": "NOT RUN",
+  "production_quality": "BLOCKED G1; silhouette hull not accepted anatomy"
+}

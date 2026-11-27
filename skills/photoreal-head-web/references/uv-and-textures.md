@@ -1,5 +1,7 @@
 # UV, PBR texturing, and baking standards
 
+> **v3:** Preserve the anatomy and general guidance below. For current mandatory UV, texture, candidate export and final promotion use [surface-release-gates.md](surface-release-gates.md) and [anatomical-uv-and-registration.md](anatomical-uv-and-registration.md); any earlier final export command is legacy.
+
 ## UV0 layout
 
 - Main face: large, unique front-facing island; no mirror overlap when the face needs asymmetrical freckles, brows, or scanned/painted color.

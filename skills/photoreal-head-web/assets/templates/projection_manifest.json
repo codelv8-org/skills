@@ -1,0 +1,36 @@
+{
+  "mesh": "../export/head.draft.glb",
+  "mesh_sha256": "REPLACE_WITH_ACTUAL_SHA256",
+  "skin_material": "Skin",
+  "source_kind": "real_photo",
+  "source_provenance": "REPLACE_WITH_CAPTURE_AND_RIGHTS_PROVENANCE",
+  "rights_verified": false,
+  "uv_qa_report": "../reports/uv/surface_qa.json",
+  "diagnostic_mode": false,
+  "exclude_materials": [],
+  "acknowledge_skipped_occluders": false,
+  "depth_tolerance_m": 0.001,
+  "min_view_cosine": 0.25,
+  "mask_feather_px": 8,
+  "exposure_match": "off",
+  "views": [
+    {
+      "id": "front",
+      "role": "train",
+      "image": "REPLACE_FRONT_RECTIFIED.png",
+      "mask": "REPLACE_FRONT_SKIN_MASK.png",
+      "rectified": false,
+      "pose_overlay_reviewed": false,
+      "K": null,
+      "R": null,
+      "t": null,
+      "linear_gain": [
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "blend_mode": "robust_consensus",
+  "consensus_threshold_srgb": 0.06
+}

@@ -1,0 +1,286 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "User Manual Writer · Workflow",
+    "subtitle": "v1.0.1 / documented procedure",
+    "output": "assets/skill-workflows/user-manual-writer.html",
+    "visual_preset": "signal-flow",
+    "quality_profile": "showcase",
+    "animation": "trace",
+    "feedback_links": false,
+    "repository": {
+      "url": "https://github.com/codelv8-org/skills",
+      "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+      "provider": "github"
+    },
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "external": {
+          "label": "Input / Intake"
+        },
+        "backend": {
+          "label": "Work"
+        },
+        "security": {
+          "label": "Gate / Alternative"
+        },
+        "frontend": {
+          "label": "Delivery"
+        },
+        "messagebus": {
+          "label": "Export"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "Main workflow"
+    },
+    {
+      "id": "exceptions",
+      "label": "Decision / alternative",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "scope",
+    "browser",
+    "draft",
+    "images",
+    "review",
+    "deliver"
+  ],
+  "nodes": [
+    {
+      "id": "scope",
+      "lane": "main",
+      "col": 0,
+      "type": "external",
+      "label": "Scope & roles",
+      "sublabel": "ระบุงานและกลุ่มผู้ใช้",
+      "explanation": "กำหนดงาน บทบาท และขอบเขตของคู่มือจากบันทึก/หลักฐานที่ได้รับอนุญาต",
+      "icon": "start",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/user-manual-writer/SKILL.md",
+          "line": 21,
+          "end_line": 24,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "browser",
+      "lane": "main",
+      "col": 1,
+      "type": "security",
+      "label": "Evidence review",
+      "sublabel": "ตรวจ UI ทดสอบ",
+      "explanation": "ถ้ามี URL ทดสอบที่ได้รับอนุญาต ต้องเดินขั้นตอนจริงผ่าน Browser ด้วยบัญชีทดสอบและ mock data; ตรวจปุ่ม เมนู สิทธิ์ และผลลัพธ์",
+      "icon": "decision",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/user-manual-writer/SKILL.md",
+          "line": 34,
+          "end_line": 40,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "draft",
+      "lane": "main",
+      "col": 2,
+      "type": "backend",
+      "label": "Write steps",
+      "sublabel": "ร่างคู่มือทีละขั้น",
+      "explanation": "จัดตามวัตถุประสงค์ บทบาท สิ่งที่ต้องเตรียม ขั้นตอน และปัญหาที่ตรวจสอบได้; หนึ่งการกระทำหลักต่อ Step",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/user-manual-writer/SKILL.md",
+          "line": 42,
+          "end_line": 49,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "images",
+      "lane": "main",
+      "col": 3,
+      "type": "backend",
+      "label": "Screenshots",
+      "sublabel": "ภาพตรงกับทุก Step",
+      "explanation": "แทรกภาพจาก Browser ใต้ขั้นตอน; ใช้ภาพจำลองที่ติดป้ายสำหรับ 2FA/OTP และ placeholder เมื่อมีข้อจำกัด ห้ามใช้ข้อมูลจริง",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/user-manual-writer/SKILL.md",
+          "line": 51,
+          "end_line": 57,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "review",
+      "lane": "main",
+      "col": 4,
+      "type": "security",
+      "label": "Review & format",
+      "sublabel": "ตรวจความถูกต้อง",
+      "explanation": "ตรวจการเดินตามขั้นตอน ชื่อปุ่ม ภาพ ไม่มีข้อมูลอ่อนไหว และ Sarabun ในไฟล์ที่กำหนดฟอนต์ได้",
+      "icon": "decision",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/user-manual-writer/SKILL.md",
+          "line": 23,
+          "end_line": 32,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "deliver",
+      "lane": "main",
+      "col": 5,
+      "type": "frontend",
+      "label": "Reviewed draft",
+      "sublabel": "ส่งฉบับร่าง",
+      "explanation": "ส่งคู่มือให้ผู้ขอตรวจทาน ปรับตามข้อเสนอแนะ และระบุภาพหรือขั้นตอนที่ยังตรวจไม่ได้",
+      "icon": "success",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/user-manual-writer/SKILL.md",
+          "line": 26,
+          "end_line": 32,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "evidence-gap",
+      "lane": "exceptions",
+      "col": 1,
+      "type": "security",
+      "label": "Evidence gap",
+      "sublabel": "หยุดหรือขอหลักฐาน",
+      "explanation": "หากเข้าไม่ได้ สิทธิ์ไม่พอ หรือไม่มีบัญชีทดสอบ ให้หยุดก่อนล็อกอิน ขอหลักฐานที่ใช้ mock data และรอข้อมูลสำคัญ",
+      "icon": "decision",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/user-manual-writer/SKILL.md",
+          "line": 36,
+          "end_line": 40,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "correct",
+      "lane": "exceptions",
+      "col": 4,
+      "type": "security",
+      "label": "Correct draft",
+      "sublabel": "แก้ตามข้อเสนอแนะ",
+      "explanation": "แก้ขั้นตอน ภาพ และฟอนต์ที่ยังไม่ถูกต้อง แล้วตรวจซ้ำ; ระบุข้อจำกัดที่ยังแก้ไม่ได้",
+      "icon": "decision",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/user-manual-writer/SKILL.md",
+          "line": 26,
+          "end_line": 32,
+          "label": "SKILL.md"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "main-1",
+      "from": "scope",
+      "to": "browser",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-2",
+      "from": "browser",
+      "to": "draft",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-3",
+      "from": "draft",
+      "to": "images",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-4",
+      "from": "images",
+      "to": "review",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-5",
+      "from": "review",
+      "to": "deliver",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "branch-1",
+      "from": "browser",
+      "to": "evidence-gap",
+      "label": "หลักฐานไม่พอ",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "return-1",
+      "from": "evidence-gap",
+      "to": "browser",
+      "variant": "dashed",
+      "role": "return"
+    },
+    {
+      "id": "branch-2",
+      "from": "review",
+      "to": "correct",
+      "label": "ต้องแก้",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "return-2",
+      "from": "correct",
+      "to": "review",
+      "variant": "dashed",
+      "role": "return"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Workflow notes",
+      "items": [
+        "ห้ามขอรหัสผ่าน/OTP ผ่านแชตหรือใช้บัญชีผู้ใช้จริง",
+        "ห้ามอ้างว่าตรวจผ่าน Browser หากใช้เพียงหลักฐานจากผู้ขอ"
+      ]
+    }
+  ]
+}

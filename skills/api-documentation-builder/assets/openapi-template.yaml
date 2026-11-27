@@ -1,0 +1,35 @@
+openapi: 3.1.0
+info:
+  title: Synthetic Contract Template (NOT VERIFIED)
+  version: 0.0.0
+  description: Structural example only, not a production API.
+servers:
+  - url: https://api.example.invalid
+paths:
+  /demo/departments:
+    get:
+      operationId: listDemoDepartments
+      summary: Illustrative operation, not approved for actual use
+      responses:
+        '200':
+          description: Synthetic schema only
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DemoDepartment'
+                required: [items]
+components:
+  schemas:
+    DemoDepartment:
+      type: object
+      properties:
+        code:
+          type: string
+          maxLength: 20
+          x-data-classification: Internal
+      required: [code]

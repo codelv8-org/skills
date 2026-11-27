@@ -76,6 +76,71 @@ skills/
 
 ---
 
+## 📚 Documentation Skills
+
+| Skill | Version | ขอบเขต |
+|---|---|---|
+| [Privacy-First Database Documentation Builder](skills/privacy-first-database-documentation-builder/SKILL.md) | 2.0.0 | Data Catalog, Data Dictionary, ERD, Classification, Lineage, Schema Diff, PDF + Markdown จาก metadata ที่ผ่านการรับรองเท่านั้น |
+| [API Documentation Builder](skills/api-documentation-builder/SKILL.md) | 1.0.0 | API Catalog, Data Dictionary, OpenAPI, Consumer Guide, Governance, AI Agent/MCP Integration จาก contract ที่ผ่านการคัดกรองเท่านั้น |
+
+ทั้งสอง Skill ห้ามอ่านข้อมูลส่วนบุคคลจริงหรือค่าข้อมูลอ่อนไหวจริง ไม่อนุญาตให้เชื่อมต่อฐานข้อมูลหรือเรียก API จริงเพื่อสร้างเอกสาร ใช้เฉพาะ metadata/contract ที่เจ้าของข้อมูลตรวจสอบก่อนส่งมอบ และตัวอย่างสมมุติเท่านั้น
+
+---
+
+## 🖼️ ตัวอย่างผลลัพธ์ Documentation Skills
+
+| Skill | Overview / Example | เอกสารต้นฉบับ |
+|---|---|---|
+| Privacy-First Database Documentation Builder | [Example Showcase](https://codelv8-org.github.io/skills/skills/privacy-first-database-documentation-builder/examples/synthetic-demo/) | [Data Dictionary](skills/privacy-first-database-documentation-builder/examples/synthetic-demo/output/data-dictionary.md) |
+| API Documentation Builder | [Example Showcase](https://codelv8-org.github.io/skills/skills/api-documentation-builder/examples/synthetic-demo/) | [API Consumer Guide](skills/api-documentation-builder/examples/synthetic-demo/output/api-consumer-guide.md) · [OpenAPI](skills/api-documentation-builder/examples/synthetic-demo/output/openapi.yaml) |
+
+ทั้งสองชุดใช้ Synthetic Metadata/Contract เท่านั้น ไม่เรียกฐานข้อมูลหรือ API จริง ไม่ใช้ข้อมูลส่วนบุคคลหรือ credentials จริง ภาพ Overview แสดงโครงสร้างและผลลัพธ์ของตัวอย่าง ไม่ใช่ภาพหน้าจอของระบบจริง
+
+**PDF ตัวอย่าง (7 + 6 เอกสาร)** สร้างใน GitHub Pages workflow จาก Markdown ที่ตรวจสอบแล้วก่อน Build ZIP โดยไม่ commit ไฟล์ PDF ที่สร้างซ้ำได้ลง repository เมื่อต้องการสร้างในเครื่อง ให้เตรียม Python 3.12, WeasyPrint system dependencies, ฟอนต์ Noto Sans Thai และ Poppler (pdftotext) แล้วรัน:
+
+```bash
+python -m pip install -r scripts/documentation-examples-requirements.txt
+python scripts/build-documentation-examples.py
+python scripts/build-skill-zips.py
+```
+
+จากนั้นเปิด `examples/synthetic-demo/index.html` ภายในโฟลเดอร์ Skill ที่ต้องการผ่าน Local Web Server
+
+---
+
+## Fantasy Character Production
+
+[AAA Fantasy Character Studio](skills/aaa-fantasy-character-studio/SKILL.md) (v1.0.0) — Semi-realistic Xianxia / Wuxia fantasy characters: anatomy, layered robes, hair, armor, retopology, UV, PBR, rigging and game integration. Includes 12 evidence gates and 15 synthetic tool tests. No AAA-quality model benchmark is claimed; actual Blender/engine tools and independent visual review are required.
+
+### G1 diagnostic prototype — Azure Celestial Sword Immortal
+
+[Open the diagnostic showcase](assets/examples/fantasy-character/index.html) · [Actual CPU clay renders](assets/examples/fantasy-character/renders/clay-views.webp) · [Rigged blockout GLB](assets/examples/fantasy-character/export/sword-immortal-blockout.glb) · [Gate evidence](assets/examples/fantasy-character/evidence/gate-status.json)
+
+This is an actual reference-traced **G1 blockout/rig diagnostic, not an AAA or game-ready model**. 56,992 triangles, 29 inferred joints and one test clip. The binary/skin checks passed; G1 visual fidelity failed. No production UV, texture baking, PBR lookdev or independent approval. Three.js viewer source is included; browser/runtime verification was not completed. Do not treat the concept preview as a rendered 3D asset.
+
+## Workflow Diagrams — Archify
+
+เปิดรายละเอียดของแต่ละ Skill แล้วเลือกขั้นตอนใน Workflow Diagram เพื่อดูคำอธิบาย เงื่อนไขการหยุด/แก้ไข และหลักฐาน `SKILL.md` ที่อ้างอิง commit ต้นทาง ทุก Skill ใน Catalog มีแผนภาพเฉพาะของตัวเอง ไม่ใช่ flow ตัวอย่างร่วมกัน
+
+- `assets/skill-workflows/<id>.workflow.json`: แหล่งข้อมูล editable ตาม Workflow Schema v2 ของ [Archify](https://github.com/tt-a1i/archify) (Apache-2.0)
+- `data/skills.json` และ Embedded Catalog: compact interactive flow ที่เปิดจากเครื่องได้โดยไม่ต้องเชื่อมต่ออินเทอร์เน็ตหรือโหลด CDN
+- `assets/skill-workflows/<id>.html`: Native Archify standalone HTML ที่สร้างด้วย `finalize workflow` (validate, delivery, strict check และ browser-check) เมื่อ Build สำเร็จ จึงแสดงปุ่มเปิดตัวดู Interactive และเต็มจอในรายละเอียด Skill
+- Workflow เป็นข้อกำหนดตามเอกสารของ Skill ไม่ได้แสดงว่างานของผู้ใช้กำลังรันหรือผ่าน QA จริง
+
+สร้างหรือทดสอบในเครื่องจาก repository root (Node.js 22+, Git, Chrome/Chromium, Git history ที่มี commit ต้นทางครบถ้วน):
+
+```bash
+node scripts/build-skill-workflows.mjs --check
+git clone https://github.com/tt-a1i/archify.git ../archify
+git -C ../archify checkout --detach 3ca198d867ce4b616332f846ff66e5c8e5e60f95
+node scripts/build-skill-workflows.mjs --archify=../archify
+python -m http.server 3000
+```
+
+หากต้องการปรับ flow ให้แก้ Workflow JSON และ compact workflow ใน Catalog ทั้งสองชุดให้สอดคล้องกับ SKILL.md รุ่นที่อ้างถึง แล้วรัน build/check ใหม่ ห้ามใช้ข้อมูลจริงเป็นตัวอย่างในแผนภาพของ Privacy-First และ API Documentation Builder
+
+---
+
 ## 🚀 วิธีเปิดใช้งานหน้า Web Catalog
 
 คุณสามารถเปิดดูรายการ Skill ผ่านเบราว์เซอร์ได้ทันทีโดยไม่ต้องติดตั้ง Backend:
@@ -225,3 +290,10 @@ compatibility:
 ---
 
 <p align="center">Made with ❤️ for AI Agent Power Users</p>
+
+
+## Community Ratings & Reviews
+
+The catalog supports versioned community reviews via public GitHub Issues and approved ratings generated at Pages build time. See [moderator setup and review documentation](docs/skill-reviews.md).
+
+Phase 2 adds helpful reactions, approved GitHub attachments, comparison, quality analytics, static repository benchmarks and opt-in AI review summaries. See [the review documentation](docs/skill-reviews.md#community-edition--phase-2).

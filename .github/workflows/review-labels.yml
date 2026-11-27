@@ -1,0 +1,21 @@
+name: Ensure skill review moderation label
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/review-labels.yml']
+  workflow_dispatch:
+permissions:
+  issues: write
+jobs:
+  ensure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create approval label if absent
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh api "repos/$GITHUB_REPOSITORY/labels/skill-review-approved" --silent; then
+            echo "Approval label already exists"
+          else
+            gh label create skill-review-approved --repo "$GITHUB_REPOSITORY" --color 0e8a16 --description "Approved community skill review"
+          fi

@@ -1,0 +1,111 @@
+openapi: 3.1.0
+info:
+  title: Synthetic Department Directory
+  version: 0.0.0
+  description: Synthetic contract only; not a deployed service.
+servers:
+  - url: https://api.example.invalid
+security:
+  - DemoBearer: []
+paths:
+  /demo/departments:
+    get:
+      operationId: listDemoDepartments
+      summary: List synthetic department codes
+      tags: [Departments]
+      x-data-classification: Internal
+      responses:
+        '200':
+          description: List of synthetic departments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepartmentList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /demo/departments/{code}:
+    get:
+      operationId: getDemoDepartment
+      summary: Get one synthetic department by code
+      tags: [Departments]
+      x-data-classification: Internal
+      parameters:
+        - name: code
+          in: path
+          required: true
+          description: Synthetic department code
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 20
+      responses:
+        '200':
+          description: Synthetic department
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Department'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    DemoBearer:
+      type: http
+      scheme: bearer
+      description: Illustrative authentication; no real credentials or token issuer.
+  schemas:
+    Department:
+      type: object
+      additionalProperties: false
+      required: [code]
+      properties:
+        code:
+          type: string
+          minLength: 1
+          maxLength: 20
+          description: Synthetic department code
+          x-data-classification: Internal
+    DepartmentList:
+      type: object
+      additionalProperties: false
+      required: [items]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Department'
+          x-data-classification: Internal
+    Error:
+      type: object
+      additionalProperties: false
+      required: [code]
+      properties:
+        code:
+          type: string
+          description: Non-personal machine-readable error code
+          x-data-classification: Internal
+  responses:
+    Unauthorized:
+      description: Authentication missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Access not permitted
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Synthetic department not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

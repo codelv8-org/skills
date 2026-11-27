@@ -1,0 +1,279 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Web App Quotation Builder · Workflow",
+    "subtitle": "v1.1.1 / documented procedure",
+    "output": "assets/skill-workflows/webapp-quotation-builder.html",
+    "visual_preset": "signal-flow",
+    "quality_profile": "showcase",
+    "animation": "trace",
+    "feedback_links": false,
+    "repository": {
+      "url": "https://github.com/codelv8-org/skills",
+      "revision": "5166c3604d65864f77950d3ef5fc7796867298ba",
+      "provider": "github"
+    },
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "external": {
+          "label": "Input / Intake"
+        },
+        "backend": {
+          "label": "Work"
+        },
+        "security": {
+          "label": "Gate / Alternative"
+        },
+        "frontend": {
+          "label": "Delivery"
+        },
+        "messagebus": {
+          "label": "Export"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "Main workflow"
+    },
+    {
+      "id": "exceptions",
+      "label": "Decision / alternative",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "profile",
+    "continue",
+    "scope",
+    "pricing",
+    "generate",
+    "deliver"
+  ],
+  "nodes": [
+    {
+      "id": "profile",
+      "lane": "main",
+      "col": 0,
+      "type": "external",
+      "label": "Provider profile",
+      "sublabel": "โปรไฟล์ + ราคาตลาด",
+      "explanation": "สร้างแบบฟอร์ม Markdown ใหม่ ตรวจราคาอย่างน้อยสองแหล่งอิสระและภาษี แล้วให้ผู้ใช้ยืนยันข้อมูลผู้เสนอราคา",
+      "icon": "start",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/webapp-quotation-builder/SKILL.md",
+          "line": 18,
+          "end_line": 23,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "continue",
+      "lane": "main",
+      "col": 1,
+      "type": "security",
+      "label": "Continue gate",
+      "sublabel": "รอคำสั่ง ทำต่อ",
+      "explanation": "เมื่อข้อมูลผู้เสนอราคาครบ ให้รอผู้ใช้พิมพ์ ทำต่อ หรือคำสั่งเทียบเท่าก่อนถามรายละเอียดโครงการ",
+      "icon": "decision",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/webapp-quotation-builder/SKILL.md",
+          "line": 20,
+          "end_line": 23,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "scope",
+      "lane": "main",
+      "col": 2,
+      "type": "backend",
+      "label": "Project scope",
+      "sublabel": "เก็บ Requirement",
+      "explanation": "ถามครั้งละ 2–4 ข้อ แต่ละข้ออย่างน้อย 3 ตัวเลือกและ Other; ยืนยันลูกค้า ขอบเขต งบ เวลา งวดชำระ และข้อยกเว้น",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/webapp-quotation-builder/SKILL.md",
+          "line": 25,
+          "end_line": 29,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "pricing",
+      "lane": "main",
+      "col": 3,
+      "type": "security",
+      "label": "Pricing & tax",
+      "sublabel": "คำนวณและตรวจภาษี",
+      "explanation": "รวมงาน 3–7 รายการ คำนวณต้นทุน/กำไร ยืนยัน VAT/WHT และเงื่อนไข งวดชำระรวม 100%; ข้อมูลสำคัญต้องครบก่อนสร้างไฟล์",
+      "icon": "decision",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/webapp-quotation-builder/SKILL.md",
+          "line": 31,
+          "end_line": 37,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "generate",
+      "lane": "main",
+      "col": 4,
+      "type": "backend",
+      "label": "Generate & QA",
+      "sublabel": "สร้างและตรวจ 2 PDF",
+      "explanation": "สร้าง quote-data.json ที่ยืนยันแล้ว จัด A4 + สไลด์ 16:9 ด้วย Sarabun และ component layout; ตรวจยอด สัญญา ฟอนต์ และทุกหน้า",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/webapp-quotation-builder/SKILL.md",
+          "line": 39,
+          "end_line": 60,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "deliver",
+      "lane": "main",
+      "col": 5,
+      "type": "frontend",
+      "label": "2 PDF files",
+      "sublabel": "ส่งมอบใบเสนอราคา",
+      "explanation": "ส่งใบเสนอราคา A4 หนึ่งหน้าและ Service Overview PDF แนวนอน พร้อมยอด สถานะ VAT อายุใบเสนอราคา และสมมติฐาน",
+      "icon": "success",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/webapp-quotation-builder/SKILL.md",
+          "line": 57,
+          "end_line": 61,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "wait",
+      "lane": "exceptions",
+      "col": 1,
+      "type": "security",
+      "label": "Wait for user",
+      "sublabel": "ยังไม่ทำต่อ",
+      "explanation": "พักที่ข้อมูลผู้เสนอราคา จนได้รับคำสั่งทำต่อ; ไม่เริ่มประเมินโครงการก่อน",
+      "icon": "stop",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/webapp-quotation-builder/SKILL.md",
+          "line": 20,
+          "end_line": 23,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "revise",
+      "lane": "exceptions",
+      "col": 3,
+      "type": "security",
+      "label": "Clarify terms",
+      "sublabel": "ปรับ Scope / งบ",
+      "explanation": "หากขอบเขต เวลา งบ หรือความปลอดภัยขัดกัน ให้ตกลงสมมติฐานและถามเฉพาะข้อมูลที่ยังขาด",
+      "icon": "decision",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/webapp-quotation-builder/SKILL.md",
+          "line": 25,
+          "end_line": 37,
+          "label": "SKILL.md"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "main-1",
+      "from": "profile",
+      "to": "continue",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-2",
+      "from": "continue",
+      "to": "scope",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-3",
+      "from": "scope",
+      "to": "pricing",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-4",
+      "from": "pricing",
+      "to": "generate",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-5",
+      "from": "generate",
+      "to": "deliver",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "branch-1",
+      "from": "continue",
+      "to": "wait",
+      "label": "ยังไม่ยืนยัน",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "branch-2",
+      "from": "pricing",
+      "to": "revise",
+      "label": "ข้อมูลไม่ครบ",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "return-2",
+      "from": "revise",
+      "to": "pricing",
+      "variant": "dashed",
+      "role": "return"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Workflow notes",
+      "items": [
+        "ต้องตรวจราคาตลาดและภาษีสำหรับใบเสนอราคาใหม่ทุกครั้ง",
+        "ทั้งสอง PDF ต้องมาจากยอดและเงื่อนไขเดียวกัน"
+      ]
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 # Photoreal anatomy release gates (mandatory operating procedure)
 
+> **v3:** Preserve the anatomy and general guidance below. For current mandatory UV, texture, candidate export and final promotion use [surface-release-gates.md](surface-release-gates.md) and [anatomical-uv-and-registration.md](anatomical-uv-and-registration.md); any earlier final export command is legacy.
+
 Do not allow a rendering's attractive skin texture to hide a poorly sculpted head. A realistic head must pass each preceding quality gate before the following stage begins.
 
 | Gate | Stage and evidence | Automatic checks | Manual acceptance / block condition |
@@ -30,7 +32,7 @@ project/
   previews/clay_under_nose.png
   previews/pbr_front.png
   uv/head_uv0_layout.png
-  textures/...
+  textures/... 
   export/head.glb
   reports/glb_qa.json
   README.md

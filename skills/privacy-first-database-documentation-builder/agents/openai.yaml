@@ -1,0 +1,4 @@
+interface:
+  display_name: "Privacy-First Database Documentation Builder"
+  short_description: "สร้าง Catalog, Dictionary, ERD และคู่มือ AI โดยไม่อ่านข้อมูลจริง"
+  default_prompt: "สร้างชุดเอกสารฐานข้อมูลจาก DBA-approved schema metadata เป็น PDF + Markdown โดยห้ามอ่านข้อมูลจริงทุกกรณี"

@@ -7,6 +7,7 @@ Run with Blender, e.g. blender -b scene.blend --python blender_export_head.py --
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 import sys
@@ -19,7 +20,7 @@ def cli_args():
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--report', type=Path, help='Optional JSON report')
     parser.add_argument('--max-triangles', type=int, default=90000)
-    parser.add_argument('--release', action='store_true', help='Enforce anatomy evidence before final GLB export')
+    parser.add_argument('--release', action='store_true', help='Enforce anatomy evidence before candidate GLB export; final promotion requires surface QA')
     parser.add_argument('--anatomy-report', type=Path, help='JSON from analyze_anatomy.py')
     parser.add_argument('--photo-fit-report', type=Path, action='append', default=[], help='JSON from compare_photo_landmarks.py, repeat for views')
     parser.add_argument('--manual-anatomy-reviewed', action='store_true', help='Operator attests to actual clay-view anatomy review, not an automated claim')
@@ -96,6 +97,8 @@ def run():
     anatomy_evidence = {}
     photo_fit_evidence = []
     if args.release:
+        if not args.output.name.endswith('.candidate.glb'):
+            errors.append('Release export must use *.candidate.glb; final promotion requires validate_head_surface.py')
         if not args.manual_anatomy_reviewed:
             errors.append('Release requires an actual clay-view anatomy review (--manual-anatomy-reviewed)')
         if not args.anatomy_report:
@@ -155,7 +158,8 @@ def run():
     result = bpy.ops.export_scene.gltf(filepath=str(output), export_format='GLB', use_selection=True)
     if 'FINISHED' not in result or not output.is_file():
         raise RuntimeError('Blender glTF exporter did not create GLB')
-    report['status'] = 'EXPORTED_NEEDS_GLB_AND_BROWSER_QA'
+    report['status'] = 'CANDIDATE_NEEDS_SURFACE_QA' if args.release else 'EXPORTED_NEEDS_GLB_AND_BROWSER_QA'
+    report['glb_sha256'] = hashlib.sha256(output.read_bytes()).hexdigest()
     report['glb_size_mb'] = round(output.stat().st_size / (1024 * 1024), 3)
     report_path.write_text(json.dumps(report, indent=2), encoding='utf-8')
     print(json.dumps(report, indent=2))

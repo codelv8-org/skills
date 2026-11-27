@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "profile": "DESKTOP",
+  "reference_mode": "MULTIVIEW_CONCEPT",
+  "height_m": null,
+  "scale_is_assumed": true,
+  "pose": "A_POSE",
+  "views": ["front", "anatomical_left", "back", "anatomical_right", "three_quarter"],
+  "export_formats": ["blend", "fbx"],
+  "rig_required": true,
+  "clips": [],
+  "target_device": null,
+  "simultaneous_characters": null,
+  "asset_licenses": [],
+  "observed_features": [],
+  "inferred_features": [],
+  "accepted_interpretation": null
+}

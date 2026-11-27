@@ -1,0 +1,33 @@
+// Diagnostic reference-envelope reconstruction. Original fictional design, no rig/AAA approval.
+import fs from 'node:fs';
+const build = function build(atlas){
+const profiles={
+ head:[[32,237,244,104,111,2],[38,215,270,75,146,2],[52,193,288,54,163,2],[80,185,296,44,176,2.5],[100,182,299,49,168,2.4],[126,184,299,55,172,2.4],[143,198,284,62,167,2],[158,211,269,65,157,2],[169,218,261,71,145,2]],
+ neck:[[143,213,272,63,149,2],[163,204,279,57,147,2],[180,194,291,47,150,2],[202,183,301,38,154,2.4]],
+ torso:[[174,191,291,41,148,2],[192,155,326,25,155,2.2],[217,131,349,13,163,2.5],[250,138,340,10,173,3],[287,149,337,11,197,3.4],[324,140,345,13,201,3.4],[365,143,341,17,200,3.5],[399,139,340,25,199,3],[433,135,346,24,197,3],[459,147,334,32,177,2.7],[490,143,340,34,174,2.4],[519,150,341,40,170,2.1],[538,178,305,52,159,2]],
+ armR:[[194,143,202,41,127,2],[219,111,181,36,130,2.2],[251,94,166,38,127,2.3],[284,78,149,42,120,2.2],[316,69,136,42,118,2],[344,59,122,46,120,2],[372,46,106,50,122,2],[400,39,94,58,123,2.3],[426,34,83,68,121,2],[447,30,72,76,124,2],[466,27,67,85,133,2],[493,21,72,91,148,2],[515,25,65,98,153,2],[537,33,59,104,151,2],[550,44,51,112,134,2]],
+ armL:[[194,281,341,43,127,2],[219,303,373,36,130,2.2],[251,317,389,38,127,2.3],[284,334,405,42,120,2.2],[316,349,415,42,118,2],[344,360,424,46,120,2],[372,374,433,50,122,2],[400,389,439,58,123,2.3],[426,398,443,68,121,2],[447,410,446,76,124,2],[466,413,447,85,133,2],[493,403,451,91,148,2],[515,405,447,98,153,2],[537,416,437,104,151,2],[550,422,429,112,134,2]],
+ legR:[[472,146,246,36,174,2],[500,138,244,38,170,2.4],[540,125,240,46,163,2.5],[575,126,230,46,160,2.5],[615,128,218,45,154,2.5],[650,132,210,46,145,2.5],[680,130,204,50,149,2.4],[716,122,195,45,146,2.3],[748,114,189,33,123,2.2],[786,110,182,29,110,2.2],[823,111,180,30,109,2.1],[859,117,176,34,112,2],[877,120,168,41,106,2],[910,111,163,38,122,2.3],[945,99,161,33,169,3],[965,100,159,31,174,3],[970,105,156,36,168,3]],
+ legL:[[472,238,333,36,174,2],[500,240,344,38,170,2.4],[540,244,350,46,163,2.5],[575,249,358,46,160,2.5],[615,256,353,45,154,2.5],[650,266,349,46,145,2.5],[680,275,350,50,149,2.4],[716,280,354,45,146,2.3],[748,281,359,33,123,2.2],[786,284,365,29,110,2.2],[823,288,365,30,109,2.1],[859,299,363,34,112,2],[877,303,351,41,106,2],[910,302,355,38,122,2.3],[945,305,372,33,169,3],[965,306,374,31,174,3],[970,310,369,36,168,3]]
+};
+const S=1.8/938,N=32;const pos=[],nor=[],uv=[],idx=[],parts=[];
+const sp=(a,p)=>Math.sign(a)*Math.pow(Math.abs(a),p);
+function point(r,t){let [y,x0,x1,z0,z1,p]=r;return [(x0+x1)/2+(x1-x0)/2*sp(Math.cos(t),2/p),y,(z0+z1)/2+(z1-z0)/2*sp(Math.sin(t),2/p)];}
+const sub=(a,b)=>a.map((x,i)=>x-b[i]);const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];const norm=a=>{let l=Math.hypot(...a)||1;return a.map(x=>x/l)};
+function world(p){return [(p[0]-240)*S,(970-p[1])*S,(p[2]-105)*S]}
+function uvp(p,view){let x=view===0?p[0]:view===1?463+p[2]:691+239-(p[0]-240);return [Math.max(0,Math.min(1,x/1161)),Math.max(0,Math.min(1,p[1]/1004))]}
+for(const [name,rows] of Object.entries(profiles)){
+ let rings=[];for(let i=0;i<rows.length-1;i++){let a=rows[i],b=rows[i+1],n=Math.ceil((b[0]-a[0])/8);for(let j=0;j<n;j++){let t=j/n;rings.push(a.map((x,k)=>x+(b[k]-x)*t));}}rings.push(rows.at(-1));
+ let pp=[],ww=[],nn=[],tri=[];for(let i=0;i<rings.length;i++)for(let j=0;j<N;j++){let p=point(rings[i],j*Math.PI*2/N);pp.push(p);ww.push(world(p));nn.push([0,0,0]);}
+ for(let i=0;i<rings.length-1;i++)for(let j=0;j<N;j++){let a=i*N+j,b=i*N+(j+1)%N,c=(i+1)*N+j,d=(i+1)*N+(j+1)%N;tri.push([a,b,c],[b,d,c]);}
+ for(let end of [0,rings.length-1]){let r=rings[end],p=[(r[1]+r[2])/2,r[0],(r[3]+r[4])/2],k=pp.length;pp.push(p);ww.push(world(p));nn.push([0,0,0]);for(let j=0;j<N;j++){let a=end*N+j,b=end*N+(j+1)%N;tri.push(end===0?[k,b,a]:[k,a,b]);}}
+ for(let t of tri){let a=cross(sub(ww[t[1]],ww[t[0]]),sub(ww[t[2]],ww[t[0]]));for(let k of t)nn[k]=nn[k].map((x,i)=>x+a[i]);}nn=nn.map(norm);
+ let lookup=new Map(),offset=idx.length;for(let t of tri){let n=norm(t.reduce((a,k)=>a.map((x,i)=>x+nn[k][i]),[0,0,0]));let view=Math.abs(n[2])>=Math.abs(n[0])*.72?(n[2]>=0?0:2):1;for(let k of t){let key=k+':'+view;if(!lookup.has(key)){lookup.set(key,pos.length/3);pos.push(...ww[k]);nor.push(...nn[k]);uv.push(...uvp(pp[k],view));}idx.push(lookup.get(key));}}parts.push({name,triangleCount:(idx.length-offset)/3});
+}
+const arrays=[new Float32Array(pos),new Float32Array(nor),new Float32Array(uv),new Uint32Array(idx),atlas];let off=0;const views=[],chunks=[];for(let a of arrays){let b=new Uint8Array(a.buffer,a.byteOffset,a.byteLength);views.push({buffer:0,byteOffset:off,byteLength:b.length});chunks.push(b);let pad=(4-b.length%4)%4;if(pad)chunks.push(new Uint8Array(pad));off+=b.length+pad;}
+const vmin=[0,1,2].map(k=>Math.min(...pos.filter((_,i)=>i%3===k))),vmax=[0,1,2].map(k=>Math.max(...pos.filter((_,i)=>i%3===k)));
+let g={asset:{version:'2.0',generator:'AAA Studio reference envelope prototype'},scene:0,scenes:[{nodes:[0]}],nodes:[{mesh:0,name:'Reference envelope - PROTOTYPE'}],meshes:[{primitives:[{attributes:{POSITION:0,NORMAL:1,TEXCOORD_0:2},indices:3,material:0}]}],materials:[{name:'Projected concept color (baked illumination)',pbrMetallicRoughness:{baseColorTexture:{index:0},metallicFactor:0,roughnessFactor:1},doubleSided:true,extensions:{KHR_materials_unlit:{}}}],extensionsUsed:['KHR_materials_unlit'],textures:[{source:0}],images:[{bufferView:4,mimeType:'image/jpeg'}],buffers:[{byteLength:off}],bufferViews:views,accessors:[{bufferView:0,componentType:5126,count:pos.length/3,type:'VEC3',min:vmin,max:vmax},{bufferView:1,componentType:5126,count:pos.length/3,type:'VEC3'},{bufferView:2,componentType:5126,count:pos.length/3,type:'VEC2'},{bufferView:3,componentType:5125,count:idx.length,type:'SCALAR'}],extras:{status:'PROTOTYPE',source:'synthetic concept, duplicate profiles; depth inferred; overlapping static components; not independent visual approval'}};
+const jstr=JSON.stringify(g),jlen=Math.ceil(jstr.length/4)*4,out=new Uint8Array(28+jlen+off),dv=new DataView(out.buffer);dv.setUint32(0,0x46546c67,true);dv.setUint32(4,2,true);dv.setUint32(8,out.length,true);dv.setUint32(12,jlen,true);dv.setUint32(16,0x4e4f534a,true);out.fill(32,20,20+jlen);for(let i=0;i<jstr.length;i++)out[20+i]=jstr.charCodeAt(i);dv.setUint32(20+jlen,off,true);dv.setUint32(24+jlen,0x004e4942,true);let at=28+jlen;for(let c of chunks){out.set(c,at);at+=c.length}return {bytes:out,stats:{vertices:pos.length/3,triangles:idx.length/3,bytes:out.length,bounds:[vmin,vmax],parts}}
+};
+const {bytes,stats}=build(fs.readFileSync(process.argv[2]||'atlas.jpg'));
+fs.writeFileSync(process.argv[3]||'operator.glb',bytes);console.log(JSON.stringify(stats));

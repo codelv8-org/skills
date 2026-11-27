@@ -1,0 +1,11 @@
+# Privacy-first metadata documentation
+
+No record access; no execution permission. Source scope and verification in each document.
+
+- [data-catalog.md](data-catalog.md)
+- [data-dictionary.md](data-dictionary.md)
+- [er-diagram.md](er-diagram.md)
+- [data-classification.md](data-classification.md)
+- [data-lineage.md](data-lineage.md)
+- [database-consumer-guide.md](database-consumer-guide.md)
+- [ai-agent-guide.md](ai-agent-guide.md)
