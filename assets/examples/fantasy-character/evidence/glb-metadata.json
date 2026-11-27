@@ -1,0 +1,18 @@
+{
+  "status": "METADATA_DIAGNOSTIC_ONLY",
+  "bytes": 1717464,
+  "unique_mesh_triangles": 56992,
+  "all_node_triangles": 56992,
+  "meshes": 1,
+  "materials": 1,
+  "images": 0,
+  "skins": 1,
+  "rigged_nodes": 1,
+  "animations": [
+    "Diagnostic bend - NOT production motion"
+  ],
+  "warnings": [
+    "mesh 0: missing normal or UV0"
+  ],
+  "limitations": "Does not decode geometry, verify weights, validate buffers, measure draw calls/FPS, or test engine appearance."
+}

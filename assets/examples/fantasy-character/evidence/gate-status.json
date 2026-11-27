@@ -1,0 +1,77 @@
+{
+  "status": "PROTOTYPE_NOT_AAA",
+  "gates": [
+    {
+      "gate": "G0",
+      "name": "Reference intake",
+      "status": "PARTIAL",
+      "findings": "Reference inspected, traced; tools/rights and assumptions documented. Independent acceptance unavailable."
+    },
+    {
+      "gate": "G1",
+      "name": "Blockout",
+      "status": "FAIL",
+      "findings": "Actual front/profile/back/three-quarter renders reveal fused garment, featureless face, approximate head/crown, missing hair separation, armor and coat openings. Silhouette only."
+    },
+    {
+      "gate": "G2",
+      "name": "Anatomy",
+      "status": "BLOCKED",
+      "findings": "No licensed credible anatomical mesh or Blender. Do not substitute primitive geometry."
+    },
+    {
+      "gate": "G3",
+      "name": "Garments",
+      "status": "NOT RUN",
+      "findings": "Separate garment layers, folds and fit not modeled."
+    },
+    {
+      "gate": "G4",
+      "name": "Hair and ornaments",
+      "status": "NOT RUN",
+      "findings": "Not built as modules."
+    },
+    {
+      "gate": "G5",
+      "name": "Retopology",
+      "status": "NOT RUN",
+      "findings": "Voxel triangulation is not deformation-ready retopology."
+    },
+    {
+      "gate": "G6",
+      "name": "UV",
+      "status": "NOT RUN",
+      "findings": "No UV0."
+    },
+    {
+      "gate": "G7",
+      "name": "Baking",
+      "status": "NOT RUN",
+      "findings": "No high-to-low normal or AO bake."
+    },
+    {
+      "gate": "G8",
+      "name": "PBR lookdev",
+      "status": "NOT RUN",
+      "findings": "Only neutral clay material."
+    },
+    {
+      "gate": "G9",
+      "name": "Production rig",
+      "status": "NOT RUN",
+      "findings": "A separate inferred diagnostic skeleton with four-weight skinning and one 2-second test clip is included in the G1 proxy; not production rigging."
+    },
+    {
+      "gate": "G10",
+      "name": "Engine integration",
+      "status": "NOT RUN",
+      "findings": "GLB binary diagnostic and geometry reimport passed; Three.js viewer source exists, runtime device and Khronos validation not run."
+    },
+    {
+      "gate": "G11",
+      "name": "Release",
+      "status": "BLOCKED",
+      "findings": "No independent review or production gate seals. Do not promote to AAA/game-ready."
+    }
+  ]
+}

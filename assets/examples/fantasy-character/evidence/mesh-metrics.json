@@ -1,0 +1,41 @@
+{
+  "status": "PROTOTYPE_NOT_AAA",
+  "vertices": 28498,
+  "triangles": 56992,
+  "joint_count": 29,
+  "animation_clips": [
+    "Diagnostic bend - NOT production motion"
+  ],
+  "height_m": 1.9251633401370902,
+  "bounds_m": [
+    [
+      -0.45943102097017574,
+      0.0,
+      -0.33623464789473706
+    ],
+    [
+      0.4568393424773724,
+      1.9251633401370902,
+      0.16840058617590942
+    ]
+  ],
+  "weight_sum_max_error": 1.1920928955078125e-07,
+  "rest_pose_max_error_m": 1.0792766277978727e-07,
+  "diagnostic_max_displacement_m": 0.03189425344904483,
+  "degenerate_faces": 0,
+  "connected_components": 1,
+  "watertight": true,
+  "material_count": 1,
+  "uv0": false,
+  "textures": 0,
+  "game_engine_test": "NOT RUN",
+  "independent_visual_review": "NOT RUN",
+  "limitations": [
+    "fused hull of garment and body",
+    "inferred depth and joints",
+    "no anatomical topology or real costume layers",
+    "no UV or texture bake",
+    "no production rigging or animation",
+    "no Three.js device runtime test"
+  ]
+}

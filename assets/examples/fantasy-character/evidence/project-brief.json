@@ -1,0 +1,48 @@
+{
+  "name": "Azure Celestial Sword Immortal",
+  "profile_target": "WEB_HERO",
+  "status": "PROTOTYPE",
+  "earliest_blocked_gate": "G0/G1: no independent approval; no viable anatomy authoring environment",
+  "reference": "AI-generated concept from user conversation; no proprietary model imported",
+  "reference_sha256": "592adc6c91e81483726d2d73027d1403cbafb9ce34f75d4b150e330578349f28",
+  "reference_views": [
+    "large front A-pose",
+    "small front",
+    "small left-facing profile",
+    "back",
+    "detail crops"
+  ],
+  "assumed_head_to_floor_m": 1.85,
+  "axis": "glTF Y-up, +Z forward, anatomical L +X",
+  "observed": [
+    "navy/ivory long layered silk robe",
+    "gold pointed shoulder plates and crown",
+    "dark blue long half-up hair",
+    "blue gemstones",
+    "long embroidered panels",
+    "gold decorated boots and bracers",
+    "young adult male semi-realistic face"
+  ],
+  "inferred": [
+    "depth of hidden regions",
+    "body beneath garments",
+    "joint centers",
+    "opposite side",
+    "crown thickness",
+    "hair mass behind torso"
+  ],
+  "not_in_reference": [
+    "sword (not included in prototype)",
+    "animation and cloth simulation"
+  ],
+  "tool_versions": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "scikit-image": "0.26.0",
+    "trimesh": "4.11.1",
+    "blender": null,
+    "threejs_runtime": "not available locally"
+  },
+  "asset_provenance": "Original traced concept hull; no imported proprietary mesh, external asset, or texture. Concept preview is a derived image, not a model render. Original PNG retained in downloadable local project."
+}

@@ -1,0 +1,266 @@
+{
+  "status": "inferred diagnostic scaffold",
+  "joints": [
+    {
+      "name": "root",
+      "parent": null,
+      "position_m": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "pelvis",
+      "parent": "root",
+      "position_m": [
+        0,
+        0.98,
+        0
+      ]
+    },
+    {
+      "name": "spine",
+      "parent": "pelvis",
+      "position_m": [
+        0,
+        1.22,
+        0
+      ]
+    },
+    {
+      "name": "chest",
+      "parent": "spine",
+      "position_m": [
+        0,
+        1.47,
+        0
+      ]
+    },
+    {
+      "name": "neck",
+      "parent": "chest",
+      "position_m": [
+        0,
+        1.64,
+        0
+      ]
+    },
+    {
+      "name": "head",
+      "parent": "neck",
+      "position_m": [
+        0,
+        1.73,
+        0
+      ]
+    },
+    {
+      "name": "clavicle_L",
+      "parent": "chest",
+      "position_m": [
+        0.09,
+        1.57,
+        0
+      ]
+    },
+    {
+      "name": "upper_arm_L",
+      "parent": "clavicle_L",
+      "position_m": [
+        0.15,
+        1.56,
+        0.005
+      ]
+    },
+    {
+      "name": "forearm_L",
+      "parent": "upper_arm_L",
+      "position_m": [
+        0.275,
+        1.335,
+        0.015
+      ]
+    },
+    {
+      "name": "hand_L",
+      "parent": "forearm_L",
+      "position_m": [
+        0.386,
+        1.18,
+        0.02
+      ]
+    },
+    {
+      "name": "thigh_L",
+      "parent": "pelvis",
+      "position_m": [
+        0.095,
+        0.98,
+        0
+      ]
+    },
+    {
+      "name": "shin_L",
+      "parent": "thigh_L",
+      "position_m": [
+        0.105,
+        0.48,
+        0.005
+      ]
+    },
+    {
+      "name": "foot_L",
+      "parent": "shin_L",
+      "position_m": [
+        0.124,
+        0.11,
+        0.04
+      ]
+    },
+    {
+      "name": "robe_L",
+      "parent": "pelvis",
+      "position_m": [
+        0.13,
+        1.16,
+        -0.02
+      ]
+    },
+    {
+      "name": "robe_tip_L",
+      "parent": "robe_L",
+      "position_m": [
+        0.22,
+        0.54,
+        -0.04
+      ]
+    },
+    {
+      "name": "clavicle_R",
+      "parent": "chest",
+      "position_m": [
+        -0.09,
+        1.57,
+        0
+      ]
+    },
+    {
+      "name": "upper_arm_R",
+      "parent": "clavicle_R",
+      "position_m": [
+        -0.15,
+        1.56,
+        0.005
+      ]
+    },
+    {
+      "name": "forearm_R",
+      "parent": "upper_arm_R",
+      "position_m": [
+        -0.275,
+        1.335,
+        0.015
+      ]
+    },
+    {
+      "name": "hand_R",
+      "parent": "forearm_R",
+      "position_m": [
+        -0.386,
+        1.18,
+        0.02
+      ]
+    },
+    {
+      "name": "thigh_R",
+      "parent": "pelvis",
+      "position_m": [
+        -0.095,
+        0.98,
+        0
+      ]
+    },
+    {
+      "name": "shin_R",
+      "parent": "thigh_R",
+      "position_m": [
+        -0.105,
+        0.48,
+        0.005
+      ]
+    },
+    {
+      "name": "foot_R",
+      "parent": "shin_R",
+      "position_m": [
+        -0.124,
+        0.11,
+        0.04
+      ]
+    },
+    {
+      "name": "robe_R",
+      "parent": "pelvis",
+      "position_m": [
+        -0.13,
+        1.16,
+        -0.02
+      ]
+    },
+    {
+      "name": "robe_tip_R",
+      "parent": "robe_R",
+      "position_m": [
+        -0.22,
+        0.54,
+        -0.04
+      ]
+    },
+    {
+      "name": "hair_01",
+      "parent": "head",
+      "position_m": [
+        0,
+        1.77,
+        -0.09
+      ]
+    },
+    {
+      "name": "hair_02",
+      "parent": "hair_01",
+      "position_m": [
+        0,
+        1.48,
+        -0.16
+      ]
+    },
+    {
+      "name": "hair_03",
+      "parent": "hair_02",
+      "position_m": [
+        0,
+        1.28,
+        -0.19
+      ]
+    },
+    {
+      "name": "robe_back",
+      "parent": "pelvis",
+      "position_m": [
+        0,
+        1.18,
+        -0.14
+      ]
+    },
+    {
+      "name": "robe_back_tip",
+      "parent": "robe_back",
+      "position_m": [
+        0,
+        0.5,
+        -0.19
+      ]
+    }
+  ]
+}
