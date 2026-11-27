@@ -3891,7 +3891,7 @@
     },
     {
       "id": "aaa-tactical-character-studio",
-      "overviewImage": "assets/skill-overviews/aaa-tactical-character-studio.svg",
+      "overviewImage": "assets/skill-overviews/aaa-tactical-character-studio-benchmark.webp",
       "name": "AAA Tactical Character Studio",
       "nameTh": "สตูดิโอสร้างตัวละคร 3D สมจริงระดับ AAA",
       "category": "UIUX",
@@ -3900,7 +3900,7 @@
       "phase": "Phase 1",
       "author": "Personal Library",
       "summary": "สร้างตัวละครสมจริงจาก A-pose 4 มุม ด้วย High-poly, Clothing, Modular Gear, PBR และ Rigging พร้อม Quality Gates",
-      "description": "Skill แยกจาก Low-poly Character Web Studio สำหรับงานตัวละคร FPS และมนุษย์สมจริง เน้น anatomy, เสื้อผ้า, อุปกรณ์, retopology, UV, baking, PBR, deformation, FBX/GLB และหลักฐานตรวจจริง แพ็กเกจและ unit tests ผ่านแล้ว แต่ยังไม่ได้ benchmark โมเดลระดับ AAA",
+      "description": "Skill แยกจาก Low-poly Character Web Studio สำหรับตัวละคร FPS และมนุษย์สมจริง เน้น anatomy, เสื้อผ้า, อุปกรณ์, retopology, UV, baking, PBR, deformation, FBX/GLB และหลักฐานตรวจจริง มีตัวอย่าง Geometry จริงแบบ reference-envelope prototype; G0/G1 ยังไม่ผ่าน และยังไม่ใช่โมเดล AAA ที่พร้อมใช้งาน",
       "tags": [
         "3D",
         "Photoreal",
@@ -3980,7 +3980,14 @@
           "path": "skills/aaa-tactical-character-studio/agents/openai.yaml"
         }
       ],
-      "examples": [],
+      "examples": [
+        {
+          "title": "Operator · Reference-envelope benchmark 01",
+          "description": "โมเดล GLB จริง 21,120 triangles หมุนดูได้ พร้อม Projected Color, Gray Clay, Wireframe และ QA report; PROTOTYPE, G0/G1 blocked, ไม่มี rig/PBR ที่ผ่านการตรวจ",
+          "htmlPath": "assets/examples/aaa-tactical-character/preview.html",
+          "markdownPath": "assets/examples/aaa-tactical-character/REPORT.md"
+        }
+      ],
       "highlights": [
         "แยกตรวจ anatomy, clothing และ modular gear ก่อน optimize",
         "ตรวจ 8 gates และหลักฐาน SHA-256 พร้อมแยกผู้สร้างและ reviewer",
