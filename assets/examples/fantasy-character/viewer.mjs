@@ -1,0 +1,19 @@
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+const canvas=document.querySelector('#viewer'),viewport=document.querySelector('#viewport'),status=document.querySelector('#status'),buttons=[...document.querySelectorAll('.toolbar button')];
+const setStatus=t=>status.textContent=t;
+try{
+ const report=await fetch('evidence/export-verification.json').then(r=>{if(!r.ok)throw Error('QA report unavailable');return r.json();});
+ const response=await fetch('export/sword-immortal-blockout.glb');if(!response.ok)throw Error('GLB unavailable: '+response.status);
+ const bytes=await response.arrayBuffer();if(crypto.subtle){const hash=[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(n=>n.toString(16).padStart(2,'0')).join('');if(hash!==report.sha256)throw Error('Exact export hash mismatch');}
+ const gltf=await new GLTFLoader().parseAsync(bytes,new URL('.',location.href).href);const scene=new THREE.Scene();scene.background=new THREE.Color(0x141a28);const renderer=new THREE.WebGLRenderer({canvas,antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.2;
+ scene.add(new THREE.HemisphereLight(0xc9dfff,0x37302c,2.1));const key=new THREE.DirectionalLight(0xffedd5,3);key.position.set(3,4,4);scene.add(key);const rim=new THREE.DirectionalLight(0x7fafff,2);rim.position.set(-3,2,-4);scene.add(rim);
+ const model=gltf.scene;scene.add(model);model.updateMatrixWorld(true);const skinned=[];model.traverse(o=>{if(o.isSkinnedMesh)skinned.push(o)});if(skinned.length!==1||skinned[0].skeleton.bones.length!==report.joints)throw Error('Unexpected rig structure');
+ const center=new THREE.Vector3(0,.962,0),cam=new THREE.PerspectiveCamera(35,1,.01,50);cam.position.set(0,.962,4.2);const controls=new OrbitControls(cam,canvas);controls.target.copy(center);controls.minDistance=1.3;controls.maxDistance=7;controls.enableDamping=true;controls.update();const helper=new THREE.SkeletonHelper(model);helper.visible=false;scene.add(helper);const grid=new THREE.GridHelper(3,12,0x59667b,0x303d50);scene.add(grid);
+ const mixer=new THREE.AnimationMixer(model);const action=mixer.clipAction(gltf.animations[0]);const clock=new THREE.Clock();let playing=false;const originals=skinned.map(m=>m.material);const wire=new THREE.MeshBasicMaterial({color:0x9ac5ef,wireframe:true});
+ const toggle=(id,callback)=>{const b=document.querySelector('#'+id);b.addEventListener('click',()=>{const on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',String(on));callback(on);});};toggle('wire',on=>skinned.forEach((m,i)=>m.material=on?wire:originals[i]));toggle('bones',on=>helper.visible=on);toggle('play',on=>{playing=on;if(on){action.reset().play();}else{action.stop();mixer.stopAllAction();model.updateMatrixWorld(true);}});
+ document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{const a={front:0,side:-Math.PI/2,back:Math.PI,threequarter:Math.PI/5}[b.dataset.view];cam.position.set(Math.sin(a)*4.2,center.y,Math.cos(a)*4.2);controls.target.copy(center);controls.update();}));
+ const resize=()=>{const w=viewport.clientWidth,h=viewport.clientHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();};new ResizeObserver(resize).observe(viewport);resize();canvas.hidden=false;document.querySelector('#fallback').hidden=true;buttons.forEach(b=>b.disabled=false);setStatus('GLB loaded in this browser · inferred diagnostic rig · not production quality');
+ renderer.setAnimationLoop(()=>{const delta=Math.min(.05,clock.getDelta());if(playing)mixer.update(delta);controls.update();renderer.render(scene,cam);});
+}catch(e){console.error(e);setStatus('Interactive viewer unavailable: '+e.message+'. Static renders and GLB remain available.');}

@@ -112,6 +112,12 @@ python scripts/build-skill-zips.py
 
 [AAA Fantasy Character Studio](skills/aaa-fantasy-character-studio/SKILL.md) (v1.0.0) — Semi-realistic Xianxia / Wuxia fantasy characters: anatomy, layered robes, hair, armor, retopology, UV, PBR, rigging and game integration. Includes 12 evidence gates and 15 synthetic tool tests. No AAA-quality model benchmark is claimed; actual Blender/engine tools and independent visual review are required.
 
+### G1 diagnostic prototype — Azure Celestial Sword Immortal
+
+[Open the diagnostic showcase](assets/examples/fantasy-character/index.html) · [Actual CPU clay renders](assets/examples/fantasy-character/renders/clay-views.webp) · [Rigged blockout GLB](assets/examples/fantasy-character/export/sword-immortal-blockout.glb) · [Gate evidence](assets/examples/fantasy-character/evidence/gate-status.json)
+
+This is an actual reference-traced **G1 blockout/rig diagnostic, not an AAA or game-ready model**. 56,992 triangles, 29 inferred joints and one test clip. The binary/skin checks passed; G1 visual fidelity failed. No production UV, texture baking, PBR lookdev or independent approval. Three.js viewer source is included; browser/runtime verification was not completed. Do not treat the concept preview as a rendered 3D asset.
+
 ## Workflow Diagrams — Archify
 
 เปิดรายละเอียดของแต่ละ Skill แล้วเลือกขั้นตอนใน Workflow Diagram เพื่อดูคำอธิบาย เงื่อนไขการหยุด/แก้ไข และหลักฐาน `SKILL.md` ที่อ้างอิง commit ต้นทาง ทุก Skill ใน Catalog มีแผนภาพเฉพาะของตัวเอง ไม่ใช่ flow ตัวอย่างร่วมกัน
