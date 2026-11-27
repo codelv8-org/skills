@@ -2507,6 +2507,237 @@
           "PASS_EVIDENCE_INTEGRITY_ONLY ตรวจความครบถ้วนและความเปลี่ยนแปลงของหลักฐาน ไม่ใช่การรับรองความสมจริง"
         ]
       }
+    },
+    {
+      "id": "aaa-fantasy-character-studio",
+      "overviewImage": "assets/skill-overviews/aaa-fantasy-character-studio.svg",
+      "name": "AAA Fantasy Character Studio",
+      "nameTh": "สตูดิโอสร้างตัวละครแฟนตาซี 3D ระดับ AAA",
+      "category": "UIUX",
+      "version": "1.0.0",
+      "status": "Ready",
+      "phase": "Phase 1",
+      "author": "Personal Library",
+      "summary": "Semi-realistic Xianxia / Wuxia: ปั้นตัวละคร ชุดผ้าไหม ผมยาว เกราะ PBR Rigging และ Game Engine พร้อม 12 Quality Gates",
+      "description": "สร้างและซ่อมตัวละครแฟนตาซี original แนวเซียนกระบี่ เทพสงคราม จอมยุทธ์ จาก text, A-pose หรือ 3D mesh ผ่าน anatomy, garment, hair, retopology, UV, normal/AO baking, PBR, rig, animation และ FBX/GLB; ตรวจหลักฐาน SHA-256 และ GLB metadata ด้วยชุดทดสอบ synthetic 15 กรณี ไม่ใช่ benchmark คุณภาพ AAA จริง",
+      "tags": [
+        "3D",
+        "AAA",
+        "Fantasy",
+        "Xianxia",
+        "Wuxia",
+        "Blender",
+        "PBR",
+        "Rigging",
+        "FBX",
+        "GLB"
+      ],
+      "supportedAgents": [
+        "antigravity",
+        "claude-code",
+        "codex"
+      ],
+      "agentCompatibility": {
+        "antigravity": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "claudeCode": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "codex": {
+          "supported": true,
+          "version": ">=1.0.0"
+        }
+      },
+      "triggers": [
+        "ถังซาน",
+        "เซียนกระบี่",
+        "เทพสงคราม",
+        "จอมยุทธ์",
+        "ปั้นตัวละคร 3D",
+        "A-pose",
+        "xianxia",
+        "wuxia",
+        "fantasy character",
+        "PBR baking",
+        "rigging"
+      ],
+      "path": "skills/aaa-fantasy-character-studio",
+      "entryFile": "skills/aaa-fantasy-character-studio/SKILL.md",
+      "assets": [
+        {
+          "name": "SKILL.md",
+          "type": "skill",
+          "path": "skills/aaa-fantasy-character-studio/SKILL.md"
+        },
+        {
+          "name": "openai.yaml",
+          "type": "template",
+          "path": "skills/aaa-fantasy-character-studio/agents/openai.yaml"
+        },
+        {
+          "name": "project.json",
+          "type": "template",
+          "path": "skills/aaa-fantasy-character-studio/assets/project.json"
+        },
+        {
+          "name": "style.md",
+          "type": "reference",
+          "path": "skills/aaa-fantasy-character-studio/references/style.md"
+        },
+        {
+          "name": "production.md",
+          "type": "reference",
+          "path": "skills/aaa-fantasy-character-studio/references/production.md"
+        },
+        {
+          "name": "rig-engine.md",
+          "type": "reference",
+          "path": "skills/aaa-fantasy-character-studio/references/rig-engine.md"
+        },
+        {
+          "name": "review.md",
+          "type": "reference",
+          "path": "skills/aaa-fantasy-character-studio/references/review.md"
+        },
+        {
+          "name": "gate.py",
+          "type": "script",
+          "path": "skills/aaa-fantasy-character-studio/scripts/gate.py"
+        },
+        {
+          "name": "inspect_glb.py",
+          "type": "script",
+          "path": "skills/aaa-fantasy-character-studio/scripts/inspect_glb.py"
+        },
+        {
+          "name": "test_tools.py",
+          "type": "script",
+          "path": "skills/aaa-fantasy-character-studio/scripts/test_tools.py"
+        }
+      ],
+      "examples": [],
+      "highlights": [
+        "5 แนวทาง Art Direction และตรวจ anatomy ทีละส่วน",
+        "Hair grooming, silk garments, layered armor และ secondary motion",
+        "12 Quality Gates พร้อม SHA-256 และ exact delivery ZIP",
+        "GLB metadata diagnostic / 15 synthetic tests; ไม่ใช่การรับรองคุณภาพโมเดล",
+        "Cinematic, Desktop Hero, Web Hero, Web NPC; ต้องทดสอบ engine จริง"
+      ],
+      "workflow": {
+        "sourcePath": "assets/skill-workflows/aaa-fantasy-character-studio.workflow.json",
+        "htmlPath": "assets/skill-workflows/aaa-fantasy-character-studio.html",
+        "revision": "ccbd6b125b47c0a89f637c7511a2a224ee679340",
+        "steps": [
+          {
+            "id": "intake",
+            "title": "G0–G1 · Design",
+            "subtitle": "Reference / blockout",
+            "description": "ตรวจภาพ ทิศทาง สัดส่วน ลิขสิทธิ์ เลือก archetype และอนุมัติ silhouette จาก gray clay",
+            "kind": "external",
+            "line": 16,
+            "endLine": 20
+          },
+          {
+            "id": "anatomy",
+            "title": "G2 · Anatomy",
+            "subtitle": "Head / body sculpt",
+            "description": "ปั้นทีละส่วน ตรวจศีรษะ ลำตัว แขน มือ ขา และเท้า ก่อนขึ้นชุด",
+            "kind": "security",
+            "line": 22,
+            "endLine": 23
+          },
+          {
+            "id": "outfit",
+            "title": "G3–G4 · Outfit",
+            "subtitle": "Robes / hair / armor",
+            "description": "สร้างเสื้อผ้าหลายชั้น ผมยาว เกราะ เครื่องประดับ และทดสอบการซ้อนทับ",
+            "kind": "backend",
+            "line": 25,
+            "endLine": 29
+          },
+          {
+            "id": "surface",
+            "title": "G5–G8 · Surface",
+            "subtitle": "Retopo / UV / PBR",
+            "description": "ตรวจ topology, UV checker, bake normal/AO และ PBR หลายสภาพแสง",
+            "kind": "backend",
+            "line": 31,
+            "endLine": 41
+          },
+          {
+            "id": "runtime",
+            "title": "G9–G10 · Runtime",
+            "subtitle": "Rig / export / engine",
+            "description": "ตรวจ deformation, clip, FBX/GLB, engine reimport และวัด frame time จริง",
+            "kind": "messagebus",
+            "line": 43,
+            "endLine": 47
+          },
+          {
+            "id": "release",
+            "title": "G11 · Release",
+            "subtitle": "Exact candidate ZIP",
+            "description": "ตรวจโมเดลจริงทุกมุมและ seal 12 gates; ส่งมอบ source/export พร้อมหลักฐาน",
+            "kind": "frontend",
+            "line": 49,
+            "endLine": 50
+          }
+        ],
+        "branches": [
+          {
+            "from": "intake",
+            "id": "ref-repair",
+            "title": "Resolve reference",
+            "subtitle": "แก้ความขัดแย้ง",
+            "description": "แก้ภาพที่ขัดแย้งหรือบันทึกการตีความที่ยอมรับก่อนเริ่ม production",
+            "condition": "Ref ขัดแย้ง",
+            "returnTo": "intake",
+            "line": 16,
+            "endLine": 17
+          },
+          {
+            "from": "anatomy",
+            "id": "shape-repair",
+            "title": "Fix anatomy",
+            "subtitle": "แก้ geometry ก่อน",
+            "description": "แก้สัดส่วนและรูปทรงจาก clay views ไม่ใช้ texture บังความผิดพลาด",
+            "condition": "Anatomy ไม่ผ่าน",
+            "returnTo": "anatomy",
+            "line": 22,
+            "endLine": 23
+          },
+          {
+            "from": "surface",
+            "id": "surface-repair",
+            "title": "Fix UV / bake",
+            "subtitle": "ตรวจ checker และ seams",
+            "description": "แก้ UV ที่ผิดเพี้ยนและ bake artifacts ก่อน author PBR",
+            "condition": "UV/Bake ไม่ผ่าน",
+            "returnTo": "surface",
+            "line": 34,
+            "endLine": 38
+          },
+          {
+            "from": "release",
+            "id": "review-required",
+            "title": "Review required",
+            "subtitle": "ไม่รับรอง AAA",
+            "description": "เมื่อขาด actual engine evidence หรือ independent review ให้ระบุสถานะจริง ห้าม production-ready",
+            "condition": "QA ไม่ครบ",
+            "returnTo": null,
+            "line": 49,
+            "endLine": 50
+          }
+        ],
+        "notes": [
+          "Semi-realistic Xianxia / Wuxia: สร้างตัวละคร original ไม่คัดลอก proprietary model",
+          "12 gates และ SHA-256 ตรวจความครบถ้วนของหลักฐาน ไม่ใช่การรับรอง visual fidelity",
+          "ยังไม่มี benchmark โมเดล AAA จริง; ต้องใช้ Blender และ target engine"
+        ]
+      }
     }
   ]
 }

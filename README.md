@@ -108,6 +108,10 @@ python scripts/build-skill-zips.py
 
 ---
 
+## Fantasy Character Production
+
+[AAA Fantasy Character Studio](skills/aaa-fantasy-character-studio/SKILL.md) (v1.0.0) — Semi-realistic Xianxia / Wuxia fantasy characters: anatomy, layered robes, hair, armor, retopology, UV, PBR, rigging and game integration. Includes 12 evidence gates and 15 synthetic tool tests. No AAA-quality model benchmark is claimed; actual Blender/engine tools and independent visual review are required.
+
 ## Workflow Diagrams — Archify
 
 เปิดรายละเอียดของแต่ละ Skill แล้วเลือกขั้นตอนใน Workflow Diagram เพื่อดูคำอธิบาย เงื่อนไขการหยุด/แก้ไข และหลักฐาน `SKILL.md` ที่อ้างอิง commit ต้นทาง ทุก Skill ใน Catalog มีแผนภาพเฉพาะของตัวเอง ไม่ใช่ flow ตัวอย่างร่วมกัน
