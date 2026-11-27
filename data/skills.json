@@ -2307,6 +2307,206 @@
           "Agent tool manifest เป็น draft ไม่ใช่ MCP server และไม่ให้สิทธิ์เรียก API"
         ]
       }
+    },
+    {
+      "id": "aaa-tactical-character-studio",
+      "overviewImage": "assets/skill-overviews/aaa-tactical-character-studio.svg",
+      "name": "AAA Tactical Character Studio",
+      "nameTh": "สตูดิโอสร้างตัวละคร 3D สมจริงระดับ AAA",
+      "category": "UIUX",
+      "version": "1.0.0",
+      "status": "Ready",
+      "phase": "Phase 1",
+      "author": "Personal Library",
+      "summary": "สร้างตัวละครสมจริงจาก A-pose 4 มุม ด้วย High-poly, Clothing, Modular Gear, PBR และ Rigging พร้อม Quality Gates",
+      "description": "Skill แยกจาก Low-poly Character Web Studio สำหรับงานตัวละคร FPS และมนุษย์สมจริง เน้น anatomy, เสื้อผ้า, อุปกรณ์, retopology, UV, baking, PBR, deformation, FBX/GLB และหลักฐานตรวจจริง แพ็กเกจและ unit tests ผ่านแล้ว แต่ยังไม่ได้ benchmark โมเดลระดับ AAA",
+      "tags": [
+        "3D",
+        "Photoreal",
+        "AAA",
+        "FPS",
+        "Blender",
+        "PBR",
+        "FBX",
+        "GLB",
+        "Character Modeling"
+      ],
+      "supportedAgents": [
+        "antigravity",
+        "claude-code",
+        "codex"
+      ],
+      "agentCompatibility": {
+        "antigravity": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "claudeCode": {
+          "supported": true,
+          "version": ">=1.0.0"
+        },
+        "codex": {
+          "supported": true,
+          "version": ">=1.0.0"
+        }
+      },
+      "triggers": [
+        "สร้างตัวละครสมจริง",
+        "ปั้นทหาร 3D",
+        "A-pose 4 ทิศทาง",
+        "AAA character",
+        "FPS character",
+        "photoreal character",
+        "clothing simulation",
+        "PBR baking"
+      ],
+      "path": "skills/aaa-tactical-character-studio",
+      "entryFile": "skills/aaa-tactical-character-studio/SKILL.md",
+      "assets": [
+        {
+          "name": "SKILL.md",
+          "type": "skill",
+          "path": "skills/aaa-tactical-character-studio/SKILL.md"
+        },
+        {
+          "name": "gate.py",
+          "type": "script",
+          "path": "skills/aaa-tactical-character-studio/scripts/gate.py"
+        },
+        {
+          "name": "test_gate.py",
+          "type": "script",
+          "path": "skills/aaa-tactical-character-studio/scripts/test_gate.py"
+        },
+        {
+          "name": "project.json",
+          "type": "template",
+          "path": "skills/aaa-tactical-character-studio/assets/project.json"
+        },
+        {
+          "name": "production.md",
+          "type": "reference",
+          "path": "skills/aaa-tactical-character-studio/references/production.md"
+        },
+        {
+          "name": "review.md",
+          "type": "reference",
+          "path": "skills/aaa-tactical-character-studio/references/review.md"
+        },
+        {
+          "name": "openai.yaml",
+          "type": "template",
+          "path": "skills/aaa-tactical-character-studio/agents/openai.yaml"
+        }
+      ],
+      "examples": [],
+      "highlights": [
+        "แยกตรวจ anatomy, clothing และ modular gear ก่อน optimize",
+        "ตรวจ 8 gates และหลักฐาน SHA-256 พร้อมแยกผู้สร้างและ reviewer",
+        "รองรับ MASTER, DESKTOP, WEB_HERO, WEB_NPC",
+        "รองรับ Blender เป็นหลัก; เครื่องมือเสริมตามที่มีจริง",
+        "ไม่อ้างผลระดับ AAA จาก 2D concept หรือ unit tests"
+      ],
+      "workflow": {
+        "sourcePath": "assets/skill-workflows/aaa-tactical-character-studio.workflow.json",
+        "htmlPath": "assets/skill-workflows/aaa-tactical-character-studio.html",
+        "revision": "a56784c03a1e61523dcad3bd48c388ccf2880f3a",
+        "steps": [
+          {
+            "id": "intake",
+            "title": "G0 · Reference",
+            "subtitle": "ตรวจภาพและเครื่องมือ",
+            "description": "ตรวจภาพ A-pose ทิศจริง สัดส่วน จุดอ้างอิง สิทธิ์ใช้งาน เครื่องมือ และสิ่งที่ยังอนุมาน",
+            "kind": "external",
+            "line": 16,
+            "endLine": 17
+          },
+          {
+            "id": "anatomy",
+            "title": "G1 · Anatomy",
+            "subtitle": "ปั้นทีละส่วน",
+            "description": "HEAD → TORSO → ARMS_HANDS → LEGS_FEET; ตรวจ gray clay และเทียบหลายมุมก่อนทำต่อ",
+            "kind": "security",
+            "line": 19,
+            "endLine": 20
+          },
+          {
+            "id": "outfit",
+            "title": "G2–G3 · Outfit",
+            "subtitle": "Clothing / modular gear",
+            "description": "สร้างผ้าและอุปกรณ์เป็นชิ้น ตรวจรอยพับ การซ้อนทับ จุดยึด และ silhouette หลังประกอบ",
+            "kind": "backend",
+            "line": 22,
+            "endLine": 26
+          },
+          {
+            "id": "surface",
+            "title": "G4–G5 · Surface",
+            "subtitle": "Retopo / UV / PBR",
+            "description": "แยก high/low mesh, ตรวจ UV checker และ bake; ทดสอบวัสดุและแสงหลายแบบ",
+            "kind": "backend",
+            "line": 28,
+            "endLine": 32
+          },
+          {
+            "id": "export",
+            "title": "G6 · Rig & export",
+            "subtitle": "Deform / runtime",
+            "description": "ตรวจ skinning, การเปลี่ยนรูป, reimport FBX/GLB และวัดประสิทธิภาพตาม platform",
+            "kind": "backend",
+            "line": 34,
+            "endLine": 35
+          },
+          {
+            "id": "release",
+            "title": "G7 · Release",
+            "subtitle": "ตรวจ candidate จริง",
+            "description": "ตรวจมุมจริงและหลักฐานทั้ง 8 ขั้นพร้อม SHA-256; ไม่รับรองงานเมื่อยังไม่ผ่านการตรวจอิสระ",
+            "kind": "frontend",
+            "line": 37,
+            "endLine": 38
+          }
+        ],
+        "branches": [
+          {
+            "from": "intake",
+            "id": "ref-repair",
+            "title": "Reference blocked",
+            "subtitle": "แก้ข้อมูลก่อน",
+            "description": "ภาพขัดแย้งต้องแก้ reference หรือบันทึกการตีความที่ได้รับการยอมรับ",
+            "condition": "Ref ขัดแย้ง",
+            "returnTo": "intake",
+            "line": 16,
+            "endLine": 17
+          },
+          {
+            "from": "anatomy",
+            "id": "shape-repair",
+            "title": "Fix geometry",
+            "subtitle": "แก้ชิ้นเดิม",
+            "description": "แก้ geometry เมื่อไม่ผ่าน ไม่เปลี่ยนกล้องหรือ source เพื่อเพิ่มคะแนน",
+            "condition": "รูปทรงไม่ผ่าน",
+            "returnTo": "anatomy",
+            "line": 19,
+            "endLine": 20
+          },
+          {
+            "from": "release",
+            "id": "review-required",
+            "title": "Review required",
+            "subtitle": "ยังไม่พร้อมผลิต",
+            "description": "หลักฐานหรือการตรวจอิสระไม่ครบ ให้ระบุ REVIEW_REQUIRED และข้อจำกัดจริง",
+            "condition": "QA ไม่ครบ",
+            "returnTo": null,
+            "line": 37,
+            "endLine": 38
+          }
+        ],
+        "notes": [
+          "ภาพแนวคิด 2D ไม่ใช่โมเดล 3D; Visual Fidelity มาก่อน Optimization",
+          "PASS_EVIDENCE_INTEGRITY_ONLY ตรวจความครบถ้วนและความเปลี่ยนแปลงของหลักฐาน ไม่ใช่การรับรองความสมจริง"
+        ]
+      }
     }
   ]
 }

@@ -1,0 +1,309 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "AAA Tactical Character Studio · Workflow",
+    "subtitle": "v1.0.0 / documented procedure",
+    "output": "assets/skill-workflows/aaa-tactical-character-studio.html",
+    "visual_preset": "signal-flow",
+    "quality_profile": "showcase",
+    "animation": "trace",
+    "feedback_links": false,
+    "repository": {
+      "url": "https://github.com/codelv8-org/skills",
+      "revision": "a56784c03a1e61523dcad3bd48c388ccf2880f3a",
+      "provider": "github"
+    },
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "external": {
+          "label": "Input / Intake"
+        },
+        "backend": {
+          "label": "Work"
+        },
+        "security": {
+          "label": "Gate / Alternative"
+        },
+        "frontend": {
+          "label": "Delivery"
+        },
+        "messagebus": {
+          "label": "Export"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "Main workflow"
+    },
+    {
+      "id": "exceptions",
+      "label": "Decision / alternative",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "intake",
+    "anatomy",
+    "outfit",
+    "surface",
+    "export",
+    "release"
+  ],
+  "nodes": [
+    {
+      "id": "intake",
+      "lane": "main",
+      "col": 0,
+      "type": "external",
+      "label": "G0 · Reference",
+      "sublabel": "ตรวจภาพและเครื่องมือ",
+      "explanation": "ตรวจภาพ A-pose ทิศจริง สัดส่วน จุดอ้างอิง สิทธิ์ใช้งาน เครื่องมือ และสิ่งที่ยังอนุมาน",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/aaa-tactical-character-studio/SKILL.md",
+          "line": 16,
+          "end_line": 17,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "anatomy",
+      "lane": "main",
+      "col": 1,
+      "type": "security",
+      "label": "G1 · Anatomy",
+      "sublabel": "ปั้นทีละส่วน",
+      "explanation": "HEAD → TORSO → ARMS_HANDS → LEGS_FEET; ตรวจ gray clay และเทียบหลายมุมก่อนทำต่อ",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/aaa-tactical-character-studio/SKILL.md",
+          "line": 19,
+          "end_line": 20,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "outfit",
+      "lane": "main",
+      "col": 2,
+      "type": "backend",
+      "label": "G2–G3 · Outfit",
+      "sublabel": "Clothing / modular gear",
+      "explanation": "สร้างผ้าและอุปกรณ์เป็นชิ้น ตรวจรอยพับ การซ้อนทับ จุดยึด และ silhouette หลังประกอบ",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/aaa-tactical-character-studio/SKILL.md",
+          "line": 22,
+          "end_line": 26,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "surface",
+      "lane": "main",
+      "col": 3,
+      "type": "backend",
+      "label": "G4–G5 · Surface",
+      "sublabel": "Retopo / UV / PBR",
+      "explanation": "แยก high/low mesh, ตรวจ UV checker และ bake; ทดสอบวัสดุและแสงหลายแบบ",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/aaa-tactical-character-studio/SKILL.md",
+          "line": 28,
+          "end_line": 32,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "export",
+      "lane": "main",
+      "col": 4,
+      "type": "backend",
+      "label": "G6 · Rig & export",
+      "sublabel": "Deform / runtime",
+      "explanation": "ตรวจ skinning, การเปลี่ยนรูป, reimport FBX/GLB และวัดประสิทธิภาพตาม platform",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/aaa-tactical-character-studio/SKILL.md",
+          "line": 34,
+          "end_line": 35,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "release",
+      "lane": "main",
+      "col": 5,
+      "type": "frontend",
+      "label": "G7 · Release",
+      "sublabel": "ตรวจ candidate จริง",
+      "explanation": "ตรวจมุมจริงและหลักฐานทั้ง 8 ขั้นพร้อม SHA-256; ไม่รับรองงานเมื่อยังไม่ผ่านการตรวจอิสระ",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/aaa-tactical-character-studio/SKILL.md",
+          "line": 37,
+          "end_line": 38,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "ref-repair",
+      "lane": "exceptions",
+      "col": 0,
+      "type": "security",
+      "label": "Reference blocked",
+      "sublabel": "แก้ข้อมูลก่อน",
+      "explanation": "ภาพขัดแย้งต้องแก้ reference หรือบันทึกการตีความที่ได้รับการยอมรับ",
+      "icon": "decision",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/aaa-tactical-character-studio/SKILL.md",
+          "line": 16,
+          "end_line": 17,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "shape-repair",
+      "lane": "exceptions",
+      "col": 1,
+      "type": "security",
+      "label": "Fix geometry",
+      "sublabel": "แก้ชิ้นเดิม",
+      "explanation": "แก้ geometry เมื่อไม่ผ่าน ไม่เปลี่ยนกล้องหรือ source เพื่อเพิ่มคะแนน",
+      "icon": "decision",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/aaa-tactical-character-studio/SKILL.md",
+          "line": 19,
+          "end_line": 20,
+          "label": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "review-required",
+      "lane": "exceptions",
+      "col": 5,
+      "type": "security",
+      "label": "Review required",
+      "sublabel": "ยังไม่พร้อมผลิต",
+      "explanation": "หลักฐานหรือการตรวจอิสระไม่ครบ ให้ระบุ REVIEW_REQUIRED และข้อจำกัดจริง",
+      "icon": "stop",
+      "width": 168,
+      "sources": [
+        {
+          "path": "skills/aaa-tactical-character-studio/SKILL.md",
+          "line": 37,
+          "end_line": 38,
+          "label": "SKILL.md"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "main-1",
+      "from": "intake",
+      "to": "anatomy",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-2",
+      "from": "anatomy",
+      "to": "outfit",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-3",
+      "from": "outfit",
+      "to": "surface",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-4",
+      "from": "surface",
+      "to": "export",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "main-5",
+      "from": "export",
+      "to": "release",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "branch-1",
+      "from": "intake",
+      "to": "ref-repair",
+      "label": "Ref ขัดแย้ง",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "return-1",
+      "from": "ref-repair",
+      "to": "intake",
+      "variant": "dashed",
+      "role": "return"
+    },
+    {
+      "id": "branch-2",
+      "from": "anatomy",
+      "to": "shape-repair",
+      "label": "รูปทรงไม่ผ่าน",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "return-2",
+      "from": "shape-repair",
+      "to": "anatomy",
+      "variant": "dashed",
+      "role": "return"
+    },
+    {
+      "id": "branch-3",
+      "from": "release",
+      "to": "review-required",
+      "label": "QA ไม่ครบ",
+      "variant": "security",
+      "role": "branch"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Workflow notes",
+      "items": [
+        "ภาพแนวคิด 2D ไม่ใช่โมเดล 3D; Visual Fidelity มาก่อน Optimization",
+        "PASS_EVIDENCE_INTEGRITY_ONLY ตรวจความครบถ้วนและความเปลี่ยนแปลงของหลักฐาน ไม่ใช่การรับรองความสมจริง"
+      ]
+    }
+  ]
+}
