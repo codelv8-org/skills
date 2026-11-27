@@ -1,0 +1,4 @@
+interface:
+  display_name: "AAA Tactical Character Studio"
+  short_description: "Photoreal full-body 3D characters with evidence gates"
+  default_prompt: "Build an original photoreal character from my reference, using actual 3D geometry and staged visual QA."
