@@ -1,0 +1,4 @@
+interface:
+  display_name: "AAA Fantasy Character Studio"
+  short_description: "Build semi-realistic fantasy 3D game characters with staged QA"
+  default_prompt: "Build an original semi-realistic xianxia character from my reference, with actual editable geometry, PBR, rigging, game export and independent quality gates."
