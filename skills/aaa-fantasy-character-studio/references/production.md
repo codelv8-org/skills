@@ -1,7 +1,7 @@
 # Modeling, surfaces and bake playbook
 
 ## Tool routing
-Inspect installed tools and version-specific documentation. Prefer Blender for mesh, sculpt, curves, cloth, UV, bake, render, skeleton and export; optional licensed ZBrush/Marvelous Designer/Substance/RizomUV or authorized image-to-3D starting mesh. Inspect provenance and topology of any external asset; never assume a connector is available. Save editable .blend master with dependencies; external textures use relative paths. Use background Blender for repeatable inspection/export, visual sculpt corrections require credible geometry and review.
+Use the agent-native route first: author actual vertices, edge-loop patches, garment panels, rig and UVs as MeshIR plus a geometry program; compile and inspect in the platform cloud. Use cloud DCC only in CLOUD_DCC mode or explicit authorization. Never require a local workstation, external 3D SaaS or learned 3D weights in STRICT_AGENT_CLOUD. Preserve editable IR and scripts (or .blend if supported). Inspect provenance and topology of any supplied asset. See agent-native.md and mesh-ir.md for capability boundaries.
 
 ## Anatomy and parts
 Collections: HEAD, BODY, EYES, HAIR, CLOTH, ARMOR, ORNAMENTS, HIGH, RUNTIME, RIG. Stable IDs per component and _high/_low pair names. Stage gray clay with broad studio light and flat material. Use licensed base mesh or real sculpt, not sphere-and-cylinder anatomy. Shape eyes as cornea/iris with correct placement, not painted-on eyes; preserve skull under hair. Maintain regional seam anchors. Add corrective shapes where necessary; don't erase hidden skin unless garment motion cannot expose it.

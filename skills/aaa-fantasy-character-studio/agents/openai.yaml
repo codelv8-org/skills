@@ -1,4 +1,15 @@
 interface:
-  display_name: "AAA Fantasy Character Studio"
-  short_description: "Build semi-realistic fantasy 3D game characters with staged QA"
-  default_prompt: "Build an original semi-realistic xianxia character from my reference, with actual editable geometry, PBR, rigging, game export and independent quality gates."
+  display_name: AAA Fantasy Character Studio
+  short_description: Cloud-first fantasy 3D meshes, rigs and staged QA
+  default_prompt: Build an original semi-realistic xianxia character from my reference,
+    using platform cloud execution, no external 3D SaaS, editable geometry, PBR, rigging, game export and independent quality
+    gates.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "axes": "Y_UP_Z_FORWARD_METERS",
+  "purpose": "Compiler test only; open garment-like band and panel, not a character or AAA model",
+  "materials": [{"id":"silk","base_color":[0.1,0.25,0.5,1],"metallic":0,"roughness":0.4,"double_sided":true},{"id":"trim","base_color":[0.8,0.5,0.1,1],"metallic":0.8,"roughness":0.3,"double_sided":true}],
+  "joints": [{"id":"root","translation":[0,0,0]},{"id":"upper","parent":"root","translation":[0,0.5,0]}],
+  "parts": [
+    {"id":"open_band","kind":"loft","material":"silk","reverse_winding":true,
+      "rings":[[[0.25,0,0],[0,0,0.25],[-0.25,0,0],[0,0,-0.25]],[[0.3,0.5,0],[0,0.5,0.3],[-0.3,0.5,0],[0,0.5,-0.3]],[[0.2,1,0],[0,1,0.2],[-0.2,1,0],[0,1,-0.2]]],
+      "ring_weights":[{"root":1},{"root":0.5,"upper":0.5},{"upper":1}]},
+    {"id":"trim_panel","kind":"mesh","material":"trim","positions":[[-0.15,0.4,0.32],[0.15,0.4,0.32],[0.15,0.6,0.32],[-0.15,0.6,0.32]],"faces":[[0,1,2,3]],"uv":[[0,0],[1,0],[1,1],[0,1]],"weights":[{"upper":1},{"upper":1},{"upper":1},{"upper":1}]}
+  ],
+  "animations":[{"name":"fixture_bend","tracks":[{"joint":"upper","path":"rotation","times":[0,0.5,1],"values":[[0,0,0,1],[0,0,0.1305261922,0.9914448614],[0,0,0,1]]}]}]
+}

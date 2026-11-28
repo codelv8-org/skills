@@ -1,0 +1,31 @@
+test_bad_animation (test_native.NativeTests.test_bad_animation) ... ok
+test_bad_index (test_native.NativeTests.test_bad_index) ... ok
+test_bad_joint (test_native.NativeTests.test_bad_joint) ... ok
+test_bad_uv (test_native.NativeTests.test_bad_uv) ... ok
+test_bad_weight (test_native.NativeTests.test_bad_weight) ... ok
+test_degenerate (test_native.NativeTests.test_degenerate) ... ok
+test_deterministic_and_decode (test_native.NativeTests.test_deterministic_and_decode) ... ok
+test_path_escape (test_native.NativeTests.test_path_escape) ... ok
+test_preflight_does_not_attest (test_native.NativeTests.test_preflight_does_not_attest) ... ok
+test_smooth_seam_and_render (test_native.NativeTests.test_smooth_seam_and_render) ... ok
+test_texture_embedding (test_native.NativeTests.test_texture_embedding) ... ok
+test_chain_mutation (test_tools.GateTests.test_chain_mutation) ... ok
+test_circular_release (test_tools.GateTests.test_circular_release) ... ok
+test_fail_review (test_tools.GateTests.test_fail_review) ... ok
+test_missing_role (test_tools.GateTests.test_missing_role) ... ok
+test_no_skip (test_tools.GateTests.test_no_skip) ... ok
+test_path_escape (test_tools.GateTests.test_path_escape) ... ok
+test_release_mutation (test_tools.GateTests.test_release_mutation) ... ok
+test_release_requires_zip (test_tools.GateTests.test_release_requires_zip) ... ok
+test_self_review (test_tools.GateTests.test_self_review) ... ok
+test_budget (test_tools.GlbTests.test_budget) ... ok
+test_instances (test_tools.GlbTests.test_instances) ... ok
+test_invalid_header (test_tools.GlbTests.test_invalid_header) ... ok
+test_metadata (test_tools.GlbTests.test_metadata) ... ok
+test_missing_skin (test_tools.GlbTests.test_missing_skin) ... ok
+test_missing_weights (test_tools.GlbTests.test_missing_weights) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 0.171s
+
+OK
