@@ -102,3 +102,8 @@ skills/<skill-name>/
 - **Automated Skill Linting & CI Testing**: ตรวจสอบความถูกต้องของ YAML Frontmatter และโครงสร้างไฟล์อัตโนมัติผ่าน GitHub Actions
 - **MCP Bridge Adapters**: การเชื่อมต่อคำสั่ง Skill เข้ากับ Model Context Protocol (MCP) Tools
 - **Dynamic Catalog Search API**: เพิ่ม REST/JSON Endpoint สำหรับการดึงข้อมูล Skill แบบอัตโนมัติ
+
+
+## AAA Fantasy Character Studio — v2.0.0 Beta
+
+This skill retains the portable two-field Agent Skills frontmatter used by v1; version and multi-agent compatibility live in the catalog and skill body. Native GLB compilation and diagnostic rendering require Python 3.10+ standard library in a **verified platform-hosted execution environment**. Antigravity, Claude Code and Codex are compatible by design when hosted execution is configured; no specific provider model/tier is certified. STRICT_AGENT_CLOUD prohibits local generation and external 3D SaaS. CLOUD_DCC is opt-in; PLAN_ONLY when cloud execution is unavailable. Native FBX/BLEND, full baking, deformation and engine verification are not guaranteed. See [runtime contract](skills/aaa-fantasy-character-studio/references/agent-native.md). Chat-hosted fixture tests passed; separate agent-platform tests NOT TESTED.

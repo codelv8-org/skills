@@ -110,7 +110,13 @@ python scripts/build-skill-zips.py
 
 ## Fantasy Character Production
 
-[AAA Fantasy Character Studio](skills/aaa-fantasy-character-studio/SKILL.md) (v1.0.0) — Semi-realistic Xianxia / Wuxia fantasy characters: anatomy, layered robes, hair, armor, retopology, UV, PBR, rigging and game integration. Includes 12 evidence gates and 15 synthetic tool tests. No AAA-quality model benchmark is claimed; actual Blender/engine tools and independent visual review are required.
+[AAA Fantasy Character Studio](skills/aaa-fantasy-character-studio/SKILL.md) (v2.0.0 Beta) — Agent-native cloud-first generation of original Xianxia / Wuxia characters. STRICT_AGENT_CLOUD defaults to verified hosted Python execution without external 3D SaaS or local user generation. Includes MeshIR, a native GLB compiler, CPU bind-clay renderer, 12 retained evidence gates and 26 passing synthetic tests. No AAA-quality character certification. [Usage](skills/aaa-fantasy-character-studio/README.md) · [Changelog](skills/aaa-fantasy-character-studio/CHANGELOG.md) · [Roadmap](skills/aaa-fantasy-character-studio/ROADMAP.md).
+
+### v2 native compiler fixture — COMPILED_ONLY
+
+[Actual fixture showcase](assets/examples/fantasy-character/native-compiler-v2/index.html) · [GLB](assets/examples/fantasy-character/native-compiler-v2/fixture.glb) · [Compiler report](assets/examples/fantasy-character/native-compiler-v2/compiler.json) · [26-test log](assets/examples/fantasy-character/native-compiler-v2/test-log.txt)
+
+18 triangles, 19 vertices, two joints, one authored clip, five actual CPU bind-clay views. The fixture is not a humanoid. Chat-hosted fixture execution tested; independent Agent execution and matched visual version/mode comparison NOT TESTED. Existing overview concept retained pending refresh. Historical v1 example below is a different scenario, not a before/after benchmark.
 
 ### G1 diagnostic prototype — Azure Celestial Sword Immortal
 

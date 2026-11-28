@@ -4102,12 +4102,12 @@
       "name": "AAA Fantasy Character Studio",
       "nameTh": "สตูดิโอสร้างตัวละครแฟนตาซี 3D ระดับ AAA",
       "category": "UIUX",
-      "version": "1.0.0",
-      "status": "Ready",
+      "version": "2.0.0",
+      "status": "Beta",
       "phase": "Phase 1",
       "author": "Personal Library",
-      "summary": "Semi-realistic Xianxia / Wuxia: ปั้นตัวละคร ชุดผ้าไหม ผมยาว เกราะ PBR Rigging และ Game Engine พร้อม 12 Quality Gates",
-      "description": "สร้างและซ่อมตัวละครแฟนตาซี original แนวเซียนกระบี่ เทพสงคราม จอมยุทธ์ จาก text, A-pose หรือ 3D mesh ผ่าน anatomy, garment, hair, retopology, UV, normal/AO baking, PBR, rig, animation และ FBX/GLB; ตรวจหลักฐาน SHA-256 และ GLB metadata ด้วยชุดทดสอบ synthetic 15 กรณี ไม่ใช่ benchmark คุณภาพ AAA จริง",
+      "summary": "Agent-native Cloud Edition: MeshIR, native GLB compiler, rig/clip authoring, CPU clay preview และ 12 Quality Gates; ไม่ต้องใช้ Meshy/Tripo หรือ GPU เครื่องผู้ใช้ในการสร้าง",
+      "description": "สร้างและซ่อมตัวละครแฟนตาซี original แนวเซียนกระบี่ เทพสงคราม จอมยุทธ์จาก text/A-pose/mesh โดย STRICT_AGENT_CLOUD เป็นค่าเริ่มต้น; Python 3.10+ standard library สำหรับ native GLB export และ CPU clay render. G0–G11 คงไว้ทั้งหมด. 26 synthetic tests ผ่าน; fixture ไม่ใช่ตัวละคร AAA. Codex, Claude Code, Antigravity compatible by design เมื่อมี hosted execution; independent Agent benchmark และ matched visual comparison NOT TESTED. ภาพ overview เดิมเป็น concept เท่านั้น.",
       "tags": [
         "3D",
         "AAA",
@@ -4118,7 +4118,12 @@
         "PBR",
         "Rigging",
         "FBX",
-        "GLB"
+        "GLB",
+        "Cloud-native",
+        "MeshIR",
+        "Agent-native",
+        "Python",
+        "No 3D SaaS"
       ],
       "supportedAgents": [
         "antigravity",
@@ -4150,7 +4155,13 @@
         "wuxia",
         "fantasy character",
         "PBR baking",
-        "rigging"
+        "rigging",
+        "STRICT_AGENT_CLOUD",
+        "MeshIR",
+        "Agent-native 3D",
+        "ไม่ใช้ Meshy",
+        "ไม่ใช้ Tripo",
+        "สร้างโมเดลบน Cloud"
       ],
       "path": "skills/aaa-fantasy-character-studio",
       "entryFile": "skills/aaa-fantasy-character-studio/SKILL.md",
@@ -4204,9 +4215,75 @@
           "name": "test_tools.py",
           "type": "script",
           "path": "skills/aaa-fantasy-character-studio/scripts/test_tools.py"
+        },
+        {
+          "name": "README.md",
+          "type": "reference",
+          "path": "skills/aaa-fantasy-character-studio/README.md"
+        },
+        {
+          "name": "CHANGELOG.md",
+          "type": "reference",
+          "path": "skills/aaa-fantasy-character-studio/CHANGELOG.md"
+        },
+        {
+          "name": "ROADMAP.md",
+          "type": "reference",
+          "path": "skills/aaa-fantasy-character-studio/ROADMAP.md"
+        },
+        {
+          "name": "icon.svg",
+          "type": "template",
+          "path": "skills/aaa-fantasy-character-studio/assets/icon.svg"
+        },
+        {
+          "name": "mesh-fixture.json",
+          "type": "template",
+          "path": "skills/aaa-fantasy-character-studio/assets/mesh-fixture.json"
+        },
+        {
+          "name": "mesh-ir.md",
+          "type": "reference",
+          "path": "skills/aaa-fantasy-character-studio/references/mesh-ir.md"
+        },
+        {
+          "name": "agent-native.md",
+          "type": "reference",
+          "path": "skills/aaa-fantasy-character-studio/references/agent-native.md"
+        },
+        {
+          "name": "research.md",
+          "type": "reference",
+          "path": "skills/aaa-fantasy-character-studio/references/research.md"
+        },
+        {
+          "name": "preflight.py",
+          "type": "script",
+          "path": "skills/aaa-fantasy-character-studio/scripts/preflight.py"
+        },
+        {
+          "name": "native_mesh.py",
+          "type": "script",
+          "path": "skills/aaa-fantasy-character-studio/scripts/native_mesh.py"
+        },
+        {
+          "name": "render_clay.py",
+          "type": "script",
+          "path": "skills/aaa-fantasy-character-studio/scripts/render_clay.py"
+        },
+        {
+          "name": "test_native.py",
+          "type": "script",
+          "path": "skills/aaa-fantasy-character-studio/scripts/test_native.py"
         }
       ],
       "examples": [
+        {
+          "title": "v2 Native GLB Compiler — actual synthetic fixture",
+          "description": "Chat-side cloud fixture: 18 triangles, 19 vertices, 2 joints, 1 clip; 26/26 tests and deterministic GLB SHA-256. Five real bind-clay renders, not AAA anatomy. Agent and matched v1/v2 benchmarks NOT TESTED.",
+          "htmlPath": "assets/examples/fantasy-character/native-compiler-v2/index.html",
+          "markdownPath": "assets/examples/fantasy-character/native-compiler-v2/README.md"
+        },
         {
           "title": "Azure Celestial Sword Immortal — G1 Diagnostic Prototype",
           "description": "ตัวอย่างตรวจสอบขั้น G1 จาก concept reference: visual-hull mesh 56,992 triangles, diagnostic skin 29 joints และ 1 test clip; G1 ไม่ผ่าน visual fidelity, ไม่มี UV/PBR production และยังไม่ได้ยืนยัน Three.js runtime ไม่ใช่โมเดล AAA/game-ready",
@@ -4215,122 +4292,143 @@
         }
       ],
       "highlights": [
-        "5 แนวทาง Art Direction และตรวจ anatomy ทีละส่วน",
-        "Hair grooming, silk garments, layered armor และ secondary motion",
-        "12 Quality Gates พร้อม SHA-256 และ exact delivery ZIP",
-        "GLB metadata diagnostic / 15 synthetic tests; ไม่ใช่การรับรองคุณภาพโมเดล",
-        "Cinematic, Desktop Hero, Web Hero, Web NPC; ต้องทดสอบ engine จริง"
+        "STRICT_AGENT_CLOUD default: no external 3D SaaS / no local generation; optional cloud DCC",
+        "MeshIR + native GLB compiler: explicit topology, UV, materials, skeleton, weights, clips",
+        "5-view CPU diagnostic renderer; stable camera and part-local edit contract",
+        "26/26 synthetic tests PASS; 12 quality gates retained; no AAA certification",
+        "Model targets Gemini 4 Hydrogen+, GPT-6 Sol+, Claude Opus 5.5+; actual model/runtime must be verified"
       ],
       "workflow": {
         "sourcePath": "assets/skill-workflows/aaa-fantasy-character-studio.workflow.json",
         "htmlPath": "assets/skill-workflows/aaa-fantasy-character-studio.html",
-        "revision": "ccbd6b125b47c0a89f637c7511a2a224ee679340",
+        "revision": "18dde57e4c0d3ed328c2577ad127dc111977ed24",
         "steps": [
+          {
+            "id": "capability",
+            "title": "Runtime · Preflight",
+            "subtitle": "Verified cloud only",
+            "description": "ตรวจ model และ platform-hosted runtime; STRICT_AGENT_CLOUD เป็นค่าเริ่มต้น ไม่ใช้บริการ 3D ภายนอกหรือเครื่องผู้ใช้; CLOUD_DCC ต้อง opt-in",
+            "kind": "security",
+            "line": 11,
+            "endLine": 12
+          },
           {
             "id": "intake",
             "title": "G0–G1 · Design",
             "subtitle": "Reference / blockout",
-            "description": "ตรวจภาพ ทิศทาง สัดส่วน ลิขสิทธิ์ เลือก archetype และอนุมัติ silhouette จาก gray clay",
+            "description": "ตรวจภาพ ทิศทาง สัดส่วน ลิขสิทธิ์ และล็อก silhouette กับกล้อง clay views",
             "kind": "external",
-            "line": 16,
-            "endLine": 20
+            "line": 17,
+            "endLine": 21
           },
           {
             "id": "anatomy",
             "title": "G2 · Anatomy",
-            "subtitle": "Head / body sculpt",
-            "description": "ปั้นทีละส่วน ตรวจศีรษะ ลำตัว แขน มือ ขา และเท้า ก่อนขึ้นชุด",
-            "kind": "security",
-            "line": 22,
-            "endLine": 23
+            "subtitle": "Authored surfaces",
+            "description": "สร้าง geometry แบบ topology-aware จาก landmark และ surface patches แก้ทีละส่วนก่อนลง texture",
+            "kind": "backend",
+            "line": 23,
+            "endLine": 24
           },
           {
             "id": "outfit",
             "title": "G3–G4 · Outfit",
-            "subtitle": "Robes / hair / armor",
-            "description": "สร้างเสื้อผ้าหลายชั้น ผมยาว เกราะ เครื่องประดับ และทดสอบการซ้อนทับ",
+            "subtitle": "Modular parts",
+            "description": "สร้างชุด ผม เกราะและเครื่องประดับเป็นส่วนแยก ตรวจความซ้อนทับและท่าทาง",
             "kind": "backend",
-            "line": 25,
-            "endLine": 29
+            "line": 26,
+            "endLine": 30
           },
           {
             "id": "surface",
             "title": "G5–G8 · Surface",
             "subtitle": "Retopo / UV / PBR",
-            "description": "ตรวจ topology, UV checker, bake normal/AO และ PBR หลายสภาพแสง",
+            "description": "ตรวจ topology, UV, normal/AO bake และ PBR จากผลจริง; native compiler ไม่ทำแทนขั้นที่ยังไม่ implement",
             "kind": "backend",
-            "line": 31,
-            "endLine": 41
+            "line": 32,
+            "endLine": 42
           },
           {
             "id": "runtime",
             "title": "G9–G10 · Runtime",
-            "subtitle": "Rig / export / engine",
-            "description": "ตรวจ deformation, clip, FBX/GLB, engine reimport และวัด frame time จริง",
+            "subtitle": "Rig / MeshIR / GLB",
+            "description": "สร้าง skeleton และ weights ตรวจ deformation และส่งออก GLB/IR; BLEND/FBX เฉพาะ cloud backend ที่ตรวจสอบแล้ว",
             "kind": "messagebus",
-            "line": 43,
-            "endLine": 47
+            "line": 44,
+            "endLine": 48
           },
           {
             "id": "release",
             "title": "G11 · Release",
             "subtitle": "Exact candidate ZIP",
-            "description": "ตรวจโมเดลจริงทุกมุมและ seal 12 gates; ส่งมอบ source/export พร้อมหลักฐาน",
+            "description": "ตรวจ render ของ geometry จริง ทดสอบ exact candidate และ seal G0–G11 พร้อม independent review",
             "kind": "frontend",
-            "line": 49,
-            "endLine": 50
+            "line": 50,
+            "endLine": 51
           }
         ],
         "branches": [
           {
+            "from": "capability",
+            "id": "plan-only",
+            "title": "PLAN_ONLY / BLOCKED",
+            "subtitle": "No hosted execution",
+            "description": "หากไม่สามารถยืนยัน cloud execution ส่ง source และแผนเท่านั้น; ห้ามอ้างว่าได้โมเดล",
+            "condition": "Runtime unavailable",
+            "returnTo": null,
+            "line": 11,
+            "endLine": 12
+          },
+          {
             "from": "intake",
             "id": "ref-repair",
             "title": "Resolve reference",
-            "subtitle": "แก้ความขัดแย้ง",
-            "description": "แก้ภาพที่ขัดแย้งหรือบันทึกการตีความที่ยอมรับก่อนเริ่ม production",
+            "subtitle": "แก้ภาพขัดแย้ง",
+            "description": "แก้ความขัดแย้งหรือบันทึกการตีความ ก่อนเริ่ม production",
             "condition": "Ref ขัดแย้ง",
             "returnTo": "intake",
-            "line": 16,
-            "endLine": 17
+            "line": 17,
+            "endLine": 18
           },
           {
             "from": "anatomy",
             "id": "shape-repair",
             "title": "Fix anatomy",
-            "subtitle": "แก้ geometry ก่อน",
-            "description": "แก้สัดส่วนและรูปทรงจาก clay views ไม่ใช้ texture บังความผิดพลาด",
+            "subtitle": "Geometry first",
+            "description": "แก้ anatomy จาก clay views ด้วยกล้องเดิมก่อนใช้ material",
             "condition": "Anatomy ไม่ผ่าน",
             "returnTo": "anatomy",
-            "line": 22,
-            "endLine": 23
+            "line": 23,
+            "endLine": 24
           },
           {
             "from": "surface",
             "id": "surface-repair",
             "title": "Fix UV / bake",
-            "subtitle": "ตรวจ checker และ seams",
-            "description": "แก้ UV ที่ผิดเพี้ยนและ bake artifacts ก่อน author PBR",
+            "subtitle": "Checker / bake QA",
+            "description": "แก้ UV และ bake artifacts ก่อนดำเนินการ PBR; ระบุ NOT RUN เมื่อไม่มีเครื่องมือ",
             "condition": "UV/Bake ไม่ผ่าน",
             "returnTo": "surface",
-            "line": 34,
-            "endLine": 38
+            "line": 35,
+            "endLine": 42
           },
           {
             "from": "release",
             "id": "review-required",
             "title": "Review required",
-            "subtitle": "ไม่รับรอง AAA",
-            "description": "เมื่อขาด actual engine evidence หรือ independent review ให้ระบุสถานะจริง ห้าม production-ready",
+            "subtitle": "No AAA certification",
+            "description": "ถ้าเครื่องมือ หลักฐาน engine หรือ independent review ไม่ครบ ให้รายงาน BLOCKED/PROTOTYPE/REVIEW_REQUIRED",
             "condition": "QA ไม่ครบ",
             "returnTo": null,
-            "line": 49,
-            "endLine": 50
+            "line": 50,
+            "endLine": 51
           }
         ],
         "notes": [
-          "Semi-realistic Xianxia / Wuxia: สร้างตัวละคร original ไม่คัดลอก proprietary model",
-          "12 gates และ SHA-256 ตรวจความครบถ้วนของหลักฐาน ไม่ใช่การรับรอง visual fidelity",
-          "ยังไม่มี benchmark โมเดล AAA จริง; ต้องใช้ Blender และ target engine"
+          "Agent-native STRICT_AGENT_CLOUD by default; cloud compute is required, but no external 3D generation SaaS or local user generation.",
+          "Native MeshIR compiler and 5-view bind-clay renderer; 26/26 synthetic tests PASS, not an AAA character benchmark.",
+          "CLOUD_DCC optional with explicit opt-in; PLAN_ONLY if cloud execution cannot be verified.",
+          "AI Agent independent execution and matched v1/v2 character/mode visual benchmarks NOT TESTED. Existing v1 concept overview is retained; refreshed overview pending."
         ]
       }
     }
