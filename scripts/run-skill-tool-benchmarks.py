@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 SUITES={
-    "aaa-fantasy-character-studio": ["scripts/test_tools.py"],
+    "aaa-fantasy-character-studio": ["scripts/test_tools.py","scripts/test_native.py"],
     "webapp-quotation-builder": ["scripts/test_pricing.py"],
     "privacy-first-database-documentation-builder": ["scripts/test_dictionary.py"],
     "photoreal-head-web": ["tests/test_anatomy_tools.py","tests/test_surface_tools.py","tests/test_projection_tools.py","tests/test_robust_blend.py"],

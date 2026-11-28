@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "profile": "DESKTOP_HERO",
   "archetype": "XIANXIA_SWORD_IMMORTAL",
   "reference_mode": "MULTIVIEW_CONCEPT",
@@ -15,8 +15,8 @@
   ],
   "engine": null,
   "export_formats": [
-    "blend",
-    "fbx"
+    "meshir.json",
+    "glb"
   ],
   "rig_required": true,
   "clips": [
@@ -32,5 +32,18 @@
   "observed_features": [],
   "inferred_features": [],
   "accepted_interpretation": null,
-  "critical_parts": []
+  "critical_parts": [],
+  "execution_mode": "STRICT_AGENT_CLOUD",
+  "runtime_location": "UNVERIFIED",
+  "model_id": null,
+  "external_3d_api_allowed": false,
+  "local_generation_allowed": false,
+  "downloaded_3d_weights_allowed": false,
+  "capability_report": null,
+  "backend": null,
+  "limits": {
+    "max_iterations": 4,
+    "max_triangles": 150000,
+    "max_texture_bytes": 33554432
+  }
 }

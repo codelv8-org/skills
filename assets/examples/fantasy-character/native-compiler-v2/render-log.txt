@@ -1,0 +1,55 @@
+{
+  "status": "CLAY_BIND_ONLY",
+  "source": "/mnt/data/upgrade-publish/examples/native-compiler-v2/fixture.glb",
+  "center_m": [
+    0.0,
+    0.5,
+    0.009999990463256836
+  ],
+  "pixels_per_meter": 252.94577732023674,
+  "resolution": 384,
+  "camera_lock_source": null,
+  "views": {
+    "front": {
+      "covered_pixels": 33492,
+      "camera_direction": [
+        0,
+        0,
+        1
+      ]
+    },
+    "back": {
+      "covered_pixels": 33492,
+      "camera_direction": [
+        0,
+        0,
+        -1
+      ]
+    },
+    "right": {
+      "covered_pixels": 33489,
+      "camera_direction": [
+        1,
+        0,
+        0
+      ]
+    },
+    "left": {
+      "covered_pixels": 33489,
+      "camera_direction": [
+        -1,
+        0,
+        0
+      ]
+    },
+    "three_quarter": {
+      "covered_pixels": 26477,
+      "camera_direction": [
+        1,
+        0.25,
+        1
+      ]
+    }
+  },
+  "limitations": "Flat software shading from native GLB triangles; no texture, PBR, animation, smooth normal, ray bake or independent review."
+}

@@ -1,0 +1,41 @@
+{
+  "status": "COMPILED_ONLY",
+  "triangles": 18,
+  "vertices": 19,
+  "parts": [
+    {
+      "id": "open_band",
+      "vertices": 15,
+      "triangles": 16,
+      "source_quads": 8,
+      "indexed_boundary_edges": 12,
+      "skinned": true
+    },
+    {
+      "id": "trim_panel",
+      "vertices": 4,
+      "triangles": 2,
+      "source_quads": 1,
+      "indexed_boundary_edges": 4,
+      "skinned": true
+    }
+  ],
+  "joints": 2,
+  "skinned_parts": 2,
+  "clips": [
+    "fixture_bend"
+  ],
+  "embedded_images": 0,
+  "bytes": 4708,
+  "sha256": "431c64a27d2c9c16b1710522757762b92cb0be60307c232e36e386ff3c52294b",
+  "not_verified": [
+    "visual fidelity",
+    "general UV overlap",
+    "geometric self-intersection",
+    "normal/AO bake",
+    "deformation",
+    "full glTF validation",
+    "engine performance",
+    "independent review"
+  ]
+}
