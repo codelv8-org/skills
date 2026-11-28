@@ -50,7 +50,6 @@
     "capability",
     "intake",
     "anatomy",
-    "outfit",
     "surface",
     "runtime",
     "release"
@@ -97,32 +96,14 @@
       "lane": "main",
       "col": 2,
       "type": "backend",
-      "label": "G2 · Anatomy",
-      "sublabel": "Authored surfaces",
-      "explanation": "สร้าง geometry แบบ topology-aware จาก landmark และ surface patches แก้ทีละส่วนก่อนลง texture",
+      "label": "G2–G4 · Character",
+      "sublabel": "Anatomy / outfit",
+      "explanation": "สร้าง anatomy แบบ topology-aware จาก landmarks และ surface patches; ตรวจ clay ทีละส่วน ก่อนสร้างชุดผ้า ผม เกราะ และเครื่องประดับแยกชิ้น พร้อมตรวจความซ้อนทับและท่าทาง",
       "width": 168,
       "sources": [
         {
           "path": "skills/aaa-fantasy-character-studio/SKILL.md",
           "line": 23,
-          "end_line": 24,
-          "label": "SKILL.md"
-        }
-      ]
-    },
-    {
-      "id": "outfit",
-      "lane": "main",
-      "col": 3,
-      "type": "backend",
-      "label": "G3–G4 · Outfit",
-      "sublabel": "Modular parts",
-      "explanation": "สร้างชุด ผม เกราะและเครื่องประดับเป็นส่วนแยก ตรวจความซ้อนทับและท่าทาง",
-      "width": 168,
-      "sources": [
-        {
-          "path": "skills/aaa-fantasy-character-studio/SKILL.md",
-          "line": 26,
           "end_line": 30,
           "label": "SKILL.md"
         }
@@ -131,7 +112,7 @@
     {
       "id": "surface",
       "lane": "main",
-      "col": 4,
+      "col": 3,
       "type": "backend",
       "label": "G5–G8 · Surface",
       "sublabel": "Retopo / UV / PBR",
@@ -149,7 +130,7 @@
     {
       "id": "runtime",
       "lane": "main",
-      "col": 5,
+      "col": 4,
       "type": "messagebus",
       "label": "G9–G10 · Runtime",
       "sublabel": "Rig / MeshIR / GLB",
@@ -167,7 +148,7 @@
     {
       "id": "release",
       "lane": "main",
-      "col": 6,
+      "col": 5,
       "type": "frontend",
       "label": "G11 · Release",
       "sublabel": "Exact candidate ZIP",
@@ -242,7 +223,7 @@
     {
       "id": "surface-repair",
       "lane": "exceptions",
-      "col": 4,
+      "col": 3,
       "type": "security",
       "label": "Fix UV / bake",
       "sublabel": "Checker / bake QA",
@@ -261,7 +242,7 @@
     {
       "id": "review-required",
       "lane": "exceptions",
-      "col": 6,
+      "col": 5,
       "type": "security",
       "label": "Review required",
       "sublabel": "No AAA certification",
@@ -296,26 +277,19 @@
     {
       "id": "main-3",
       "from": "anatomy",
-      "to": "outfit",
-      "variant": "emphasis",
-      "role": "main"
-    },
-    {
-      "id": "main-4",
-      "from": "outfit",
       "to": "surface",
       "variant": "emphasis",
       "role": "main"
     },
     {
-      "id": "main-5",
+      "id": "main-4",
       "from": "surface",
       "to": "runtime",
       "variant": "emphasis",
       "role": "main"
     },
     {
-      "id": "main-6",
+      "id": "main-5",
       "from": "runtime",
       "to": "release",
       "variant": "emphasis",

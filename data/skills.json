@@ -2742,20 +2742,11 @@
           },
           {
             "id": "anatomy",
-            "title": "G2 · Anatomy",
-            "subtitle": "Authored surfaces",
-            "description": "สร้าง geometry แบบ topology-aware จาก landmark และ surface patches แก้ทีละส่วนก่อนลง texture",
+            "title": "G2–G4 · Character",
+            "subtitle": "Anatomy / outfit",
+            "description": "สร้าง anatomy แบบ topology-aware จาก landmarks และ surface patches; ตรวจ clay ทีละส่วน ก่อนสร้างชุดผ้า ผม เกราะ และเครื่องประดับแยกชิ้น พร้อมตรวจความซ้อนทับและท่าทาง",
             "kind": "backend",
             "line": 23,
-            "endLine": 24
-          },
-          {
-            "id": "outfit",
-            "title": "G3–G4 · Outfit",
-            "subtitle": "Modular parts",
-            "description": "สร้างชุด ผม เกราะและเครื่องประดับเป็นส่วนแยก ตรวจความซ้อนทับและท่าทาง",
-            "kind": "backend",
-            "line": 26,
             "endLine": 30
           },
           {

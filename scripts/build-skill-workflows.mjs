@@ -44,6 +44,15 @@ for(const s of catalog.skills) {
   assert.equal(g.meta.output,w.htmlPath);
   assert.equal(g.meta.repository.revision,w.revision);
   assert.deepEqual(g.mainPath,w.steps.map(x=>x.id));
+  // Pinned Archify 3.3.0 workflow.schema.json limits node columns to 0..5.
+  // Reject invalid coordinates in --check as well as in the native finalize step.
+  const maxWorkflowCol=5;
+  const validWorkflowCol=col=>Number.isInteger(col)&&col>=0&&col<=maxWorkflowCol;
+  for(const n of g.nodes)assert(validWorkflowCol(n.col),
+    `Invalid Archify workflow column: ${s.id}/${n.id} col=${n.col} (expected 0..${maxWorkflowCol})`);
+  for(const region of [...(g.phases??[]),...(g.groups??[])])assert(
+    validWorkflowCol(region.fromCol)&&validWorkflowCol(region.toCol),
+    `Invalid Archify workflow column range: ${s.id}/${region.id} (expected 0..${maxWorkflowCol})`);
   const nodes=new Map(g.nodes.map(n=>[n.id,n]));
   assert.equal(nodes.size,g.nodes.length);
   assert.equal(g.nodes.length,w.steps.length+w.branches.length);
